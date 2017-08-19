@@ -25,7 +25,7 @@ export class Station extends React.Component {
         cx={x}
         cy={y}
         r={10}
-        stroke="red"
+        stroke="black"
         strokeWidth="5"
         fill="white"
       />
