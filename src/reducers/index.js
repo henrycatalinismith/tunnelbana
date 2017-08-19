@@ -1,11 +1,11 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import map from './map';
 import stations from './stations';
-import viewBox from './viewBox';
 import middlewares from '../middlewares';
 
 const reducer = combineReducers({
+  map,
   stations,
-  viewBox,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
