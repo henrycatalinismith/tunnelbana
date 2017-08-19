@@ -1,34 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux';
+import { combineReducers, createStore } from 'redux';
 import RgbLine from './components/RgbLine';
 
-const Redux = require('redux');
-const canvas = document.createElement('canvas');
-const ctx = canvas.getContext('2d');
-
-canvas.classList.add('canvas');
-
-const renderPoint = (point, radius, options = {}) => {
-  ctx.fillStyle = '#0b65aa';
-  ctx.beginPath();
-  Object.assign(ctx, options);
-  ctx.arc(point.x, point.y, radius, 0, 2 * Math.PI);
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
-}
-
-const renderStation = station => {
-  renderPoint(station.point, 10, {
-    fillStyle: '#FFFFFF',
-    strokeStyle: station.color,
-    lineWidth: 6,
-  });
-}
-
-
-const reducer = Redux.combineReducers({
+const reducer = combineReducers({
   stations: (state = [], action) => {
     switch (action.type) {
       case 'ADD_STATION':
@@ -39,23 +15,11 @@ const reducer = Redux.combineReducers({
   },
 });
 
-const store = Redux.createStore(reducer);
+const store = createStore(reducer);
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.appendChild(canvas);
-
   const app = document.createElement('div');
   document.body.appendChild(app);
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  store.subscribe((action) => {
-    const { stations } = store.getState();
-    stations.forEach(station => {
-      renderStation(station);
-    });
-  });
 
   store.dispatch({
     type: 'ADD_STATION',
@@ -138,13 +102,6 @@ class Station {
 }
 
 class Point {
-  static center () {
-    return new Point(
-      canvas.width / 2,
-      canvas.height / 2
-    );
-  }
-
   constructor(x, y) {
     this.x = x;
     this.y = y;
