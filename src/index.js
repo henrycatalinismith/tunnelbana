@@ -1,7 +1,12 @@
-const Redux = require('redux');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider, connect } from 'react-redux';
+import RgbLine from './components/RgbLine';
 
+const Redux = require('redux');
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
+
 canvas.classList.add('canvas');
 
 const renderPoint = (point, radius, options = {}) => {
@@ -39,12 +44,14 @@ const store = Redux.createStore(reducer);
 document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(canvas);
 
+  const app = document.createElement('div');
+  document.body.appendChild(app);
+
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
   store.subscribe((action) => {
     const { stations } = store.getState();
-    console.log('rendering');
     stations.forEach(station => {
       renderStation(station);
     });
@@ -58,6 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
       point: { x: 200, y: 300 },
     }
   });
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <RgbLine />
+    </Provider>,
+    app
+  );
 
   /*
   return;
