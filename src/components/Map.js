@@ -2,28 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Station from './Station';
+import Connection from './Connection';
 
 export class Map extends React.Component {
   static propTypes = {
+    connections: PropTypes.array,
+    map: PropTypes.object,
     stations: PropTypes.array,
-    viewBox: PropTypes.shape({
-      minX: PropTypes.number,
-      minY: PropTypes.number,
-      width: PropTypes.number,
-      height: PropTypes.number,
-    }),
   }
 
   render() {
     const viewBox = [
-      this.props.viewBox.minX,
-      this.props.viewBox.minY,
-      this.props.viewBox.width,
-      this.props.viewBox.height,
+      this.props.map.viewBox.minX,
+      this.props.map.viewBox.minY,
+      this.props.map.viewBox.width,
+      this.props.map.viewBox.height,
     ].join(' ');
 
     return (
       <svg viewBox={viewBox}>
+        {this.props.connections.map((connection, i) => (
+          <Connection
+            key={`connection-${i}`}
+            sourceName={connection[0]}
+            destinationName={connection[1]}
+          />
+        ))}
+
         {this.props.stations.map((station, i) => (
           <Station key={`station-${i}`} {...station} />
         ))}
@@ -34,8 +39,9 @@ export class Map extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    connections: state.connections,
+    map: state.map,
     stations: state.stations,
-    viewBox: state.map.viewBox,
   };
 }
 
