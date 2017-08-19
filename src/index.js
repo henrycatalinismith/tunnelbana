@@ -19,13 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
     app
   );
 
-  setTimeout(() => {
-    store.dispatch(actions.addStation({
-      name: 'T-Centralen',
-      color: '#FF0000',
-      point: { x: 200, y: 300 },
-    }));
-  }, 100);
+  store.dispatch(actions.appStartup());
+
+  store.dispatch(actions.addStation({
+    name: 'T-Centralen',
+    color: '#FF0000',
+    point: { x: 0, y: 0 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Gamla Stan',
+    color: '#FF0000',
+    point: { x: 0, y: 50 },
+  }));
 
   /*
   return;
