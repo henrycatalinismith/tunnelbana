@@ -1,16 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-export default class Station extends React.Component {
+export class Station extends React.Component {
   static propTypes = {
+    map: PropTypes.object,
     point: PropTypes.object,
   }
 
   render() {
+    const x = (
+      (this.props.map.viewBox.width / 2)
+      + this.props.map.center.x
+      + this.props.point.x
+    );
+    const y = (
+      (this.props.map.viewBox.height / 2)
+      + this.props.map.center.y
+      + this.props.point.y
+    );
+
     return (
       <circle
-        cx={this.props.point.x}
-        cy={this.props.point.y}
+        cx={x}
+        cy={y}
         r={10}
         stroke="red"
         strokeWidth="5"
@@ -19,3 +32,11 @@ export default class Station extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    map: state.map,
+  };
+}
+
+export default connect(mapStateToProps)(Station);
