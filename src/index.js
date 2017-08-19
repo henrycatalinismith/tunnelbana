@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     point: { x: 0, y: 50 },
   }));
 
+  store.dispatch(actions.addConnection('T-Centralen', 'Gamla Stan'));
+
   /*
   return;
 
