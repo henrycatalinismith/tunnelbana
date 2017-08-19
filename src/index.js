@@ -4,17 +4,16 @@ import { Provider, connect } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
 import actions from './actions';
-import RgbLine from './components/RgbLine';
+import Map from './components/Map';
 import store from './reducers';
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.createElement('div');
   document.body.appendChild(app);
-  console.log(store.getState());
 
   ReactDOM.render(
     <Provider store={store}>
-      <RgbLine />
+      <Map />
     </Provider>,
     app
   );
