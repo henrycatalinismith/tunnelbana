@@ -2,33 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
+
+import actions from './actions';
 import RgbLine from './components/RgbLine';
-
-const reducer = combineReducers({
-  stations: (state = [], action) => {
-    switch (action.type) {
-      case 'ADD_STATION':
-        return [...state, action.station];
-      default:
-        return [...state];
-    }
-  },
-});
-
-const store = createStore(reducer);
+import store from './reducers';
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.createElement('div');
   document.body.appendChild(app);
-
-  store.dispatch({
-    type: 'ADD_STATION',
-    station: {
-      name: 'T-Centralen',
-      color: '#FF0000',
-      point: { x: 200, y: 300 },
-    }
-  });
+  console.log(store.getState());
 
   ReactDOM.render(
     <Provider store={store}>
@@ -36,6 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
     </Provider>,
     app
   );
+
+  setTimeout(() => {
+    store.dispatch(actions.addStation({
+      name: 'T-Centralen',
+      color: '#FF0000',
+      point: { x: 200, y: 300 },
+    }));
+  }, 100);
 
   /*
   return;
