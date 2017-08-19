@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Station from './Station';
 
 export class RgbLine extends React.Component {
   static propTypes = {
@@ -12,13 +13,7 @@ export class RgbLine extends React.Component {
     return (
       <svg viewBox="0 0 400 400">
         {this.props.stations.map((station, i) => (
-          <circle
-            key={`station-${i}`}
-            cx={station.point.x}
-            cy={station.point.y}
-            r={10}
-            fill="red"
-          />
+          <Station key={`station-${i}`} {...station} />
         ))}
       </svg>
     );
