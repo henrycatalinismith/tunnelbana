@@ -8,10 +8,18 @@ export class RgbLine extends React.Component {
   }
 
   render() {
-    console.log('rendering');
+    console.log('rendering', this.props.stations);
     return (
-      <svg>
-        <circle cx={50} cy={50} r={10} fill="red" />
+      <svg viewBox="0 0 400 400">
+        {this.props.stations.map((station, i) => (
+          <circle
+            key={`station-${i}`}
+            cx={station.point.x}
+            cy={station.point.y}
+            r={10}
+            fill="red"
+          />
+        ))}
       </svg>
     );
   }
