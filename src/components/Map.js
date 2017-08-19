@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Station from './Station';
 
-export class RgbLine extends React.Component {
+export class Map extends React.Component {
   static propTypes = {
     stations: PropTypes.array,
     viewBox: PropTypes.shape({
@@ -21,7 +21,6 @@ export class RgbLine extends React.Component {
       this.props.viewBox.width,
       this.props.viewBox.height,
     ].join(' ');
-    console.log(this.props);
 
     return (
       <svg viewBox={viewBox}>
@@ -36,8 +35,8 @@ export class RgbLine extends React.Component {
 const mapStateToProps = state => {
   return {
     stations: state.stations,
-    viewBox: state.viewBox,
+    viewBox: state.map.viewBox,
   };
 }
 
-export default connect(mapStateToProps)(RgbLine);
+export default connect(mapStateToProps)(Map);
