@@ -6,12 +6,25 @@ import Station from './Station';
 export class RgbLine extends React.Component {
   static propTypes = {
     stations: PropTypes.array,
+    viewBox: PropTypes.shape({
+      minX: PropTypes.number,
+      minY: PropTypes.number,
+      width: PropTypes.number,
+      height: PropTypes.number,
+    }),
   }
 
   render() {
-    console.log('rendering', this.props.stations);
+    const viewBox = [
+      this.props.viewBox.minX,
+      this.props.viewBox.minY,
+      this.props.viewBox.width,
+      this.props.viewBox.height,
+    ].join(' ');
+    console.log(this.props);
+
     return (
-      <svg viewBox="0 0 400 400">
+      <svg viewBox={viewBox}>
         {this.props.stations.map((station, i) => (
           <Station key={`station-${i}`} {...station} />
         ))}
@@ -23,6 +36,7 @@ export class RgbLine extends React.Component {
 const mapStateToProps = state => {
   return {
     stations: state.stations,
+    viewBox: state.viewBox,
   };
 }
 
