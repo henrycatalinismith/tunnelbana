@@ -20,6 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   store.dispatch(actions.appStartup());
 
+  store.dispatch(actions.addLine({
+    id: 'Red',
+    color: '#ff0000',
+  }));
+
+  store.dispatch(actions.addLine({
+    id: 'Green',
+    color: '#00c600',
+  }));
+
+  store.dispatch(actions.addLine({
+    id: 'Blue',
+    color: '#0273ff',
+  }));
+
   store.dispatch(actions.addStation({
     id: 'T-Centralen',
     x: 0,
@@ -101,73 +116,73 @@ document.addEventListener('DOMContentLoaded', () => {
   store.dispatch(actions.addConnection({
     sourceId: 'T-Centralen',
     destinationId: 'Kungsträdgården',
-    color: '#0273ff',
+    lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'T-Centralen',
     destinationId: 'Rådhuset',
-    color: '#0273ff',
+    lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'Rådhuset',
     destinationId: 'Fridhemsplan',
-    color: '#0273ff',
+    lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'Fridhemsplan',
     destinationId: 'Stadshagen',
-    color: '#0273ff',
+    lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'Stadshagen',
     destinationId: 'Västra Skogen',
-    color: '#0273ff',
+    lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'T-Centralen',
     destinationId: 'Gamla Stan',
-    color: '#ff0000',
+    lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'Gamla Stan',
     destinationId: 'Slussen',
-    color: '#ff0000',
+    lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'Slussen',
     destinationId: 'Mariatorget',
-    color: '#ff0000',
+    lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'Mariatorget',
     destinationId: 'Zinkensdamm',
-    color: '#ff0000',
+    lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'Zinkensdamm',
     destinationId: 'Hornstull',
-    color: '#ff0000',
+    lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'Slussen',
     destinationId: 'Medborgarplatsen',
-    color: '#00c600',
+    lineId: 'Green',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'Medborgarplatsen',
     destinationId: 'Skanstull',
-    color: '#00c600',
+    lineId: 'Green',
   }));
 
   store.dispatch(actions.addTrain({

@@ -4,10 +4,12 @@ import actions from '../actions';
 export default function(state = {}, action) {
   switch (action.type) {
     case actions.ADD_CONNECTION:
-      const connectionId = action.connection.id || uuid();
-      return {...state, [connectionId]: {
-        connectionId,
-        ...action.connection,
+      const id = action.connection.id || uuid();
+      return {...state, [id]: {
+        id,
+        sourceId: action.connection.sourceId,
+        destinationId: action.connection.destinationId,
+        lineId: action.connection.lineId,
       }};
 
     default:
@@ -16,9 +18,9 @@ export default function(state = {}, action) {
 }
 
 export function connections(state) {
-  return Object.keys(state).map(connectionId => state[connectionId]);
+  return Object.keys(state).map(id => state[id]);
 }
 
-export function connection(state, connectionId) {
-  return state[connectionId];
+export function connection(state, id) {
+  return state[id];
 }

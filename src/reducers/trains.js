@@ -1,14 +1,12 @@
 import uuid from 'uuid/v1';
 import actions from '../actions';
 
-const initialState = {};
-
-export default function(state = initialState, action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case actions.ADD_TRAIN:
-      const trainId = uuid();
-      return {...state, [trainId]: {
-        trainId,
+      const id = uuid();
+      return {...state, [id]: {
+        id,
         ...action.train,
       }};
 
@@ -18,9 +16,9 @@ export default function(state = initialState, action) {
 }
 
 export function trains(state) {
-  return Object.keys(state).map(trainId => state[trainId]);
+  return Object.keys(state).map(id => state[id]);
 }
 
-export function train(state, trainId) {
-  return state[trainId];
+export function train(state, id) {
+  return state[id];
 }
