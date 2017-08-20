@@ -20,5 +20,8 @@
     "babel-preset-stage-3": "^6.24.1",
     "prop-types": "^15.5.10",
     "webpack-dashboard": "^0.4.0"
+  },
+  "scripts": {
+    "start": "webpack-dev-server"
   }
 }
