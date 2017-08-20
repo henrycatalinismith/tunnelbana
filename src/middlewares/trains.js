@@ -5,6 +5,17 @@ import { line } from '../reducers/lines';
 import { train } from '../reducers/trains';
 import { station } from '../reducers/stations';
 
+// Converts from degrees to radians.
+Math.radians = function(degrees) {
+  return degrees * Math.PI / 180;
+};
+
+// Converts from radians to degrees.
+Math.degrees = function(radians) {
+  return radians * 180 / Math.PI;
+};
+// http://cwestblog.com/2012/11/12/javascript-degree-and-radian-conversion/
+
 export default function(store) {
   return next => action => {
     let state;
@@ -37,10 +48,16 @@ export default function(store) {
         const angle = from.angle(to);
 
         const el = Snap(document.querySelector(`#train-${t.id}`))
+        console.log(`rotate(${Math.degrees(angle)})`);
+        var bbox = el.getBBox(); //bounding box, get coords and centre
+        el.transform('rotate(0deg)');
         el.animate({
           x: to.x,
           y: to.y,
         }, time);
+
+        //el.transform("r" + Math.degrees(angle));
+        console.log()
 
         setTimeout(() => {
           store.dispatch(actions.arrival({
@@ -53,7 +70,6 @@ export default function(store) {
         break;
 
       case actions.ARRIVAL:
-        console.log(action.arrival);
         state = store.getState();
         const nextDestinationId = nextStop(
           state.connections,
@@ -61,7 +77,6 @@ export default function(store) {
           action.arrival.destinationId,
           action.arrival.lineId
         );
-        console.log('sdsdsdsd', action.arrival.sourceId, action.arrival.destinationId,   nextDestinationId);
 
         setTimeout(() => {
           store.dispatch(actions.departure({
@@ -70,7 +85,7 @@ export default function(store) {
             trainId: action.arrival.trainId,
             lineId: action.arrival.lineId,
           }));
-        }, 1000);
+        }, 100);
         break;
     }
 
