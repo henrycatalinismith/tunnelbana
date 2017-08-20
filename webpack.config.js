@@ -26,7 +26,7 @@ module.exports = {
     }]
   },
   output: {
-    filename: 'rgb-line.js'
+    filename: 'energetic-headlight.js'
   },
   plugins: [
     new DashboardPlugin({
