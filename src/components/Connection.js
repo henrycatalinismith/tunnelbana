@@ -13,19 +13,19 @@ export class Connection extends React.Component {
     const from = {
       x: this.props.map.viewBox.width / 2
         + this.props.map.center.x
-        + this.props.source.point.x,
+        + this.props.source.x,
       y: this.props.map.viewBox.height / 2
         + this.props.map.center.y
-        + this.props.source.point.y,
+        + this.props.source.y,
     };
 
     const to = {
       x: this.props.map.viewBox.width / 2
         + this.props.map.center.x
-        + this.props.destination.point.x,
+        + this.props.destination.x,
       y: this.props.map.viewBox.height / 2
         + this.props.map.center.y
-        + this.props.destination.point.y,
+        + this.props.destination.y,
     };
 
     const d = 'M' + [from.x, from.y, to.x, to.y].join(' ');

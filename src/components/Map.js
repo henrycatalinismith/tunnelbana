@@ -41,7 +41,7 @@ export class Map extends React.Component {
         {this.props.stations.map((station, i) => (
           <Station
             key={`station-${i}`}
-            {...station}
+            station={station}
           />
         ))}
       </svg>
