@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { stations } from '../reducers/stations';
+import { station, stations } from '../reducers/stations';
 
 export class Connection extends React.Component {
   static propTypes = {
@@ -43,8 +43,8 @@ export class Connection extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     map: state.map,
-    source: stations(state.stations).filter(s => s.name === ownProps.connection.source)[0],
-    destination: stations(state.stations).filter(s => s.name === ownProps.connection.destination)[0],
+    source: station(state.stations, ownProps.connection.sourceId),
+    destination: station(state.stations, ownProps.connection.destinationId),
   };
 }
 
