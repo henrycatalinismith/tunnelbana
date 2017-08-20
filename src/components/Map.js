@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Station from './Station';
 import Connection from './Connection';
 import Train from './Train';
+import { connections } from '../reducers/connections';
 import { stations } from '../reducers/stations';
 import { trains } from '../reducers/trains';
 
@@ -51,7 +52,7 @@ export class Map extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    connections: state.connections,
+    connections: connections(state.connections),
     map: state.map,
     stations: stations(state.stations),
     trains: trains(state.trains),
