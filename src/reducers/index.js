@@ -3,6 +3,7 @@ import connections from './connections';
 import lines from './lines';
 import map from './map';
 import stations from './stations';
+import trains from './trains';
 import middlewares from '../middlewares';
 
 const reducer = combineReducers({
@@ -10,6 +11,7 @@ const reducer = combineReducers({
   lines,
   map,
   stations,
+  trains,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -102,6 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
     color: '#00c600',
   }));
 
+  store.dispatch(actions.addTrain({
+    stationName: 'T-Centralen',
+  }));
+
   /*
   return;
 
