@@ -7,6 +7,7 @@ export default function(state = {}, action) {
       const id = action.train.id || uuid();
       return {...state, [id]: {
         id,
+        lineId: action.train.lineId,
         stationId: action.train.stationId,
       }};
 
