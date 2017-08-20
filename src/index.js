@@ -186,7 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
 
   store.dispatch(actions.addTrain({
+    id: 'Thomas',
     stationId: 'T-Centralen',
+  }));
+
+  store.dispatch(actions.depart({
+    trainId: 'Thomas',
+    destinationId: 'Gamla Stan',
   }));
 
   /*

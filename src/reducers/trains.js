@@ -4,10 +4,10 @@ import actions from '../actions';
 export default function(state = {}, action) {
   switch (action.type) {
     case actions.ADD_TRAIN:
-      const id = uuid();
+      const id = action.train.id || uuid();
       return {...state, [id]: {
         id,
-        ...action.train,
+        stationId: action.train.stationId,
       }};
 
     default:
