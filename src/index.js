@@ -22,17 +22,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
   store.dispatch(actions.addStation({
     name: 'T-Centralen',
-    color: '#FF0000',
     point: { x: 0, y: 0 },
   }));
 
   store.dispatch(actions.addStation({
     name: 'Gamla Stan',
-    color: '#FF0000',
     point: { x: 0, y: 50 },
   }));
 
-  store.dispatch(actions.addConnection('T-Centralen', 'Gamla Stan'));
+  store.dispatch(actions.addStation({
+    name: 'Slussen',
+    point: { x: 0, y: 100 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Mariatorget',
+    point: { x: -50, y: 120 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Zinkensdamm',
+    point: { x: -100, y: 120 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Hornstull',
+    point: { x: -150, y: 150 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Medborgarplatsen',
+    point: { x: 0, y: 150 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Skanstull',
+    point: { x: 50, y: 200 },
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'T-Centralen',
+    destination: 'Gamla Stan',
+    color: '#ff0000',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'Gamla Stan',
+    destination: 'Slussen',
+    color: '#ff0000',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'Slussen',
+    destination: 'Mariatorget',
+    color: '#ff0000',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'Mariatorget',
+    destination: 'Zinkensdamm',
+    color: '#ff0000',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'Zinkensdamm',
+    destination: 'Hornstull',
+    color: '#ff0000',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'Slussen',
+    destination: 'Medborgarplatsen',
+    color: '#00c600',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'Medborgarplatsen',
+    destination: 'Skanstull',
+    color: '#00c600',
+  }));
 
   /*
   return;
