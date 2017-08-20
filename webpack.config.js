@@ -20,6 +20,9 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loader: 'babel-loader'
+    }, {
+      test: require.resolve('snapsvg'),
+      loader: 'imports-loader?this=>window,fix=>module.exports=0',
     }]
   },
   output: {
