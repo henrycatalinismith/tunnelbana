@@ -1,41 +1,107 @@
 import Snap from 'snapsvg';
 import actions from '../actions';
+import { nextStop } from '../reducers/connections';
+import { line } from '../reducers/lines';
 import { train } from '../reducers/trains';
 import { station } from '../reducers/stations';
 
 export default function(store) {
   return next => action => {
+    let state;
+    let t, source, destination, l;
+
     switch (action.type) {
-      case actions.DEPART:
-        const state = store.getState();
-        const t = train(state.trains, action.departure.trainId);
-        const source = station(state.stations, t.stationId);
-        const destination = station(state.stations, action.departure.destinationId);
+      case actions.DEPARTURE:
+        state = store.getState();
+        t = train(state.trains, action.departure.trainId);
+        source = station(state.stations, action.departure.sourceId);
+        destination = station(state.stations, action.departure.destinationId);
+        l = line(state.lines, action.departure.lineId);
 
         const width = 15;
         const height = 30;
-        const to = {
-          x: state.map.viewBox.width / 2
-            + state.map.center.x
-            + destination.x
-            - (width / 2),
-          y: state.map.viewBox.height / 2
-            + state.map.center.y
-            + destination.y
-            - (height / 2),
-        };
+
+        const from = new Point(source.x, source.y);
+        from.add({ x: state.map.viewBox.width / 2, y: state.map.viewBox.height / 2});
+        from.add({ x: state.map.center.x, y: state.map.center.y });
+        from.add({ x: 0 - width / 2, y: 0 - height / 2 });
+
+        const to = new Point(destination.x, destination.y);
+        to.add({ x: state.map.viewBox.width / 2, y: state.map.viewBox.height / 2});
+        to.add({ x: state.map.center.x, y: state.map.center.y });
+        to.add({ x: 0 - width / 2, y: 0 - height / 2 });
+
+        const speed = 0.1;
+        const distance = from.distance(to);
+        const time = distance / speed;
+        const angle = from.angle(to);
 
         const el = Snap(document.querySelector(`#train-${t.id}`))
         el.animate({
           x: to.x,
           y: to.y,
-        }, 1000);
+        }, time);
 
-        console.log(action.departure, t, source);
-        console.log('departure middleware');
+        setTimeout(() => {
+          store.dispatch(actions.arrival({
+            destinationId: destination.id,
+            lineId: l.id,
+            sourceId: source.id,
+            trainId: t.id,
+          }));
+        }, time);
+        break;
+
+      case actions.ARRIVAL:
+        console.log(action.arrival);
+        state = store.getState();
+        const nextDestinationId = nextStop(
+          state.connections,
+          action.arrival.sourceId,
+          action.arrival.destinationId,
+          action.arrival.lineId
+        );
+        console.log('sdsdsdsd', action.arrival.sourceId, action.arrival.destinationId,   nextDestinationId);
+
+        setTimeout(() => {
+          store.dispatch(actions.departure({
+            sourceId: action.arrival.destinationId,
+            destinationId: nextDestinationId,
+            trainId: action.arrival.trainId,
+            lineId: action.arrival.lineId,
+          }));
+        }, 1000);
         break;
     }
 
     return next(action);
+  }
+}
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  add ({ x = 0, y = 0}) {
+    this.x += x;
+    this.y += y;
+    return this;
+  }
+
+  angle (point) {
+    return Math.atan2(
+      point.y - this.y,
+      point.x - this.x
+    );
+  }
+
+  distance ({ x, y }) {
+    const a = Math.abs(this.x - x);
+    const b = Math.abs(this.y - y);
+    return Math.sqrt(
+      Math.abs((a * a) + (b * b))
+    );
   }
 }

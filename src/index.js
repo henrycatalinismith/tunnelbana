@@ -188,11 +188,14 @@ document.addEventListener('DOMContentLoaded', () => {
   store.dispatch(actions.addTrain({
     id: 'Thomas',
     stationId: 'T-Centralen',
+    lineId: 'Red',
   }));
 
-  store.dispatch(actions.depart({
+  store.dispatch(actions.departure({
     trainId: 'Thomas',
+    sourceId: 'T-Centralen',
     destinationId: 'Gamla Stan',
+    lineId: 'Red',
   }));
 
   /*

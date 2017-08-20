@@ -1,5 +1,6 @@
 export const ADD_TRAIN = 'ADD_TRAIN';
-export const DEPART = 'DEPART';
+export const DEPARTURE = 'DEPARTURE';
+export const ARRIVAL = 'ARRIVAL';
 
 export function addTrain(train) {
   return {
@@ -8,9 +9,16 @@ export function addTrain(train) {
   };
 }
 
-export function depart(departure) {
+export function departure(departure) {
   return {
-    type: DEPART,
+    type: DEPARTURE,
     departure,
+  };
+}
+
+export function arrival(arrival) {
+  return {
+    type: ARRIVAL,
+    arrival,
   };
 }
