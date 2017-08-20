@@ -22,67 +22,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
   store.dispatch(actions.addStation({
     name: 'T-Centralen',
-    point: { x: 0, y: 0 },
+    x: 0,
+    y: 0,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Kungsträdgården',
-    point: { x: 50, y: 0 },
+    x: 50,
+    y: 0,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Rådhuset',
-    point: { x: -50, y: 0 },
+    x: -50,
+    y: 0,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Fridhemsplan',
-    point: { x: -100, y: 0 },
+    x: -100,
+    y: 0,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Stadshagen',
-    point: { x: -150, y: -50 },
+    x: -150,
+    y: -50,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Västra Skogen',
-    point: { x: -200, y: -100 },
+    x: -200,
+    y: -100,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Gamla Stan',
-    point: { x: 0, y: 50 },
+    x: 0,
+    y: 50,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Slussen',
-    point: { x: 0, y: 100 },
+    x: 0,
+    y: 100,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Mariatorget',
-    point: { x: -50, y: 120 },
+    x: -50,
+    y: 120,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Zinkensdamm',
-    point: { x: -100, y: 120 },
+    x: -100,
+    y: 120,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Hornstull',
-    point: { x: -150, y: 150 },
+    x: -150,
+    y: 150,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Medborgarplatsen',
-    point: { x: 0, y: 150 },
+    x: 0,
+    y: 150,
   }));
 
   store.dispatch(actions.addStation({
     name: 'Skanstull',
-    point: { x: 50, y: 200 },
+    x: 50,
+    y: 200,
   }));
 
   store.dispatch(actions.addConnection({
