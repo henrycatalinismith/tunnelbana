@@ -2,17 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Snap from 'snapsvg';
+import { stations } from '../reducers/stations';
+import { train } from '../reducers/trains';
 
 export class Train extends React.Component {
   static propTypes = {
-    stationName: PropTypes.string,
     map: PropTypes.object,
     station: PropTypes.object,
+    train: PropTypes.object,
   }
 
   componentDidMount() {
     const r = Snap(this.element);
-    console.log(this.element, r);
     r.animate({
       x: 50,
       y: 50,
@@ -51,7 +52,7 @@ export class Train extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     map: state.map,
-    station: state.stations.filter(s => s.name === ownProps.train.stationName)[0],
+    station: stations(state.stations).filter(s => s.name === ownProps.train.stationName)[0],
   };
 }
 
