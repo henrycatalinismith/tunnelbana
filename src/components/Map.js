@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Station from './Station';
 import Connection from './Connection';
+import Train from './Train';
 
 export class Map extends React.Component {
   static propTypes = {
@@ -28,8 +29,18 @@ export class Map extends React.Component {
           />
         ))}
 
+        {this.props.trains.map((train, i) => (
+          <Train
+            key={`station-${i}`}
+            train={train}
+          />
+        ))}
+
         {this.props.stations.map((station, i) => (
-          <Station key={`station-${i}`} {...station} />
+          <Station
+            key={`station-${i}`}
+            {...station}
+          />
         ))}
       </svg>
     );
@@ -41,6 +52,7 @@ const mapStateToProps = state => {
     connections: state.connections,
     map: state.map,
     stations: state.stations,
+    trains: state.trains,
   };
 }
 
