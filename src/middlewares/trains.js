@@ -48,16 +48,20 @@ export default function(store) {
         const angle = from.angle(to);
 
         const el = Snap(document.querySelector(`#train-${t.id}`))
-        console.log(`rotate(${Math.degrees(angle)})`);
+        console.log(`rotate(${Math.degrees(Math.sin(angle))})`);
         var bbox = el.getBBox(); //bounding box, get coords and centre
-        el.transform('rotate(0deg)');
-        el.animate({
-          x: to.x,
-          y: to.y,
-        }, time);
+        //el.transform(`rotate(${Math.degrees(angle)+275}deg)`, 1);
+        const degrees = Math.degrees(angle);
 
-        //el.transform("r" + Math.degrees(angle));
-        console.log()
+        // to.rotateAround(from, degrees);
+
+        el.transform(`r${degrees}`, 1);
+        setTimeout(() => {
+          el.animate({
+            x: to.x,
+            y: to.y,
+          }, time);
+        }, 10);
 
         setTimeout(() => {
           store.dispatch(actions.arrival({
@@ -118,5 +122,15 @@ class Point {
     return Math.sqrt(
       Math.abs((a * a) + (b * b))
     );
+  }
+
+  rotateAround({ x, y }, angle) {
+    var radians = (Math.PI / 180) * angle,
+        cos = Math.cos(radians),
+        sin = Math.sin(radians),
+        nx = (cos * (this.x - x)) + (sin * (this.y - y)) + x,
+        ny = (cos * (this.y - y)) - (sin * (this.x - x)) + y;
+    this.x = nx;
+    this.y = ny;
   }
 }
