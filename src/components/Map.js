@@ -24,8 +24,7 @@ export class Map extends React.Component {
         {this.props.connections.map((connection, i) => (
           <Connection
             key={`connection-${i}`}
-            sourceName={connection[0]}
-            destinationName={connection[1]}
+            connection={connection}
           />
         ))}
 
