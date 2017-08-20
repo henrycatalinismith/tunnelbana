@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 
 export class Connection extends React.Component {
   static propTypes = {
-    sourceName: PropTypes.string,
-    destinationName: PropTypes.string,
-    source: PropTypes.object,
-    destination: PropTypes.object,
+    connection: PropTypes.object,
     map: PropTypes.object,
   }
 
@@ -32,11 +29,10 @@ export class Connection extends React.Component {
 
     const d = 'M' + [from.x, from.y, to.x, to.y].join(' ');
 
-    console.log(from);
     return (
       <path
         d={d}
-        stroke="black"
+        stroke={this.props.connection.color}
         strokeWidth="8"
       />
     );
@@ -46,8 +42,8 @@ export class Connection extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     map: state.map,
-    source: state.stations.filter(s => s.name === ownProps.sourceName)[0],
-    destination: state.stations.filter(s => s.name === ownProps.destinationName)[0],
+    source: state.stations.filter(s => s.name === ownProps.connection.source)[0],
+    destination: state.stations.filter(s => s.name === ownProps.connection.destination)[0],
   };
 }
 
