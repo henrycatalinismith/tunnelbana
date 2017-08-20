@@ -26,6 +26,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
 
   store.dispatch(actions.addStation({
+    name: 'Kungsträdgården',
+    point: { x: 50, y: 0 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Rådhuset',
+    point: { x: -50, y: 0 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Fridhemsplan',
+    point: { x: -100, y: 0 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Stadshagen',
+    point: { x: -150, y: -50 },
+  }));
+
+  store.dispatch(actions.addStation({
+    name: 'Västra Skogen',
+    point: { x: -200, y: -100 },
+  }));
+
+  store.dispatch(actions.addStation({
     name: 'Gamla Stan',
     point: { x: 0, y: 50 },
   }));
@@ -58,6 +83,36 @@ document.addEventListener('DOMContentLoaded', () => {
   store.dispatch(actions.addStation({
     name: 'Skanstull',
     point: { x: 50, y: 200 },
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'T-Centralen',
+    destination: 'Kungsträdgården',
+    color: '#0273ff',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'T-Centralen',
+    destination: 'Rådhuset',
+    color: '#0273ff',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'Rådhuset',
+    destination: 'Fridhemsplan',
+    color: '#0273ff',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'Fridhemsplan',
+    destination: 'Stadshagen',
+    color: '#0273ff',
+  }));
+
+  store.dispatch(actions.addConnection({
+    source: 'Stadshagen',
+    destination: 'Västra Skogen',
+    color: '#0273ff',
   }));
 
   store.dispatch(actions.addConnection({
