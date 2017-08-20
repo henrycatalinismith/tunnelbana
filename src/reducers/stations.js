@@ -1,10 +1,24 @@
+import uuid from 'uuid/v1';
 import actions from '../actions';
 
-export default function(state = [], action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case actions.ADD_STATION:
-      return [...state, action.station];
+      const stationId = uuid();
+      return {...state, [stationId]: {
+        stationId,
+        ...action.station,
+      }};
+
     default:
-      return [...state];
+      return state;
   }
+}
+
+export function stations(state) {
+  return Object.keys(state).map(stationId => state[stationId]);
+}
+
+export function station(state, stationId) {
+  return state[stationId];
 }
