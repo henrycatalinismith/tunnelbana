@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Snap from 'snapsvg';
 import { station, stations } from '../reducers/stations';
 import { train } from '../reducers/trains';
 
@@ -10,14 +9,6 @@ export class Train extends React.Component {
     map: PropTypes.object,
     station: PropTypes.object,
     train: PropTypes.object,
-  }
-
-  componentDidMount() {
-    const r = Snap(this.element);
-    r.animate({
-      x: 50,
-      y: 50,
-    }, 1000);
   }
 
   render() {
@@ -38,6 +29,7 @@ export class Train extends React.Component {
 
     return (
       <rect
+        id={`train-${this.props.train.id}`}
         ref={el => this.element = el}
         x={x}
         y={y}

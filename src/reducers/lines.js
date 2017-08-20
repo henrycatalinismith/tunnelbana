@@ -5,7 +5,6 @@ export default function(state = {}, action) {
   switch (action.type) {
     case actions.ADD_LINE:
       const id = action.line.id || uuid();
-      console.log(action.line);
       return {...state, [id]: {
         id,
         color: action.line.color,
