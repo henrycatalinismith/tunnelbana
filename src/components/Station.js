@@ -5,19 +5,19 @@ import { connect } from 'react-redux';
 export class Station extends React.Component {
   static propTypes = {
     map: PropTypes.object,
-    point: PropTypes.object,
+    station: PropTypes.object,
   }
 
   render() {
     const x = (
       (this.props.map.viewBox.width / 2)
       + this.props.map.center.x
-      + this.props.point.x
+      + this.props.station.x
     );
     const y = (
       (this.props.map.viewBox.height / 2)
       + this.props.map.center.y
-      + this.props.point.y
+      + this.props.station.y
     );
 
     return (
