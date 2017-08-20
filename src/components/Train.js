@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Snap from 'snapsvg';
-import { stations } from '../reducers/stations';
+import { station, stations } from '../reducers/stations';
 import { train } from '../reducers/trains';
 
 export class Train extends React.Component {
@@ -52,7 +52,7 @@ export class Train extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     map: state.map,
-    station: stations(state.stations).filter(s => s.name === ownProps.train.stationName)[0],
+    station: station(state.stations, ownProps.train.stationId),
   };
 }
 

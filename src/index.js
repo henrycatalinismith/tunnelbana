@@ -21,157 +21,157 @@ document.addEventListener('DOMContentLoaded', () => {
   store.dispatch(actions.appStartup());
 
   store.dispatch(actions.addStation({
-    name: 'T-Centralen',
+    id: 'T-Centralen',
     x: 0,
     y: 0,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Kungsträdgården',
+    id: 'Kungsträdgården',
     x: 50,
     y: 0,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Rådhuset',
+    id: 'Rådhuset',
     x: -50,
     y: 0,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Fridhemsplan',
+    id: 'Fridhemsplan',
     x: -100,
     y: 0,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Stadshagen',
+    id: 'Stadshagen',
     x: -150,
     y: -50,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Västra Skogen',
+    id: 'Västra Skogen',
     x: -200,
     y: -100,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Gamla Stan',
+    id: 'Gamla Stan',
     x: 0,
     y: 50,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Slussen',
+    id: 'Slussen',
     x: 0,
     y: 100,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Mariatorget',
+    id: 'Mariatorget',
     x: -50,
     y: 120,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Zinkensdamm',
+    id: 'Zinkensdamm',
     x: -100,
     y: 120,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Hornstull',
+    id: 'Hornstull',
     x: -150,
     y: 150,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Medborgarplatsen',
+    id: 'Medborgarplatsen',
     x: 0,
     y: 150,
   }));
 
   store.dispatch(actions.addStation({
-    name: 'Skanstull',
+    id: 'Skanstull',
     x: 50,
     y: 200,
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'T-Centralen',
-    destination: 'Kungsträdgården',
+    sourceId: 'T-Centralen',
+    destinationId: 'Kungsträdgården',
     color: '#0273ff',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'T-Centralen',
-    destination: 'Rådhuset',
+    sourceId: 'T-Centralen',
+    destinationId: 'Rådhuset',
     color: '#0273ff',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'Rådhuset',
-    destination: 'Fridhemsplan',
+    sourceId: 'Rådhuset',
+    destinationId: 'Fridhemsplan',
     color: '#0273ff',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'Fridhemsplan',
-    destination: 'Stadshagen',
+    sourceId: 'Fridhemsplan',
+    destinationId: 'Stadshagen',
     color: '#0273ff',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'Stadshagen',
-    destination: 'Västra Skogen',
+    sourceId: 'Stadshagen',
+    destinationId: 'Västra Skogen',
     color: '#0273ff',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'T-Centralen',
-    destination: 'Gamla Stan',
+    sourceId: 'T-Centralen',
+    destinationId: 'Gamla Stan',
     color: '#ff0000',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'Gamla Stan',
-    destination: 'Slussen',
+    sourceId: 'Gamla Stan',
+    destinationId: 'Slussen',
     color: '#ff0000',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'Slussen',
-    destination: 'Mariatorget',
+    sourceId: 'Slussen',
+    destinationId: 'Mariatorget',
     color: '#ff0000',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'Mariatorget',
-    destination: 'Zinkensdamm',
+    sourceId: 'Mariatorget',
+    destinationId: 'Zinkensdamm',
     color: '#ff0000',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'Zinkensdamm',
-    destination: 'Hornstull',
+    sourceId: 'Zinkensdamm',
+    destinationId: 'Hornstull',
     color: '#ff0000',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'Slussen',
-    destination: 'Medborgarplatsen',
+    sourceId: 'Slussen',
+    destinationId: 'Medborgarplatsen',
     color: '#00c600',
   }));
 
   store.dispatch(actions.addConnection({
-    source: 'Medborgarplatsen',
-    destination: 'Skanstull',
+    sourceId: 'Medborgarplatsen',
+    destinationId: 'Skanstull',
     color: '#00c600',
   }));
 
   store.dispatch(actions.addTrain({
-    stationName: 'T-Centralen',
+    stationId: 'T-Centralen',
   }));
 
   /*
