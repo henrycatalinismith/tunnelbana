@@ -26,13 +26,13 @@ export class Train extends React.Component {
     const x = (
       (this.props.map.viewBox.width / 2)
       + this.props.map.center.x
-      + this.props.station.point.x
+      + this.props.station.x
       - (width / 2)
     );
     const y = (
       (this.props.map.viewBox.height / 2)
       + this.props.map.center.y
-      + this.props.station.point.y
+      + this.props.station.y
       - (height / 2)
     );
 
