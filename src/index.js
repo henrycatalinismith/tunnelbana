@@ -191,11 +191,37 @@ document.addEventListener('DOMContentLoaded', () => {
     lineId: 'Red',
   }));
 
+  store.dispatch(actions.addTrain({
+    id: 'Henry',
+    stationId: 'Medborgarplatsen',
+    lineId: 'Green',
+  }));
+
+  store.dispatch(actions.addTrain({
+    id: 'Edward',
+    stationId: 'Kungsträdgården',
+    lineId: 'Blue',
+  }));
+
   store.dispatch(actions.departure({
     trainId: 'Thomas',
     sourceId: 'T-Centralen',
     destinationId: 'Gamla Stan',
     lineId: 'Red',
+  }));
+
+  store.dispatch(actions.departure({
+    trainId: 'Henry',
+    sourceId: 'Medborgarplatsen',
+    destinationId: 'Skanstull',
+    lineId: 'Green',
+  }));
+
+  store.dispatch(actions.departure({
+    trainId: 'Edward',
+    sourceId: 'Kungsträdgården',
+    destinationId: 'T-Centralen',
+    lineId: 'Blue',
   }));
 
   /*
