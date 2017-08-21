@@ -58,8 +58,8 @@ export default function(store) {
 
         setTimeout(() => {
           el.animate({
-            x: to.x,
-            y: to.y,
+            x: distance,
+            y: 0,
           }, time);
         }, 10);
 
