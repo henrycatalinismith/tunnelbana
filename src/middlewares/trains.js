@@ -55,7 +55,7 @@ export default function(store) {
 
         // to.rotateAround(from, degrees);
 
-        el.transform(`r${degrees}`, 1);
+        //el.transform(`r${degrees}`, 1);
         setTimeout(() => {
           el.animate({
             x: to.x,
