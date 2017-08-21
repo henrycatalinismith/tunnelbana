@@ -53,9 +53,9 @@ export default function(store) {
         //el.transform(`rotate(${Math.degrees(angle)+275}deg)`, 1);
         const degrees = Math.degrees(angle);
 
-        // to.rotateAround(from, degrees);
+        // to.rotateAround(from, 90 + degrees);
+        el.transform(`r${90 + 45 + degrees}`, 1);
 
-        //el.transform(`r${degrees}`, 1);
         setTimeout(() => {
           el.animate({
             x: to.x,
