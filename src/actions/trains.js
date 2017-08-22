@@ -9,16 +9,16 @@ export function addTrain(train) {
   };
 }
 
-export function departure(departure) {
+export function departure(journey) {
   return {
     type: DEPARTURE,
-    departure,
+    journey,
   };
 }
 
-export function arrival(arrival) {
+export function arrival(journey) {
   return {
     type: ARRIVAL,
-    arrival,
+    journey,
   };
 }
