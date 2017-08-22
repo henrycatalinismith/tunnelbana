@@ -1,4 +1,5 @@
 import Snap from 'snapsvg';
+import {TweenMax, Power2, TimelineLite} from "gsap";
 import actions from '../actions';
 import { nextStop } from '../reducers/connections';
 import { line } from '../reducers/lines';
@@ -45,23 +46,16 @@ export default function(store) {
         const speed = 0.1;
         const distance = from.distance(to);
         const time = distance / speed;
-        const angle = from.angle(to);
+        const angle = from.angle(to) + Math.PI / 3;
 
+        const pathId = `#connection-${source.id}-${destination.id}-${l.id}`;
+        const path = document.querySelector(pathId);
         const el = Snap(document.querySelector(`#train-${t.id}`))
-        console.log(`rotate(${Math.degrees(Math.sin(angle))})`);
-        var bbox = el.getBBox(); //bounding box, get coords and centre
-        //el.transform(`rotate(${Math.degrees(angle)+275}deg)`, 1);
         const degrees = Math.degrees(angle);
+        console.log(source.id, destination.id, el);
 
-        // to.rotateAround(from, 90 + degrees);
-        el.transform(`r${90 + 45 + degrees}`, 1);
-
-        setTimeout(() => {
-          el.animate({
-            x: distance,
-            y: 0,
-          }, time);
-        }, 10);
+        //el.animate({ x: to.x, y: to.y }, time);
+        //el.transform(`r${degrees}`, 1);
 
         setTimeout(() => {
           store.dispatch(actions.arrival({
@@ -70,7 +64,7 @@ export default function(store) {
             sourceId: source.id,
             trainId: t.id,
           }));
-        }, time);
+        }, time );
         break;
 
       case actions.ARRIVAL:

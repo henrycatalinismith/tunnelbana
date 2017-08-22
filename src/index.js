@@ -185,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lineId: 'Green',
   }));
 
+/*
   store.dispatch(actions.addTrain({
     id: 'Thomas',
     stationId: 'T-Centralen',
@@ -196,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     stationId: 'Medborgarplatsen',
     lineId: 'Green',
   }));
+  */
 
   store.dispatch(actions.addTrain({
     id: 'Edward',
@@ -203,19 +205,25 @@ document.addEventListener('DOMContentLoaded', () => {
     lineId: 'Blue',
   }));
 
+  /*
   store.dispatch(actions.departure({
     trainId: 'Thomas',
     sourceId: 'T-Centralen',
     destinationId: 'Gamla Stan',
     lineId: 'Red',
   }));
+  */
 
+  /*
   store.dispatch(actions.departure({
     trainId: 'Henry',
     sourceId: 'Medborgarplatsen',
     destinationId: 'Skanstull',
     lineId: 'Green',
   }));
+
+
+  */
 
   store.dispatch(actions.departure({
     trainId: 'Edward',

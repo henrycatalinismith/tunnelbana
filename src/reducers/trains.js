@@ -2,6 +2,8 @@ import uuid from 'uuid/v1';
 import actions from '../actions';
 
 export default function(state = {}, action) {
+  let train;
+
   switch (action.type) {
     case actions.ADD_TRAIN:
       const id = action.train.id || uuid();
@@ -10,6 +12,14 @@ export default function(state = {}, action) {
         lineId: action.train.lineId,
         stationId: action.train.stationId,
       }};
+
+    case actions.ARRIVAL:
+      train = state[action.arrival.trainId];
+      return {...state, [train.id]: {
+        ...train,
+        stationId: action.arrival.destinationId,
+      }};
+      break;
 
     default:
       return state;
