@@ -40,6 +40,7 @@ export class Connection extends React.Component {
 
     return (
       <path
+        id={`connection-${this.props.source.id}-${this.props.destination.id}-${this.props.line.id}`}
         d={d}
         stroke={this.props.line.color}
         strokeWidth="8"
