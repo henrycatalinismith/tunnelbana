@@ -9,16 +9,8 @@ export class Station extends React.Component {
   }
 
   render() {
-    const x = (
-      (this.props.map.viewBox.width / 2)
-      + this.props.map.center.x
-      + this.props.station.x
-    );
-    const y = (
-      (this.props.map.viewBox.height / 2)
-      + this.props.map.center.y
-      + this.props.station.y
-    );
+    const x = this.props.station.x;
+    const y = this.props.station.y;
 
     return (
       <circle
