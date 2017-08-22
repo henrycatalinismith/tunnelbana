@@ -11,6 +11,10 @@ export class Train extends React.Component {
     train: PropTypes.object,
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.station.id !== this.props.station.id;
+  }
+
   render() {
     const width = 15;
     const height = 30;
@@ -27,6 +31,8 @@ export class Train extends React.Component {
       - (height / 2)
     );
 
+    const pathId = `#connection-T-Centralen-Kungsträdgården-Blue`
+
     return (
       <rect
         id={`train-${this.props.train.id}`}
@@ -36,7 +42,11 @@ export class Train extends React.Component {
         width={width}
         height={height}
         fill="gray"
-      />
+      >
+        <animateMotion dur="0.1s" repeatCount="indefinite">
+          <mpath xlinkHref={pathId} />
+        </animateMotion>
+      </rect>
     );
   }
 }
