@@ -13,11 +13,19 @@ export default function(state = {}, action) {
         stationId: action.train.stationId,
       }};
 
-    case actions.ARRIVAL:
-      train = state[action.arrival.trainId];
+    case actions.DEPARTURE:
+      train = state[action.journey.trainId];
       return {...state, [train.id]: {
         ...train,
-        stationId: action.arrival.destinationId,
+        journeyId: action.journey.id,
+      }};
+
+    case actions.ARRIVAL:
+      train = state[action.journey.trainId];
+      return {...state, [train.id]: {
+        ...train,
+        stationId: action.journey.destinationId,
+        journeyId: undefined,
       }};
       break;
 

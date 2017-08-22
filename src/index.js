@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
+import uuid from 'uuid/v1';
 
 import actions from './actions';
 import Map from './components/Map';
@@ -37,80 +38,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
   store.dispatch(actions.addStation({
     id: 'T-Centralen',
-    x: 0,
-    y: 0,
+    x: 300,
+    y: 300,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Kungsträdgården',
-    x: 50,
-    y: 0,
+    x: 350,
+    y: 300,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Rådhuset',
-    x: -50,
-    y: 0,
+    x: 250,
+    y: 300,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Fridhemsplan',
-    x: -100,
-    y: 0,
+    x: 200,
+    y: 300,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Stadshagen',
-    x: -150,
-    y: -50,
+    x: 150,
+    y: 250,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Västra Skogen',
-    x: -200,
-    y: -100,
+    x: 100,
+    y: 200,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Gamla Stan',
-    x: 0,
-    y: 50,
+    x: 300,
+    y: 350,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Slussen',
-    x: 0,
-    y: 100,
+    x: 300,
+    y: 400,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Mariatorget',
-    x: -50,
-    y: 120,
+    x: 250,
+    y: 420,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Zinkensdamm',
-    x: -100,
-    y: 120,
+    x: 200,
+    y: 420,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Hornstull',
-    x: -150,
-    y: 150,
+    x: 150,
+    y: 450,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Medborgarplatsen',
-    x: 0,
-    y: 150,
+    x: 300,
+    y: 450,
   }));
 
   store.dispatch(actions.addStation({
     id: 'Skanstull',
-    x: 50,
-    y: 200,
+    x: 350,
+    y: 500,
   }));
 
   store.dispatch(actions.addConnection({
@@ -226,6 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
   */
 
   store.dispatch(actions.departure({
+    id: uuid(),
     trainId: 'Edward',
     sourceId: 'Kungsträdgården',
     destinationId: 'T-Centralen',
