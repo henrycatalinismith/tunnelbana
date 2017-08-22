@@ -43,13 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
 
   store.dispatch(actions.addStation({
-    id: 'Kungsträdgården',
+    id: 'Kungstradgarden',
     x: 350,
     y: 300,
   }));
 
   store.dispatch(actions.addStation({
-    id: 'Rådhuset',
+    id: 'Radhuset',
     x: 250,
     y: 300,
   }));
@@ -67,13 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
 
   store.dispatch(actions.addStation({
-    id: 'Västra Skogen',
+    id: 'VastraSkogen',
     x: 100,
     y: 200,
   }));
 
   store.dispatch(actions.addStation({
-    id: 'Gamla Stan',
+    id: 'GamlaStan',
     x: 300,
     y: 350,
   }));
@@ -116,18 +116,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   store.dispatch(actions.addConnection({
     sourceId: 'T-Centralen',
-    destinationId: 'Kungsträdgården',
+    destinationId: 'Kungstradgarden',
     lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'T-Centralen',
-    destinationId: 'Rådhuset',
+    destinationId: 'Radhuset',
     lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
-    sourceId: 'Rådhuset',
+    sourceId: 'Radhuset',
     destinationId: 'Fridhemsplan',
     lineId: 'Blue',
   }));
@@ -140,18 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   store.dispatch(actions.addConnection({
     sourceId: 'Stadshagen',
-    destinationId: 'Västra Skogen',
+    destinationId: 'VastraSkogen',
     lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
     sourceId: 'T-Centralen',
-    destinationId: 'Gamla Stan',
+    destinationId: 'GamlaStan',
     lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
-    sourceId: 'Gamla Stan',
+    sourceId: 'GamlaStan',
     destinationId: 'Slussen',
     lineId: 'Red',
   }));
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   store.dispatch(actions.addTrain({
     id: 'Edward',
-    stationId: 'Kungsträdgården',
+    stationId: 'Kungstradgarden',
     lineId: 'Blue',
   }));
 
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
   store.dispatch(actions.departure({
     trainId: 'Thomas',
     sourceId: 'T-Centralen',
-    destinationId: 'Gamla Stan',
+    destinationId: 'GamlaStan',
     lineId: 'Red',
   }));
   */
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
   store.dispatch(actions.departure({
     id: uuid(),
     trainId: 'Edward',
-    sourceId: 'Kungsträdgården',
+    sourceId: 'Kungstradgarden',
     destinationId: 'T-Centralen',
     lineId: 'Blue',
   }));
@@ -253,28 +253,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const medborgarplatsen = new Station(Point.center().add({ y: 150 }), '#00c600');
   const skanstull = new Station(Point.center().add({ y: 175, x: 50 }), '#00c600');
   const gullmarsplan = new Station(Point.center().add({ y: 200, x: 100 }), '#00c600');
-  const skärmarbrink = new Station(Point.center().add({ y: 225, x: 150 }), '#00c600');
+  const skarmarbrink = new Station(Point.center().add({ y: 225, x: 150 }), '#00c600');
   const hammarbyhöjden = new Station(Point.center().add({ y: 250, x: 200 }), '#00c600');
-  const blåsut = new Station(Point.center().add({ y: 250, x: 150 }), '#00c600');
+  const blasut = new Station(Point.center().add({ y: 250, x: 150 }), '#00c600');
   const globen = new Station(Point.center().add({ y: 250, x: 100 }), '#00c600');
   medborgarplatsen.render();
   skanstull.render();
   gullmarsplan.render();
-  skärmarbrink.render();
+  skarmarbrink.render();
   hammarbyhöjden.render();
-  blåsut.render();
+  blasut.render();
   globen.render();
 
-  const rådhuset = new Station(Point.center().add({ y: 25, x: -50 }), '#0273ff');
+  const radhuset = new Station(Point.center().add({ y: 25, x: -50 }), '#0273ff');
   const fridhemsplan = new Station(Point.center().add({ y: 25, x: -100 }), '#0273ff');
   const stadshagen = new Station(Point.center().add({ y: 0, x: -150 }), '#0273ff');
-  const västraskogen = new Station(Point.center().add({ y: -25, x: -200 }), '#0273ff');
+  const vastraskogen = new Station(Point.center().add({ y: -25, x: -200 }), '#0273ff');
   const huvudsta = new Station(Point.center().add({ y: -50, x: -250 }), '#0273ff');
   const solnacentrum = new Station(Point.center().add({ y: -50, x: -200 }), '#0273ff');
-  rådhuset.render();
+  radhuset.render();
   fridhemsplan.render();
   stadshagen.render();
-  västraskogen.render();
+  vastraskogen.render();
   huvudsta.render();
   solnacentrum.render();
 
