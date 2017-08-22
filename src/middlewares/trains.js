@@ -1,6 +1,6 @@
 import Snap from 'snapsvg';
 import uuid from 'uuid/v1';
-import {TweenMax, Power2, TimelineLite} from 'gsap';
+import {TweenMax, TweenLite, Power2, TimelineLite} from 'gsap';
 import actions from '../actions';
 import { nextStop } from '../reducers/connections';
 import { line } from '../reducers/lines';
@@ -35,23 +35,32 @@ export default function(store) {
         const height = 30;
 
         const from = new Point(source.x, source.y);
-        from.add({ x: 0 - width / 2, y: 0 - height / 2 });
+        from.add({ x: 0 - height / 2, y: 0 - width / 2 });
 
         const to = new Point(destination.x, destination.y);
-        to.add({ x: 0 - width / 2, y: 0 - height / 2 });
+        to.add({ x: 0 - height / 2, y: 0 - width / 2 });
 
         const speed = 0.1;
         const distance = from.distance(to);
         const time = distance / speed;
-        const angle = from.angle(to);
+        const angle = to.angle(from);
 
         const pathId = `#connection-${source.id}-${destination.id}-${l.id}`;
         const path = document.querySelector(pathId);
         const el = Snap(document.querySelector(`#train-${t.id}`))
         const degrees = Math.degrees(angle);
         // console.log(source.id, destination.id, el);
+        TweenLite.to(`#train-${t.id}`, 0.1, {
+          rotation:degrees,
+          //transformOrigin:"center center",
+          svgOrigin: `${source.x} ${source.y}`
+        });
 
-        //el.animate({ x: to.x, y: to.y }, time);
+        console.log(from, source);
+        TweenLite.fromTo(`#train-${t.id}`, time / 1000, from, to);
+
+
+        // el.animate({ x: to.x, y: to.y }, time);
         // el.transform(`r${degrees}`, 1);
         // console.log(from, to);
 
