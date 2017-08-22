@@ -52,7 +52,7 @@ export default function(store) {
         // console.log(source.id, destination.id, el);
 
         //el.animate({ x: to.x, y: to.y }, time);
-        el.transform(`r${degrees}`, 1);
+        // el.transform(`r${degrees}`, 1);
         // console.log(from, to);
 
         setTimeout(() => {
