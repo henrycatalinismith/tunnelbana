@@ -40,7 +40,7 @@ export default function(store) {
         const to = new Point(destination.x, destination.y);
         to.add({ x: 0 - height / 2, y: 0 - width / 2 });
 
-        const speed = 0.4;
+        const speed = 0.1;
         const distance = from.distance(to);
         const time = distance / speed;
         const angle = to.angle(from);
@@ -90,7 +90,7 @@ export default function(store) {
             trainId: action.journey.trainId,
             lineId: action.journey.lineId,
           }));
-        }, 100);
+        }, 300);
         break;
     }
 
