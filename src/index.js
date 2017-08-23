@@ -36,6 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
     color: '#0273ff',
   }));
 
+  store.dispatch(actions.addLine({
+    id: 'Special',
+    color: 'gold',
+  }));
+
   store.dispatch(actions.addStation({
     id: 'T-Centralen',
     x: 300,
@@ -204,6 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
     lineId: 'Blue',
   }));
 
+  store.dispatch(actions.addTrain({
+    id: 'Gordon',
+    stationId: 'Kungstradgarden',
+    lineId: 'Special',
+  }));
+
   store.dispatch(actions.departure({
     id: uuid(),
     trainId: 'Thomas',
@@ -227,6 +238,60 @@ document.addEventListener('DOMContentLoaded', () => {
     destinationId: 'T-Centralen',
     lineId: 'Blue',
   }));
+
+  const π = Math.PI;
+  const points = ({ x, y }, r, n) => {
+    const angle = (2 * π) / n;
+
+    return [...Array(n)].map((_, i) =>
+      new Point(
+        x + r * Math.cos(angle * i),
+        y + r * Math.sin(angle * i)
+      )
+    );
+  }
+
+  const center = new Point(300, 300);
+  let firstId = null, lastId = null;
+  points(center, 250, 10).map((point, i) => {
+
+    let id = uuid();
+    store.dispatch(actions.addStation({
+      id: id,
+      x: point.x,
+      y: point.y,
+    }));
+
+    if (lastId) {
+      store.dispatch(actions.addConnection({
+        sourceId: lastId,
+        destinationId: id,
+        lineId: 'Special',
+      }));
+    }
+    if (i === 9) {
+      console.log(id, firstId);
+      store.dispatch(actions.addConnection({
+        sourceId: id,
+        destinationId: firstId,
+        lineId: 'Special',
+      }));
+    }
+
+    if (firstId === null) {
+      firstId = id;
+    }
+    lastId = id;
+  })
+
+  store.dispatch(actions.departure({
+    id: uuid(),
+    trainId: 'Gordon',
+    sourceId: firstId,
+    destinationId: lastId,
+    lineId: 'Special',
+  }));
+
 
   /*
   return;
