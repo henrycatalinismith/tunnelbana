@@ -31,8 +31,6 @@ export class Train extends React.Component {
 
 
     //const pathId = `#track-Kungsträdgården-T-Centralen-Blue`
-    console.log(this.props.train.stationId, this.props.train.journeyId);
-
     //id={`track-${this.props.source.id}-${this.props.destination.id}-${this.props.line.id}`}
     //id={}
 
