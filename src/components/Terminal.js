@@ -39,14 +39,9 @@ export class Terminal extends React.Component {
   }
 
   onMouseMove(event) {
-    console.log(event.screenY);
-    console.log({
-      xOffset: event.screenX - this.state.xStart,
-      yOffset: event.screenY - this.state.yStart,
-    })
     this.setState({
-      xOffset: (event.screenX - this.state.xStart) / 2,
-      yOffset: (event.screenY - this.state.yStart) / 2,
+      xOffset: (event.screenX - this.state.xStart) / 2, // no idea why it helps
+      yOffset: (event.screenY - this.state.yStart) / 2, // to divide by 2 here
     })
   }
 
