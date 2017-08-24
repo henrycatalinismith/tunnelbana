@@ -12,6 +12,39 @@ export default function(state = {}, action) {
         stationId: action.terminal.stationId,
       }};
 
+    case actions.ADD_CONNECTION:
+      const { lineId, sourceId, destinationId } = action.connection;
+      console.log(lineId, sourceId, destinationId)
+      const newSource = terminalByLineAndStation(state, lineId, sourceId);
+      const newDestination = terminalByLineAndStation(state, lineId, destinationId);
+      if (newDestination) {
+        console.log('ee', action.connection)
+      }
+
+      const changes = {};
+      if (false) {
+        changes[newSource.id] = {
+          ...newSource,
+          stationId: action.connection.destinationId,
+        };
+      }
+
+      if (newDestination && !newSource) {
+        console.log('--------------');
+        console.log(action.connection);
+        console.log(newSource);
+        changes[newDestination.id] = {
+          ...newDestination,
+          stationId: action.connection.sourceId,
+        };
+      }
+
+      if (Object.keys(changes).length > 0) {
+        //console.log(changes);
+      }
+
+      return { ...state, ...changes };
+
     default:
       return state;
   }
