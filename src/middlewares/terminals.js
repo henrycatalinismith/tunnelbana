@@ -9,7 +9,7 @@ export default function(store) {
         const { lineId } = action.connection;
         const { connections } = store.getState();
         const siblings = getConnectionsByLine(connections, lineId)
-        if (siblings.length === 1) {
+        if (siblings.length === 0) {
           store.dispatch(actions.addTerminal({
             id: uuid(),
             connectionId: action.connection.id,
