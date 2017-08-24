@@ -47,6 +47,10 @@ export class Terminal extends React.Component {
 
   onMouseUp(event) {
     this.props.deselectTerminal(this.props.terminal.id);
+    this.setState({
+      xOffset: 0,
+      yOffset: 0,
+    })
   }
 
   render() {
@@ -69,22 +73,27 @@ export class Terminal extends React.Component {
     const onMouseMove = this.props.terminal.isSelected && this.onMouseMove;
     const onMouseUp = this.props.terminal.isSelected && this.onMouseUp;
 
+    // stick a huge transparent border around it while it's selected so that
+    // the user doesn't accidentally mouseout the polygon because of the slight
+    // redux/svg lag
     const stroke = this.props.terminal.isSelected
-      ? line.color
+      ? 'transparent'
       : undefined;
 
     return (
-      <polygon
-        style={({ cursor: 'move' })}
-        points={points}
-        fill={line.color}
-        stroke={stroke}
-        strokeWidth={10}
-        onMouseDown={this.onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseOut={onMouseUp}
-        onMouseUp={onMouseUp}
-      />
+      <g>
+        <polygon
+          style={({ cursor: 'move' })}
+          points={points}
+          fill={line.color}
+          stroke={stroke}
+          strokeWidth={1000}
+          onMouseDown={this.onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseOut={onMouseUp}
+          onMouseUp={onMouseUp}
+        />
+      </g>
     );
   }
 }
