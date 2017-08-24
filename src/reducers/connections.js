@@ -56,3 +56,7 @@ export function nextStop(state, previousStationId, currentStationId, lineId) {
     ? sameLine[0].sourceId
     : sameLine[0].destinationId;
 }
+
+export function getConnectionsByLine(state, lineId) {
+  return connections(state).filter(c => c.lineId === lineId);
+}
