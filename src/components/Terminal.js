@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../actions';
+import { connection } from '../reducers/connections';
 import { line } from '../reducers/lines';
 
 export class Terminal extends React.Component {
   static propTypes = {
+    connection: PropTypes.object,
     station: PropTypes.object,
     terminal: PropTypes.object,
     line: PropTypes.object,
@@ -31,7 +33,12 @@ export class Terminal extends React.Component {
   }
 
   onMouseDown(event) {
-    this.props.selectTerminal(this.props.terminal.id);
+    this.props.selectTerminal({
+      terminalId: this.props.terminal.id,
+      connectionId: this.props.connection.id,
+      lineId: this.props.line.id,
+      stationId: this.props.station.id,
+    });
     this.setState({
       xStart: event.screenX,
       yStart: event.screenY,
@@ -46,7 +53,12 @@ export class Terminal extends React.Component {
   }
 
   onMouseUp(event) {
-    this.props.deselectTerminal(this.props.terminal.id);
+    this.props.deselectTerminal({
+      terminalId: this.props.terminal.id,
+      connectionId: this.props.connection.id,
+      lineId: this.props.line.id,
+      stationId: this.props.station.id,
+    });
     this.setState({
       xOffset: 0,
       yOffset: 0,
@@ -69,7 +81,6 @@ export class Terminal extends React.Component {
         this.state.yOffset + station.y - 20 + this.state.yOffset,
       ].join(','),
     ].join(' ');
-    console.log(points);
     const onMouseMove = this.props.terminal.isSelected && this.onMouseMove;
     const onMouseUp = this.props.terminal.isSelected && this.onMouseUp;
 
@@ -100,6 +111,7 @@ export class Terminal extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    connection: connection(state.connections, ownProps.terminal.connectionId),
     line: line(state.lines, ownProps.terminal.lineId),
   };
 }

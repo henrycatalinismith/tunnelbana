@@ -2,15 +2,33 @@ import uuid from 'uuid/v1';
 import actions from '../actions';
 
 export default function(state = {}, action) {
+  let id;
+
   switch (action.type) {
     case actions.ADD_CONNECTION:
-      const id = action.connection.id || uuid();
+      id = action.connection.id || uuid();
       return {...state, [id]: {
         id,
         sourceId: action.connection.sourceId,
         destinationId: action.connection.destinationId,
         lineId: action.connection.lineId,
+        terminalId: undefined,
       }};
+
+    case actions.SELECT_TERMINAL:
+      id = uuid();
+      return {...state, [id]: {
+        id,
+        sourceId: action.stationId,
+        destinationId: undefined,
+        lineId: action.lineId,
+        terminalId: action.terminalId,
+      }};
+
+    case actions.DESELECT_TERMINAL:
+      let fake = fakeConnections(state)[0];
+      let { [fake.id]: {}, ...rest } = state;
+      return rest;
 
     default:
       return state;
@@ -26,7 +44,10 @@ export function connection(state, id) {
 }
 
 export function nextStop(state, previousStationId, currentStationId, lineId) {
-  const goesHere = connections(state).filter(c => (
+  const isReal = connections(state).filter(c => (
+    !!c.sourceId && !!c.destinationId
+  ));
+  const goesHere = isReal.filter(c => (
     c.sourceId === currentStationId
     || c.destinationId === currentStationId
   ));
@@ -59,4 +80,8 @@ export function nextStop(state, previousStationId, currentStationId, lineId) {
 
 export function getConnectionsByLine(state, lineId) {
   return connections(state).filter(c => c.lineId === lineId);
+}
+
+export function fakeConnections(state) {
+  return connections(state).filter(c => !!c.terminalId);
 }

@@ -13,19 +13,22 @@ export class Connection extends React.Component {
     map: PropTypes.object,
     source: PropTypes.object,
     destination: PropTypes.object,
+    terminal: PropTypes.object,
     sourceTerminal: PropTypes.object,
     destinationTerminal: PropTypes.object,
   }
 
   render() {
+    const { source, destination } = this.props;
+
     const from = {
-      x: this.props.source.x,
-      y: this.props.source.y,
+      x: source.x,
+      y: source.y,
     };
 
     const to = {
-      x: this.props.destination.x,
-      y: this.props.destination.y,
+      x: destination ? destination.x : 10,
+      y: destination ? destination.y : 10,
     };
 
     if (isNaN(from.y)) {
@@ -37,7 +40,7 @@ export class Connection extends React.Component {
     const returnPath = 'M' + [to.x, to.y, from.x, from.y].join(' ');
 
     return (
-      <g id={`connection-${this.props.source.id}-${this.props.destination.id}-${this.props.line.id}`}>
+      <g id={`connection-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}>
         {this.props.sourceTerminal && (
           <Terminal
             station={this.props.source}
@@ -45,14 +48,14 @@ export class Connection extends React.Component {
           />
         )}
         <path
-          id={`track-${this.props.source.id}-${this.props.destination.id}-${this.props.line.id}`}
+          id={`track-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}
           d={outboundPath}
           stroke={this.props.line.color}
           strokeWidth="8"
         />
 
         <path
-          id={`track-${this.props.destination.id}-${this.props.source.id}-${this.props.line.id}`}
+          id={`track-${destination && destination.id}-${this.props.source.id}-${this.props.line.id}`}
           d={returnPath}
           stroke={this.props.line.color}
           strokeWidth="8"
