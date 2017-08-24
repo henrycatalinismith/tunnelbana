@@ -9,16 +9,16 @@ export function addTerminal(terminal) {
   };
 }
 
-export function selectTerminal(terminalId) {
+export function selectTerminal(selection) {
   return {
     type: SELECT_TERMINAL,
-    terminalId,
+    ...selection,
   };
 }
 
-export function deselectTerminal(terminalId) {
+export function deselectTerminal(selection) {
   return {
     type: DESELECT_TERMINAL,
-    terminalId,
+    ...selection,
   };
 }
