@@ -57,6 +57,13 @@ export class Connection extends React.Component {
           stroke={this.props.line.color}
           strokeWidth="8"
         />
+
+        {this.props.destinationTerminal && (
+          <Terminal
+            station={this.props.destination}
+            terminal={this.props.destinationTerminal}
+          />
+        )}
       </g>
 
     );
