@@ -16,6 +16,7 @@ export default function(state = {}, action) {
       }};
 
     case actions.SELECT_TERMINAL:
+      return state;
       id = uuid();
       return {...state, [id]: {
         id,
@@ -26,6 +27,7 @@ export default function(state = {}, action) {
       }};
 
     case actions.DESELECT_TERMINAL:
+      return state;
       let fake = fakeConnections(state)[0];
       let { [fake.id]: {}, ...rest } = state;
       return rest;
