@@ -120,72 +120,84 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'T-Centralen',
     destinationId: 'Kungstradgarden',
     lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'T-Centralen',
     destinationId: 'Radhuset',
     lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'Radhuset',
     destinationId: 'Fridhemsplan',
     lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'Fridhemsplan',
     destinationId: 'Stadshagen',
     lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'Stadshagen',
     destinationId: 'VastraSkogen',
     lineId: 'Blue',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'T-Centralen',
     destinationId: 'GamlaStan',
     lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'GamlaStan',
     destinationId: 'Slussen',
     lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'Slussen',
     destinationId: 'Mariatorget',
     lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'Mariatorget',
     destinationId: 'Zinkensdamm',
     lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'Zinkensdamm',
     destinationId: 'Hornstull',
     lineId: 'Red',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'Slussen',
     destinationId: 'Medborgarplatsen',
     lineId: 'Green',
   }));
 
   store.dispatch(actions.addConnection({
+    id: uuid(),
     sourceId: 'Medborgarplatsen',
     destinationId: 'Skanstull',
     lineId: 'Green',
@@ -264,6 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lastId) {
       store.dispatch(actions.addConnection({
+        id: uuid(),
         sourceId: lastId,
         destinationId: id,
         lineId: 'Special',
@@ -272,6 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (i === 9) {
       console.log(id, firstId);
       store.dispatch(actions.addConnection({
+        id: uuid(),
         sourceId: id,
         destinationId: firstId,
         lineId: 'Special',
