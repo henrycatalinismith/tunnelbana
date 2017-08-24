@@ -19,7 +19,7 @@ export class Connection extends React.Component {
   }
 
   render() {
-    const { source, destination } = this.props;
+    const { source, destination, terminal } = this.props;
 
     const from = {
       x: source.x,
@@ -27,8 +27,8 @@ export class Connection extends React.Component {
     };
 
     const to = {
-      x: destination ? destination.x : 10,
-      y: destination ? destination.y : 10,
+      ...terminal,
+      ...destination,
     };
 
     if (isNaN(from.y)) {
