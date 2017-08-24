@@ -2,6 +2,8 @@ import uuid from 'uuid/v1';
 import actions from '../actions';
 
 export default function(state = {}, action) {
+  let terminalId;
+
   switch (action.type) {
     case actions.ADD_TERMINAL:
       const id = action.terminal.id || uuid();
@@ -10,6 +12,7 @@ export default function(state = {}, action) {
         connectionId: action.terminal.connectionId,
         lineId: action.terminal.lineId,
         stationId: action.terminal.stationId,
+        isSelected: false,
       }};
 
     case actions.ADD_CONNECTION:
@@ -24,8 +27,21 @@ export default function(state = {}, action) {
           stationId: action.connection.destinationId,
         };
       }
-
       return { ...state, ...changes };
+
+    case actions.SELECT_TERMINAL:
+      terminalId = action.terminalId;
+      return { ...state, [terminalId]: {
+        ...state[terminalId],
+        isSelected: true,
+      }};
+
+    case actions.DESELECT_TERMINAL:
+      terminalId = action.terminalId;
+      return { ...state, [terminalId]: {
+        ...state[terminalId],
+        isSelected: false,
+      }};
 
     default:
       return state;
