@@ -41,6 +41,16 @@ export default function(state = {}, action) {
       return { ...state, [terminalId]: {
         ...state[terminalId],
         isSelected: false,
+        x: undefined,
+        y: undefined,
+      }};
+
+    case actions.MOVE_TERMINAL:
+      terminalId = action.terminalId;
+      return { ...state, [terminalId]: {
+        ...state[terminalId],
+        x: action.x,
+        y: action.y,
       }};
 
     default:

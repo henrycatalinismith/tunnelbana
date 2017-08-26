@@ -13,6 +13,7 @@ export class Terminal extends React.Component {
     line: PropTypes.object,
     selectTerminal: PropTypes.func,
     deselectTerminal: PropTypes.func,
+    moveTerminal: PropTypes.func,
   }
 
   static defaultProps = {
@@ -45,11 +46,19 @@ export class Terminal extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    console.log('componentWillUnmount')
+  }
+
   onMouseMove(event) {
-    this.setState({
-      xOffset: (event.screenX - this.state.xStart) / 2, // no idea why it helps
-      yOffset: (event.screenY - this.state.yStart) / 2, // to divide by 2 here
-    })
+    const xOffset = (event.screenX - this.state.xStart) / 2; // no idea why it helps
+    const yOffset = (event.screenY - this.state.yStart) / 2; // to divide by 2 here
+    this.setState({ xOffset, yOffset });
+    this.props.moveTerminal(
+      this.props.terminal.id,
+      xOffset + this.props.station.x + xOffset,
+      yOffset + this.props.station.y + yOffset
+    )
   }
 
   onMouseUp(event) {
@@ -66,20 +75,14 @@ export class Terminal extends React.Component {
   }
 
   render() {
-    const { line, station } = this.props;
+    const { line, station, terminal } = this.props;
+    const x = typeof terminal.x === 'undefined' ? station.x : terminal.x;
+    const y = typeof terminal.y === 'undefined' ? station.y : terminal.y;
+
     const points = [
-      [
-        this.state.xOffset + station.x + this.state.xOffset,
-        this.state.yOffset + station.y + this.state.yOffset,
-      ].join(','),
-      [
-        this.state.xOffset + station.x - 10 + this.state.xOffset,
-        this.state.yOffset + station.y - 20 + this.state.yOffset,
-      ].join(','),
-      [
-        this.state.xOffset + station.x + 10 + this.state.xOffset,
-        this.state.yOffset + station.y - 20 + this.state.yOffset,
-      ].join(','),
+      [ x, y ].join(','),
+      [ x - 10, y - 20, ].join(','),
+      [ x + 10, y - 20, ].join(','),
     ].join(' ');
     const onMouseMove = this.props.terminal.isSelected && this.onMouseMove;
     const onMouseUp = this.props.terminal.isSelected && this.onMouseUp;
@@ -120,6 +123,7 @@ const mapDispatchToProps = dispatch => {
   return {
     selectTerminal: id => dispatch(actions.selectTerminal(id)),
     deselectTerminal: id => dispatch(actions.deselectTerminal(id)),
+    moveTerminal: (id, x, y) => dispatch(actions.moveTerminal(id, x, y)),
   };
 }
 
