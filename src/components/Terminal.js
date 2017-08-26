@@ -65,10 +65,6 @@ export class Terminal extends React.Component {
     })
   }
 
-  componentWillUnmount() {
-    console.log('oh fuck it was an unexpected componentWillUnmount')
-  }
-
   render() {
     const { line, station } = this.props;
     const points = [
