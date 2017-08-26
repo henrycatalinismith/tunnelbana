@@ -5,6 +5,7 @@ import * as map from './map';
 import * as stations from './stations';
 import * as terminals from './terminals';
 import * as trains from './trains';
+import * as window from './window';
 
 export default {
   ...app,
@@ -14,4 +15,5 @@ export default {
   ...stations,
   ...terminals,
   ...trains,
+  ...window,
 };

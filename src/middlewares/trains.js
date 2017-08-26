@@ -6,6 +6,7 @@ import { nextStop } from '../reducers/connections';
 import { line } from '../reducers/lines';
 import { train } from '../reducers/trains';
 import { station } from '../reducers/stations';
+import clock from '../clock';
 
 // Converts from degrees to radians.
 Math.radians = function(degrees) {
@@ -63,7 +64,7 @@ export default function(store) {
         // el.transform(`r${degrees}`, 1);
         // console.log(from, to);
 
-        setTimeout(() => {
+        clock.setTimeout(() => {
           store.dispatch(actions.arrival({
             destinationId: destination.id,
             lineId: l.id,
@@ -82,7 +83,7 @@ export default function(store) {
           action.journey.lineId
         );
 
-        setTimeout(() => {
+        clock.setTimeout(() => {
           store.dispatch(actions.departure({
             id: uuid(),
             sourceId: action.journey.destinationId,
