@@ -51,13 +51,13 @@ export class Terminal extends React.Component {
   }
 
   onMouseMove(event) {
-    const xOffset = (event.screenX - this.state.xStart) / 2; // no idea why it helps
-    const yOffset = (event.screenY - this.state.yStart) / 2; // to divide by 2 here
+    const xOffset = (event.screenX - this.state.xStart);
+    const yOffset = (event.screenY - this.state.yStart);
     this.setState({ xOffset, yOffset });
     this.props.moveTerminal(
       this.props.terminal.id,
-      xOffset + this.props.station.x + xOffset,
-      yOffset + this.props.station.y + yOffset
+      xOffset + this.props.station.x,
+      yOffset + this.props.station.y
     )
   }
 
