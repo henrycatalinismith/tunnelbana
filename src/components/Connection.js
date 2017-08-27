@@ -31,11 +31,6 @@ export class Connection extends React.Component {
       ...destination,
     };
 
-    if (isNaN(from.y)) {
-      console.log(this.props.source);
-      console.error('omg')
-    }
-
     const outboundPath = 'M' + [from.x, from.y, to.x, to.y].join(' ');
     const returnPath = 'M' + [to.x, to.y, from.x, from.y].join(' ');
     const strokeWidth = this.props.line.isSelected ? 12 : 8;
