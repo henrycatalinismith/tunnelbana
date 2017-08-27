@@ -9,7 +9,6 @@ import actions from './actions';
 import clock from './clock';
 import Map from './components/Map';
 import store from './reducers';
-import { getConnection } from './reducers/connections';
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.createElement('div');
@@ -271,17 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sourceId: 'T-Centralen',
     destinationId: 'GamlaStan',
     lineId: 'Red',
-    connectionId: getConnection(
-      store.getState().connections,
-      'Red',
-      'T-Centralen',
-      'GamlaStan'
-    )
   }));
-
-  console.log();
-//export function getConnectionId(state, lineId, sourceId, destinationId) {
-
 
   store.dispatch(actions.departure({
     id: uuid(),
@@ -289,12 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
     sourceId: 'Medborgarplatsen',
     destinationId: 'Skanstull',
     lineId: 'Green',
-    connectionId: getConnection(
-      store.getState().connections,
-      'Green',
-      'Medborgarplatsen',
-      'Skanstull'
-    )
   }));
 
   store.dispatch(actions.departure({
@@ -303,12 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
     sourceId: 'Kungstradgarden',
     destinationId: 'T-Centralen',
     lineId: 'Blue',
-    connectionId: getConnection(
-      store.getState().connections,
-      'Blue',
-      'Kungstradgarden',
-      'T-Centralen'
-    )
   }));
 
   const π = Math.PI;
@@ -361,12 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sourceId: firstId,
     destinationId: lastId,
     lineId: 'Special',
-    connectionId: getConnection(
-      store.getState().connections,
-      'Special',
-      firstId,
-      lastId
-    )
   }));
+
 
 });
