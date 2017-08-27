@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import actions from '../actions';
 import { connection } from '../reducers/connections';
 import { line } from '../reducers/lines';
+import { angle, rotate } from '../geometry/points';
 
 export class Terminal extends React.Component {
   static propTypes = {
@@ -79,11 +80,32 @@ export class Terminal extends React.Component {
     const x = typeof terminal.x === 'undefined' ? station.x : terminal.x;
     const y = typeof terminal.y === 'undefined' ? station.y : terminal.y;
 
+    const width = this.props.terminal.isSelected ? 26 : 20;
+    const height = this.props.terminal.isSelected ? 26 : 20;
+
+    let bottom = { x, y };
+    let topLeft = { x: x - width, y: y - height };
+    let topRight = { x: x + width, y: y - height };
+    const center = {
+      x: bottom.x,
+      y: bottom.y - height / 2,
+    }
+
+    if (this.props.terminal.isSelected) {
+      const origin = { x: 0, y: 0 };
+      const point = { x: this.state.xOffset, y: this.state.yOffset };
+      const radians = angle(point, origin) - Math.PI / 2;
+      bottom = rotate(center, bottom, radians);
+      topLeft = rotate(center, topLeft, radians);
+      topRight = rotate(center, topRight, radians);
+    }
+
     const points = [
-      [ x, y ].join(','),
-      [ x - 10, y - 20, ].join(','),
-      [ x + 10, y - 20, ].join(','),
+      [ bottom.x, bottom.y ].join(','),
+      [ topLeft.x, topLeft.y ].join(','),
+      [ topRight.x, topRight.y ].join(','),
     ].join(' ');
+
     const onMouseMove = this.props.terminal.isSelected && this.onMouseMove;
     const onMouseUp = this.props.terminal.isSelected && this.onMouseUp;
 
