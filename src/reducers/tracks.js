@@ -9,6 +9,7 @@ export default function(state = {}, action) {
       return {...state, [id]: {
         id,
         connectionId: action.track.connectionId,
+        lineId: action.track.lineId,
         x1: action.track.x1,
         y1: action.track.y1,
         x2: action.track.x2,

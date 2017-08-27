@@ -102,6 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
 
   store.dispatch(actions.addStation({
+    id: 'SolnaStation',
+    x: 120,
+    y: 100,
+  }));
+
+  store.dispatch(actions.addStation({
     id: 'GamlaStan',
     x: 300,
     y: 350,
@@ -175,6 +181,13 @@ document.addEventListener('DOMContentLoaded', () => {
     id: uuid(),
     sourceId: 'Stadshagen',
     destinationId: 'VastraSkogen',
+    lineId: 'Blue',
+  }));
+
+  store.dispatch(actions.addConnection({
+    id: uuid(),
+    sourceId: 'VastraSkogen',
+    destinationId: 'SolnaStation',
     lineId: 'Blue',
   }));
 
