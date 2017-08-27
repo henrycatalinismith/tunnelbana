@@ -1,9 +1,9 @@
+import journeys from './journeys';
 import terminals from './terminals';
-import trains from './trains';
 import window from './window';
 
 export default [
+  journeys,
   terminals,
-  trains,
   window,
 ];
