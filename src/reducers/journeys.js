@@ -12,6 +12,7 @@ export default function(state = {}, action) {
         id,
         sourceId: action.journey.sourceId,
         destinationId: action.journey.destinationId,
+        connectionId: action.journey.connectionId,
         lineId: action.journey.lineId,
         trainId: action.journey.trainId,
         isComplete: false,

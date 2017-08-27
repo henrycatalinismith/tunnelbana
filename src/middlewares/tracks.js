@@ -88,17 +88,6 @@ export default function(store) {
             addTrack(a, b);
             addTrack(b, destination);
           }
-
-
-          console.log(
-            source.id,
-            destination.id,
-            angle.toFixed(2),
-            type,
-            primaryDistance,
-            secondaryDistance,
-            remainder
-          );
         }
 
         break;

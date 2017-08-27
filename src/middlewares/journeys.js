@@ -4,6 +4,7 @@ import actions from '../actions';
 import { nextStop } from '../reducers/connections';
 import { journey } from '../reducers/journeys';
 import { line } from '../reducers/lines';
+import { getTracksByConnection } from '../reducers/tracks';
 import { train } from '../reducers/trains';
 import { station } from '../reducers/stations';
 import clock from '../clock';
@@ -23,6 +24,9 @@ export default function(store) {
         destination = station(state.stations, action.journey.destinationId);
         l = line(state.lines, action.journey.lineId);
         j = journey(state.journeys, t.journeyId);
+        const tracks = getTracksByConnection(state.tracks, action.journey.connectionId);
+        console.log(action.journey.connectionId);
+
 
         const width = 15;
         const height = 30;
@@ -42,9 +46,8 @@ export default function(store) {
 
         TweenLite.to(`#train-${t.id}`, 0.1, {
           rotation:degrees,
-          svgOrigin: `${source.x} ${source.y}`
-        });
-
+            svgOrigin: `${source.x} ${source.y}`
+          });
         TweenLite.fromTo(`#train-${t.id}`, time / 1000, from, to);
 
         clock.setTimeout(() => {
@@ -60,7 +63,7 @@ export default function(store) {
 
       case actions.ARRIVAL:
         state = store.getState();
-        const nextDestinationId = nextStop(
+        const { connectionId, destinationId } = nextStop(
           state.connections,
           action.journey.sourceId,
           action.journey.destinationId,
@@ -71,7 +74,8 @@ export default function(store) {
           store.dispatch(actions.departure({
             id: uuid(),
             sourceId: action.journey.destinationId,
-            destinationId: nextDestinationId,
+            destinationId: destinationId,
+            connectionId: connectionId,
             trainId: action.journey.trainId,
             lineId: action.journey.lineId,
           }));

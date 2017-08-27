@@ -28,3 +28,7 @@ export function tracks(state) {
 export function track(state, id) {
   return state[id];
 }
+
+export function getTracksByConnection(state, connectionId) {
+  return tracks(state).filter(t => t.connectionId === connectionId);
+}
