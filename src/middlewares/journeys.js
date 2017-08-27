@@ -3,6 +3,7 @@ import uuid from 'uuid/v1';
 import {TweenMax, TweenLite, Power2, TimelineLite} from 'gsap';
 import actions from '../actions';
 import { nextStop } from '../reducers/connections';
+import { journey } from '../reducers/journeys';
 import { line } from '../reducers/lines';
 import { train } from '../reducers/trains';
 import { station } from '../reducers/stations';
@@ -12,7 +13,8 @@ import * as points from '../geometry/points';
 export default function(store) {
   return next => action => {
     let state;
-    let t, source, destination, l;
+    let t, source, destination, l, j;
+    const n = next(action);
 
     switch (action.type) {
       case actions.DEPARTURE:
@@ -21,6 +23,7 @@ export default function(store) {
         source = station(state.stations, action.journey.sourceId);
         destination = station(state.stations, action.journey.destinationId);
         l = line(state.lines, action.journey.lineId);
+        j = journey(state.journeys, t.journeyId);
 
         const width = 15;
         const height = 30;
@@ -48,6 +51,7 @@ export default function(store) {
 
         clock.setTimeout(() => {
           store.dispatch(actions.arrival({
+            id: j.id,
             destinationId: destination.id,
             lineId: l.id,
             sourceId: source.id,
@@ -77,6 +81,6 @@ export default function(store) {
         break;
     }
 
-    return next(action);
+    return n;
   }
 }
