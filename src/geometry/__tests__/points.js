@@ -30,4 +30,14 @@ describe('points', () => {
       expect(output.toFixed(2)).toEqual('10.00')
     });
   });
+
+  describe('rotate()', () => {
+    it('rotates a point around another point', () => {
+      const origin = { x: 0, y: 0 };
+      const point = { x: 0, y: -10 };
+      const output = points.rotate(origin, point, Math.PI);
+      expect(output.x.toFixed(2)).toEqual('0.00');
+      expect(output.y.toFixed(2)).toEqual('10.00');
+    });
+  });
 });
