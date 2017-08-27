@@ -14,8 +14,9 @@ export function windowFocus() {
   };
 }
 
-export function windowResize() {
+export function windowResize(window) {
   return {
-    type: WINDOW_FOCUS,
+    type: WINDOW_RESIZE,
+    window,
   };
 }

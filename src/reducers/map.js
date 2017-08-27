@@ -16,8 +16,12 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case actions.UPDATE_VIEW_BOX:
-      return { ...state, viewBox: action.viewBox };
+    case actions.WINDOW_RESIZE:
+      return { ...state, viewBox: {
+        ...state.viewBox,
+        width: action.window.width,
+        height: action.window.height,
+      }};
 
     default:
       return state;
