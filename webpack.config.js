@@ -5,14 +5,11 @@ const dashboard = new Dashboard;
 
 module.exports = {
   devServer: {
-    // contentBase: path.join(__dirname, 'src'),
     compress: true,
     historyApiFallback: true,
     port: 8080,
     host: '127.0.0.1',
-    // inline: true,
-    quiet: true,   // important
-    // hot: true,
+    quiet: true,
     open: true,
   },
   entry: path.join(__dirname, 'src', 'index.js'),
