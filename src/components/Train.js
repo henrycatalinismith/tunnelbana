@@ -47,7 +47,7 @@ export class Train extends React.Component {
       const distance = from.distance(to);
       const time = distance / speed;
       const angle = from.angle(to) + Math.PI * 3;
-      const degrees = Math.degrees(angle);
+      const degrees = angle * 180 / Math.PI;
       //transform = `rotate(${degrees} ${this.props.station.x} ${this.props.station.y})`;
     }
 
