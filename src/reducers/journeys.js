@@ -6,7 +6,7 @@ export default function(state = {}, action) {
 
   switch (action.type) {
     case actions.DEPARTURE:
-      id = action.journey.id || uuid();
+      id = action.journey.id;
       return {...state, [id]: {
         id,
         sourceId: action.journey.sourceId,
