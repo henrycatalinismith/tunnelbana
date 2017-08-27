@@ -11,7 +11,7 @@ export default function(store) {
         const { connections, stations } = store.getState();
         const source = station(stations, sourceId);
         const destination = station(stations, destinationId);
-        const angle = points.angle(source, destination);
+        const angle = Math.abs(points.angle(source, destination));
         const π = Math.PI;
 
         let type = 'dunno lol';
@@ -35,20 +35,70 @@ export default function(store) {
           primaryDistance = source.x - destination.x;
           secondaryDistance = source.y - destination.y;
         }
+        primaryDistance = Math.abs(primaryDistance);
+        secondaryDistance = Math.abs(secondaryDistance);
+        const remainder = (primaryDistance - secondaryDistance);
 
-        const diff = (primaryDistance - secondaryDistance) / 2;
-
-        console.log(source.id, destination.id, angle.toFixed(2), type, primaryDistance, secondaryDistance, diff)
 
         if (Math.abs(secondaryDistance) < 0.000001) {
           store.dispatch(actions.addTrack({
             id: uuid(),
             connectionId: action.connection.id,
+            lineId,
             x1: source.x,
             y1: source.y,
             x2: destination.x,
             y2: destination.y,
           }))
+        } else {
+          let p1, p2;
+
+          const addTrack = (p1, p2) => {
+            store.dispatch(actions.addTrack({
+              id: uuid(),
+              connectionId: action.connection.id,
+              lineId,
+              x1: p1.x,
+              y1: p1.y,
+              x2: p2.x,
+              y2: p2.y,
+            }))
+
+          }
+
+          let a, b;
+          if (type === 'latitudinal') {
+            a = { x: source.x, y: source.y };
+            b = { x: destination.x, y: destination.y}
+            a.y += source.y < destination.y ? remainder / 2 : 0 - remainder / 2;
+            b.y += source.y > destination.y ? remainder / 2 : 0 - remainder / 2;
+
+            addTrack(source, a);
+            addTrack(a, b);
+            addTrack(b, destination);
+          }
+
+          if (type === 'longitudinal') {
+            a = { x: source.x, y: source.y };
+            b = { x: destination.x, y: destination.y}
+            a.x += source.x < destination.x ? remainder / 2 : 0 - remainder / 2;
+            b.x += source.x > destination.x ? remainder / 2 : 0 - remainder / 2;
+
+            addTrack(source, a);
+            addTrack(a, b);
+            addTrack(b, destination);
+          }
+
+
+          console.log(
+            source.id,
+            destination.id,
+            angle.toFixed(2),
+            type,
+            primaryDistance,
+            secondaryDistance,
+            remainder
+          );
         }
 
         break;
