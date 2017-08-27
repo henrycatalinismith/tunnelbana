@@ -19,7 +19,6 @@ export class Track extends React.Component {
     const path = 'M' + [track.x1, track.y1, track.x2, track.y2].join(' ');
     const strokeWidth = this.props.track.isSelected ? 12 : 8;
 
-    console.log(this.props.track);
     return (
       <g id={this.props.track.id}>
         <path
