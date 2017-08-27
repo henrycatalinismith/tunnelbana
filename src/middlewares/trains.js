@@ -7,17 +7,7 @@ import { line } from '../reducers/lines';
 import { train } from '../reducers/trains';
 import { station } from '../reducers/stations';
 import clock from '../clock';
-
-// Converts from degrees to radians.
-Math.radians = function(degrees) {
-  return degrees * Math.PI / 180;
-};
-
-// Converts from radians to degrees.
-Math.degrees = function(radians) {
-  return radians * 180 / Math.PI;
-};
-// http://cwestblog.com/2012/11/12/javascript-degree-and-radian-conversion/
+import * as points from '../geometry/points';
 
 export default function(store) {
   return next => action => {
@@ -35,34 +25,26 @@ export default function(store) {
         const width = 15;
         const height = 30;
 
-        const from = new Point(source.x, source.y);
-        from.add({ x: 0 - height / 2, y: 0 - width / 2 });
-
-        const to = new Point(destination.x, destination.y);
-        to.add({ x: 0 - height / 2, y: 0 - width / 2 });
+        const halfTrain = { x: 0 - height / 2, y: 0 - width / 2 };
+        const from = points.add(source, halfTrain);
+        const to = points.add(destination, halfTrain);
 
         const speed = 0.1;
-        const distance = from.distance(to);
+        const distance = points.distance(from, to);
         const time = distance / speed;
-        const angle = to.angle(from);
+        const angle = points.angle(to, from);
 
         const pathId = `#connection-${source.id}-${destination.id}-${l.id}`;
         const path = document.querySelector(pathId);
         const el = Snap(document.querySelector(`#train-${t.id}`))
-        const degrees = Math.degrees(angle);
-        // console.log(source.id, destination.id, el);
+        const degrees = angle * 180 / Math.PI;
+
         TweenLite.to(`#train-${t.id}`, 0.1, {
           rotation:degrees,
-          //transformOrigin:"center center",
           svgOrigin: `${source.x} ${source.y}`
         });
 
         TweenLite.fromTo(`#train-${t.id}`, time / 1000, from, to);
-
-
-        // el.animate({ x: to.x, y: to.y }, time);
-        // el.transform(`r${degrees}`, 1);
-        // console.log(from, to);
 
         clock.setTimeout(() => {
           store.dispatch(actions.arrival({
@@ -96,43 +78,5 @@ export default function(store) {
     }
 
     return next(action);
-  }
-}
-
-class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  add ({ x = 0, y = 0}) {
-    this.x += x;
-    this.y += y;
-    return this;
-  }
-
-  angle (point) {
-    return Math.atan2(
-      point.y - this.y,
-      point.x - this.x
-    );
-  }
-
-  distance ({ x, y }) {
-    const a = Math.abs(this.x - x);
-    const b = Math.abs(this.y - y);
-    return Math.sqrt(
-      Math.abs((a * a) + (b * b))
-    );
-  }
-
-  rotateAround({ x, y }, angle) {
-    var radians = (Math.PI / 180) * angle,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians),
-        nx = (cos * (this.x - x)) + (sin * (this.y - y)) + x,
-        ny = (cos * (this.y - y)) - (sin * (this.x - x)) + y;
-    this.x = nx;
-    this.y = ny;
   }
 }
