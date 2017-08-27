@@ -1,4 +1,3 @@
-import Snap from 'snapsvg';
 import uuid from 'uuid/v1';
 import {TweenMax, TweenLite, Power2, TimelineLite} from 'gsap';
 import actions from '../actions';
@@ -39,7 +38,6 @@ export default function(store) {
 
         const pathId = `#connection-${source.id}-${destination.id}-${l.id}`;
         const path = document.querySelector(pathId);
-        const el = Snap(document.querySelector(`#train-${t.id}`))
         const degrees = angle * 180 / Math.PI;
 
         TweenLite.to(`#train-${t.id}`, 0.1, {
