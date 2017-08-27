@@ -5,6 +5,7 @@ import lines from './lines';
 import map from './map';
 import stations from './stations';
 import terminals from './terminals';
+import tracks from './tracks';
 import trains from './trains';
 import middlewares from '../middlewares';
 
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   map,
   stations,
   terminals,
+  tracks,
   trains,
 });
 
