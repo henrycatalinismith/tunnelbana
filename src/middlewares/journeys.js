@@ -25,8 +25,6 @@ export default function(store) {
         l = line(state.lines, action.journey.lineId);
         j = journey(state.journeys, t.journeyId);
         const tracks = getTracksByConnection(state.tracks, action.journey.connectionId);
-        console.log(action.journey.connectionId);
-
 
         const width = 15;
         const height = 30;
