@@ -38,6 +38,7 @@ export class Connection extends React.Component {
 
     const outboundPath = 'M' + [from.x, from.y, to.x, to.y].join(' ');
     const returnPath = 'M' + [to.x, to.y, from.x, from.y].join(' ');
+    const strokeWidth = this.props.line.isSelected ? 12 : 8;
 
     return (
       <g id={`connection-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}>
@@ -51,14 +52,14 @@ export class Connection extends React.Component {
           id={`track-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}
           d={outboundPath}
           stroke={this.props.line.color}
-          strokeWidth="8"
+          strokeWidth={strokeWidth}
         />
 
         <path
           id={`track-${destination && destination.id}-${this.props.source.id}-${this.props.line.id}`}
           d={returnPath}
           stroke={this.props.line.color}
-          strokeWidth="8"
+          strokeWidth={strokeWidth}
         />
 
         {this.props.destinationTerminal && (
