@@ -3,6 +3,7 @@ import actions from '../actions';
 
 export default function(state = {}, action) {
   let id;
+  let journey;
 
   switch (action.type) {
     case actions.DEPARTURE:
@@ -17,11 +18,9 @@ export default function(state = {}, action) {
       }};
 
     case actions.ARRIVAL:
-      id = action.journey.id || uuid();
-      return {...state, [id]: {
-        ...state[id],
-        isComplete: true,
-      }};
+      id = action.journey.id;
+      let { [id]: {}, ...rest } = state;
+      return rest;
 
     default:
       return state;

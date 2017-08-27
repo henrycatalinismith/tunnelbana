@@ -27,7 +27,7 @@ describe('journeys', () => {
       });
     });
 
-    it('marks the journey as complete on ARRIVAL', () => {
+    it('deletes the journey on ARRIVAL', () => {
       const state = {
         'Example Departure': {
           isComplete: false,
@@ -36,11 +36,7 @@ describe('journeys', () => {
       const action = actions.arrival({ id: 'Example Departure' });
       const newState = reducer(state, action);
 
-      expect(newState).toEqual({
-        'Example Departure': {
-          isComplete: true,
-        }
-      });
+      expect(newState).toEqual({});
     });
   });
 
