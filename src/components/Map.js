@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Station from './Station';
 import Connection from './Connection';
+import Track from './Track';
 import Train from './Train';
 import { connections } from '../reducers/connections';
 import { stations } from '../reducers/stations';
+import { tracks } from '../reducers/tracks';
 import { trains } from '../reducers/trains';
 
 export class Map extends React.Component {
@@ -13,6 +15,7 @@ export class Map extends React.Component {
     connections: PropTypes.array,
     map: PropTypes.object,
     stations: PropTypes.array,
+    tracks: PropTypes.array,
   }
 
   render() {
@@ -29,6 +32,13 @@ export class Map extends React.Component {
           <Connection
             key={`connection-${i}`}
             connection={connection}
+          />
+        ))}
+
+        {this.props.tracks.map((track, i) => (
+          <Track
+            key={`track-${i}`}
+            track={track}
           />
         ))}
 
@@ -55,6 +65,7 @@ const mapStateToProps = state => {
     connections: connections(state.connections),
     map: state.map,
     stations: stations(state.stations),
+    tracks: tracks(state.tracks),
     trains: trains(state.trains),
   };
 }
