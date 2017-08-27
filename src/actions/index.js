@@ -1,4 +1,3 @@
-import * as app from './app';
 import * as connections from './connections';
 import * as lines from './lines';
 import * as map from './map';
@@ -8,7 +7,6 @@ import * as trains from './trains';
 import * as window from './window';
 
 export default {
-  ...app,
   ...connections,
   ...lines,
   ...map,
