@@ -47,10 +47,6 @@ export class Terminal extends React.Component {
     })
   }
 
-  componentWillUnmount() {
-    console.log('componentWillUnmount')
-  }
-
   onMouseMove(event) {
     const xOffset = (event.screenX - this.state.xStart);
     const yOffset = (event.screenY - this.state.yStart);

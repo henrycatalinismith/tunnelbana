@@ -13,7 +13,6 @@ export default function(store) {
         })
 
         window.addEventListener('focus', () => {
-          console.log('focus')
           store.dispatch(actions.windowFocus());
           clock.resume();
           TweenMax.resumeAll(true, true);

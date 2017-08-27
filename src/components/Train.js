@@ -29,38 +29,13 @@ export class Train extends React.Component {
     let x = (this.props.station.x - (width / 2));
     let y = (this.props.station.y - (height / 2));
 
-
-    //const pathId = `#track-Kungsträdgården-T-Centralen-Blue`
-    //id={`track-${this.props.source.id}-${this.props.destination.id}-${this.props.line.id}`}
-    //id={}
-
-    let pathId, transform;
-    if (this.props.journey) {
-      pathId = `#track-${this.props.source.id}-${this.props.destination.id}-${this.props.line.id}`;
-      const from = new Point(this.props.source.x, this.props.source.y);
-      from.add({ x: 0 - width / 2, y: 0 - height / 2 });
-
-      const to = new Point(this.props.destination.x, this.props.destination.y);
-      to.add({ x: 0 - width / 2, y: 0 - height / 2 });
-
-      const speed = 0.1;
-      const distance = from.distance(to);
-      const time = distance / speed;
-      const angle = from.angle(to) + Math.PI * 3;
-      const degrees = angle * 180 / Math.PI;
-      //transform = `rotate(${degrees} ${this.props.station.x} ${this.props.station.y})`;
-    }
-
     return (
       <rect
         id={`train-${this.props.train.id}`}
         ref={el => this.element = el}
-        x={pathId ? undefined : undefined}
-        y={pathId ? undefined : undefined}
         width={width}
         height={height}
         fill="gray"
-        transform={transform}
       >
         {this.props.journey && false && (
           <animateMotion id={Math.random()} dur={`1s`} repeatCount="infinite">
