@@ -283,7 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }));
     }
     if (i === 9) {
-      console.log(id, firstId);
       store.dispatch(actions.addConnection({
         id: uuid(),
         sourceId: id,
