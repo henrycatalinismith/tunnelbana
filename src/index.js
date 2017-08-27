@@ -276,12 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'Red',
       'T-Centralen',
       'GamlaStan'
-    )
+    ).id
   }));
-
-  console.log();
-//export function getConnectionId(state, lineId, sourceId, destinationId) {
-
 
   store.dispatch(actions.departure({
     id: uuid(),
@@ -294,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'Green',
       'Medborgarplatsen',
       'Skanstull'
-    )
+    ).id
   }));
 
   store.dispatch(actions.departure({
@@ -308,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'Blue',
       'Kungstradgarden',
       'T-Centralen'
-    )
+    ).id
   }));
 
   const π = Math.PI;
@@ -366,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'Special',
       firstId,
       lastId
-    )
+    ).id
   }));
 
 });
