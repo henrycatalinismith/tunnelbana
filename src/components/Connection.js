@@ -33,7 +33,7 @@ export class Connection extends React.Component {
 
     const outboundPath = 'M' + [from.x, from.y, to.x, to.y].join(' ');
     const returnPath = 'M' + [to.x, to.y, from.x, from.y].join(' ');
-    const strokeWidth = 1;
+    const strokeWidth = 0;
 
     return (
       <g id={`connection-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}>
