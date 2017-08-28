@@ -29,7 +29,7 @@ export default function(store) {
 
         const width = 15;
         const height = 30;
-        const halfTrain = { x: 0 - height / 2, y: 0 - width / 2 };
+        const halfTrain = { x: 0, y: 0 };
         let from = points.add(source, halfTrain);
         let to = points.add(destination, halfTrain);
 
@@ -54,13 +54,19 @@ export default function(store) {
 
           from = points.add({ x: tracks[0].x1, y: tracks[0].y1 }, halfTrain)
           to = points.add({ x: tracks[0].x2, y: tracks[0].y2 }, halfTrain);
+          angle = points.angle(from,to);
+          degrees = angle * 180 / Math.PI;
+          tl.to(`#train-${t.id}`, 0, from);
+          tl.to(`#train-${t.id}`, 0.001, {
+            rotation: degrees,
+          });
           tl.fromTo(`#train-${t.id}`, time / 1000 / 3, from, to);
 
           from = points.add({ x: tracks[1].x1, y: tracks[1].y1 }, halfTrain);
           to = points.add({ x: tracks[1].x2, y: tracks[1].y2 }, halfTrain);
           angle = points.angle(to, from);
           degrees = angle * 180 / Math.PI;
-          tl.to(`#train-${t.id}`, 0.1, {
+          tl.to(`#train-${t.id}`, 0.001, {
             rotation: degrees,
             svgOrigin: `${from.x} ${from.y}`,
           });
@@ -70,7 +76,7 @@ export default function(store) {
           to = points.add({ x: tracks[2].x2, y: tracks[2].y2 }, halfTrain);
           angle = points.angle(to, from);
           degrees = angle * 180 / Math.PI;
-          tl.to(`#train-${t.id}`, 0.1, {
+          tl.to(`#train-${t.id}`, 0.001, {
             rotation: degrees,
             svgOrigin: `${from.x} ${from.y}`,
           });
