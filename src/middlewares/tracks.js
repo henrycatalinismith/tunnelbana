@@ -41,23 +41,43 @@ export default function(store) {
 
 
         if (Math.abs(secondaryDistance) < 0.000001) {
+
           store.dispatch(actions.addTrack({
             id: uuid(),
             connectionId: action.connection.id,
             lineId,
+            sourceId: action.connection.sourceId,
+            destinationId: action.connection.destinationId,
+            ordinality: 0,
             x1: source.x,
             y1: source.y,
             x2: destination.x,
             y2: destination.y,
-          }))
+          }));
+
+          store.dispatch(actions.addTrack({
+            id: uuid(),
+            connectionId: action.connection.id,
+            lineId,
+            sourceId: action.connection.destinationId,
+            destinationId: action.connection.sourceId,
+            ordinality: 0,
+            x1: destination.x,
+            y1: destination.y,
+            x2: source.x,
+            y2: source.y,
+          }));
+
         } else {
           let p1, p2;
 
-          const addTrack = (p1, p2) => {
+          const addTrack = (p1, p2, sourceId, destinationId, ordinality) => {
             store.dispatch(actions.addTrack({
               id: uuid(),
               connectionId: action.connection.id,
               lineId,
+              sourceId,
+              destinationId,
               x1: p1.x,
               y1: p1.y,
               x2: p2.x,
@@ -73,9 +93,13 @@ export default function(store) {
             a.y += source.y < destination.y ? remainder / 2 : 0 - remainder / 2;
             b.y += source.y > destination.y ? remainder / 2 : 0 - remainder / 2;
 
-            addTrack(source, a);
-            addTrack(a, b);
-            addTrack(b, destination);
+            addTrack(source, a, source.id, destination.id, 0);
+            addTrack(a, b, source.id, destination.id, 1);
+            addTrack(b, destination, source.id, destination.id, 2);
+
+            addTrack(destination, b, destination.id, source.id, 0);
+            addTrack(b, a, destination.id, source.id, 1);
+            addTrack(a, source, destination.id, source.id, 2);
           }
 
           if (type === 'longitudinal') {
@@ -84,9 +108,13 @@ export default function(store) {
             a.x += source.x < destination.x ? remainder / 2 : 0 - remainder / 2;
             b.x += source.x > destination.x ? remainder / 2 : 0 - remainder / 2;
 
-            addTrack(source, a);
-            addTrack(a, b);
-            addTrack(b, destination);
+            addTrack(source, a, source.id, destination.id, 0);
+            addTrack(a, b, source.id, destination.id, 1);
+            addTrack(b, destination, source.id, destination.id, 2);
+
+            addTrack(destination, b, destination.id, source.id, 0);
+            addTrack(b, a, destination.id, source.id, 1);
+            addTrack(a, source, destination.id, source.id, 2);
           }
         }
 
