@@ -265,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lineId: 'Special',
   }));
 
-  /*
   store.dispatch(actions.departure({
     id: uuid(),
     trainId: 'Thomas',
@@ -307,7 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
       'T-Centralen'
     ).id
   }));
-  */
 
   const π = Math.PI;
   const points = ({ x, y }, r, n) => {
