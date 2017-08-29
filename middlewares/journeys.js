@@ -25,7 +25,6 @@ export default function(store) {
         l = line(state.lines, action.journey.lineId);
         j = journey(state.journeys, t.journeyId);
         const tracks = getTracksForJourney(state.tracks, action.journey);
-        console.log(tracks);
 
         const width = 15;
         const height = 30;
@@ -74,7 +73,6 @@ export default function(store) {
               degrees = 0;
             }
             const needsTurn = turnAngle !== 180;
-            console.log(turnAngle);
 
             //tl.to(`#train-${t.id}`, 0.001, points.add(from, halfTrain));
             if (needsTurn) {
