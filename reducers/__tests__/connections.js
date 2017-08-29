@@ -62,7 +62,7 @@ describe('connections', () => {
         'R2': { id: 'R2', sourceId: 'Gamla Stan', destinationId: 'T-Centralen', lineId: 'Red' },
       };
       const output = selectors.nextStop(state, 'Slussen', 'Gamla Stan', 'Red');
-      expect(output).toEqual('T-Centralen');
+      expect(output).toEqual({'connectionId': 'R2', 'destinationId': 'T-Centralen'});
     });
   });
 });
