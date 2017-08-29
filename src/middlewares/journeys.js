@@ -55,8 +55,8 @@ export default function(store) {
           let turnAngle;
 
           for (let track of tracks) {
-            from = points.add({ x: track.x1, y: track.y1 }, {x:0,y:0})
-            to = points.add({ x: track.x2, y: track.y2 }, {x:0,y:0});
+            from = points.add({ x: track.x1, y: track.y1 }, halfTrain)
+            to = points.add({ x: track.x2, y: track.y2 }, halfTrain);
 
             angle = points.angle(from,to);
             degrees = angle * 180 / Math.PI;
