@@ -1,0 +1,5 @@
+<svg>
+  <g class="station" id="the-only-station-in-town">
+    <circle cx="100" cy="100" r="10" stroke="black" strokeWidth="5" fill="white" />
+  </g>
+</svg>

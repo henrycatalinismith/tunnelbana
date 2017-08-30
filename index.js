@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     height: window.innerHeight,
   }));
 
-  importCity('empty', store);
+  importCity('oneStation', store);
 
   /*
   store.dispatch(actions.addLine({
