@@ -5,6 +5,8 @@ import * as points from '../geometry/points';
 
 export default function(store) {
   return next => action => {
+    const ret = next(action);
+
     switch (action.type) {
       case actions.ADD_CONNECTION:
         const { lineId, sourceId, destinationId } = action.connection;
@@ -121,6 +123,6 @@ export default function(store) {
         break;
     }
 
-    return next(action);
+    return ret;
   }
 }
