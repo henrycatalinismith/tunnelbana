@@ -17,7 +17,10 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loader: 'babel-loader'
-    }]
+    }, {
+      test: /\.svg/,
+      loader: 'raw-loader'
+    }],
   },
   output: {
     filename: 'energetic-headlight.js'
