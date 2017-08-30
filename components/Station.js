@@ -12,14 +12,16 @@ export class Station extends React.Component {
     const y = this.props.station.y;
 
     return (
-      <circle
-        cx={x}
-        cy={y}
-        r={10}
-        stroke="black"
-        strokeWidth="5"
-        fill="white"
-      />
+      <g className="station" id={this.props.station.id}>
+        <circle
+          cx={x}
+          cy={y}
+          r={10}
+          stroke="black"
+          strokeWidth="5"
+          fill="white"
+        />
+      </g>
     );
   }
 }
