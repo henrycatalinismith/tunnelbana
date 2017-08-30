@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { line } from '../reducers/lines';
 import { station, stations } from '../reducers/stations';
 import { terminalByLineAndStation } from '../reducers/terminals';
+import { getTracksByConnectionOneWay } from '../reducers/tracks';
 
 export class Connection extends React.Component {
   static propTypes = {
@@ -16,10 +17,11 @@ export class Connection extends React.Component {
     terminal: PropTypes.object,
     sourceTerminal: PropTypes.object,
     destinationTerminal: PropTypes.object,
+    tracks: PropTypes.array,
   }
 
   render() {
-    const { source, destination, terminal } = this.props;
+    const { source, destination, terminal, tracks } = this.props;
 
     const from = {
       x: source.x,
@@ -30,6 +32,19 @@ export class Connection extends React.Component {
       ...terminal,
       ...destination,
     };
+
+    const path = 'M' + tracks.map(t => `${t.x1} ${t.y1} ${t.x2} ${t.y2}`).join(' ');
+
+    /*
+    return (
+      <g id={this.props.track.id}>
+        <path
+          d={path}
+          stroke={this.props.line.color}
+          strokeWidth={strokeWidth}
+        />
+      </g>
+      */
 
     const outboundPath = 'M' + [from.x, from.y, to.x, to.y].join(' ');
     const returnPath = 'M' + [to.x, to.y, from.x, from.y].join(' ');
@@ -45,9 +60,11 @@ export class Connection extends React.Component {
         )}
         <path
           id={`track-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}
-          d={outboundPath}
+          d={path}
           stroke={this.props.line.color}
-          strokeWidth={strokeWidth}
+          strokeWidth={10}
+          strokeLinejoin="round"
+          fill="none"
         />
 
         <path
@@ -78,6 +95,7 @@ const mapStateToProps = (state, ownProps) => {
     destination: station(state.stations, destinationId),
     sourceTerminal: terminalByLineAndStation(state.terminals, lineId, sourceId),
     destinationTerminal: terminalByLineAndStation(state.terminals, lineId, destinationId),
+    tracks: getTracksByConnectionOneWay(state.tracks, ownProps.connection.id, sourceId, destinationId),
   };
 }
 
