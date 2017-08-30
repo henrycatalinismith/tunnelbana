@@ -1,26 +1,20 @@
-import { Svg, Elements } from 'svgutils';
 import actions from '../actions';
 
 export default function importStations(string, store) {
-  return new Promise(resolve => {
-    Svg.fromXmlString(string, (error, svg) => {
-      svg.elements
-        .filter(element => element.classes.includes('station'))
-        .forEach(group => importStation(group, store));
-      resolve();
-    });
-  });
+  const parser = new DOMParser;
+  const svg = parser.parseFromString(string, 'image/svg+xml');
+
+  const stations = Array.prototype.slice.call(svg.querySelectorAll('.station'));
+  stations.forEach(element => importStation(element, store));
 }
 
 function importStation(group, store) {
-  const circle = group.childs
-    .filter(child => child instanceof Elements.Circle)
-    .shift();
+  const circle = group.querySelector('circle');
 
   const action = actions.importStation({
-    id: group.id,
-    x: circle.cx,
-    y: circle.cy,
+    id: group.getAttribute('id'),
+    x: circle.getAttribute('cx'),
+    y: circle.getAttribute('cy'),
   });
 
   store.dispatch(action);

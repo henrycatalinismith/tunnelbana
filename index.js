@@ -10,6 +10,7 @@ import clock from './clock';
 import Map from './components/Map';
 import store from './reducers';
 import { getConnection } from './reducers/connections';
+import importCity from './importers';
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.createElement('div');
@@ -46,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     height: window.innerHeight,
   }));
 
+  importCity('empty', store);
+
+  /*
   store.dispatch(actions.addLine({
     id: 'Red',
     color: '#ff0000',
@@ -364,5 +368,6 @@ document.addEventListener('DOMContentLoaded', () => {
       lastId
     ).id
   }));
+  */
 
 });
