@@ -17,12 +17,13 @@ export class Connection extends React.Component {
     terminal: PropTypes.object,
     sourceTerminal: PropTypes.object,
     destinationTerminal: PropTypes.object,
-    tracks: PropTypes.array,
   }
 
   render() {
-    const { source, destination, terminal, tracks } = this.props;
+    const { connection, source, destination, terminal } = this.props;
+    const { tracks } = connection;
 
+    console.log(Math.random());
     const from = {
       x: source.x,
       y: source.y,
@@ -95,7 +96,6 @@ const mapStateToProps = (state, ownProps) => {
     destination: station(state.stations, destinationId),
     sourceTerminal: terminalByLineAndStation(state.terminals, lineId, sourceId),
     destinationTerminal: terminalByLineAndStation(state.terminals, lineId, destinationId),
-    tracks: getTracksByConnectionOneWay(state.tracks, ownProps.connection.id, sourceId, destinationId),
   };
 }
 
