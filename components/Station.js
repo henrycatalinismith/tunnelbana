@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 export class Station extends React.Component {
   static propTypes = {
-    map: PropTypes.object,
     station: PropTypes.object,
   }
 
@@ -26,9 +25,7 @@ export class Station extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    map: state.map,
-  };
+  return {};
 }
 
 export default connect(mapStateToProps)(Station);
