@@ -4,6 +4,7 @@ import actions from '../actions';
 export default function(state = {}, action) {
   switch (action.type) {
     case actions.ADD_STATION:
+    case actions.IMPORT_STATION:
       const id = action.station.id || uuid();
       return {...state, [id]: {
         id,
