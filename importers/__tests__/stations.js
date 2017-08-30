@@ -6,7 +6,7 @@ import actions from '../../actions';
 import { Station } from '../../components/Station';
 
 describe('importStations', () => {
-  it('dispatches an IMPORT_STATION for each station found', done => {
+  it('dispatches an IMPORT_STATION for each station found', () => {
     const middlewares = [];
     const mockStore = configureStore(middlewares);
     const initialState = {}
@@ -23,17 +23,16 @@ describe('importStations', () => {
     const element = ReactDOMServer.renderToString(<Station {...props} />);
     const input = `<svg>${element}</svg>`;
 
-    importStations(input, store).then(() => {
-      expect(store.getActions()).toEqual([
-        actions.importStation({
-          id: 'Bandhagen',
-          x: 100,
-          y: 100,
-        })
-      ]);
+    importStations(input, store);
 
-      done();
-    });
+    expect(store.getActions()).toEqual([
+      actions.importStation({
+        id: 'Bandhagen',
+        x: '100',
+        y: '100',
+      })
+    ]);
+
   });
 
 });
