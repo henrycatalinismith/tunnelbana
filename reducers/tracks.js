@@ -36,6 +36,14 @@ export function getTracksByConnection(state, connectionId) {
   return tracks(state).filter(t => t.connectionId === connectionId);
 }
 
+export function getTracksByConnectionOneWay(state, connectionId, sourceId, destinationId) {
+  return tracks(state).filter(t =>
+    t.connectionId === connectionId
+    && t.sourceId === sourceId
+    && t.destinationId === destinationId
+  ).sort(t => t.ordinality);
+}
+
 export function getTracksForJourney(state, journey) {
   return tracks(state)
     .filter(t => (
