@@ -42,11 +42,11 @@ export default function(store) {
         let degrees = angle * 180 / Math.PI;
 
         if (tracks.length === 1) {
-          TweenLite.to(`#train-${t.id}`, 0.1, {
+          TweenLite.to(`#${t.id}`, 0.1, {
             rotation: degrees,
             svgOrigin: `${source.x} ${source.y}`,
           });
-          TweenLite.fromTo(`#train-${t.id}`, time / 1000, from, to);
+          TweenLite.fromTo(`#${t.id}`, time / 1000, from, to);
         } else {
 
           const tl = new TimelineMax();
@@ -74,13 +74,13 @@ export default function(store) {
             }
             const needsTurn = turnAngle !== 180;
 
-            //tl.to(`#train-${t.id}`, 0.001, points.add(from, halfTrain));
+            //tl.to(`#${t.id}`, 0.001, points.add(from, halfTrain));
             if (needsTurn) {
-              tl.to(`#train-${t.id}`, 0.01, {
+              tl.to(`#${t.id}`, 0.01, {
                 rotation: degrees,
               });
             }
-            tl.fromTo(`#train-${t.id}`, time / 1000 / 3, from, {
+            tl.fromTo(`#${t.id}`, time / 1000 / 3, from, {
               ...to,
               ease: Linear.easeNone
             });
@@ -94,11 +94,11 @@ export default function(store) {
           to = points.add({ x: tracks[0].x2, y: tracks[0].y2 }, halfTrain);
           angle = points.angle(from,to);
           degrees = angle * 180 / Math.PI;
-          tl.to(`#train-${t.id}`, 0, points.add(from, halfTrain));
-          tl.to(`#train-${t.id}`, 0.1, {
+          tl.to(`#${t.id}`, 0, points.add(from, halfTrain));
+          tl.to(`#${t.id}`, 0.1, {
             rotation: degrees,
           });
-          tl.fromTo(`#train-${t.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
+          tl.fromTo(`#${t.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
           prevAngle = angle;
 
           from = points.add({ x: tracks[1].x1, y: tracks[1].y1 }, halfTrain);
@@ -106,24 +106,24 @@ export default function(store) {
           angle = points.angle(to, from);
           turnAngle = (angle - prevAngle) * 180 / Math.PI;
           degrees = angle * 180 / Math.PI;
-          tl.to(`#train-${t.id}`, 0.1, {
+          tl.to(`#${t.id}`, 0.1, {
             rotation: degrees,
             svgOrigin: `${from.x} ${from.y}`,
           });
-          tl.fromTo(`#train-${t.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
+          tl.fromTo(`#${t.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
 
           from = points.add({ x: tracks[2].x1, y: tracks[2].y1 }, halfTrain);
           to = points.add({ x: tracks[2].x2, y: tracks[2].y2 }, halfTrain);
           angle = points.angle(to, from);
           degrees = angle * 180 / Math.PI;
-          tl.to(`#train-${t.id}`, 0.1, {
+          tl.to(`#${t.id}`, 0.1, {
             rotation: degrees,
             svgOrigin: `${from.x} ${from.y}`,
           });
-          tl.fromTo(`#train-${t.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
+          tl.fromTo(`#${t.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
           */
 
-          //TweenLite.fromTo(`#train-${t.id}`, time / 1000, from, to);
+          //TweenLite.fromTo(`#${t.id}`, time / 1000, from, to);
         }
 
         clock.setTimeout(() => {

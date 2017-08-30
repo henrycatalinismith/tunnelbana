@@ -30,19 +30,9 @@ export class Train extends React.Component {
     let y = (this.props.station.y - (height / 2));
 
     return (
-      <rect
-        id={`train-${this.props.train.id}`}
-        ref={el => this.element = el}
-        width={width}
-        height={height}
-        fill="gray"
-      >
-        {this.props.journey && false && (
-          <animateMotion id={Math.random()} dur={`1s`} repeatCount="infinite">
-            <mpath xlinkHref={pathId} />
-          </animateMotion>
-        )}
-      </rect>
+      <g className="train" id={this.props.train.id}>
+        <rect width={width} height={height} fill="gray" />
+      </g>
     );
   }
 }
