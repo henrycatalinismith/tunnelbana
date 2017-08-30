@@ -3,6 +3,7 @@ import actions from '../actions';
 
 export default function(state = {}, action) {
   let id;
+  let connection;
 
   switch (action.type) {
     case actions.ADD_CONNECTION:
@@ -13,6 +14,7 @@ export default function(state = {}, action) {
         destinationId: action.connection.destinationId,
         lineId: action.connection.lineId,
         terminalId: undefined,
+        tracks: [],
       }};
 
     case actions.SELECT_TERMINAL:
@@ -31,6 +33,17 @@ export default function(state = {}, action) {
       let fake = fakeConnections(state)[0];
       let { [fake.id]: {}, ...rest } = state;
       return rest;
+
+    case actions.ADD_TRACK:
+      id = action.track.connectionId;
+      console.log(id, state, state[id]);
+      return {...state, [id]: {
+        ...state[id],
+        tracks: [
+          ...state[id].tracks,
+          action.track,
+        ],
+      }};
 
     default:
       return state;
