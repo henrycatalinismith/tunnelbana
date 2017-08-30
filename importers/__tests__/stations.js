@@ -1,11 +1,12 @@
 import configureStore from 'redux-mock-store'
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import importCity from '../index';
+import importStations from '../stations';
+import actions from '../../actions';
 import { Station } from '../../components/Station';
 
-describe('importCity', () => {
-  it('does something', () => {
+describe('importStations', () => {
+  it('dispatches an IMPORT_STATION for each station found', done => {
     const middlewares = [];
     const mockStore = configureStore(middlewares);
     const initialState = {}
@@ -13,6 +14,7 @@ describe('importCity', () => {
 
     const props = {
       station: {
+        id: 'Bandhagen',
         x: 100,
         y: 100,
       },
@@ -21,9 +23,17 @@ describe('importCity', () => {
     const element = ReactDOMServer.renderToString(<Station {...props} />);
     const input = `<svg>${element}</svg>`;
 
-    importCity(input, store);
+    importStations(input, store).then(() => {
+      expect(store.getActions()).toEqual([
+        actions.importStation({
+          id: 'Bandhagen',
+          x: 100,
+          y: 100,
+        })
+      ]);
 
-    console.log(store.getActions());
+      done();
+    });
   });
 
 });
