@@ -17,10 +17,17 @@ export class Track extends React.Component {
     const { track } = this.props;
 
     const path = 'M' + [track.x1, track.y1, track.x2, track.y2].join(' ');
-    const strokeWidth = this.props.track.isSelected ? 2 : 1;
+    const strokeWidth = 0;
 
     return (
-      <g id={this.props.track.id}>
+      <g className='track' id={this.props.track.id}>
+        <path
+          d={path}
+          stroke={'black'}
+          strokeWidth={strokeWidth}
+          strokeLinejoin="round"
+          fill="none"
+        />
       </g>
 
     );

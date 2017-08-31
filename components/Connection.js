@@ -44,7 +44,7 @@ export class Connection extends React.Component {
     const strokeWidth = this.props.line.isSelected ? 12 : 8;
 
     return (
-      <g id={`connection-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}>
+      <g className='connection' id={connection.id}>
         {this.props.sourceTerminal && (
           <Terminal
             station={this.props.source}
