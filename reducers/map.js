@@ -1,3 +1,4 @@
+import { createReducer } from 'redux-create-reducer';
 import actions from '../actions';
 
 const initialState = {
@@ -14,16 +15,12 @@ const initialState = {
   },
 };
 
-export default function(state = initialState, action) {
-  switch (action.type) {
-    case actions.WINDOW_RESIZE:
-      return { ...state, viewBox: {
-        ...state.viewBox,
-        width: action.window.width,
-        height: action.window.height,
-      }};
-
-    default:
-      return state;
+export default createReducer(initialState, {
+  [actions.WINDOW_RESIZE](state, action) {
+    return { ...state, viewBox: {
+      ...state.viewBox,
+      width: action.window.width,
+      height: action.window.height,
+    }};
   }
-}
+});
