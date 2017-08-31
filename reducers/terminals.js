@@ -1,62 +1,60 @@
-import uuid from 'uuid/v1';
+import { createReducer } from 'redux-create-reducer';
 import actions from '../actions';
 
-export default function(state = {}, action) {
-  let terminalId;
+export default createReducer({}, {
+  [actions.ADD_TERMINAL](state, action) {
+    const id = action.terminal.id;
+    return {...state, [id]: {
+      id,
+      connectionId: action.terminal.connectionId,
+      lineId: action.terminal.lineId,
+      stationId: action.terminal.stationId,
+      isSelected: false,
+    }};
+  },
 
-  switch (action.type) {
-    case actions.ADD_TERMINAL:
-      const id = action.terminal.id || uuid();
-      return {...state, [id]: {
-        id,
-        connectionId: action.terminal.connectionId,
-        lineId: action.terminal.lineId,
-        stationId: action.terminal.stationId,
-        isSelected: false,
-      }};
+  [actions.ADD_CONNECTION](state, action) {
+    const { lineId, sourceId, destinationId } = action.connection;
+    const newSource = terminalByLineAndStation(state, lineId, sourceId);
+    const newDestination = terminalByLineAndStation(state, lineId, destinationId);
 
-    case actions.ADD_CONNECTION:
-      const { lineId, sourceId, destinationId } = action.connection;
-      const newSource = terminalByLineAndStation(state, lineId, sourceId);
-      const newDestination = terminalByLineAndStation(state, lineId, destinationId);
+    const changes = {};
+    if (newSource && !newDestination) {
+      changes[newSource.id] = {
+        ...newSource,
+        stationId: action.connection.destinationId,
+      };
+    }
+    return { ...state, ...changes };
+  },
 
-      const changes = {};
-      if (newSource && !newDestination) {
-        changes[newSource.id] = {
-          ...newSource,
-          stationId: action.connection.destinationId,
-        };
-      }
-      return { ...state, ...changes };
+  [actions.SELECT_TERMINAL](state, action) {
+    const terminalId = action.terminalId;
+    return { ...state, [terminalId]: {
+      ...state[terminalId],
+      isSelected: true,
+    }};
+  },
 
-    case actions.SELECT_TERMINAL:
-      terminalId = action.terminalId;
-      return { ...state, [terminalId]: {
-        ...state[terminalId],
-        isSelected: true,
-      }};
+  [actions.DESELECT_TERMINAL](state, action) {
+    const terminalId = action.terminalId;
+    return { ...state, [terminalId]: {
+      ...state[terminalId],
+      isSelected: false,
+      x: undefined,
+      y: undefined,
+    }};
+  },
 
-    case actions.DESELECT_TERMINAL:
-      terminalId = action.terminalId;
-      return { ...state, [terminalId]: {
-        ...state[terminalId],
-        isSelected: false,
-        x: undefined,
-        y: undefined,
-      }};
-
-    case actions.MOVE_TERMINAL:
-      terminalId = action.terminalId;
-      return { ...state, [terminalId]: {
-        ...state[terminalId],
-        x: action.x,
-        y: action.y,
-      }};
-
-    default:
-      return state;
+  [actions.MOVE_TERMINAL](state, action) {
+    const terminalId = action.terminalId;
+    return { ...state, [terminalId]: {
+      ...state[terminalId],
+      x: action.x,
+      y: action.y,
+    }};
   }
-}
+});
 
 export function terminals(state) {
   return Object.keys(state).map(id => state[id]);
