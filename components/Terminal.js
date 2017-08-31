@@ -112,12 +112,12 @@ export class Terminal extends React.Component {
 
     return (
       <g className="terminal" id={terminal.id}>
-        <polygon
+        <rect
           style={({ cursor: 'move' })}
-          points={points}
+          width={10} height={30}
           fill={line.color}
-          stroke={stroke}
-          strokeWidth={1000}
+          x={bottom.x - 5}
+          y={bottom.y - 25}
           onMouseDown={this.onMouseDown}
           onMouseMove={onMouseMove}
           onMouseOut={onMouseUp}
