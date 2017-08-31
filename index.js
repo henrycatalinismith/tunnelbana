@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     store.dispatch(actions.addLine({
       id: 'Special',
-      color: 'black',
+      color: 'Gold',
     }));
 
     store.dispatch(actions.addStation({
