@@ -1,53 +1,31 @@
-import uuid from 'uuid/v1';
+import { createReducer } from 'redux-create-reducer';
 import actions from '../actions';
 
-export default function(state = {}, action) {
-  let id;
-  let connection;
+export default createReducer({}, {
+  [actions.ADD_CONNECTION](state, action) {
+    const id = action.connection.id;
+    return {...state, [id]: {
+      id,
+      sourceId: action.connection.sourceId,
+      destinationId: action.connection.destinationId,
+      lineId: action.connection.lineId,
+      terminalId: undefined,
+      tracks: [],
+    }};
+  },
 
-  switch (action.type) {
-    case actions.ADD_CONNECTION:
-      id = action.connection.id || uuid();
-      return {...state, [id]: {
-        id,
-        sourceId: action.connection.sourceId,
-        destinationId: action.connection.destinationId,
-        lineId: action.connection.lineId,
-        terminalId: undefined,
-        tracks: [],
-      }};
-
-    case actions.SELECT_TERMINAL:
-      return state;
-      id = uuid();
-      return {...state, [id]: {
-        id,
-        sourceId: action.stationId,
-        destinationId: undefined,
-        lineId: action.lineId,
-        terminalId: action.terminalId,
-      }};
-
-    case actions.DESELECT_TERMINAL:
-      return state;
-      let fake = fakeConnections(state)[0];
-      let { [fake.id]: {}, ...rest } = state;
-      return rest;
-
-    case actions.ADD_TRACK:
-      id = action.track.connectionId;
-      return {...state, [id]: {
-        ...state[id],
-        tracks: [
-          ...state[id].tracks,
-          action.track,
-        ],
-      }};
-
-    default:
-      return state;
+  [actions.ADD_TRACK](state, action) {
+    const id = action.track.connectionId;
+    return {...state, [id]: {
+      ...state[id],
+      tracks: [
+        ...state[id].tracks,
+        action.track,
+      ],
+    }};
   }
-}
+
+});
 
 export function connections(state) {
   return Object.keys(state).map(id => state[id]);
