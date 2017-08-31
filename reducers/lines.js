@@ -1,35 +1,32 @@
-import uuid from 'uuid/v1';
+import { createReducer } from 'redux-create-reducer';
 import actions from '../actions';
 
-export default function(state = {}, action) {
-  let id;
-  switch (action.type) {
-    case actions.ADD_LINE:
-      id = action.line.id || uuid();
-      return {...state, [id]: {
-        id,
-        color: action.line.color,
-        isSelected: false,
-      }};
+export default createReducer({}, {
+  [actions.ADD_LINE](state, action) {
+    const id = action.line.id;
+    return {...state, [id]: {
+      id,
+      color: action.line.color,
+      isSelected: false,
+    }};
+  },
 
-    case actions.SELECT_TERMINAL:
-      id = action.lineId;
-      return {...state, [id]: {
-        ...state[id],
-        isSelected: true,
-      }};
+  [actions.SELECT_TERMINAL](state, action) {
+    const id = action.lineId;
+    return {...state, [id]: {
+      ...state[id],
+      isSelected: true,
+    }};
+  },
 
-    case actions.DESELECT_TERMINAL:
-      id = action.lineId;
-      return {...state, [id]: {
-        ...state[id],
-        isSelected: false,
-      }};
-
-    default:
-      return state;
+  [actions.DESELECT_TERMINAL](state, action) {
+    const id = action.lineId;
+    return {...state, [id]: {
+      ...state[id],
+      isSelected: false,
+    }};
   }
-}
+});
 
 export function lines(state) {
   return Object.keys(state).map(id => state[id]);

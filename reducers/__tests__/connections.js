@@ -20,6 +20,8 @@ describe('connections', () => {
           sourceId: 'T-Centralen',
           destinationId: 'Rådhuset',
           lineId: 'Blue',
+          terminalId: undefined,
+          tracks: [],
         }
       });
     });
