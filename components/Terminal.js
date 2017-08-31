@@ -76,8 +76,8 @@ export class Terminal extends React.Component {
     const x = typeof terminal.x === 'undefined' ? station.x : terminal.x;
     const y = typeof terminal.y === 'undefined' ? station.y : terminal.y;
 
-    const width = this.props.terminal.isSelected ? 26 : 20;
-    const height = this.props.terminal.isSelected ? 26 : 20;
+    const width = terminal.isSelected ? 26 : 20;
+    const height = terminal.isSelected ? 26 : 20;
 
     let bottom = { x, y };
     let topLeft = { x: x - width, y: y - height };
@@ -87,7 +87,7 @@ export class Terminal extends React.Component {
       y: bottom.y - height / 2,
     }
 
-    if (this.props.terminal.isSelected) {
+    if (terminal.isSelected) {
       const origin = { x: 0, y: 0 };
       const point = { x: this.state.xOffset, y: this.state.yOffset };
       const radians = angle(point, origin) - Math.PI / 2;
@@ -102,18 +102,16 @@ export class Terminal extends React.Component {
       [ topRight.x, topRight.y ].join(','),
     ].join(' ');
 
-    const onMouseMove = this.props.terminal.isSelected && this.onMouseMove;
-    const onMouseUp = this.props.terminal.isSelected && this.onMouseUp;
+    const onMouseMove = terminal.isSelected && this.onMouseMove;
+    const onMouseUp = terminal.isSelected && this.onMouseUp;
 
     // stick a huge transparent border around it while it's selected so that
     // the user doesn't accidentally mouseout the polygon because of the slight
     // redux/svg lag
-    const stroke = this.props.terminal.isSelected
-      ? 'transparent'
-      : undefined;
+    const stroke = terminal.isSelected ? 'transparent' : undefined;
 
     return (
-      <g>
+      <g className="terminal" id={terminal.id}>
         <polygon
           style={({ cursor: 'move' })}
           points={points}
