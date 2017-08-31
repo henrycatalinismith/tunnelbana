@@ -1,7 +1,7 @@
 import empty from './empty.svg';
-import oneStation from './oneStation.svg';
+import boringville from './boringville.svg';
 
 export default {
   empty,
-  oneStation,
+  boringville,
 };
