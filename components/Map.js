@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Line from './Line';
 import Station from './Station';
 import Connection from './Connection';
 import Track from './Track';
 import Train from './Train';
 import { connections } from '../reducers/connections';
+import { lines } from '../reducers/lines';
 import { stations } from '../reducers/stations';
 import { tracks } from '../reducers/tracks';
 import { trains } from '../reducers/trains';
@@ -13,6 +15,7 @@ import { trains } from '../reducers/trains';
 export class Map extends React.Component {
   static propTypes = {
     connections: PropTypes.array,
+    lines: PropTypes.object,
     map: PropTypes.object,
     stations: PropTypes.array,
     tracks: PropTypes.array,
@@ -28,10 +31,10 @@ export class Map extends React.Component {
 
     return (
       <svg viewBox={viewBox}>
-        {this.props.connections.map((connection, i) => (
-          <Connection
-            key={`connection-${i}`}
-            connection={connection}
+        {lines(this.props.lines).map((line, i) => (
+          <Line
+            key={`line-${i}`}
+            line={line}
           />
         ))}
 
@@ -63,6 +66,7 @@ export class Map extends React.Component {
 const mapStateToProps = state => {
   return {
     connections: connections(state.connections),
+    lines: state.lines,
     map: state.map,
     stations: stations(state.stations),
     tracks: tracks(state.tracks),
