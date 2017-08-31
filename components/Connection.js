@@ -23,7 +23,6 @@ export class Connection extends React.Component {
     const { connection, source, destination, terminal } = this.props;
     const { tracks } = connection;
 
-    console.log(Math.random());
     const from = {
       x: source.x,
       y: source.y,
@@ -34,22 +33,15 @@ export class Connection extends React.Component {
       ...destination,
     };
 
-    const path = 'M' + tracks.map(t => `${t.x1} ${t.y1} ${t.x2} ${t.y2}`).join(' ');
+    let path;
 
-    /*
-    return (
-      <g id={this.props.track.id}>
-        <path
-          d={path}
-          stroke={this.props.line.color}
-          strokeWidth={strokeWidth}
-        />
-      </g>
-      */
+    if (tracks.length > 0) {
+      path = 'M' + tracks.map(t => `${t.x1} ${t.y1} ${t.x2} ${t.y2}`).join(' ');
+    } else {
+      path = 'M' + [from.x, from.y, to.x, to.y].join(' ');
+    }
 
-    const outboundPath = 'M' + [from.x, from.y, to.x, to.y].join(' ');
-    const returnPath = 'M' + [to.x, to.y, from.x, from.y].join(' ');
-    const strokeWidth = 0;
+    const strokeWidth = 10;
 
     return (
       <g id={`connection-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}>
@@ -59,20 +51,14 @@ export class Connection extends React.Component {
             terminal={this.props.sourceTerminal}
           />
         )}
+
         <path
           id={`track-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}
           d={path}
           stroke={this.props.line.color}
-          strokeWidth={10}
+          strokeWidth={strokeWidth}
           strokeLinejoin="round"
           fill="none"
-        />
-
-        <path
-          id={`track-${destination && destination.id}-${this.props.source.id}-${this.props.line.id}`}
-          d={returnPath}
-          stroke={this.props.line.color}
-          strokeWidth={strokeWidth}
         />
 
         {this.props.destinationTerminal && (

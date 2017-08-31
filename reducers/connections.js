@@ -36,7 +36,6 @@ export default function(state = {}, action) {
 
     case actions.ADD_TRACK:
       id = action.track.connectionId;
-      console.log(id, state, state[id]);
       return {...state, [id]: {
         ...state[id],
         tracks: [
