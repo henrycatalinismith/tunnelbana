@@ -10,14 +10,14 @@ export default createReducer(new Immutable.Map, {
       destinationId: action.connection.destinationId,
       lineId: action.connection.lineId,
       terminalId: undefined,
-      tracks: [],
+      tracks: new Immutable.List,
     }));
   },
 
   [actions.ADD_TRACK](state, action) {
     const id = action.track.connectionId;
     return state.updateIn([id, 'tracks'], tracks => {
-      return tracks.push(action.track);
+      return tracks.push(Immutable.fromJS(action.track));
     });
   }
 });

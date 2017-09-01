@@ -1,38 +1,37 @@
+import Immutable from 'immutable';
 import { createReducer } from 'redux-create-reducer';
 import actions from '../actions';
 
-export default createReducer({}, {
+export default createReducer(new Immutable.Map, {
   [actions.ADD_TRAIN](state, action) {
-    const id = action.train.id;
-    return {...state, [id]: {
-      id,
+    return state.set(action.train.id, Immutable.fromJS({
+      id: action.train.id,
       lineId: action.train.lineId,
       stationId: action.train.stationId,
-    }};
+    }));
   },
 
   [actions.DEPARTURE](state, action) {
-    const train = state[action.journey.trainId];
-    return {...state, [train.id]: {
-      ...train,
-      journeyId: action.journey.id,
-    }};
+    return state.setIn(
+      [action.journey.trainId, 'journeyId'],
+      action.journey.id
+    );
   },
 
   [actions.ARRIVAL](state, action) {
-    const train = state[action.journey.trainId];
-    return {...state, [train.id]: {
-      ...train,
-      stationId: action.journey.destinationId,
-      journeyId: undefined,
-    }};
+    return state.updateIn([action.journey.trainId], t => {
+      return t.merge({
+        stationId: action.journey.destinationId,
+        journeyId: undefined,
+      })
+    });
   },
 });
 
 export function trains(state) {
-  return Object.keys(state).map(id => state[id]);
+  return state.toList();
 }
 
 export function train(state, id) {
-  return state[id];
+  return state.get(id);
 }
