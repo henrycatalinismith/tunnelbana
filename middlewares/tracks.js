@@ -10,7 +10,8 @@ export default function(store) {
     switch (action.type) {
       case actions.ADD_CONNECTION:
         const { lineId, sourceId, destinationId } = action.connection;
-        const { connections, stations } = store.getState();
+        const connections = store.getState().get('connections');
+        const stations = store.getState().get('stations');
         const source = station(stations, sourceId);
         const destination = station(stations, destinationId);
         const angle = Math.abs(points.angle(source, destination));
