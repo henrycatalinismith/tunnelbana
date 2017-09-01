@@ -8,11 +8,12 @@ export class Station extends React.Component {
   }
 
   render() {
-    const x = this.props.station.x;
-    const y = this.props.station.y;
+    const station = this.props.station.toJS();
+    const x = station.x;
+    const y = station.y;
 
     return (
-      <g className="station" id={this.props.station.id}>
+      <g className="station" id={station.id}>
         <circle
           cx={x}
           cy={y}

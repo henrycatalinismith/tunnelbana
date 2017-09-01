@@ -26,9 +26,8 @@ export class Train extends React.Component {
   render() {
     const width = 30;
     const height = 15;
-    let x = (this.props.station.x - (width / 2));
-    let y = (this.props.station.y - (height / 2));
-
+    let x = (this.props.station.get('x') - (width / 2));
+    let y = (this.props.station.get('y') - (height / 2));
     return (
       <g className="train" id={this.props.train.id}>
         <rect width={width} height={height} fill="gray" />
@@ -44,11 +43,11 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     map: state.get('map'),
-    station: station(state.get('stations'), ownProps.train.stationId),
+    station: station(state.get('stations'), ownProps.train.get('stationId')),
     journey: j,
-    source: j && station(state.get('stations'), j.sourceId),
-    destination: j && station(state.get('stations'), j.destinationId),
-    line: j && line(state.get('lines'), j.lineId),
+    source: j && station(state.get('stations'), j.get('sourceId')),
+    destination: j && station(state.get('stations'), j.get('destinationId')),
+    line: j && line(state.get('lines'), j.get('lineId')),
   };
 }
 

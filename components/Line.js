@@ -19,7 +19,7 @@ export class Line extends React.Component {
           return (
             <Connection
               key={`connection-${i}`}
-              connection={c.toJS()}
+              connection={c}
               line={line}
             />
           );
@@ -30,8 +30,11 @@ export class Line extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const lineId = ownProps.line.get('id');
   return {
-    connections: state.get('connections'),
+    connections: state.get('connections').filter(c => (
+      c.get('lineId') === lineId
+    )),
   };
 }
 

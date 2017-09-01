@@ -17,7 +17,7 @@ export class Map extends React.Component {
     connections: PropTypes.array,
     lines: PropTypes.object,
     map: PropTypes.object,
-    stations: PropTypes.array,
+    stations: PropTypes.object,
     tracks: PropTypes.array,
   }
 
@@ -35,13 +35,6 @@ export class Map extends React.Component {
           <Line
             key={`line-${i}`}
             line={line}
-          />
-        ))}
-
-        {this.props.tracks.map((track, i) => (
-          <Track
-            key={`track-${i}`}
-            track={track}
           />
         ))}
 
@@ -69,7 +62,7 @@ const mapStateToProps = state => {
     lines: state.get('lines'),
     map: state.get('map'),
     stations: stations(state.get('stations')),
-    tracks: tracks(state.get('tracks')),
+    tracks: tracks(state.get('tracks')).toJS(),
     trains: trains(state.get('trains')),
   };
 }
