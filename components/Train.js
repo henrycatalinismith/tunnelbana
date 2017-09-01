@@ -39,16 +39,16 @@ export class Train extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const j = ownProps.train.journeyId
-    ? journey(state.journeys, ownProps.train.journeyId)
+    ? journey(state.get('journeys'), ownProps.train.journeyId)
     : undefined;
 
   return {
-    map: state.map,
-    station: station(state.stations, ownProps.train.stationId),
+    map: state.get('map'),
+    station: station(state.get('stations'), ownProps.train.stationId),
     journey: j,
-    source: j && station(state.stations, j.sourceId),
-    destination: j && station(state.stations, j.destinationId),
-    line: j && line(state.lines, j.lineId),
+    source: j && station(state.get('stations'), j.sourceId),
+    destination: j && station(state.get('stations'), j.destinationId),
+    line: j && line(state.get('lines'), j.lineId),
   };
 }
 

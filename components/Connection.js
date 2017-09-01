@@ -76,12 +76,12 @@ export class Connection extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const { lineId, sourceId, destinationId } = ownProps.connection;
   return {
-    line: line(state.lines, lineId),
-    map: state.map,
-    source: station(state.stations, sourceId),
-    destination: station(state.stations, destinationId),
-    sourceTerminal: terminalByLineAndStation(state.terminals, lineId, sourceId),
-    destinationTerminal: terminalByLineAndStation(state.terminals, lineId, destinationId),
+    line: line(state.get('lines'), lineId),
+    map: state.get('map'),
+    source: station(state.get('stations'), sourceId),
+    destination: station(state.get('stations'), destinationId),
+    sourceTerminal: terminalByLineAndStation(state.get('terminals'), lineId, sourceId),
+    destinationTerminal: terminalByLineAndStation(state.get('terminals'), lineId, destinationId),
   };
 }
 
