@@ -87,3 +87,11 @@ export function getConnection(state, lineId, sourceId, destinationId) {
     )
   )).first().toJS();
 }
+
+export const select = {
+  byLineId(state, lineId) {
+    return state.filter(c => {
+      return c.get('lineId') === lineId;
+    });
+  }
+}
