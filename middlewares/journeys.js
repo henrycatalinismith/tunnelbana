@@ -19,12 +19,12 @@ export default function(store) {
     switch (action.type) {
       case actions.DEPARTURE:
         state = store.getState();
-        t = train(state.trains, action.journey.trainId);
-        source = station(state.stations, action.journey.sourceId);
-        destination = station(state.stations, action.journey.destinationId);
-        l = line(state.lines, action.journey.lineId);
-        j = journey(state.journeys, t.journeyId);
-        const tracks = getTracksForJourney(state.tracks, action.journey);
+        t = train(state.get('trains'), action.journey.trainId);
+        source = station(state.get('stations'), action.journey.sourceId);
+        destination = station(state.get('stations'), action.journey.destinationId);
+        l = line(state.get('lines'), action.journey.lineId);
+        j = journey(state.get('journeys'), t.journeyId);
+        const tracks = getTracksForJourney(state.get('tracks'), action.journey);
 
         const width = 15;
         const height = 30;
@@ -140,7 +140,7 @@ export default function(store) {
       case actions.ARRIVAL:
         state = store.getState();
         const { connectionId, destinationId } = nextStop(
-          state.connections,
+          state.get('connections'),
           action.journey.sourceId,
           action.journey.destinationId,
           action.journey.lineId
