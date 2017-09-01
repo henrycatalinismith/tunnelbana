@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Connection from './Connection';
 import { connect } from 'react-redux';
+import { select } from '../reducers';
 import { getConnectionsByLine } from '../reducers/connections';
 
 export class Line extends React.Component {
@@ -12,7 +13,6 @@ export class Line extends React.Component {
 
   render() {
     const { line, connections } = this.props;
-
     return (
       <g className="line" id={line.id}>
         {connections.map((c, i) => {
@@ -32,9 +32,7 @@ export class Line extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const lineId = ownProps.line.get('id');
   return {
-    connections: state.get('connections').filter(c => (
-      c.get('lineId') === lineId
-    )),
+    connections: select('connections').from(state).byLineId(lineId),
   };
 }
 
