@@ -37,7 +37,7 @@ export class Track extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const { lineId } = ownProps.track;
   return {
-    line: line(state.lines, lineId),
+    line: line(state.get('lines'), lineId),
   };
 }
 

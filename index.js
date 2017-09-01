@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
       destinationId: 'GamlaStan',
       lineId: 'Red',
       connectionId: getConnection(
-        store.getState().connections,
+        store.getState().get('connections'),
         'Red',
         'T-Centralen',
         'GamlaStan'
@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
       destinationId: 'Skanstull',
       lineId: 'Green',
       connectionId: getConnection(
-        store.getState().connections,
+        store.getState().get('connections'),
         'Green',
         'Medborgarplatsen',
         'Skanstull'
@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
       destinationId: 'T-Centralen',
       lineId: 'Blue',
       connectionId: getConnection(
-        store.getState().connections,
+        store.getState().get('connections'),
         'Blue',
         'Kungstradgarden',
         'T-Centralen'
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
       destinationId: lastId,
       lineId: 'Special',
       connectionId: getConnection(
-        store.getState().connections,
+        store.getState().get('connections'),
         'Special',
         firstId,
         lastId
