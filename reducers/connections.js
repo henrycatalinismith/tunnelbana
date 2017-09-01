@@ -1,5 +1,5 @@
-import { createReducer } from 'redux-create-reducer';
 import Immutable from 'immutable';
+import { createReducer } from 'redux-create-reducer';
 import actions from '../actions';
 
 export default createReducer(new Immutable.Map, {
