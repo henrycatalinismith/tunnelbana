@@ -15,13 +15,15 @@ export class Line extends React.Component {
 
     return (
       <g className="line" id={line.id}>
-        {Object.keys(connections).map((id, i) => (
-          <Connection
-            key={`connection-${i}`}
-            connection={connections[id]}
-            line={line}
-          />
-        ))}
+        {connections.map((c, i) => {
+          return (
+            <Connection
+              key={`connection-${i}`}
+              connection={c.toJS()}
+              line={line}
+            />
+          );
+        })}
       </g>
     );
   }
@@ -29,7 +31,7 @@ export class Line extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    connections: state.connections, // todo: do memoization right across the whole data model and stop hacking around it like this
+    connections: state.get('connections'),
   };
 }
 

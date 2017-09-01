@@ -16,13 +16,9 @@ export default createReducer(new Immutable.Map, {
 
   [actions.ADD_TRACK](state, action) {
     const id = action.track.connectionId;
-    return {...state, [id]: {
-      ...state[id],
-      tracks: [
-        ...state[id].tracks,
-        action.track,
-      ],
-    }};
+    return state.updateIn([id, 'tracks'], tracks => {
+      return tracks.push(action.track);
+    });
   }
 });
 
@@ -84,10 +80,10 @@ export function fakeConnections(state) {
 }
 
 export function getConnection(state, lineId, sourceId, destinationId) {
-  return connections(state).filter(c => (
+  return state.filter(c => (
     c.get('lineId') === lineId && (
       (c.get('sourceId') === sourceId && c.get('destinationId') === destinationId)
       || (c.get('sourceId') === destinationId && c.get('destinationId') === sourceId)
     )
-  ))[0];
+  )).first().toJS();
 }
