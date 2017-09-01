@@ -1,4 +1,5 @@
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import connections from './connections';
 import journeys from './journeys';
 import lines from './lines';

@@ -65,7 +65,7 @@ export class Map extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    connections: connections(state.connections),
+    connections: state.get('connections').toList(),
     lines: state.lines,
     map: state.map,
     stations: stations(state.stations),
