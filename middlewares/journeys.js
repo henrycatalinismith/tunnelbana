@@ -128,9 +128,9 @@ export default function(store) {
 
         clock.setTimeout(() => {
           store.dispatch(actions.arrival({
-            id: j.id,
+            id: j.get('id'),
             destinationId: destination.id,
-            lineId: l.id,
+            lineId: l.get('id'),
             sourceId: source.id,
             trainId: t.id,
           }));

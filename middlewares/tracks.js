@@ -12,8 +12,8 @@ export default function(store) {
         const { lineId, sourceId, destinationId } = action.connection;
         const connections = store.getState().get('connections');
         const stations = store.getState().get('stations');
-        const source = station(stations, sourceId);
-        const destination = station(stations, destinationId);
+        const source = station(stations, sourceId).toJS();
+        const destination = station(stations, destinationId).toJS();
         const angle = Math.abs(points.angle(source, destination));
         const π = Math.PI;
 

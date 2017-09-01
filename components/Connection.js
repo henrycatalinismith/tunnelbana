@@ -20,28 +20,20 @@ export class Connection extends React.Component {
   }
 
   render() {
-    const { connection, source, destination, terminal } = this.props;
-    const { tracks } = connection;
-
-    const from = {
-      x: source.x,
-      y: source.y,
-    };
-
-    const to = {
-      ...terminal,
-      ...destination,
-    };
+    const connection = this.props.connection.toJS();
+    const source = this.props.source && this.props.source.toJS();
+    const line = this.props.line && this.props.line.toJS();
+    const destination = this.props.destination && this.props.destination.toJS();
+    const terminal = this.props.terminal;
+    const tracks = connection.tracks;
 
     let path;
 
     if (tracks.length > 0) {
       path = 'M' + tracks.map(t => `${t.x1} ${t.y1} ${t.x2} ${t.y2}`).join(' ');
-    } else {
-      path = 'M' + [from.x, from.y, to.x, to.y].join(' ');
     }
 
-    const strokeWidth = this.props.line.isSelected ? 12 : 8;
+    const strokeWidth = line.isSelected ? 12 : 8;
 
     return (
       <g className='connection' id={connection.id}>
@@ -53,9 +45,9 @@ export class Connection extends React.Component {
         )}
 
         <path
-          id={`track-${this.props.source.id}-${destination && destination.id}-${this.props.line.id}`}
+          id={`track-${this.props.source.id}-${destination && destination.id}-${line.id}`}
           d={path}
-          stroke={this.props.line.color}
+          stroke={line.color}
           strokeWidth={strokeWidth}
           strokeLinejoin="round"
           fill="none"
@@ -74,7 +66,7 @@ export class Connection extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { lineId, sourceId, destinationId } = ownProps.connection;
+  const { lineId, sourceId, destinationId } = ownProps.connection.toJS();
   return {
     line: line(state.get('lines'), lineId),
     map: state.get('map'),

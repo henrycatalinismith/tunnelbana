@@ -1,11 +1,11 @@
+import Immutable from 'immutable';
 import { createReducer } from 'redux-create-reducer';
 import actions from '../actions';
 
-export default createReducer({}, {
+export default createReducer(new Immutable.Map, {
   [actions.ADD_TRACK](state, action) {
-    const id = action.track.id;
-    return {...state, [id]: {
-      id,
+    return state.set(action.track.id, Immutable.fromJS({
+      id: action.track.id,
       connectionId: action.track.connectionId,
       lineId: action.track.lineId,
       sourceId: action.track.sourceId,
@@ -15,24 +15,24 @@ export default createReducer({}, {
       y1: action.track.y1,
       x2: action.track.x2,
       y2: action.track.y2,
-    }};
+    }));
   }
 });
 
 export function tracks(state) {
-  return Object.keys(state).map(id => state[id]);
+  return state.toList();
 }
 
 export function track(state, id) {
-  return state[id];
+  return state.get(id);
 }
 
 export function getTracksByConnection(state, connectionId) {
-  return tracks(state).filter(t => t.connectionId === connectionId);
+  return state.filter(t => t.connectionId === connectionId);
 }
 
 export function getTracksByConnectionOneWay(state, connectionId, sourceId, destinationId) {
-  return tracks(state).filter(t =>
+  return state.filter(t =>
     t.connectionId === connectionId
     && t.sourceId === sourceId
     && t.destinationId === destinationId
@@ -40,7 +40,7 @@ export function getTracksByConnectionOneWay(state, connectionId, sourceId, desti
 }
 
 export function getTracksForJourney(state, journey) {
-  return tracks(state)
+  return state
     .filter(t => (
       t.connectionId === journey.connectionId
       && t.sourceId === journey.sourceId
