@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { combineReducers } from 'redux-immutable';
+import bind from 'bind-to';
 import connections from './connections';
 import journeys from './journeys';
 import lines from './lines';
@@ -31,3 +32,19 @@ const store = createStore(
 );
 
 export default store;
+
+import { select as connectionSelectors } from './connections';
+
+const selectors = {
+  connections: connectionSelectors,
+};
+
+export const select = entity => {
+  return {
+    from: state => {
+      const entitySelectors = Object.assign({}, selectors[entity]);
+      bind(entitySelectors, null, state.get(entity));
+      return entitySelectors;
+    }
+  }
+}
