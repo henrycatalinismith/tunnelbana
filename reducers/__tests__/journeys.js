@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 import actions from '../../actions';
 import reducer from '../journeys';
 import * as selectors from '../journeys';
@@ -5,7 +6,7 @@ import * as selectors from '../journeys';
 describe('journeys', () => {
   describe('reducer', () => {
     it('adds a journey to the store on DEPARTURE', () => {
-      const state = {};
+      const state = new Immutable.Map
       const action = actions.departure({
         id: 'Example Departure',
         sourceId: 'Gamla Stan',
@@ -15,7 +16,7 @@ describe('journeys', () => {
       });
       const newState = reducer(state, action);
 
-      expect(newState).toEqual({
+      expect(newState.toJS()).toEqual({
         'Example Departure': {
           id: 'Example Departure',
           sourceId: 'Gamla Stan',
@@ -28,29 +29,32 @@ describe('journeys', () => {
     });
 
     it('deletes the journey on ARRIVAL', () => {
-      const state = {
+      const state = Immutable.fromJS({
         'Example Departure': {
           isComplete: false,
         }
-      };
+      });
       const action = actions.arrival({ id: 'Example Departure' });
       const newState = reducer(state, action);
 
-      expect(newState).toEqual({});
+      expect(newState.toJS()).toEqual({});
     });
   });
 
   describe('selectors', () => {
     it('journeys() returns an array of journeys', () => {
-      const state = { 'Journey 1': {}, 'Journey 2': {} };
+      const state = Immutable.fromJS({ 'Journey 1': {}, 'Journey 2': {} });
       const output = selectors.journeys(state);
-      expect(output).toEqual([{}, {}]);
+      expect(output.toJS()).toEqual([{}, {}]);
     });
 
     it('journey() returns a single journey', () => {
-      const state = { 'Journey 1': {id: 'Journey 1'}, 'Journey 2': {id: 'Journey 2'} };
+      const state = Immutable.fromJS({
+        'Journey 1': {id: 'Journey 1'},
+        'Journey 2': {id: 'Journey 2'},
+      });
       const output = selectors.journey(state, 'Journey 1');
-      expect(output).toEqual({ id: 'Journey 1' });
+      expect(output.toJS()).toEqual({ id: 'Journey 1' });
     });
   });
 });
