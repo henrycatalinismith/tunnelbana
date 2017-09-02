@@ -1,18 +1,19 @@
 import uuid from 'uuid/v1';
 import actions from '../actions';
-import { getConnectionsByLine } from '../reducers/connections';
 import { station } from '../reducers/stations';
+import { select } from '../reducers';
 
 export default function(store) {
   return next => action => {
     switch (action.type) {
       case actions.ADD_CONNECTION:
         const { lineId, sourceId, destinationId } = action.connection;
-        const connections = store.getState().get('connections');
+        const state = store.getState();
+        const connections = state.get('connections');
         const stations = store.getState().get('stations');
         const source = station(stations, sourceId);
         const destination = station(stations, destinationId);
-        const siblings = getConnectionsByLine(connections, lineId)
+        const siblings = select('connections').from(state).byLineId(lineId);
         if (siblings.length === 0) {
           store.dispatch(actions.addTerminal({
             id: uuid(),
