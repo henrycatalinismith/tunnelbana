@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Connection from './Connection';
 import { connect } from 'react-redux';
 import { select } from '../reducers';
-import { getConnectionsByLine } from '../reducers/connections';
 
 export class Line extends React.Component {
   static propTypes = {
