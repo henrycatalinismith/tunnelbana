@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 import { createReducer } from 'redux-create-reducer';
 import actions from '../actions';
 
-export default createReducer(new Immutable.Map, {
+export const reducer = createReducer(new Immutable.Map, {
   [actions.ADD_TERMINAL](state, action) {
     return state.set(action.terminal.id, Immutable.fromJS({
       id: action.terminal.id,
@@ -15,8 +15,8 @@ export default createReducer(new Immutable.Map, {
 
   [actions.ADD_CONNECTION](state, action) {
     const { lineId, sourceId, destinationId } = action.connection;
-    const newSource = terminalByLineAndStation(state, lineId, sourceId);
-    const newDestination = terminalByLineAndStation(state, lineId, destinationId);
+    const newSource = selectors.byLineAndStation(state, lineId, sourceId);
+    const newDestination = selectors.byLineAndStation(state, lineId, destinationId);
 
     if (newSource && !newDestination) {
       return state.setIn(
@@ -56,16 +56,19 @@ export default createReducer(new Immutable.Map, {
   }
 });
 
-export function terminals(state) {
-  return state.toList();
-}
 
-export function terminal(state, id) {
-  return state.get(id);
-}
+export const selectors = {
+  all(state) {
+    return state.toList();
+  },
 
-export function terminalByLineAndStation(state, lineId, stationId) {
-  return state.filter(t => (
-    t.lineId === lineId && t.stationId === stationId
-  ))[0];
-}
+  byId(state, id) {
+    return state.get(id);
+  },
+
+  byLineAndStation(state, lineId, destinationId) {
+    return state.filter(t => (
+      t.lineId === lineId && t.stationId === stationId
+    ))[0];
+  },
+};

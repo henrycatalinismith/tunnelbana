@@ -26,7 +26,11 @@ import {
   selectors as stationSelectors,
 } from './stations';
 
-import terminals from './terminals';
+import {
+  reducer as terminalsReducer,
+  selectors as terminalSelectors,
+} from './terminals';
+
 import tracks from './tracks';
 import trains from './trains';
 import middlewares from '../middlewares';
@@ -37,7 +41,7 @@ const reducer = combineReducers({
   lines: linesReducer,
   map: mapReducer,
   stations: stationsReducer,
-  terminals,
+  terminals: terminalsReducer,
   tracks,
   trains,
 });
@@ -47,6 +51,7 @@ const selectors = {
   journeys: journeySelectors,
   lines: lineSelectors,
   stations: stationSelectors,
+  terminals: terminalSelectors,
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
