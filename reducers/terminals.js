@@ -67,8 +67,8 @@ export const selectors = {
   },
 
   byLineAndStation(state, lineId, destinationId) {
-    return state.filter(t => (
-      t.lineId === lineId && t.stationId === stationId
-    ))[0];
+    return state.filter(t => {
+      return t.get('lineId') === lineId && t.get('stationId') === destinationId
+    }).first();
   },
 };

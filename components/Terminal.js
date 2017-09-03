@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import actions from '../actions';
 import { select } from '../reducers';
+import actions from '../actions';
 import { angle, rotate } from '../geometry/points';
 
 export class Terminal extends React.Component {
