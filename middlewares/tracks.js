@@ -82,6 +82,7 @@ export default function(store) {
               lineId,
               sourceId,
               destinationId,
+              ordinality,
               x1: p1.x,
               y1: p1.y,
               x2: p2.x,
