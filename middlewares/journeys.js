@@ -2,7 +2,6 @@ import uuid from 'uuid/v1';
 import {TweenMax, TweenLite, Power2, TimelineLite, TimelineMax, Power4, Linear } from 'gsap';
 import actions from '../actions';
 import { select } from '../reducers';
-import { getTracksForJourney } from '../reducers/tracks';
 import { train } from '../reducers/trains';
 import clock from '../clock';
 import * as points from '../geometry/points';
@@ -16,7 +15,7 @@ export default function(store) {
     switch (action.type) {
       case actions.DEPARTURE:
         state = store.getState();
-        t = train(state.get('trains'), action.journey.trainId);
+        t = select('trains').from(state).byId(action.journey.trainId);
         source = select('stations').from(state).byId(action.journey.sourceId);
         destination = select('stations').from(state).byId(action.journey.destinationId);
         l = select('lines').from(state).byId(action.journey.lineId);
