@@ -30,11 +30,14 @@ export const selectors = {
 
   forJourney(state, journey) {
     return state
-      .filter(t => (
-        t.get('connectionId') === journey.connectionId
-        && t.get('sourceId') === journey.sourceId
-        && t.get('destinationId') === journey.destinationId
+      .filter(track => (
+        track.get('connectionId') === journey.connectionId
+        && track.get('sourceId') === journey.sourceId
+        && track.get('destinationId') === journey.destinationId
       ))
-      .sort(t => t.get('ordinality'));
+      .toList()
+      .sort(track => {
+        return track.get('ordinality');
+      });
   },
 }
