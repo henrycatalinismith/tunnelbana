@@ -9,7 +9,8 @@ export const reducer = createReducer(new Immutable.Map(), {
       Immutable.fromJS({
         id: action.station.id,
         x: action.station.x,
-        y: action.station.y
+        y: action.station.y,
+        isSelected: false
       })
     );
   },
@@ -23,6 +24,29 @@ export const reducer = createReducer(new Immutable.Map(), {
         y: action.station.y
       })
     );
+  },
+
+  [actions.SELECT_STATION](state, action) {
+    console.log("SELECT_STATION");
+    return state.setIn([action.id, "isSelected"], true);
+  },
+
+  [actions.DESELECT_STATION](state, action) {
+    console.log("DESELECT_STATION");
+    return state.setIn([action.id, "isSelected"], false);
+  },
+
+  [actions.MOVE_STATION](state, action) {
+    console.log("MOVE_STATION");
+    return state.update(action.stationId, station => {
+      console.log(action);
+      return station.merge(
+        Immutable.fromJS({
+          x: action.x,
+          y: action.y
+        })
+      );
+    });
   }
 });
 
