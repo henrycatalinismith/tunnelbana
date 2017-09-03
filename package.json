@@ -31,10 +31,13 @@
     "webpack-dev-server": "^2.7.1"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.4",
     "prettier": "^1.6.1"
   },
   "scripts": {
     "start": "webpack-dev-server --disable-host-check",
+    "pre-commit": "exit -1",
     "test": "jest"
   }
 }
