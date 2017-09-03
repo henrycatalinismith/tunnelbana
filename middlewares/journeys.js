@@ -44,7 +44,8 @@ export default function(store) {
           .toJS();
         const tracks = select("tracks")
           .from(state)
-          .forJourney(action.journey);
+          .forJourney(action.journey)
+          .toJS();
 
         const width = 15;
         const height = 30;
@@ -72,15 +73,9 @@ export default function(store) {
           let prevAngle = 0;
           let turnAngle;
 
-          tracks.forEach((track, i) => {
-            from = points.add(
-              { x: track.get("x1"), y: track.get("y1") },
-              halfTrain
-            );
-            to = points.add(
-              { x: track.get("x2"), y: track.get("y2") },
-              halfTrain
-            );
+          for (let track of tracks) {
+            from = points.add({ x: track.x1, y: track.y1 }, halfTrain);
+            to = points.add({ x: track.x2, y: track.y2 }, halfTrain);
 
             angle = points.angle(from, to);
             degrees = angle * 180 / Math.PI;
@@ -110,7 +105,7 @@ export default function(store) {
               ease: Linear.easeNone
             });
             prevAngle = degrees;
-          });
+          }
 
           tl.play();
         }
