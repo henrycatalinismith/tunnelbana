@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 export class Station extends React.Component {
   static propTypes = {
-    station: PropTypes.object,
-  }
+    station: PropTypes.object
+  };
 
   render() {
-    const id = this.props.station.get('id');
-    const x = this.props.station.get('x');
-    const y = this.props.station.get('y');
+    const id = this.props.station.get("id");
+    const x = this.props.station.get("x");
+    const y = this.props.station.get("y");
 
     return (
       <g className="station" id={id}>
@@ -29,6 +29,6 @@ export class Station extends React.Component {
 
 const mapStateToProps = state => {
   return {};
-}
+};
 
 export default connect(mapStateToProps)(Station);
