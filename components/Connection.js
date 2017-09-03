@@ -8,7 +8,6 @@ export class Connection extends React.Component {
   static propTypes = {
     connection: PropTypes.object,
     line: PropTypes.object,
-    map: PropTypes.object,
     source: PropTypes.object,
     destination: PropTypes.object,
     terminal: PropTypes.object,
@@ -65,7 +64,6 @@ export class Connection extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const { lineId, sourceId, destinationId } = ownProps.connection.toJS();
   return {
-    map: state.get('map'),
     source: select('stations').from(state).byId(sourceId),
     destination: select('stations').from(state).byId(destinationId),
     sourceTerminal: select('terminals').from(state).byLineAndStation(lineId, sourceId),
