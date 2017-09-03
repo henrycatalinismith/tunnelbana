@@ -31,10 +31,10 @@ export const selectors = {
   forJourney(state, journey) {
     return state
       .filter(t => (
-        t.connectionId === journey.connectionId
-        && t.sourceId === journey.sourceId
-        && t.destinationId === journey.destinationId
+        t.get('connectionId') === journey.connectionId
+        && t.get('sourceId') === journey.sourceId
+        && t.get('destinationId') === journey.destinationId
       ))
-      .sort(t => t.ordinality);
+      .sort(t => t.get('ordinality'));
   },
 }

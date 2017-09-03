@@ -9,17 +9,17 @@ import * as points from '../geometry/points';
 export default function(store) {
   return next => action => {
     let state;
-    let t, source, destination, l, j;
+    let train, source, destination, line, journey;
     const n = next(action);
 
     switch (action.type) {
       case actions.DEPARTURE:
         state = store.getState();
-        t = select('trains').from(state).byId(action.journey.trainId);
-        source = select('stations').from(state).byId(action.journey.sourceId);
-        destination = select('stations').from(state).byId(action.journey.destinationId);
-        l = select('lines').from(state).byId(action.journey.lineId);
-        j = select('journeys').from(state).byId(t.journeyId);
+        train = select('trains').from(state).byId(action.journey.trainId).toJS();
+        source = select('stations').from(state).byId(action.journey.sourceId).toJS();
+        destination = select('stations').from(state).byId(action.journey.destinationId).toJS();
+        line = select('lines').from(state).byId(action.journey.lineId);
+        journey = select('journeys').from(state).byId(train.journeyId).toJS();
         const tracks = select('tracks').from(state).forJourney(action.journey);
 
         const width = 15;
@@ -33,25 +33,25 @@ export default function(store) {
         const time = distance / speed;
         let angle = points.angle(to, from);
 
-        const pathId = `#connection-${source.id}-${destination.id}-${l.id}`;
+        const pathId = `#connection-${source.id}-${destination.id}-${line.id}`;
         const path = document.querySelector(pathId);
         let degrees = angle * 180 / Math.PI;
 
         if (tracks.length === 1) {
-          TweenLite.to(`#${t.id}`, 0.1, {
+          TweenLite.to(`#${train.id}`, 0.1, {
             rotation: degrees,
             svgOrigin: `${source.x} ${source.y}`,
           });
-          TweenLite.fromTo(`#${t.id}`, time / 1000, from, to);
+          TweenLite.fromTo(`#${train.id}`, time / 1000, from, to);
         } else {
 
           const tl = new TimelineMax();
           let prevAngle = 0;
           let turnAngle;
 
-          for (let track of tracks) {
-            from = points.add({ x: track.x1, y: track.y1 }, halfTrain)
-            to = points.add({ x: track.x2, y: track.y2 }, halfTrain);
+          tracks.forEach((track, i) => {
+            from = points.add({ x: track.get('x1'), y: track.get('y1') }, halfTrain)
+            to = points.add({ x: track.get('x2'), y: track.get('y2') }, halfTrain);
 
             angle = points.angle(from,to);
             degrees = angle * 180 / Math.PI;
@@ -70,18 +70,18 @@ export default function(store) {
             }
             const needsTurn = turnAngle !== 180;
 
-            //tl.to(`#${t.id}`, 0.001, points.add(from, halfTrain));
+            //tl.to(`#${train.id}`, 0.001, points.add(from, halfTrain));
             if (needsTurn) {
-              tl.to(`#${t.id}`, 0.01, {
+              tl.to(`#${train.id}`, 0.01, {
                 rotation: degrees,
               });
             }
-            tl.fromTo(`#${t.id}`, time / 1000 / 3, from, {
+            tl.fromTo(`#${train.id}`, time / 1000 / 3, from, {
               ...to,
               ease: Linear.easeNone
             });
             prevAngle = degrees;
-          }
+          });
 
           tl.play();
 
@@ -90,11 +90,11 @@ export default function(store) {
           to = points.add({ x: tracks[0].x2, y: tracks[0].y2 }, halfTrain);
           angle = points.angle(from,to);
           degrees = angle * 180 / Math.PI;
-          tl.to(`#${t.id}`, 0, points.add(from, halfTrain));
-          tl.to(`#${t.id}`, 0.1, {
+          tl.to(`#${train.id}`, 0, points.add(from, halfTrain));
+          tl.to(`#${train.id}`, 0.1, {
             rotation: degrees,
           });
-          tl.fromTo(`#${t.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
+          tl.fromTo(`#${train.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
           prevAngle = angle;
 
           from = points.add({ x: tracks[1].x1, y: tracks[1].y1 }, halfTrain);
@@ -102,33 +102,33 @@ export default function(store) {
           angle = points.angle(to, from);
           turnAngle = (angle - prevAngle) * 180 / Math.PI;
           degrees = angle * 180 / Math.PI;
-          tl.to(`#${t.id}`, 0.1, {
+          tl.to(`#${train.id}`, 0.1, {
             rotation: degrees,
             svgOrigin: `${from.x} ${from.y}`,
           });
-          tl.fromTo(`#${t.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
+          tl.fromTo(`#${train.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
 
           from = points.add({ x: tracks[2].x1, y: tracks[2].y1 }, halfTrain);
           to = points.add({ x: tracks[2].x2, y: tracks[2].y2 }, halfTrain);
           angle = points.angle(to, from);
           degrees = angle * 180 / Math.PI;
-          tl.to(`#${t.id}`, 0.1, {
+          tl.to(`#${train.id}`, 0.1, {
             rotation: degrees,
             svgOrigin: `${from.x} ${from.y}`,
           });
-          tl.fromTo(`#${t.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
+          tl.fromTo(`#${train.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
           */
 
-          //TweenLite.fromTo(`#${t.id}`, time / 1000, from, to);
+          //TweenLite.fromTo(`#${train.id}`, time / 1000, from, to);
         }
 
         clock.setTimeout(() => {
           store.dispatch(actions.arrival({
-            id: j.get('id'),
+            id: journey.id,
             destinationId: destination.id,
-            lineId: l.get('id'),
+            lineId: line.get('id'),
             sourceId: source.id,
-            trainId: t.id,
+            trainId: train.id,
           }));
         }, time );
         break;

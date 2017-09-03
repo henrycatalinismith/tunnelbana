@@ -358,7 +358,6 @@ document.addEventListener('DOMContentLoaded', () => {
       lastId = id;
     })
 
-    /*
     store.dispatch(actions.departure({
       id: uuid(),
       trainId: 'Gordon',
@@ -372,7 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lastId
       ).id
     }));
-    */
 
   }
 
