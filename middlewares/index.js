@@ -1,9 +1,5 @@
-import journeys from './journeys';
-import terminals from './terminals';
-import tracks from './tracks';
+import journeys from "./journeys";
+import terminals from "./terminals";
+import tracks from "./tracks";
 
-export default [
-  journeys,
-  terminals,
-  tracks,
-];
+export default [journeys, terminals, tracks];

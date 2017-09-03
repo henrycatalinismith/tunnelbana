@@ -1,10 +1,18 @@
-import uuid from 'uuid/v1';
-import {TweenMax, TweenLite, Power2, TimelineLite, TimelineMax, Power4, Linear } from 'gsap';
-import actions from '../actions';
-import { select } from '../reducers';
-import { train } from '../reducers/trains';
-import clock from '../clock';
-import * as points from '../geometry/points';
+import uuid from "uuid/v1";
+import {
+  TweenMax,
+  TweenLite,
+  Power2,
+  TimelineLite,
+  TimelineMax,
+  Power4,
+  Linear
+} from "gsap";
+import actions from "../actions";
+import { select } from "../reducers";
+import { train } from "../reducers/trains";
+import clock from "../clock";
+import * as points from "../geometry/points";
 
 export default function(store) {
   return next => action => {
@@ -15,12 +23,28 @@ export default function(store) {
     switch (action.type) {
       case actions.DEPARTURE:
         state = store.getState();
-        train = select('trains').from(state).byId(action.journey.trainId).toJS();
-        source = select('stations').from(state).byId(action.journey.sourceId).toJS();
-        destination = select('stations').from(state).byId(action.journey.destinationId).toJS();
-        line = select('lines').from(state).byId(action.journey.lineId);
-        journey = select('journeys').from(state).byId(train.journeyId).toJS();
-        const tracks = select('tracks').from(state).forJourney(action.journey);
+        train = select("trains")
+          .from(state)
+          .byId(action.journey.trainId)
+          .toJS();
+        source = select("stations")
+          .from(state)
+          .byId(action.journey.sourceId)
+          .toJS();
+        destination = select("stations")
+          .from(state)
+          .byId(action.journey.destinationId)
+          .toJS();
+        line = select("lines")
+          .from(state)
+          .byId(action.journey.lineId);
+        journey = select("journeys")
+          .from(state)
+          .byId(train.journeyId)
+          .toJS();
+        const tracks = select("tracks")
+          .from(state)
+          .forJourney(action.journey);
 
         const width = 15;
         const height = 30;
@@ -40,20 +64,25 @@ export default function(store) {
         if (tracks.length === 1) {
           TweenLite.to(`#${train.id}`, 0.1, {
             rotation: degrees,
-            svgOrigin: `${source.x} ${source.y}`,
+            svgOrigin: `${source.x} ${source.y}`
           });
           TweenLite.fromTo(`#${train.id}`, time / 1000, from, to);
         } else {
-
           const tl = new TimelineMax();
           let prevAngle = 0;
           let turnAngle;
 
           tracks.forEach((track, i) => {
-            from = points.add({ x: track.get('x1'), y: track.get('y1') }, halfTrain)
-            to = points.add({ x: track.get('x2'), y: track.get('y2') }, halfTrain);
+            from = points.add(
+              { x: track.get("x1"), y: track.get("y1") },
+              halfTrain
+            );
+            to = points.add(
+              { x: track.get("x2"), y: track.get("y2") },
+              halfTrain
+            );
 
-            angle = points.angle(from,to);
+            angle = points.angle(from, to);
             degrees = angle * 180 / Math.PI;
             turnAngle = prevAngle - degrees;
 
@@ -73,7 +102,7 @@ export default function(store) {
             //tl.to(`#${train.id}`, 0.001, points.add(from, halfTrain));
             if (needsTurn) {
               tl.to(`#${train.id}`, 0.01, {
-                rotation: degrees,
+                rotation: degrees
               });
             }
             tl.fromTo(`#${train.id}`, time / 1000 / 3, from, {
@@ -85,7 +114,7 @@ export default function(store) {
 
           tl.play();
 
-            /*
+          /*
           from = points.add({ x: tracks[0].x1, y: tracks[0].y1 }, halfTrain)
           to = points.add({ x: tracks[0].x2, y: tracks[0].y2 }, halfTrain);
           angle = points.angle(from,to);
@@ -123,40 +152,43 @@ export default function(store) {
         }
 
         clock.setTimeout(() => {
-          store.dispatch(actions.arrival({
-            id: journey.id,
-            destinationId: destination.id,
-            lineId: line.get('id'),
-            sourceId: source.id,
-            trainId: train.id,
-          }));
-        }, time );
+          store.dispatch(
+            actions.arrival({
+              id: journey.id,
+              destinationId: destination.id,
+              lineId: line.get("id"),
+              sourceId: source.id,
+              trainId: train.id
+            })
+          );
+        }, time);
         break;
 
       case actions.ARRIVAL:
         state = store.getState();
-        const {
-          connectionId,
-          destinationId
-        } = select('connections').from(state).forNextStop(
-          action.journey.sourceId,
-          action.journey.destinationId,
-          action.journey.lineId
-        );
+        const { connectionId, destinationId } = select("connections")
+          .from(state)
+          .forNextStop(
+            action.journey.sourceId,
+            action.journey.destinationId,
+            action.journey.lineId
+          );
 
         clock.setTimeout(() => {
-          store.dispatch(actions.departure({
-            id: uuid(),
-            sourceId: action.journey.destinationId,
-            destinationId: destinationId,
-            connectionId: connectionId,
-            trainId: action.journey.trainId,
-            lineId: action.journey.lineId,
-          }));
+          store.dispatch(
+            actions.departure({
+              id: uuid(),
+              sourceId: action.journey.destinationId,
+              destinationId: destinationId,
+              connectionId: connectionId,
+              trainId: action.journey.trainId,
+              lineId: action.journey.lineId
+            })
+          );
         }, 300);
         break;
     }
 
     return n;
-  }
+  };
 }
