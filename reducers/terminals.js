@@ -1,26 +1,33 @@
-import Immutable from 'immutable';
-import { createReducer } from 'redux-create-reducer';
-import actions from '../actions';
+import Immutable from "immutable";
+import { createReducer } from "redux-create-reducer";
+import actions from "../actions";
 
-export const reducer = createReducer(new Immutable.Map, {
+export const reducer = createReducer(new Immutable.Map(), {
   [actions.ADD_TERMINAL](state, action) {
-    return state.set(action.terminal.id, Immutable.fromJS({
-      id: action.terminal.id,
-      connectionId: action.terminal.connectionId,
-      lineId: action.terminal.lineId,
-      stationId: action.terminal.stationId,
-      isSelected: false,
-    }));
+    return state.set(
+      action.terminal.id,
+      Immutable.fromJS({
+        id: action.terminal.id,
+        connectionId: action.terminal.connectionId,
+        lineId: action.terminal.lineId,
+        stationId: action.terminal.stationId,
+        isSelected: false
+      })
+    );
   },
 
   [actions.ADD_CONNECTION](state, action) {
     const { lineId, sourceId, destinationId } = action.connection;
     const newSource = selectors.byLineAndStation(state, lineId, sourceId);
-    const newDestination = selectors.byLineAndStation(state, lineId, destinationId);
+    const newDestination = selectors.byLineAndStation(
+      state,
+      lineId,
+      destinationId
+    );
 
     if (newSource && !newDestination) {
       return state.setIn(
-        [newSource.id, 'stationId'],
+        [newSource.id, "stationId"],
         action.connection.destinationId
       );
     }
@@ -30,32 +37,40 @@ export const reducer = createReducer(new Immutable.Map, {
 
   [actions.SELECT_TERMINAL](state, action) {
     const terminalId = action.terminalId;
-    return { ...state, [terminalId]: {
-      ...state[terminalId],
-      isSelected: true,
-    }};
+    return {
+      ...state,
+      [terminalId]: {
+        ...state[terminalId],
+        isSelected: true
+      }
+    };
   },
 
   [actions.DESELECT_TERMINAL](state, action) {
     const terminalId = action.terminalId;
-    return { ...state, [terminalId]: {
-      ...state[terminalId],
-      isSelected: false,
-      x: undefined,
-      y: undefined,
-    }};
+    return {
+      ...state,
+      [terminalId]: {
+        ...state[terminalId],
+        isSelected: false,
+        x: undefined,
+        y: undefined
+      }
+    };
   },
 
   [actions.MOVE_TERMINAL](state, action) {
     const terminalId = action.terminalId;
-    return { ...state, [terminalId]: {
-      ...state[terminalId],
-      x: action.x,
-      y: action.y,
-    }};
+    return {
+      ...state,
+      [terminalId]: {
+        ...state[terminalId],
+        x: action.x,
+        y: action.y
+      }
+    };
   }
 });
-
 
 export const selectors = {
   all(state) {
@@ -67,8 +82,12 @@ export const selectors = {
   },
 
   byLineAndStation(state, lineId, destinationId) {
-    return state.filter(t => {
-      return t.get('lineId') === lineId && t.get('stationId') === destinationId
-    }).first();
-  },
+    return state
+      .filter(t => {
+        return (
+          t.get("lineId") === lineId && t.get("stationId") === destinationId
+        );
+      })
+      .first();
+  }
 };
