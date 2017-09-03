@@ -1,7 +1,6 @@
 import Immutable from 'immutable';
 import actions from '../../actions';
-import reducer from '../lines';
-import * as selectors from '../lines';
+import { reducer, selectors } from '../lines';
 
 describe('lines', () => {
   describe('reducer', () => {
@@ -50,15 +49,15 @@ describe('lines', () => {
   });
 
   describe('selectors', () => {
-    it('lines() returns an array of lines', () => {
+    it('all() returns an array of lines', () => {
       const state = Immutable.fromJS({ 'Line 1': {}, 'Line 2': {} });
-      const output = selectors.lines(state);
+      const output = selectors.all(state);
       expect(output.toJS()).toEqual([{}, {}]);
     });
 
-    it('line() returns a single line', () => {
+    it('byId() returns a single line', () => {
       const state = Immutable.fromJS({ 'Line 1': {id: 'Line 1'}, 'Line 2': {id: 'Line 2'} });
-      const output = selectors.line(state, 'Line 1');
+      const output = selectors.byId(state, 'Line 1');
       expect(output.toJS()).toEqual({ id: 'Line 1' });
     });
   });

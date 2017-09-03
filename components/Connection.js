@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Terminal from './Terminal';
 import { connect } from 'react-redux';
-import { line } from '../reducers/lines';
 import { station, stations } from '../reducers/stations';
 import { terminalByLineAndStation } from '../reducers/terminals';
 import { getTracksByConnectionOneWay } from '../reducers/tracks';
@@ -68,7 +67,6 @@ export class Connection extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const { lineId, sourceId, destinationId } = ownProps.connection.toJS();
   return {
-    line: line(state.get('lines'), lineId),
     map: state.get('map'),
     source: station(state.get('stations'), sourceId),
     destination: station(state.get('stations'), destinationId),

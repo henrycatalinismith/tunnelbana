@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { line } from '../reducers/lines';
-import { journey } from '../reducers/journeys';
+import { select } from '../reducers';
 import { station, stations } from '../reducers/stations';
 import { train } from '../reducers/trains';
 
@@ -11,16 +10,9 @@ export class Train extends React.Component {
     source: PropTypes.object,
     destination: PropTypes.object,
     line: PropTypes.object,
-    journey: PropTypes.object,
     map: PropTypes.object,
     station: PropTypes.object,
     train: PropTypes.object,
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.station.id !== this.props.station.id
-      || !this.props.journey
-      || nextProps.journey && this.props.journey.id !== nextProps.journey.Id;
   }
 
   render() {
@@ -37,17 +29,17 @@ export class Train extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const j = ownProps.train.journeyId
-    ? journey(state.get('journeys'), ownProps.train.journeyId)
+  const journey = ownProps.train.journeyId
+    ? select('journeys').from(state).byId(ownProps.train.journeyId)
     : undefined;
 
   return {
     map: state.get('map'),
     station: station(state.get('stations'), ownProps.train.get('stationId')),
-    journey: j,
-    source: j && station(state.get('stations'), j.get('sourceId')),
-    destination: j && station(state.get('stations'), j.get('destinationId')),
-    line: j && line(state.get('lines'), j.get('lineId')),
+    journey: journey,
+    source: journey && station(state.get('stations'), journey.get('sourceId')),
+    destination: journey && station(state.get('stations'), journey.get('destinationId')),
+    line: journey && select('lines').from(state).byId(journey.get('lineId')),
   };
 }
 
