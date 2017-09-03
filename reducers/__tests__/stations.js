@@ -1,7 +1,6 @@
 import Immutable from 'immutable';
 import actions from '../../actions';
-import reducer from '../stations';
-import * as selectors from '../stations';
+import { reducer, selectors } from '../stations';
 
 describe('stations', () => {
   describe('reducer', () => {
@@ -25,21 +24,21 @@ describe('stations', () => {
   });
 
   describe('selectors', () => {
-    it('stations() returns an array of stations', () => {
+    it('all() returns an array of stations', () => {
       const state = Immutable.fromJS({
         'Station 1': {},
         'Station 2': {},
       });
-      const output = selectors.stations(state);
+      const output = selectors.all(state);
       expect(output.toJS()).toEqual([{}, {}]);
     });
 
-    it('station() returns a single station', () => {
+    it('byId() returns a single station', () => {
       const state = Immutable.fromJS({
         'Station 1': {id: 'Station 1'},
         'Station 2': {id: 'Station 2'},
       });
-      const output = selectors.station(state, 'Station 1');
+      const output = selectors.byId(state, 'Station 1');
       expect(output.toJS()).toEqual({ id: 'Station 1' });
     });
   });

@@ -4,7 +4,6 @@ import actions from '../actions';
 import { select } from '../reducers';
 import { getTracksByConnection, getTracksForJourney } from '../reducers/tracks';
 import { train } from '../reducers/trains';
-import { station } from '../reducers/stations';
 import clock from '../clock';
 import * as points from '../geometry/points';
 
@@ -18,8 +17,8 @@ export default function(store) {
       case actions.DEPARTURE:
         state = store.getState();
         t = train(state.get('trains'), action.journey.trainId);
-        source = station(state.get('stations'), action.journey.sourceId);
-        destination = station(state.get('stations'), action.journey.destinationId);
+        source = select('stations').from(state).byId(action.journey.sourceId);
+        destination = select('stations').from(state).byId(action.journey.destinationId);
         l = select('lines').from(state).byId(action.journey.lineId);
         j = select('journeys').from(state).byId(t.journeyId);
         const tracks = getTracksForJourney(state.get('tracks'), action.journey);
