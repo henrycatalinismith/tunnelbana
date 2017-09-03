@@ -73,6 +73,7 @@ export default function(store) {
           let turnAngle;
 
           tracks.forEach((track, i) => {
+            console.log(track.get("ordinality"));
             from = points.add(
               { x: track.get("x1"), y: track.get("y1") },
               halfTrain
@@ -113,42 +114,6 @@ export default function(store) {
           });
 
           tl.play();
-
-          /*
-          from = points.add({ x: tracks[0].x1, y: tracks[0].y1 }, halfTrain)
-          to = points.add({ x: tracks[0].x2, y: tracks[0].y2 }, halfTrain);
-          angle = points.angle(from,to);
-          degrees = angle * 180 / Math.PI;
-          tl.to(`#${train.id}`, 0, points.add(from, halfTrain));
-          tl.to(`#${train.id}`, 0.1, {
-            rotation: degrees,
-          });
-          tl.fromTo(`#${train.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
-          prevAngle = angle;
-
-          from = points.add({ x: tracks[1].x1, y: tracks[1].y1 }, halfTrain);
-          to = points.add({ x: tracks[1].x2, y: tracks[1].y2 }, halfTrain);
-          angle = points.angle(to, from);
-          turnAngle = (angle - prevAngle) * 180 / Math.PI;
-          degrees = angle * 180 / Math.PI;
-          tl.to(`#${train.id}`, 0.1, {
-            rotation: degrees,
-            svgOrigin: `${from.x} ${from.y}`,
-          });
-          tl.fromTo(`#${train.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
-
-          from = points.add({ x: tracks[2].x1, y: tracks[2].y1 }, halfTrain);
-          to = points.add({ x: tracks[2].x2, y: tracks[2].y2 }, halfTrain);
-          angle = points.angle(to, from);
-          degrees = angle * 180 / Math.PI;
-          tl.to(`#${train.id}`, 0.1, {
-            rotation: degrees,
-            svgOrigin: `${from.x} ${from.y}`,
-          });
-          tl.fromTo(`#${train.id}`, time / 1000 / 3, from, { ...to, ease: Power4.easeOut });
-          */
-
-          //TweenLite.fromTo(`#${train.id}`, time / 1000, from, to);
         }
 
         clock.setTimeout(() => {
