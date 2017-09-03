@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { select } from '../reducers';
 import Line from './Line';
 import Station from './Station';
-import Connection from './Connection';
-import Track from './Track';
 import Train from './Train';
-import { select } from '../reducers';
 
 export class Map extends React.Component {
   static propTypes = {
@@ -23,29 +21,13 @@ export class Map extends React.Component {
       this.props.map.viewBox.width,
       this.props.map.viewBox.height,
     ].join(' ');
+    const { lines, stations, trains } = this.props;
 
     return (
       <svg viewBox={viewBox}>
-        {this.props.lines.map((line, i) => (
-          <Line
-            key={`line-${i}`}
-            line={line}
-          />
-        ))}
-
-        {this.props.trains.map((train, i) => (
-          <Train
-            key={`train-${i}`}
-            train={train}
-          />
-        ))}
-
-        {this.props.stations.map((station, i) => (
-          <Station
-            key={`station-${i}`}
-            station={station}
-          />
-        ))}
+        {lines.map((l, i) => <Line key={`line-${i}`} line={l} />)}
+        {trains.map((t, i) => <Train key={`train-${i}`} train={t} />)}
+        {stations.map((s, i) => <Station key={`station-${i}`} station={s} />)}
       </svg>
     );
   }
