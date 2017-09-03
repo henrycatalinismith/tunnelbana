@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --disable-host-check",
-    "pre-commit": "echo test",
+    "precommit": "echo test",
     "test": "jest"
   }
 }
