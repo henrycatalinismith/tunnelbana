@@ -7,7 +7,6 @@ import Connection from './Connection';
 import Track from './Track';
 import Train from './Train';
 import { select } from '../reducers';
-import { stations } from '../reducers/stations';
 import { tracks } from '../reducers/tracks';
 import { trains } from '../reducers/trains';
 
@@ -58,7 +57,7 @@ const mapStateToProps = state => {
   return {
     lines: select('lines').from(state).all(),
     map: state.get('map'),
-    stations: stations(state.get('stations')),
+    stations: select('stations').from(state).all(),
     tracks: tracks(state.get('tracks')).toJS(),
     trains: trains(state.get('trains')),
   };

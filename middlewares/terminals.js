@@ -1,6 +1,5 @@
 import uuid from 'uuid/v1';
 import actions from '../actions';
-import { station } from '../reducers/stations';
 import { select } from '../reducers';
 
 export default function(store) {
@@ -11,8 +10,8 @@ export default function(store) {
         const state = store.getState();
         const connections = state.get('connections');
         const stations = store.getState().get('stations');
-        const source = station(stations, sourceId);
-        const destination = station(stations, destinationId);
+        const source = select('stations').from(state).byId(sourceId);
+        const destination = select('stations').from(state).byId(destinationId);
         const siblings = select('connections').from(state).byLineId(lineId);
         if (siblings.length === 0) {
           store.dispatch(actions.addTerminal({

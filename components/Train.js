@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { select } from '../reducers';
-import { station, stations } from '../reducers/stations';
 import { train } from '../reducers/trains';
 
 export class Train extends React.Component {
@@ -35,10 +34,10 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     map: state.get('map'),
-    station: station(state.get('stations'), ownProps.train.get('stationId')),
+    station: select('stations').from(state).byId(ownProps.train.get('stationId')),
     journey: journey,
-    source: journey && station(state.get('stations'), journey.get('sourceId')),
-    destination: journey && station(state.get('stations'), journey.get('destinationId')),
+    source: journey && select('stations').from(state).byId(journey.get('sourceId')),
+    destination: journey && select('stations').from(state).byId(journey.get('destinationId')),
     line: journey && select('lines').from(state).byId(journey.get('lineId')),
   };
 }
