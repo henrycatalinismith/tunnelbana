@@ -62,7 +62,9 @@ export class Connection extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { lineId, sourceId, destinationId } = ownProps.connection.toJS();
+  const lineId = ownProps.connection.get("lineId");
+  const sourceId = ownProps.connection.get("sourceId");
+  const destinationId = ownProps.connection.get("destinationId");
   return {
     source: select("stations")
       .from(state)
