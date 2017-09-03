@@ -73,7 +73,6 @@ export default function(store) {
           let turnAngle;
 
           tracks.forEach((track, i) => {
-            console.log(track.get("ordinality"));
             from = points.add(
               { x: track.get("x1"), y: track.get("y1") },
               halfTrain
