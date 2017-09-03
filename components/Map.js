@@ -9,17 +9,17 @@ import Train from "./Train";
 export class Map extends React.Component {
   static propTypes = {
     lines: PropTypes.object,
-    map: PropTypes.object,
+    viewBox: PropTypes.object,
     stations: PropTypes.object,
     trains: PropTypes.object
   };
 
   render() {
     const viewBox = [
-      this.props.map.viewBox.minX,
-      this.props.map.viewBox.minY,
-      this.props.map.viewBox.width,
-      this.props.map.viewBox.height
+      this.props.viewBox.get("minX"),
+      this.props.viewBox.get("minY"),
+      this.props.viewBox.get("width"),
+      this.props.viewBox.get("height")
     ].join(" ");
     const { lines, stations, trains } = this.props;
 
@@ -38,7 +38,9 @@ const mapStateToProps = state => {
     lines: select("lines")
       .from(state)
       .all(),
-    map: state.get("map"),
+    viewBox: select("map")
+      .from(state)
+      .viewBox(),
     stations: select("stations")
       .from(state)
       .all(),
