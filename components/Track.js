@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { line } from '../reducers/lines';
+import { select } from '../reducers';
 
 export class Track extends React.Component {
   static propTypes = {
@@ -37,7 +37,7 @@ export class Track extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const { lineId } = ownProps.track;
   return {
-    line: line(state.get('lines'), lineId),
+    line: select('lines').from(state).byId(lineId),
   };
 }
 

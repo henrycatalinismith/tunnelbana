@@ -1,9 +1,7 @@
 import uuid from 'uuid/v1';
 import {TweenMax, TweenLite, Power2, TimelineLite, TimelineMax, Power4, Linear } from 'gsap';
 import actions from '../actions';
-import { nextStop } from '../reducers/connections';
-import { journey } from '../reducers/journeys';
-import { line } from '../reducers/lines';
+import { select } from '../reducers';
 import { getTracksByConnection, getTracksForJourney } from '../reducers/tracks';
 import { train } from '../reducers/trains';
 import { station } from '../reducers/stations';
@@ -22,8 +20,8 @@ export default function(store) {
         t = train(state.get('trains'), action.journey.trainId);
         source = station(state.get('stations'), action.journey.sourceId);
         destination = station(state.get('stations'), action.journey.destinationId);
-        l = line(state.get('lines'), action.journey.lineId);
-        j = journey(state.get('journeys'), t.journeyId);
+        l = select('lines').from(state).byId(action.journey.lineId);
+        j = select('journeys').from(state).byId(t.journeyId);
         const tracks = getTracksForJourney(state.get('tracks'), action.journey);
 
         const width = 15;
@@ -139,8 +137,10 @@ export default function(store) {
 
       case actions.ARRIVAL:
         state = store.getState();
-        const { connectionId, destinationId } = nextStop(
-          state.get('connections'),
+        const {
+          connectionId,
+          destinationId
+        } = select('connections').from(state).forNextStop(
           action.journey.sourceId,
           action.journey.destinationId,
           action.journey.lineId
