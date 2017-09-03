@@ -1,4 +1,4 @@
-export const UPDATE_VIEW_BOX = 'UPDATE_VIEW_BOX';
+export const UPDATE_VIEW_BOX = "UPDATE_VIEW_BOX";
 
 export function updateViewBox(minX, minY, width, height) {
   return {
@@ -7,7 +7,7 @@ export function updateViewBox(minX, minY, width, height) {
       minX,
       minY,
       width,
-      height,
-    },
+      height
+    }
   };
 }

@@ -1,4 +1,4 @@
-import pauseMe from 'pause-me';
+import pauseMe from "pause-me";
 
 const timeouts = {};
 
@@ -6,7 +6,7 @@ class Clock {
   id = 0;
   timeouts = {};
 
-  setTimeout (callback, delay) {
+  setTimeout(callback, delay) {
     const id = this.id;
     const timeout = pauseMe(() => {
       delete this.timeouts[id];
@@ -29,4 +29,4 @@ class Clock {
   }
 }
 
-export default new Clock;
+export default new Clock();

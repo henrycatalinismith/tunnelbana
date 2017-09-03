@@ -1,47 +1,42 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { combineReducers } from 'redux-immutable';
-import { createSelect } from 'bo-selecta';
+import { createStore, applyMiddleware, compose } from "redux";
+import { combineReducers } from "redux-immutable";
+import { createSelect } from "bo-selecta";
 
 import {
   reducer as connectionsReducer,
-  selectors as connectionSelectors,
-} from './connections';
+  selectors as connectionSelectors
+} from "./connections";
 
 import {
   reducer as journeysReducer,
-  selectors as journeySelectors,
-} from './journeys';
+  selectors as journeySelectors
+} from "./journeys";
 
-import {
-  reducer as linesReducer,
-  selectors as lineSelectors,
-} from './lines';
+import { reducer as linesReducer, selectors as lineSelectors } from "./lines";
 
-import {
-  reducer as mapReducer,
-} from './map';
+import { reducer as mapReducer } from "./map";
 
 import {
   reducer as stationsReducer,
-  selectors as stationSelectors,
-} from './stations';
+  selectors as stationSelectors
+} from "./stations";
 
 import {
   reducer as terminalsReducer,
-  selectors as terminalSelectors,
-} from './terminals';
+  selectors as terminalSelectors
+} from "./terminals";
 
 import {
   reducer as tracksReducer,
-  selectors as trackSelectors,
-} from './tracks';
+  selectors as trackSelectors
+} from "./tracks";
 
 import {
   reducer as trainsReducer,
-  selectors as trainSelectors,
-} from './trains';
+  selectors as trainSelectors
+} from "./trains";
 
-import middlewares from '../middlewares';
+import middlewares from "../middlewares";
 
 const reducer = combineReducers({
   connections: connectionsReducer,
@@ -51,7 +46,7 @@ const reducer = combineReducers({
   stations: stationsReducer,
   terminals: terminalsReducer,
   tracks: tracksReducer,
-  trains: trainsReducer,
+  trains: trainsReducer
 });
 
 const selectors = {
@@ -61,16 +56,14 @@ const selectors = {
   stations: stationSelectors,
   terminals: terminalSelectors,
   tracks: trackSelectors,
-  trains: trainSelectors,
+  trains: trainSelectors
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
   undefined,
-  composeEnhancers(
-    applyMiddleware(...middlewares)
-  )
+  composeEnhancers(applyMiddleware(...middlewares))
 );
 
 export default store;
