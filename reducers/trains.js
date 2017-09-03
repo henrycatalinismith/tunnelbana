@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 import { createReducer } from 'redux-create-reducer';
 import actions from '../actions';
 
-export default createReducer(new Immutable.Map, {
+export const reducer = createReducer(new Immutable.Map, {
   [actions.ADD_TRAIN](state, action) {
     return state.set(action.train.id, Immutable.fromJS({
       id: action.train.id,
@@ -28,10 +28,12 @@ export default createReducer(new Immutable.Map, {
   },
 });
 
-export function trains(state) {
-  return state.toList();
-}
+export const selectors = {
+  all(state) {
+    return state.toList();
+  },
 
-export function train(state, id) {
-  return state.get(id);
-}
+  byId(state, id) {
+    return state.get(id);
+  },
+};
