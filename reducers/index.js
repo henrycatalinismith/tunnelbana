@@ -14,7 +14,7 @@ import {
 
 import { reducer as linesReducer, selectors as lineSelectors } from "./lines";
 
-import { reducer as mapReducer } from "./map";
+import { reducer as mapReducer, selectors as mapSelectors } from "./map";
 
 import {
   reducer as stationsReducer,
@@ -53,6 +53,7 @@ const selectors = {
   connections: connectionSelectors,
   journeys: journeySelectors,
   lines: lineSelectors,
+  map: mapSelectors,
   stations: stationSelectors,
   terminals: terminalSelectors,
   tracks: trackSelectors,
