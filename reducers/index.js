@@ -1,10 +1,26 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import { createSelect } from 'bo-selecta';
-import connections from './connections';
-import journeys from './journeys';
-import lines from './lines';
-import map from './map';
+
+import {
+  reducer as connectionsReducer,
+  selectors as connectionSelectors,
+} from './connections';
+
+import {
+  reducer as journeysReducer,
+  selectors as journeySelectors,
+} from './journeys';
+
+import {
+  reducer as linesReducer,
+  selectors as lineSelectors,
+} from './lines';
+
+import {
+  reducer as mapReducer,
+} from './map';
+
 import stations from './stations';
 import terminals from './terminals';
 import tracks from './tracks';
@@ -12,10 +28,10 @@ import trains from './trains';
 import middlewares from '../middlewares';
 
 const reducer = combineReducers({
-  connections,
-  journeys,
-  lines,
-  map,
+  connections: connectionsReducer,
+  journeys: journeysReducer,
+  lines: linesReducer,
+  map: mapReducer,
   stations,
   terminals,
   tracks,
@@ -33,10 +49,10 @@ const store = createStore(
 
 export default store;
 
-import { select as connectionSelectors } from './connections';
-
 const selectors = {
   connections: connectionSelectors,
+  journeys: journeySelectors,
+  lines: lineSelectors,
 };
 
 export const select = createSelect(selectors, {

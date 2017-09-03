@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../actions';
-import { connection } from '../reducers/connections';
-import { line } from '../reducers/lines';
+import { select } from '../reducers';
 import { angle, rotate } from '../geometry/points';
 
 export class Terminal extends React.Component {
@@ -130,8 +129,8 @@ export class Terminal extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    connection: connection(state.connections, ownProps.terminal.connectionId),
-    line: line(state.lines, ownProps.terminal.lineId),
+    connection: select('connections').from(state).byId(ownProps.terminal.connectionId),
+    line: select('lines').from(state).byId(ownProps.terminal.lineId),
   };
 }
 

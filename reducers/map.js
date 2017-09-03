@@ -15,7 +15,7 @@ const initialState = {
   },
 };
 
-export default createReducer(initialState, {
+export const reducer = createReducer(initialState, {
   [actions.WINDOW_RESIZE](state, action) {
     return { ...state, viewBox: {
       ...state.viewBox,
