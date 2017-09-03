@@ -1,7 +1,6 @@
 import Immutable from 'immutable';
 import actions from '../../actions';
-import reducer from '../terminals';
-import * as selectors from '../terminals';
+import { reducer, selectors } from '../terminals';
 
 describe('terminals', () => {
   describe('reducer', () => {
@@ -28,21 +27,21 @@ describe('terminals', () => {
   });
 
   describe('selectors', () => {
-    it('terminals() returns an array of terminals', () => {
+    it('all() returns an array of terminals', () => {
       const state = Immutable.fromJS({
         'Terminal 1': {},
         'Terminal 2': {},
       });
-      const output = selectors.terminals(state);
+      const output = selectors.all(state);
       expect(output.toJS()).toEqual([{}, {}]);
     });
 
-    it('terminal() returns a single terminal', () => {
+    it('byId() returns a single terminal', () => {
       const state = Immutable.fromJS({
         'Terminal 1': {id: 'Terminal 1'},
         'Terminal 2': {id: 'Terminal 2'},
       });
-      const output = selectors.terminal(state, 'Terminal 1');
+      const output = selectors.byId(state, 'Terminal 1');
       expect(output.toJS()).toEqual({ id: 'Terminal 1' });
     });
   });

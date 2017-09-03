@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Terminal from './Terminal';
 import { connect } from 'react-redux';
 import { select } from '../reducers';
-import { terminalByLineAndStation } from '../reducers/terminals';
 import { getTracksByConnectionOneWay } from '../reducers/tracks';
 
 export class Connection extends React.Component {
@@ -70,8 +69,8 @@ const mapStateToProps = (state, ownProps) => {
     map: state.get('map'),
     source: select('stations').from(state).byId(sourceId),
     destination: select('stations').from(state).byId(destinationId),
-    sourceTerminal: terminalByLineAndStation(state.get('terminals'), lineId, sourceId),
-    destinationTerminal: terminalByLineAndStation(state.get('terminals'), lineId, destinationId),
+    sourceTerminal: select('terminals').from(state).byLineAndStation(lineId, sourceId),
+    destinationTerminal: select('terminals').from(state).byLineAndStation(lineId, destinationId),
   };
 }
 
