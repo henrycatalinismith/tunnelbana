@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Terminal from './Terminal';
 import { connect } from 'react-redux';
-import { station, stations } from '../reducers/stations';
+import { select } from '../reducers';
 import { terminalByLineAndStation } from '../reducers/terminals';
 import { getTracksByConnectionOneWay } from '../reducers/tracks';
 
@@ -68,8 +68,8 @@ const mapStateToProps = (state, ownProps) => {
   const { lineId, sourceId, destinationId } = ownProps.connection.toJS();
   return {
     map: state.get('map'),
-    source: station(state.get('stations'), sourceId),
-    destination: station(state.get('stations'), destinationId),
+    source: select('stations').from(state).byId(sourceId),
+    destination: select('stations').from(state).byId(destinationId),
     sourceTerminal: terminalByLineAndStation(state.get('terminals'), lineId, sourceId),
     destinationTerminal: terminalByLineAndStation(state.get('terminals'), lineId, destinationId),
   };

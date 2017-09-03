@@ -1,6 +1,6 @@
 import uuid from 'uuid/v1';
 import actions from '../actions';
-import { station } from '../reducers/stations';
+import { select } from '../reducers';
 import * as points from '../geometry/points';
 
 export default function(store) {
@@ -10,10 +10,11 @@ export default function(store) {
     switch (action.type) {
       case actions.ADD_CONNECTION:
         const { lineId, sourceId, destinationId } = action.connection;
+        const state = store.getState();
         const connections = store.getState().get('connections');
         const stations = store.getState().get('stations');
-        const source = station(stations, sourceId).toJS();
-        const destination = station(stations, destinationId).toJS();
+        const source = select('stations').from(state).byId(sourceId).toJS();
+        const destination = select('stations').from(state).byId(destinationId).toJS();
         const angle = Math.abs(points.angle(source, destination));
         const π = Math.PI;
 
