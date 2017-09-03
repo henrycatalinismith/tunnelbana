@@ -40,8 +40,16 @@ export const selectors = {
           track.get("destinationId") === journey.destinationId
       )
       .toList()
-      .sort(track => {
-        return track.get("ordinality");
+      .sort((a, b) => {
+        const aOrdinality = a.get("ordinality");
+        const bOrdinality = b.get("ordinality");
+        if (aOrdinality === bOrdinality) {
+          return 0;
+        } else if (aOrdinality > bOrdinality) {
+          return 1;
+        } else {
+          return -1;
+        }
       });
   }
 };
