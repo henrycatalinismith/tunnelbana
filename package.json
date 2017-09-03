@@ -30,6 +30,9 @@
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.7.1"
   },
+  "devDependencies": {
+    "prettier": "^1.6.1"
+  },
   "scripts": {
     "start": "webpack-dev-server --disable-host-check",
     "test": "jest"
