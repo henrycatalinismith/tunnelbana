@@ -7,7 +7,6 @@ import Connection from './Connection';
 import Track from './Track';
 import Train from './Train';
 import { select } from '../reducers';
-import { tracks } from '../reducers/tracks';
 import { trains } from '../reducers/trains';
 
 export class Map extends React.Component {
@@ -15,7 +14,7 @@ export class Map extends React.Component {
     lines: PropTypes.object,
     map: PropTypes.object,
     stations: PropTypes.object,
-    tracks: PropTypes.array,
+    trains: PropTypes.object,
   }
 
   render() {
@@ -58,7 +57,6 @@ const mapStateToProps = state => {
     lines: select('lines').from(state).all(),
     map: state.get('map'),
     stations: select('stations').from(state).all(),
-    tracks: tracks(state.get('tracks')).toJS(),
     trains: trains(state.get('trains')),
   };
 }

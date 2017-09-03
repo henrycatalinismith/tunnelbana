@@ -2,7 +2,7 @@ import uuid from 'uuid/v1';
 import {TweenMax, TweenLite, Power2, TimelineLite, TimelineMax, Power4, Linear } from 'gsap';
 import actions from '../actions';
 import { select } from '../reducers';
-import { getTracksByConnection, getTracksForJourney } from '../reducers/tracks';
+import { getTracksForJourney } from '../reducers/tracks';
 import { train } from '../reducers/trains';
 import clock from '../clock';
 import * as points from '../geometry/points';
@@ -21,7 +21,7 @@ export default function(store) {
         destination = select('stations').from(state).byId(action.journey.destinationId);
         l = select('lines').from(state).byId(action.journey.lineId);
         j = select('journeys').from(state).byId(t.journeyId);
-        const tracks = getTracksForJourney(state.get('tracks'), action.journey);
+        const tracks = select('tracks').from(state).forJourney(action.journey);
 
         const width = 15;
         const height = 30;

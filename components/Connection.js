@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Terminal from './Terminal';
 import { connect } from 'react-redux';
 import { select } from '../reducers';
-import { getTracksByConnectionOneWay } from '../reducers/tracks';
 
 export class Connection extends React.Component {
   static propTypes = {
