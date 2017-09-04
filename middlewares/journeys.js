@@ -37,7 +37,8 @@ export default function(store) {
           .toJS();
         line = select("lines")
           .from(state)
-          .byId(action.journey.lineId);
+          .byId(action.journey.lineId)
+          .toJS();
         journey = select("journeys")
           .from(state)
           .byId(train.journeyId)
@@ -69,9 +70,10 @@ export default function(store) {
           });
           TweenLite.fromTo(`#${train.id}`, time / 1000, from, to);
         } else {
-          const tl = new TimelineMax();
           let prevAngle = 0;
           let turnAngle;
+          const tweens = [];
+          let i = 0;
 
           for (let track of tracks) {
             from = points.add({ x: track.x1, y: track.y1 }, halfTrain);
@@ -95,18 +97,24 @@ export default function(store) {
             const needsTurn = turnAngle !== 180;
 
             //tl.to(`#${train.id}`, 0.001, points.add(from, halfTrain));
-            if (needsTurn) {
-              tl.to(`#${train.id}`, 0.01, {
-                rotation: degrees
-              });
-            }
-            tl.fromTo(`#${train.id}`, time / 1000 / 3, from, {
-              ...to,
-              ease: Linear.easeNone
-            });
+            tweens.push(
+              TweenMax.to(`#${train.id}`, 0.01, {
+                rotation: degrees,
+                delay: time / 1000 / 3 * i
+              })
+            );
+            tweens.push(
+              TweenMax.fromTo(`#${train.id}`, time / 1000 / 3, from, {
+                ...to,
+                ease: Linear.easeNone,
+                delay: time / 1000 / 3 * i
+              })
+            );
             prevAngle = degrees;
+            i++;
           }
 
+          const tl = new TimelineMax({ tweens });
           tl.play();
         }
 
@@ -115,7 +123,7 @@ export default function(store) {
             actions.arrival({
               id: journey.id,
               destinationId: destination.id,
-              lineId: line.get("id"),
+              lineId: line.id,
               sourceId: source.id,
               trainId: train.id
             })
