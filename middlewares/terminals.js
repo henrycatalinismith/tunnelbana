@@ -12,13 +12,16 @@ export default function(store) {
         const stations = store.getState().get("stations");
         const source = select("stations")
           .from(state)
-          .byId(sourceId);
+          .byId(sourceId)
+          .toJS();
         const destination = select("stations")
           .from(state)
-          .byId(destinationId);
+          .byId(destinationId)
+          .toJS();
         const siblings = select("connections")
           .from(state)
-          .byLineId(lineId);
+          .byLineId(lineId)
+          .toJS();
         if (siblings.length === 0) {
           store.dispatch(
             actions.addTerminal({
