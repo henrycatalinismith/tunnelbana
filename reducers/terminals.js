@@ -37,38 +37,31 @@ export const reducer = createReducer(new Immutable.Map(), {
 
   [actions.SELECT_TERMINAL](state, action) {
     const terminalId = action.terminalId;
-    return {
-      ...state,
-      [terminalId]: {
-        ...state[terminalId],
-        isSelected: true
-      }
-    };
+    console.log(action);
+    return state.setIn([terminalId, "isSelected"], true);
   },
 
   [actions.DESELECT_TERMINAL](state, action) {
-    const terminalId = action.terminalId;
-    return {
-      ...state,
-      [terminalId]: {
-        ...state[terminalId],
-        isSelected: false,
-        x: undefined,
-        y: undefined
-      }
-    };
+    return state.update(action.terminalId, terminal => {
+      return terminal.merge(
+        Immutable.fromJS({
+          isSelected: false,
+          x: undefined,
+          y: undefined
+        })
+      );
+    });
   },
 
   [actions.MOVE_TERMINAL](state, action) {
-    const terminalId = action.terminalId;
-    return {
-      ...state,
-      [terminalId]: {
-        ...state[terminalId],
-        x: action.x,
-        y: action.y
-      }
-    };
+    return state.update(action.terminalId, terminal => {
+      return terminal.merge(
+        Immutable.fromJS({
+          x: action.x,
+          y: action.y
+        })
+      );
+    });
   }
 });
 
