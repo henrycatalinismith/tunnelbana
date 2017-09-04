@@ -343,49 +343,53 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     );
 
-    /*
-    store.dispatch(actions.departure({
-      id: uuid(),
-      trainId: 'Thomas',
-      sourceId: 'T-Centralen',
-      destinationId: 'GamlaStan',
-      lineId: 'Red',
-      connectionId: getConnection(
-        store.getState().get('connections'),
-        'Red',
-        'T-Centralen',
-        'GamlaStan'
-      ).id
-    }));
+    store.dispatch(
+      actions.departure({
+        id: uuid(),
+        trainId: "Thomas",
+        sourceId: "T-Centralen",
+        destinationId: "GamlaStan",
+        lineId: "Red",
+        connectionId: getConnection(
+          store.getState().get("connections"),
+          "Red",
+          "T-Centralen",
+          "GamlaStan"
+        ).id
+      })
+    );
 
-    store.dispatch(actions.departure({
-      id: uuid(),
-      trainId: 'Henry',
-      sourceId: 'Medborgarplatsen',
-      destinationId: 'Skanstull',
-      lineId: 'Green',
-      connectionId: getConnection(
-        store.getState().get('connections'),
-        'Green',
-        'Medborgarplatsen',
-        'Skanstull'
-      ).id
-    }));
+    store.dispatch(
+      actions.departure({
+        id: uuid(),
+        trainId: "Henry",
+        sourceId: "Medborgarplatsen",
+        destinationId: "Skanstull",
+        lineId: "Green",
+        connectionId: getConnection(
+          store.getState().get("connections"),
+          "Green",
+          "Medborgarplatsen",
+          "Skanstull"
+        ).id
+      })
+    );
 
-    store.dispatch(actions.departure({
-      id: uuid(),
-      trainId: 'Edward',
-      sourceId: 'Kungstradgarden',
-      destinationId: 'T-Centralen',
-      lineId: 'Blue',
-      connectionId: getConnection(
-        store.getState().get('connections'),
-        'Blue',
-        'Kungstradgarden',
-        'T-Centralen'
-      ).id
-    }));
-    */
+    store.dispatch(
+      actions.departure({
+        id: uuid(),
+        trainId: "Edward",
+        sourceId: "Kungstradgarden",
+        destinationId: "T-Centralen",
+        lineId: "Blue",
+        connectionId: getConnection(
+          store.getState().get("connections"),
+          "Blue",
+          "Kungstradgarden",
+          "T-Centralen"
+        ).id
+      })
+    );
 
     const π = Math.PI;
     const points = ({ x, y }, r, n) => {
