@@ -59,7 +59,6 @@ export class Station extends React.Component {
     const onMouseMove =
       this.props.station.get("isSelected") && this.onMouseMove;
     const onMouseUp = this.props.station.get("isSelected") && this.onMouseUp;
-    console.log(this.props.station.get("isSelected"));
 
     return (
       <g className="station" id={id}>
@@ -72,6 +71,7 @@ export class Station extends React.Component {
           fill="white"
           onMouseDown={this.onMouseDown}
           onMouseMove={onMouseMove}
+          onMouseOut={onMouseUp}
           onMouseUp={onMouseUp}
         />
       </g>
