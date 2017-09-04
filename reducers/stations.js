@@ -27,17 +27,14 @@ export const reducer = createReducer(new Immutable.Map(), {
   },
 
   [actions.SELECT_STATION](state, action) {
-    console.log("SELECT_STATION");
     return state.setIn([action.id, "isSelected"], true);
   },
 
   [actions.DESELECT_STATION](state, action) {
-    console.log("DESELECT_STATION");
     return state.setIn([action.id, "isSelected"], false);
   },
 
   [actions.MOVE_STATION](state, action) {
-    console.log("MOVE_STATION");
     return state.update(action.stationId, station => {
       console.log(action);
       return station.merge(

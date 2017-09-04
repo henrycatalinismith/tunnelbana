@@ -34,7 +34,7 @@ export function selectStation(id) {
   };
 }
 
-export function deselectStation(selection) {
+export function deselectStation(id) {
   return {
     type: DESELECT_STATION,
     id
