@@ -72,7 +72,9 @@ export class Terminal extends React.Component {
   }
 
   render() {
-    const { line, station, terminal } = this.props;
+    const terminal = this.props.terminal.toJS();
+    const line = this.props.line.toJS();
+    const station = this.props.station.toJS();
     const x = typeof terminal.x === "undefined" ? station.x : terminal.x;
     const y = typeof terminal.y === "undefined" ? station.y : terminal.y;
 
@@ -133,10 +135,10 @@ const mapStateToProps = (state, ownProps) => {
   return {
     connection: select("connections")
       .from(state)
-      .byId(ownProps.terminal.connectionId),
+      .byId(ownProps.terminal.get("connectionId")),
     line: select("lines")
       .from(state)
-      .byId(ownProps.terminal.lineId)
+      .byId(ownProps.terminal.get("lineId"))
   };
 };
 
