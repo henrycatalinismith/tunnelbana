@@ -35,10 +35,10 @@ export class Terminal extends React.Component {
 
   onMouseDown(event) {
     this.props.selectTerminal({
-      terminalId: this.props.terminal.id,
-      connectionId: this.props.connection.id,
-      lineId: this.props.line.id,
-      stationId: this.props.station.id
+      terminalId: this.props.terminal.get("id"),
+      connectionId: this.props.connection.get("id"),
+      lineId: this.props.line.get("id"),
+      stationId: this.props.station.get("id")
     });
     this.setState({
       xStart: event.screenX,
@@ -52,18 +52,18 @@ export class Terminal extends React.Component {
 
     this.setState({ xOffset, yOffset });
     this.props.moveTerminal(
-      this.props.terminal.id,
-      xOffset + this.props.station.x,
-      yOffset + this.props.station.y
+      this.props.terminal.get("id"),
+      xOffset + this.props.station.get("x"),
+      yOffset + this.props.station.get("y")
     );
   }
 
   onMouseUp(event) {
     this.props.deselectTerminal({
-      terminalId: this.props.terminal.id,
-      connectionId: this.props.connection.id,
-      lineId: this.props.line.id,
-      stationId: this.props.station.id
+      terminalId: this.props.terminal.get("id"),
+      connectionId: this.props.connection.get("id"),
+      lineId: this.props.line.get("id"),
+      stationId: this.props.station.get("id")
     });
     this.setState({
       xOffset: 0,
@@ -78,8 +78,8 @@ export class Terminal extends React.Component {
     const x = typeof terminal.x === "undefined" ? station.x : terminal.x;
     const y = typeof terminal.y === "undefined" ? station.y : terminal.y;
 
-    const width = terminal.isSelected ? 26 : 20;
-    const height = terminal.isSelected ? 26 : 20;
+    const width = 20;
+    const height = 20;
 
     let bottom = { x, y };
     let topLeft = { x: x - width, y: y - height };
@@ -89,7 +89,7 @@ export class Terminal extends React.Component {
       y: bottom.y - height / 2
     };
 
-    if (terminal.isSelected) {
+    if (false && terminal.isSelected) {
       const origin = { x: 0, y: 0 };
       const point = { x: this.state.xOffset, y: this.state.yOffset };
       const radians = angle(point, origin) - Math.PI / 2;
