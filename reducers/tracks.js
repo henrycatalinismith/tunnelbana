@@ -19,6 +19,16 @@ export const reducer = createReducer(new Immutable.Map(), {
         y2: action.track.y2
       })
     );
+  },
+
+  [actions.DRAGON_MOVE](state, action) {
+    if (action.entity !== "station") return state;
+
+    return state.filter(track => {
+      const sourceId = track.get("sourceId");
+      const destinationId = track.get("destinationId");
+      return sourceId !== action.id && destinationId !== action.id;
+    });
   }
 });
 
@@ -29,6 +39,10 @@ export const selectors = {
 
   byId(state, id) {
     return state.get(id);
+  },
+
+  byConnectionId(state, connectionId) {
+    return state.filter(t => t.get("connectionId") === connectionId).toList();
   },
 
   forJourney(state, journey) {
