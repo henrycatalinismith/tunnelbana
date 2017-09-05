@@ -34,16 +34,7 @@ export class Terminal extends React.Component {
   }
 
   onMouseDown(event) {
-    this.props.selectTerminal({
-      terminalId: this.props.terminal.get("id"),
-      connectionId: this.props.connection.get("id"),
-      lineId: this.props.line.get("id"),
-      stationId: this.props.station.get("id")
-    });
-    this.setState({
-      xStart: event.screenX,
-      yStart: event.screenY
-    });
+    this.props.selectTerminal(this.props.terminal.get("id"));
   }
 
   onMouseMove(event) {
@@ -104,7 +95,7 @@ export class Terminal extends React.Component {
       [topRight.x, topRight.y].join(",")
     ].join(" ");
 
-    const onMouseMove = terminal.isSelected && this.onMouseMove;
+    //const onMouseMove = terminal.isSelected && this.onMouseMove;
     const onMouseUp = terminal.isSelected && this.onMouseUp;
 
     // stick a huge transparent border around it while it's selected so that
@@ -122,7 +113,6 @@ export class Terminal extends React.Component {
           x={bottom.x - 5}
           y={bottom.y - 25}
           onMouseDown={this.onMouseDown}
-          onMouseMove={onMouseMove}
           onMouseOut={onMouseUp}
           onMouseUp={onMouseUp}
         />
@@ -144,9 +134,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectTerminal: id => dispatch(actions.selectTerminal(id)),
-    deselectTerminal: id => dispatch(actions.deselectTerminal(id)),
-    moveTerminal: (id, x, y) => dispatch(actions.moveTerminal(id, x, y))
+    selectTerminal: id => dispatch(actions.dragonGrab("terminal", id)),
+    deselectTerminal: id => dispatch(actions.dragonDrop("terminal", id))
   };
 };
 
