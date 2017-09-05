@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { select } from "../reducers";
+import Dragon from "./Dragon";
 import Line from "./Line";
 import Station from "./Station";
 import Train from "./Train";
@@ -28,6 +29,7 @@ export class Map extends React.Component {
         {lines.map((l, i) => <Line key={`line-${i}`} line={l} />)}
         {trains.map((t, i) => <Train key={`train-${i}`} train={t} />)}
         {stations.map((s, i) => <Station key={`station-${i}`} station={s} />)}
+        <Dragon />
       </svg>
     );
   }
