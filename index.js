@@ -38,6 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  window.addEventListener("mouseup", event => {
+    const { entity, id } = store
+      .getState()
+      .get("dragon")
+      .toJS();
+    if (entity && id) {
+      store.dispatch(actions.dragonDrop(entity, id));
+    }
+  });
+
   window.addEventListener("focus", () => {
     store.dispatch(actions.windowFocus());
     clock.resume();
