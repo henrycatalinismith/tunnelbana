@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let throttle = false;
   window.addEventListener("mousemove", event => {
     if (!throttle) {
-      store.dispatch(actions.moveDragon(event.clientX, event.clientY));
+      store.dispatch(actions.dragonMove(event.clientX, event.clientY));
       throttle = true;
-      setTimeout(() => (throttle = false), 500);
+      setTimeout(() => (throttle = false), 50);
     }
   });
 
