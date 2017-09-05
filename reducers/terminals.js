@@ -53,12 +53,24 @@ export const reducer = createReducer(new Immutable.Map(), {
     });
   },
 
-  [actions.MOVE_TERMINAL](state, action) {
-    return state.update(action.terminalId, terminal => {
+  [actions.DRAGON_MOVE](state, action) {
+    if (action.entity !== "terminal") return state;
+    return state.update(action.id, terminal => {
       return terminal.merge(
         Immutable.fromJS({
           x: action.x,
           y: action.y
+        })
+      );
+    });
+  },
+
+  [actions.DRAGON_DROP](state, action) {
+    if (action.entity !== "terminal") return state;
+    return state.update(action.id, terminal => {
+      return terminal.merge(
+        Immutable.fromJS({
+          isSelected: false
         })
       );
     });
