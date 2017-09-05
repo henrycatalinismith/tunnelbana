@@ -8,6 +8,15 @@ export default function(store) {
     const ret = next(action);
 
     switch (action.type) {
+      case actions.DRAGON_MOVE:
+        if (action.entity !== "station") break;
+        let con = select("connections")
+          .from(store.getState())
+          .byStationId(action.id)
+          .first()
+          .toJS();
+        action.connection = con;
+
       case actions.ADD_CONNECTION:
         const { lineId, sourceId, destinationId } = action.connection;
         const state = store.getState();

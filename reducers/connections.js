@@ -11,17 +11,9 @@ export const reducer = createReducer(new Immutable.Map(), {
         sourceId: action.connection.sourceId,
         destinationId: action.connection.destinationId,
         lineId: action.connection.lineId,
-        terminalId: undefined,
-        tracks: new Immutable.List()
+        terminalId: undefined
       })
     );
-  },
-
-  [actions.ADD_TRACK](state, action) {
-    const id = action.track.connectionId;
-    return state.updateIn([id, "tracks"], tracks => {
-      return tracks.push(Immutable.fromJS(action.track));
-    });
   }
 });
 
@@ -50,6 +42,16 @@ export const selectors = {
 
   byLineId(state, lineId) {
     return state.filter(c => c.get("lineId") === lineId).toList();
+  },
+
+  byStationId(state, stationId) {
+    return state
+      .filter(
+        c =>
+          c.get("sourceId") === stationId ||
+          c.get("destinationId") === stationId
+      )
+      .toList();
   },
 
   forNextStop(state, previousStationId, currentStationId, lineId) {
