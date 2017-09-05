@@ -12,7 +12,8 @@ export class Connection extends React.Component {
     destination: PropTypes.object,
     terminal: PropTypes.object,
     sourceTerminal: PropTypes.object,
-    destinationTerminal: PropTypes.object
+    destinationTerminal: PropTypes.object,
+    tracks: PropTypes.object
   };
 
   render() {
@@ -21,7 +22,7 @@ export class Connection extends React.Component {
     const line = this.props.line && this.props.line.toJS();
     const destination = this.props.destination && this.props.destination.toJS();
     const terminal = this.props.terminal;
-    const tracks = connection.tracks;
+    const tracks = this.props.tracks.toJS();
 
     let path;
 
@@ -77,7 +78,10 @@ const mapStateToProps = (state, ownProps) => {
       .byLineAndStation(lineId, sourceId),
     destinationTerminal: select("terminals")
       .from(state)
-      .byLineAndStation(lineId, destinationId)
+      .byLineAndStation(lineId, destinationId),
+    tracks: select("tracks")
+      .from(state)
+      .byConnectionId(ownProps.connection.get("id"))
   };
 };
 
