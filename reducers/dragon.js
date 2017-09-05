@@ -8,7 +8,7 @@ const initialState = Immutable.fromJS({
 });
 
 export const reducer = createReducer(initialState, {
-  [actions.MOVE_DRAGON](state, action) {
+  [actions.DRAGON_MOVE](state, action) {
     return state.merge(
       Immutable.fromJS({
         x: action.x,
