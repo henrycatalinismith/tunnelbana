@@ -5,12 +5,16 @@ import { select } from "../reducers";
 import actions from "../actions";
 
 export class Dragon extends React.Component {
-  static propTypes = {};
+  static propTypes = {
+    dragon: PropTypes.object
+  };
 
   render() {
+    const dragon = this.props.dragon.toJS();
+    console.log(dragon);
     return (
       <g className="dragon">
-        <text x="300" y="200">
+        <text x={dragon.x} y={dragon.y}>
           🐉
         </text>
       </g>
@@ -19,7 +23,11 @@ export class Dragon extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  return {
+    dragon: select("dragon")
+      .from(state)
+      .dragon()
+  };
 };
 
 export default connect(mapStateToProps)(Dragon);
