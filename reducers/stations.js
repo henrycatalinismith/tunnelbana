@@ -26,21 +26,35 @@ export const reducer = createReducer(new Immutable.Map(), {
     );
   },
 
-  [actions.SELECT_STATION](state, action) {
-    return state.setIn([action.id, "isSelected"], true);
+  [actions.DRAGON_GRAB](state, action) {
+    if (action.entity !== "station") return state;
+    return state.update(action.id, station => {
+      return station.merge(
+        Immutable.fromJS({
+          isSelected: true
+        })
+      );
+    });
   },
 
-  [actions.DESELECT_STATION](state, action) {
-    return state.setIn([action.id, "isSelected"], false);
-  },
-
-  [actions.MOVE_STATION](state, action) {
-    return state.update(action.stationId, station => {
-      console.log(action);
+  [actions.DRAGON_MOVE](state, action) {
+    if (action.entity !== "station") return state;
+    return state.update(action.id, station => {
       return station.merge(
         Immutable.fromJS({
           x: action.x,
           y: action.y
+        })
+      );
+    });
+  },
+
+  [actions.DRAGON_DROP](state, action) {
+    if (action.entity !== "station") return state;
+    return state.update(action.id, station => {
+      return station.merge(
+        Immutable.fromJS({
+          isSelected: false
         })
       );
     });

@@ -11,9 +11,7 @@ export class Terminal extends React.Component {
     station: PropTypes.object,
     terminal: PropTypes.object,
     line: PropTypes.object,
-    selectTerminal: PropTypes.func,
-    deselectTerminal: PropTypes.func,
-    moveTerminal: PropTypes.func
+    selectTerminal: PropTypes.func
   };
 
   static defaultProps = {
@@ -22,44 +20,11 @@ export class Terminal extends React.Component {
 
   constructor() {
     super();
-    this.state = {
-      xStart: 0,
-      yStart: 0,
-      xOffset: 0,
-      yOffset: 0
-    };
     this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseMove = this.onMouseMove.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
   }
 
   onMouseDown(event) {
     this.props.selectTerminal(this.props.terminal.get("id"));
-  }
-
-  onMouseMove(event) {
-    const xOffset = event.screenX - this.state.xStart;
-    const yOffset = event.screenY - this.state.yStart;
-
-    this.setState({ xOffset, yOffset });
-    this.props.moveTerminal(
-      this.props.terminal.get("id"),
-      xOffset + this.props.station.get("x"),
-      yOffset + this.props.station.get("y")
-    );
-  }
-
-  onMouseUp(event) {
-    this.props.deselectTerminal({
-      terminalId: this.props.terminal.get("id"),
-      connectionId: this.props.connection.get("id"),
-      lineId: this.props.line.get("id"),
-      stationId: this.props.station.get("id")
-    });
-    this.setState({
-      xOffset: 0,
-      yOffset: 0
-    });
   }
 
   render() {
@@ -95,9 +60,6 @@ export class Terminal extends React.Component {
       [topRight.x, topRight.y].join(",")
     ].join(" ");
 
-    //const onMouseMove = terminal.isSelected && this.onMouseMove;
-    const onMouseUp = terminal.isSelected && this.onMouseUp;
-
     // stick a huge transparent border around it while it's selected so that
     // the user doesn't accidentally mouseout the polygon because of the slight
     // redux/svg lag
@@ -113,8 +75,6 @@ export class Terminal extends React.Component {
           x={bottom.x - 5}
           y={bottom.y - 25}
           onMouseDown={this.onMouseDown}
-          onMouseOut={onMouseUp}
-          onMouseUp={onMouseUp}
         />
       </g>
     );
@@ -134,8 +94,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectTerminal: id => dispatch(actions.dragonGrab("terminal", id)),
-    deselectTerminal: id => dispatch(actions.dragonDrop("terminal", id))
+    selectTerminal: id => dispatch(actions.dragonGrab("terminal", id))
   };
 };
 
