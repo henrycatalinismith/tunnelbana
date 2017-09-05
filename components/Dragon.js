@@ -19,6 +19,8 @@ export class Dragon extends React.Component {
           cy={dragon.y}
           r={0}
         />
+
+        <use xlinkHref={`#${dragon.id}`} />
       </g>
     );
   }
