@@ -8,6 +8,11 @@ import {
 } from "./connections";
 
 import {
+  reducer as dragonReducer,
+  selectors as dragonSelectors
+} from "./dragon";
+
+import {
   reducer as journeysReducer,
   selectors as journeySelectors
 } from "./journeys";
@@ -40,6 +45,7 @@ import middlewares from "../middlewares";
 
 const reducer = combineReducers({
   connections: connectionsReducer,
+  dragon: dragonReducer,
   journeys: journeysReducer,
   lines: linesReducer,
   map: mapReducer,
@@ -51,6 +57,7 @@ const reducer = combineReducers({
 
 const selectors = {
   connections: connectionSelectors,
+  dragon: dragonSelectors,
   journeys: journeySelectors,
   lines: lineSelectors,
   map: mapSelectors,

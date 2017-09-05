@@ -29,6 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
     TweenMax.pauseAll(true, true);
   });
 
+  let throttle = false;
+  window.addEventListener("mousemove", event => {
+    if (!throttle) {
+      store.dispatch(actions.moveDragon(event.clientX, event.clientY));
+      throttle = true;
+      setTimeout(() => (throttle = false), 500);
+    }
+  });
+
   window.addEventListener("focus", () => {
     store.dispatch(actions.windowFocus());
     clock.resume();
