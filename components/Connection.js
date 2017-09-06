@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Terminal from "./Terminal";
+import Track from "./Track";
 import { connect } from "react-redux";
 import { select } from "../reducers";
 
@@ -81,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
       .byLineAndStation(lineId, destinationId),
     tracks: select("tracks")
       .from(state)
-      .byConnectionId(ownProps.connection.get("id"))
+      .forRenderingConnection(ownProps.connection.get("id"))
   };
 };
 

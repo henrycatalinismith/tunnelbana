@@ -118,10 +118,6 @@ export default function(store) {
             addTrack(source, a, source.id, destination.id, 0);
             addTrack(a, b, source.id, destination.id, 1);
             addTrack(b, destination, source.id, destination.id, 2);
-
-            addTrack(destination, b, destination.id, source.id, 0);
-            addTrack(b, a, destination.id, source.id, 1);
-            addTrack(a, source, destination.id, source.id, 2);
           }
 
           if (type === "longitudinal") {
@@ -133,10 +129,6 @@ export default function(store) {
             addTrack(source, a, source.id, destination.id, 0);
             addTrack(a, b, source.id, destination.id, 1);
             addTrack(b, destination, source.id, destination.id, 2);
-
-            addTrack(destination, b, destination.id, source.id, 0);
-            addTrack(b, a, destination.id, source.id, 1);
-            addTrack(a, source, destination.id, source.id, 2);
           }
         }
 
