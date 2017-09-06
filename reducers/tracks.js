@@ -45,14 +45,9 @@ export const selectors = {
     return state.filter(t => t.get("connectionId") === connectionId).toList();
   },
 
-  forJourney(state, journey) {
-    return state
-      .filter(
-        track =>
-          track.get("connectionId") === journey.connectionId &&
-          track.get("sourceId") === journey.sourceId &&
-          track.get("destinationId") === journey.destinationId
-      )
+  forRenderingConnection(state, connectionId) {
+    return selectors
+      .byConnectionId(state, connectionId)
       .toList()
       .sort((a, b) => {
         const aOrdinality = a.get("ordinality");
@@ -65,5 +60,61 @@ export const selectors = {
           return -1;
         }
       });
+  },
+
+  forJourney(state, journey) {
+    const forwardsTracks = state.filter(
+      track =>
+        track.get("connectionId") === journey.connectionId &&
+        track.get("sourceId") === journey.sourceId &&
+        track.get("destinationId") === journey.destinationId
+    );
+    if (forwardsTracks.size) {
+      return forwardsTracks.toList().sort((a, b) => {
+        const aOrdinality = a.get("ordinality");
+        const bOrdinality = b.get("ordinality");
+        if (aOrdinality === bOrdinality) {
+          return 0;
+        } else if (aOrdinality > bOrdinality) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    }
+
+    const backwardsTracks = state.filter(
+      track =>
+        track.get("connectionId") === journey.connectionId &&
+        track.get("sourceId") === journey.destinationId &&
+        track.get("destinationId") === journey.sourceId
+    );
+    if (backwardsTracks.size) {
+      return backwardsTracks
+        .toList()
+        .map(track =>
+          track.merge(
+            Immutable.fromJS({
+              x1: track.get("x2"),
+              y1: track.get("y2"),
+              x2: track.get("x1"),
+              y2: track.get("y1")
+            })
+          )
+        )
+        .sort((a, b) => {
+          const aOrdinality = a.get("ordinality");
+          const bOrdinality = b.get("ordinality");
+          if (aOrdinality === bOrdinality) {
+            return 0;
+          } else if (aOrdinality > bOrdinality) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
+    }
+
+    return new Immutable.List();
   }
 };
