@@ -75,282 +75,23 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     store.dispatch(
       actions.addLine({
-        id: "Red",
-        color: "#ff0000"
-      })
-    );
-
-    store.dispatch(
-      actions.addLine({
-        id: "Green",
-        color: "#00c600"
-      })
-    );
-
-    store.dispatch(
-      actions.addLine({
-        id: "Blue",
-        color: "#0273ff"
-      })
-    );
-
-    store.dispatch(
-      actions.addLine({
         id: "Special",
         color: "Gold"
       })
     );
 
     store.dispatch(
-      actions.addStation({
-        id: "T-Centralen",
-        x: 300,
-        y: 300
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Kungstradgarden",
-        x: 350,
-        y: 300
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Radhuset",
-        x: 250,
-        y: 300
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Fridhemsplan",
-        x: 200,
-        y: 300
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Stadshagen",
-        x: 150,
-        y: 250
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "VastraSkogen",
-        x: 100,
-        y: 200
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "SolnaStation",
-        x: 120,
-        y: 100
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "GamlaStan",
-        x: 300,
-        y: 350
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Slussen",
-        x: 300,
-        y: 400
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Mariatorget",
-        x: 250,
-        y: 420
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Zinkensdamm",
-        x: 200,
-        y: 420
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Hornstull",
-        x: 150,
-        y: 450
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Medborgarplatsen",
-        x: 300,
-        y: 450
-      })
-    );
-
-    store.dispatch(
-      actions.addStation({
-        id: "Skanstull",
-        x: 350,
-        y: 500
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "T-Centralen",
-        destinationId: "Kungstradgarden",
-        lineId: "Blue"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "T-Centralen",
-        destinationId: "Radhuset",
-        lineId: "Blue"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "Radhuset",
-        destinationId: "Fridhemsplan",
-        lineId: "Blue"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "Fridhemsplan",
-        destinationId: "Stadshagen",
-        lineId: "Blue"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "Stadshagen",
-        destinationId: "VastraSkogen",
-        lineId: "Blue"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "VastraSkogen",
-        destinationId: "SolnaStation",
-        lineId: "Blue"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "T-Centralen",
-        destinationId: "GamlaStan",
-        lineId: "Red"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "GamlaStan",
-        destinationId: "Slussen",
-        lineId: "Red"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "Slussen",
-        destinationId: "Mariatorget",
-        lineId: "Red"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "Mariatorget",
-        destinationId: "Zinkensdamm",
-        lineId: "Red"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "Zinkensdamm",
-        destinationId: "Hornstull",
-        lineId: "Red"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "Slussen",
-        destinationId: "Medborgarplatsen",
-        lineId: "Green"
-      })
-    );
-
-    store.dispatch(
-      actions.addConnection({
-        id: uuid(),
-        sourceId: "Medborgarplatsen",
-        destinationId: "Skanstull",
-        lineId: "Green"
+      actions.addLine({
+        id: "Riverside",
+        color: "#0273ff"
       })
     );
 
     store.dispatch(
       actions.addTrain({
         id: "Thomas",
-        stationId: "T-Centralen",
-        lineId: "Red"
-      })
-    );
-
-    store.dispatch(
-      actions.addTrain({
-        id: "Henry",
-        stationId: "Medborgarplatsen",
-        lineId: "Green"
-      })
-    );
-
-    store.dispatch(
-      actions.addTrain({
-        id: "Edward",
         stationId: "Kungstradgarden",
-        lineId: "Blue"
+        lineId: "Riverside"
       })
     );
 
@@ -359,54 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
         id: "Gordon",
         stationId: "Kungstradgarden",
         lineId: "Special"
-      })
-    );
-
-    store.dispatch(
-      actions.departure({
-        id: uuid(),
-        trainId: "Thomas",
-        sourceId: "T-Centralen",
-        destinationId: "GamlaStan",
-        lineId: "Red",
-        connectionId: getConnection(
-          store.getState().get("connections"),
-          "Red",
-          "T-Centralen",
-          "GamlaStan"
-        ).id
-      })
-    );
-
-    store.dispatch(
-      actions.departure({
-        id: uuid(),
-        trainId: "Henry",
-        sourceId: "Medborgarplatsen",
-        destinationId: "Skanstull",
-        lineId: "Green",
-        connectionId: getConnection(
-          store.getState().get("connections"),
-          "Green",
-          "Medborgarplatsen",
-          "Skanstull"
-        ).id
-      })
-    );
-
-    store.dispatch(
-      actions.departure({
-        id: uuid(),
-        trainId: "Edward",
-        sourceId: "Kungstradgarden",
-        destinationId: "T-Centralen",
-        lineId: "Blue",
-        connectionId: getConnection(
-          store.getState().get("connections"),
-          "Blue",
-          "Kungstradgarden",
-          "T-Centralen"
-        ).id
       })
     );
 
@@ -422,7 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const center = { x: 300, y: 300 };
     let firstId = null,
-      lastId = null;
+      lastId = null,
+      blue1 = null,
+      blue2 = null;
     points(center, 250, 10).map((point, i) => {
       let id = uuid();
       store.dispatch(
@@ -457,8 +152,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (firstId === null) {
         firstId = id;
       }
+      if (i === 0) blue1 = id;
+      if (i === 5) blue2 = id;
       lastId = id;
     });
+
+    store.dispatch(
+      actions.addConnection({
+        id: uuid(),
+        sourceId: blue1,
+        destinationId: blue2,
+        lineId: "Riverside"
+      })
+    );
 
     store.dispatch(
       actions.departure({
@@ -472,6 +178,22 @@ document.addEventListener("DOMContentLoaded", () => {
           "Special",
           firstId,
           lastId
+        ).id
+      })
+    );
+
+    store.dispatch(
+      actions.departure({
+        id: uuid(),
+        trainId: "Thomas",
+        sourceId: blue1,
+        destinationId: blue2,
+        lineId: "Riverside",
+        connectionId: getConnection(
+          store.getState().get("connections"),
+          "Riverside",
+          blue1,
+          blue2
         ).id
       })
     );
