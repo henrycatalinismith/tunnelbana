@@ -16,9 +16,7 @@ export class Passenger extends React.Component {
 
     return (
       <g className="passenger" id={id}>
-        <text x={this.props.x} y={this.props.y} fontSize={10}>
-          ❤️
-        </text>
+        <circle cx={this.props.x} cy={this.props.y} r={5} />
       </g>
     );
   }
