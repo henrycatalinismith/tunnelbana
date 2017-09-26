@@ -9,13 +9,28 @@ export default function(store) {
     switch (action.type) {
       case actions.ARRIVAL:
         const state = store.getState();
-        const passengers = select("passengers")
+        const platformPassengers = select("passengers")
           .from(state)
           .byStationId(action.journey.destinationId);
+        const trainPassengers = select("passengers")
+          .from(state)
+          .byTrainId(action.journey.trainId);
 
-        if (passengers.size > 0) {
+        if (platformPassengers.size > 0) {
           store.dispatch(
-            actions.board(passengers.first().get("id"), action.journey.trainId)
+            actions.board(
+              platformPassengers.first().get("id"),
+              action.journey.trainId
+            )
+          );
+        }
+
+        if (trainPassengers.size > 0) {
+          store.dispatch(
+            actions.alight(
+              trainPassengers.first().get("id"),
+              action.journey.destinationId
+            )
           );
         }
         break;
