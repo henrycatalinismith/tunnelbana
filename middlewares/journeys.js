@@ -50,7 +50,8 @@ export default function(store) {
 
         const width = 15;
         const height = 30;
-        const halfTrain = { x: 0 - height / 2, y: 0 - width / 2 };
+        //const halfTrain = { x: 0 - height / 2, y: 0 - width / 2 };
+        const halfTrain = { x: 0, y: 0 };
         let from = points.add(source, halfTrain);
         let to = points.add(destination, halfTrain);
 
@@ -64,10 +65,10 @@ export default function(store) {
         let degrees = angle * 180 / Math.PI;
 
         if (tracks.length === 1) {
-          TweenLite.to(`#${train.id}`, 0.1, {
-            rotation: degrees,
-            svgOrigin: `${source.x} ${source.y}`
-          });
+          //TweenLite.to(`#${train.id}`, 0.1, {
+          //rotation: degrees,
+          //svgOrigin: `${source.x} ${source.y}`
+          //});
           TweenLite.fromTo(`#${train.id}`, time / 1000, from, to);
         } else {
           let prevAngle = 0;
@@ -97,12 +98,12 @@ export default function(store) {
             const needsTurn = turnAngle !== 180;
 
             //tl.to(`#${train.id}`, 0.001, points.add(from, halfTrain));
-            tweens.push(
-              TweenMax.to(`#${train.id}`, 0.01, {
-                rotation: degrees,
-                delay: time / 1000 / 3 * i
-              })
-            );
+            //tweens.push(
+            //TweenMax.to(`#${train.id}`, 0.01, {
+            //rotation: degrees,
+            //delay: time / 1000 / 3 * i
+            //})
+            //);
             tweens.push(
               TweenMax.fromTo(`#${train.id}`, time / 1000 / 3, from, {
                 ...to,
@@ -152,7 +153,7 @@ export default function(store) {
               lineId: action.journey.lineId
             })
           );
-        }, 300);
+        }, 1000);
         break;
     }
 
