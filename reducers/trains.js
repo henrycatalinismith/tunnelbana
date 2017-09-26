@@ -15,10 +15,12 @@ export const reducer = createReducer(new Immutable.Map(), {
   },
 
   [actions.DEPARTURE](state, action) {
-    return state.setIn(
-      [action.journey.trainId, "journeyId"],
-      action.journey.id
-    );
+    return state.updateIn([action.journey.trainId], t => {
+      return t.merge({
+        journeyId: action.journey.id,
+        stationId: undefined
+      });
+    });
   },
 
   [actions.ARRIVAL](state, action) {
