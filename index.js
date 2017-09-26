@@ -277,5 +277,12 @@ document.addEventListener("DOMContentLoaded", () => {
         ).id
       })
     );
+
+    store.dispatch(
+      actions.addPassenger({
+        id: uuid(),
+        stationId: blue1
+      })
+    );
   }
 });
