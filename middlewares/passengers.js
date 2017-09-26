@@ -15,10 +15,7 @@ export default function(store) {
 
         if (passengers.size > 0) {
           store.dispatch(
-            actions.board(
-              passengers.first().get("id"),
-              action.journey.destinationId
-            )
+            actions.board(passengers.first().get("id"), action.journey.trainId)
           );
         }
         break;
