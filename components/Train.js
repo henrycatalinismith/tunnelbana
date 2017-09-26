@@ -13,11 +13,19 @@ export class Train extends React.Component {
     const { train } = this.props;
     const width = 30;
     const height = 15;
-    return (
-      <g className="train" id={train.get("id")}>
-        <rect width={width} height={height} fill="gray" />
-      </g>
-    );
+    if (this.props.station) {
+      const x = this.props.station.get("x");
+      const y = this.props.station.get("y");
+      return <circle cx={x} cy={y} r={20} fill="gray" />;
+    } else if (this.props.journey) {
+      return (
+        <g className="train" id={train.get("id")}>
+          <circle r={10} fill="gray" />
+        </g>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
