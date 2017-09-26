@@ -43,8 +43,8 @@ export class Station extends React.Component {
             <Passenger
               key={`passenger-${i}`}
               passenger={passenger}
-              x={x + 15}
-              y={y + 0}
+              x={x + 20}
+              y={y - 5}
             />
           );
         })}
