@@ -14,11 +14,11 @@ describe("stations", () => {
       const newState = reducer(state, action);
 
       expect(newState.toJS()).toEqual({
-        Medborgarplatsen: {
+        Medborgarplatsen: expect.objectContaining({
           id: "Medborgarplatsen",
           x: 10,
           y: 40
-        }
+        })
       });
     });
   });
