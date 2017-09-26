@@ -9,10 +9,11 @@ export function addPassenger(passenger) {
   };
 }
 
-export function alight(passengerId, trainId) {
+export function alight(passengerId, stationId) {
   return {
     type: ALIGHT,
-    passengerId
+    passengerId,
+    stationId
   };
 }
 
