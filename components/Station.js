@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { select } from "../reducers";
 import actions from "../actions";
+import Passenger from "./Passenger";
 
 export class Station extends React.Component {
   static propTypes = {
     station: PropTypes.object,
+    passengers: PropTypes.object,
     selectStation: PropTypes.func,
     deselectStation: PropTypes.func
   };
@@ -35,13 +38,28 @@ export class Station extends React.Component {
           fill="white"
           onMouseDown={this.onMouseDown}
         />
+        {this.props.passengers.map((passenger, i) => {
+          return (
+            <Passenger
+              key={`passenger-${i}`}
+              passenger={passenger}
+              x={x + 15}
+              y={y + 0}
+            />
+          );
+        })}
       </g>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {};
+const mapStateToProps = (state, ownProps) => {
+  const stationId = ownProps.station.get("id");
+  return {
+    passengers: select("passengers")
+      .from(state)
+      .byStationId(stationId)
+  };
 };
 
 const mapDispatchToProps = dispatch => {
