@@ -8,7 +8,8 @@ export const reducer = createReducer(new Immutable.Map(), {
       action.passenger.id,
       Immutable.fromJS({
         id: action.passenger.id,
-        stationId: action.passenger.stationId
+        stationId: action.passenger.stationId,
+        trainId: undefined
       })
     );
   },
@@ -36,5 +37,13 @@ export const selectors = {
 
   byStationId(state, stationId) {
     return state.filter(t => t.get("stationId") === stationId).toList();
+  },
+
+  byTrainId(state, trainId) {
+    return state
+      .filter(t => {
+        return t.get("trainId") === trainId;
+      })
+      .toList();
   }
 };
