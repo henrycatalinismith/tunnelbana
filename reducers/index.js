@@ -22,6 +22,13 @@ import { reducer as linesReducer, selectors as lineSelectors } from "./lines";
 import { reducer as mapReducer, selectors as mapSelectors } from "./map";
 
 import {
+  reducer as passengersReducer,
+  selectors as passengerSelectors
+} from "./passengers";
+
+console.log(passengerSelectors);
+
+import {
   reducer as stationsReducer,
   selectors as stationSelectors
 } from "./stations";
@@ -49,6 +56,7 @@ const reducer = combineReducers({
   journeys: journeysReducer,
   lines: linesReducer,
   map: mapReducer,
+  passengers: passengersReducer,
   stations: stationsReducer,
   terminals: terminalsReducer,
   tracks: tracksReducer,
@@ -61,6 +69,7 @@ const selectors = {
   journeys: journeySelectors,
   lines: lineSelectors,
   map: mapSelectors,
+  passengers: passengerSelectors,
   stations: stationSelectors,
   terminals: terminalSelectors,
   tracks: trackSelectors,
