@@ -15,14 +15,13 @@ describe("connections", () => {
       const newState = reducer(state, action);
 
       expect(newState.toJS()).toEqual({
-        "Norr Mälarstrand": {
+        "Norr Mälarstrand": expect.objectContaining({
           id: "Norr Mälarstrand",
           sourceId: "T-Centralen",
           destinationId: "Rådhuset",
           lineId: "Blue",
-          terminalId: undefined,
-          tracks: []
-        }
+          terminalId: undefined
+        })
       });
     });
   });
