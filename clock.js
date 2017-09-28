@@ -17,6 +17,8 @@ class Clock {
   }
 
   pause() {
+    // hahahahahahahahahahahahaha sometimes i remember i actually bloody did this
+    // and this is actually how im implementing pause in this thing and lolololol
     for (var id in this.timeouts) {
       this.timeouts[id].pause();
     }
