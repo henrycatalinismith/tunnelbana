@@ -12,7 +12,6 @@ export class Passenger extends React.Component {
 
   render() {
     const id = this.props.passenger.get("id");
-    console.log(this.props.x);
 
     return (
       <g className="passenger" id={id}>
