@@ -11,9 +11,9 @@ const middleware = createMiddleware((before, after) => ({
   [after(actions.ADD_CONNECTION)]: tracks.addTracks,
   [after(actions.ADD_CONNECTION)]: terminals.addTerminal,
 
-  [after(actions.DEPARTURE)]: journeys.animateJourney,
-  [after(actions.ARRIVAL)]: passengers.alightTrains,
-  [after(actions.ARRIVAL)]: passengers.boardTrains,
+  [after(actions.DEPARTURE)]: journeys.animateJourneyAfterDeparture,
+  [after(actions.ARRIVAL)]: passengers.alightTrainsAfterArrival,
+  [after(actions.ARRIVAL)]: passengers.boardTrainsAfterArrival,
   [after(actions.ARRIVAL)]: journeys.scheduleDeparture
 }));
 
