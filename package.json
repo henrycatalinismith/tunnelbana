@@ -25,6 +25,7 @@
     "redux-immutable": "^4.0.0",
     "redux-mock-store": "^1.2.3",
     "regenerator-runtime": "^0.11.0",
+    "signalbox": "^1.0.0",
     "uuid": "^3.1.0",
     "webpack": "^3.5.5",
     "webpack-dashboard": "^0.4.0",
@@ -36,7 +37,10 @@
     "prettier": "^1.6.1"
   },
   "lint-staged": {
-    "*.js": ["prettier --write", "git add"]
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "scripts": {
     "start": "webpack-dev-server --disable-host-check",
