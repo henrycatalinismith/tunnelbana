@@ -3,7 +3,7 @@ import actions from "../actions";
 import { select } from "../reducers";
 import * as points from "../geometry/points";
 
-export function addTracks(store, { connection }) {
+export function addTracksForNewConnection(store, { connection }) {
   const { lineId, sourceId, destinationId } = connection;
   const state = store.getState();
   const connections = store.getState().get("connections");

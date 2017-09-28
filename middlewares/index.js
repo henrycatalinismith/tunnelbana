@@ -8,8 +8,8 @@ import * as tracks from "./tracks";
 
 const middleware = createMiddleware((before, after) => ({
   [before(actions.DRAGON_MOVE)]: dragon.injectEntity,
-  [after(actions.ADD_CONNECTION)]: tracks.addTracks,
-  [after(actions.ADD_CONNECTION)]: terminals.addTerminal,
+  [after(actions.ADD_CONNECTION)]: tracks.addTracksForNewConnection,
+  [after(actions.ADD_CONNECTION)]: terminals.addTerminalForNewConnection,
 
   [after(actions.DEPARTURE)]: journeys.animateJourneyAfterDeparture,
   [after(actions.ARRIVAL)]: passengers.alightTrainsAfterArrival,
