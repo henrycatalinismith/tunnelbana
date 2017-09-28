@@ -1,7 +1,7 @@
 {
   "name": "signalbox",
   "version": "1.0.0",
-  "description": "Redux selector syntactical sugar",
+  "description": "Redux middleware syntactical sugar",
   "main": "index.js",
   "repository": {
     "type": "git",
