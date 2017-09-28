@@ -37,7 +37,6 @@ export const reducer = createReducer(new Immutable.Map(), {
 
   [actions.SELECT_TERMINAL](state, action) {
     const terminalId = action.terminalId;
-    console.log(action);
     return state.setIn([terminalId, "isSelected"], true);
   },
 

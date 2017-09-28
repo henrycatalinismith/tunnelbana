@@ -26,8 +26,6 @@ import {
   selectors as passengerSelectors
 } from "./passengers";
 
-console.log(passengerSelectors);
-
 import {
   reducer as stationsReducer,
   selectors as stationSelectors
