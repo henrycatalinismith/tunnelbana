@@ -1,0 +1,26 @@
+{
+  "name": "signalbox",
+  "version": "1.0.0",
+  "description": "Redux selector syntactical sugar",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hnrysmth/signalbox.git"
+  },
+  "keywords": [
+    "redux",
+    "middleware"
+  ],
+  "author": "Henry Smith <henry@henrysmith.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hnrysmth/signalbox/issues"
+  },
+  "homepage": "https://github.com/hnrysmth/signalbox#readme",
+  "engines": {
+    "node": ">=8.4.0"
+  },
+  "dependencies": {
+    "redux": "^3.7.2"
+  }
+}
