@@ -2,7 +2,7 @@ import uuid from "uuid/v1";
 import actions from "../actions";
 import { select } from "../reducers";
 
-export function addTerminal(store, { connection }) {
+export function addTerminalForNewConnection(store, { connection }) {
   const { lineId, sourceId, destinationId } = connection;
 
   const state = store.getState();
