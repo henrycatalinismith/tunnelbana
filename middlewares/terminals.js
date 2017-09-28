@@ -2,8 +2,8 @@ import uuid from "uuid/v1";
 import actions from "../actions";
 import { select } from "../reducers";
 
-export function addTerminal(store, action) {
-  const { lineId, sourceId, destinationId } = action.connection;
+export function addTerminal(store, { connection }) {
+  const { lineId, sourceId, destinationId } = connection;
 
   const state = store.getState();
   const connections = state.get("connections");
@@ -28,9 +28,9 @@ export function addTerminal(store, action) {
     store.dispatch(
       actions.addTerminal({
         id: uuid(),
-        connectionId: action.connection.id,
+        connectionId: connection.id,
         lineId,
-        stationId: action.connection.sourceId,
+        stationId: connection.sourceId,
         x: source.x,
         y: source.y
       })
@@ -39,9 +39,9 @@ export function addTerminal(store, action) {
     store.dispatch(
       actions.addTerminal({
         id: uuid(),
-        connectionId: action.connection.id,
+        connectionId: connection.id,
         lineId,
-        stationId: action.connection.destinationId,
+        stationId: connection.destinationId,
         x: destination.x,
         y: destination.y
       })

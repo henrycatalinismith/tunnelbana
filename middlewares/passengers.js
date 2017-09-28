@@ -2,34 +2,28 @@ import uuid from "uuid/v1";
 import actions from "../actions";
 import { select } from "../reducers";
 
-export function alightTrains(store, action) {
+export function alightTrainsAfterArrival(store, { journey }) {
   const state = store.getState();
   const trainPassengers = select("passengers")
     .from(state)
-    .byTrainId(action.journey.trainId);
+    .byTrainId(journey.trainId);
 
   if (trainPassengers.size > 0) {
     store.dispatch(
-      actions.alight(
-        trainPassengers.first().get("id"),
-        action.journey.destinationId
-      )
+      actions.alight(trainPassengers.first().get("id"), journey.destinationId)
     );
   }
 }
 
-export function boardTrains(store, action) {
+export function boardTrainsAfterArrival(store, { journey }) {
   const state = store.getState();
   const platformPassengers = select("passengers")
     .from(state)
-    .byStationId(action.journey.destinationId);
+    .byStationId(journey.destinationId);
 
   if (platformPassengers.size > 0) {
     store.dispatch(
-      actions.board(
-        platformPassengers.first().get("id"),
-        action.journey.trainId
-      )
+      actions.board(platformPassengers.first().get("id"), journey.trainId)
     );
   }
 }
