@@ -3,8 +3,8 @@ import actions from "../actions";
 import { select } from "../reducers";
 import * as points from "../geometry/points";
 
-export function addTracks(store, action) {
-  const { lineId, sourceId, destinationId } = action.connection;
+export function addTracks(store, { connection }) {
+  const { lineId, sourceId, destinationId } = connection;
   const state = store.getState();
   const connections = store.getState().get("connections");
   const stations = store.getState().get("stations");
@@ -51,10 +51,10 @@ export function addTracks(store, action) {
     store.dispatch(
       actions.addTrack({
         id: uuid(),
-        connectionId: action.connection.id,
+        connectionId: connection.id,
         lineId,
-        sourceId: action.connection.sourceId,
-        destinationId: action.connection.destinationId,
+        sourceId: connection.sourceId,
+        destinationId: connection.destinationId,
         ordinality: 0,
         x1: source.x,
         y1: source.y,
@@ -66,10 +66,10 @@ export function addTracks(store, action) {
     store.dispatch(
       actions.addTrack({
         id: uuid(),
-        connectionId: action.connection.id,
+        connectionId: connection.id,
         lineId,
-        sourceId: action.connection.destinationId,
-        destinationId: action.connection.sourceId,
+        sourceId: connection.destinationId,
+        destinationId: connection.sourceId,
         ordinality: 0,
         x1: destination.x,
         y1: destination.y,
@@ -84,7 +84,7 @@ export function addTracks(store, action) {
       store.dispatch(
         actions.addTrack({
           id: uuid(),
-          connectionId: action.connection.id,
+          connectionId: connection.id,
           lineId,
           sourceId,
           destinationId,

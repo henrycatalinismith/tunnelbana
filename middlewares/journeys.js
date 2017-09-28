@@ -14,36 +14,38 @@ import { train } from "../reducers/trains";
 import clock from "../clock";
 import * as points from "../geometry/points";
 
-export function animateJourney(store, action) {
+export function animateJourneyAfterDeparture(store, { journey }) {
   const state = store.getState();
 
   const train = select("trains")
     .from(state)
-    .byId(action.journey.trainId)
+    .byId(journey.trainId)
     .toJS();
 
   const source = select("stations")
     .from(state)
-    .byId(action.journey.sourceId)
+    .byId(journey.sourceId)
     .toJS();
 
   const destination = select("stations")
     .from(state)
-    .byId(action.journey.destinationId)
+    .byId(journey.destinationId)
     .toJS();
 
   const line = select("lines")
     .from(state)
-    .byId(action.journey.lineId)
+    .byId(journey.lineId)
     .toJS();
 
-  const journey = select("journeys")
+  // what the hell have i done here omg this is a mess
+  journey = select("journeys")
     .from(state)
     .byId(train.journeyId)
     .toJS();
+
   const tracks = select("tracks")
     .from(state)
-    .forJourney(action.journey)
+    .forJourney(journey)
     .toJS();
 
   const width = 15;
@@ -130,25 +132,21 @@ export function animateJourney(store, action) {
   }, time);
 }
 
-export function scheduleDeparture(store, action) {
+export function scheduleDeparture(store, { journey }) {
   const state = store.getState();
   const { connectionId, destinationId } = select("connections")
     .from(state)
-    .forNextStop(
-      action.journey.sourceId,
-      action.journey.destinationId,
-      action.journey.lineId
-    );
+    .forNextStop(journey.sourceId, journey.destinationId, journey.lineId);
 
   clock.setTimeout(() => {
     store.dispatch(
       actions.departure({
         id: uuid(),
-        sourceId: action.journey.destinationId,
+        sourceId: journey.destinationId,
         destinationId: destinationId,
         connectionId: connectionId,
-        trainId: action.journey.trainId,
-        lineId: action.journey.lineId
+        trainId: journey.trainId,
+        lineId: journey.lineId
       })
     );
   }, 1000);
