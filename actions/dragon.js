@@ -1,5 +1,6 @@
 export const DRAGON_GRAB = "DRAGON_GRAB";
 export const DRAGON_MOVE = "DRAGON_MOVE";
+export const DRAGON_MOVE_STATION = "DRAGON_MOVE_STATION";
 export const DRAGON_DROP = "DRAGON_DROP";
 
 export function dragonGrab(entity, id) {
@@ -15,6 +16,15 @@ export function dragonMove(x, y) {
     type: DRAGON_MOVE,
     x,
     y
+  };
+}
+
+export function dragonMoveStation(x, y, id) {
+  return {
+    type: DRAGON_MOVE_STATION,
+    x,
+    y,
+    id
   };
 }
 
