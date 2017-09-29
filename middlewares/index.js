@@ -6,8 +6,8 @@ import * as passengers from "./passengers";
 import * as terminals from "./terminals";
 import * as tracks from "./tracks";
 
-const middleware = createMiddleware((before, after) => ({
-  [before(actions.DRAGON_MOVE)]: dragon.injectEntity,
+const middleware = createMiddleware((before, after, cancel) => ({
+  [cancel(actions.DRAGON_MOVE)]: dragon.redispatchMoreSpecificMove,
   [after(actions.ADD_CONNECTION)]: tracks.addTracksForNewConnection,
   [after(actions.ADD_CONNECTION)]: terminals.addTerminalForNewConnection,
 

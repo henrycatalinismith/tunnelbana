@@ -21,9 +21,7 @@ export const reducer = createReducer(new Immutable.Map(), {
     );
   },
 
-  [actions.DRAGON_MOVE](state, action) {
-    if (action.entity !== "station") return state;
-
+  [actions.DRAGON_MOVE_STATION](state, action) {
     return state.filter(track => {
       const sourceId = track.get("sourceId");
       const destinationId = track.get("destinationId");
