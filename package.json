@@ -1,4 +1,11 @@
 {
+  "name": "energetic-headlight",
+  "version": "1.0.0",
+  "description": "Trains and whatever",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/railcar/energetic-headlight.git"
+  },
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^20.0.3",
