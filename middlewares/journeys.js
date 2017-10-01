@@ -23,7 +23,6 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       .from(state)
       .byId(action.journey.trainId)
       .toJS();
-    console.log(train);
 
     if (!action.journey.id) {
       action.journey.id = uuid();
@@ -45,8 +44,6 @@ export const middleware = createMiddleware((before, after, cancel) => ({
         action.journey.destinationId
       ).id;
     }
-
-    console.log(action.journey);
   },
 
   [after(actions.ARRIVAL)](store, { journey }) {
