@@ -7,6 +7,7 @@ import { select } from "../reducers";
 
 export class Connection extends React.Component {
   static propTypes = {
+    id: PropTypes.string,
     connection: PropTypes.object,
     line: PropTypes.object,
     source: PropTypes.object,
@@ -64,10 +65,19 @@ export class Connection extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const lineId = ownProps.connection.get("lineId");
-  const sourceId = ownProps.connection.get("sourceId");
-  const destinationId = ownProps.connection.get("destinationId");
+  const connection = select("connections")
+    .from(state)
+    .byId(ownProps.id);
+  const lineId = connection.get("lineId");
+  const line = select("lines")
+    .from(state)
+    .byId(lineId);
+  const sourceId = connection.get("sourceId");
+  const destinationId = connection.get("destinationId");
+
   return {
+    connection,
+    line,
     source: select("stations")
       .from(state)
       .byId(sourceId),
@@ -82,7 +92,7 @@ const mapStateToProps = (state, ownProps) => {
       .byLineAndStation(lineId, destinationId),
     tracks: select("tracks")
       .from(state)
-      .forRenderingConnection(ownProps.connection.get("id"))
+      .forRenderingConnection(connection.get("id"))
   };
 };
 

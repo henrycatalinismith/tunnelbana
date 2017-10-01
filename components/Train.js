@@ -6,6 +6,7 @@ import Passenger from "./Passenger";
 
 export class Train extends React.Component {
   static propTypes = {
+    id: PropTypes.string,
     passengers: PropTypes.object,
     station: PropTypes.object,
     train: PropTypes.object
@@ -36,16 +37,20 @@ export class Train extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const train = select("trains")
+    .from(state)
+    .byId(ownProps.id);
   return {
-    station: select("stations")
-      .from(state)
-      .byId(ownProps.train.get("stationId")),
+    train,
     journey: select("journeys")
       .from(state)
-      .byId(ownProps.train.get("journeyId")),
+      .byId(train.get("journeyId")),
     passengers: select("passengers")
       .from(state)
-      .byTrainId(ownProps.train.get("id"))
+      .byTrainId(ownProps.id),
+    station: select("stations")
+      .from(state)
+      .byId(train.get("stationId"))
   };
 };
 
