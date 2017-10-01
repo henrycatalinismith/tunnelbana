@@ -14,8 +14,41 @@ import { select } from "../reducers";
 import { train } from "../reducers/trains";
 import clock from "../clock";
 import * as points from "../geometry/points";
+import { getConnection } from "../reducers/connections";
 
 export const middleware = createMiddleware((before, after, cancel) => ({
+  [before(actions.DEPARTURE)](store, action) {
+    const state = store.getState();
+    const train = select("trains")
+      .from(state)
+      .byId(action.journey.trainId)
+      .toJS();
+    console.log(train);
+
+    if (!action.journey.id) {
+      action.journey.id = uuid();
+    }
+
+    if (!action.journey.lineId) {
+      action.journey.lineId = train.lineId;
+    }
+
+    if (!action.journey.sourceId) {
+      action.journey.sourceId = train.stationId;
+    }
+
+    if (!action.journey.connectionId) {
+      action.journey.connectionId = getConnection(
+        state.get("connections"),
+        action.journey.lineId,
+        action.journey.sourceId,
+        action.journey.destinationId
+      ).id;
+    }
+
+    console.log(action.journey);
+  },
+
   [after(actions.ARRIVAL)](store, { journey }) {
     const state = store.getState();
     const { connectionId, destinationId } = select("connections")

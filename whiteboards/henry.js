@@ -35,23 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
         color: "#ff00ff"
       })
     );
-
-    store.dispatch(
-      actions.addTrain({
-        id: "Thomas",
-        stationId: "Kungstradgarden",
-        lineId: "Riverside"
-      })
-    );
-
-    store.dispatch(
-      actions.addTrain({
-        id: "Gordon",
-        stationId: "Kungstradgarden",
-        lineId: "Circle"
-      })
-    );
-
     const π = Math.PI;
     const points = ({ x, y }, r, n) => {
       const angle = 2 * π / n;
@@ -134,82 +117,62 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     store.dispatch(
-      actions.departure({
-        id: uuid(),
-        trainId: "Gordon",
-        sourceId: lastId,
-        destinationId: firstId,
-        lineId: "Circle",
-        connectionId: getConnection(
-          store.getState().get("connections"),
-          "Circle",
-          lastId,
-          firstId
-        ).id
-      })
-    );
-
-    store.dispatch(
       actions.addTrain({
         id: "Henry",
-        stationId: links[0].fromId,
-        lineId: "Polar"
+        stationId: links[1].fromId,
+        lineId: links[1].lineId
       })
     );
 
     store.dispatch(
       actions.addTrain({
         id: "Dave",
-        stationId: links[2].fromID,
-        lineId: "Hogwarts"
+        stationId: links[2].fromId,
+        lineId: links[2].lineId
+      })
+    );
+
+    store.dispatch(
+      actions.addTrain({
+        id: "Gordon",
+        stationId: lastId,
+        lineId: "Circle"
+      })
+    );
+
+    store.dispatch(
+      actions.addTrain({
+        id: "Thomas",
+        stationId: blue1,
+        lineId: "Riverside"
       })
     );
 
     store.dispatch(
       actions.departure({
-        id: uuid(),
         trainId: "Henry",
-        sourceId: links[1].fromId,
-        destinationId: links[1].toId,
-        lineId: links[1].lineId,
-        connectionId: getConnection(
-          store.getState().get("connections"),
-          links[1].lineId,
-          links[1].fromId,
-          links[1].toId
-        ).id
+        destinationId: links[1].toId
       })
     );
 
     store.dispatch(
       actions.departure({
-        id: uuid(),
         trainId: "Dave",
-        sourceId: links[2].fromId,
-        destinationId: links[2].toId,
-        lineId: links[2].lineId,
-        connectionId: getConnection(
-          store.getState().get("connections"),
-          links[2].lineId,
-          links[2].fromId,
-          links[2].toId
-        ).id
+        destinationId: links[2].toId
       })
     );
 
     store.dispatch(
       actions.departure({
-        id: uuid(),
+        trainId: "Gordon",
+        destinationId: firstId
+      })
+    );
+
+    store.dispatch(
+      actions.departure({
         trainId: "Thomas",
-        sourceId: blue1,
-        destinationId: blue2,
-        lineId: "Riverside",
-        connectionId: getConnection(
-          store.getState().get("connections"),
-          "Riverside",
-          blue1,
-          blue2
-        ).id
+        destinationId: blue2
       })
     );
 
