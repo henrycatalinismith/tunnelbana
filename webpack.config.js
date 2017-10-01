@@ -1,7 +1,10 @@
+const os = require("os");
 const path = require("path");
 const Dashboard = require("webpack-dashboard");
 const DashboardPlugin = require("webpack-dashboard/plugin");
+
 const dashboard = new Dashboard();
+const username = os.userInfo().username;
 
 module.exports = {
   devServer: {
@@ -12,7 +15,7 @@ module.exports = {
     quiet: true,
     open: true
   },
-  entry: path.join(__dirname, "index.js"),
+  entry: path.join(__dirname, "whiteboards", `${username}.js`),
   module: {
     loaders: [
       {
