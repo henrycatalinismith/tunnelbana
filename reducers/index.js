@@ -19,8 +19,6 @@ import {
 
 import { reducer as linesReducer, selectors as lineSelectors } from "./lines";
 
-import { reducer as mapReducer, selectors as mapSelectors } from "./map";
-
 import {
   reducer as passengersReducer,
   selectors as passengerSelectors
@@ -46,6 +44,11 @@ import {
   selectors as trainSelectors
 } from "./trains";
 
+import {
+  reducer as viewboxReducer,
+  selectors as viewboxSelectors
+} from "./viewbox";
+
 import middlewares from "../middlewares";
 
 const reducer = combineReducers({
@@ -53,12 +56,12 @@ const reducer = combineReducers({
   dragon: dragonReducer,
   journeys: journeysReducer,
   lines: linesReducer,
-  map: mapReducer,
   passengers: passengersReducer,
   stations: stationsReducer,
   terminals: terminalsReducer,
   tracks: tracksReducer,
-  trains: trainsReducer
+  trains: trainsReducer,
+  viewbox: viewboxReducer
 });
 
 const selectors = {
@@ -66,12 +69,12 @@ const selectors = {
   dragon: dragonSelectors,
   journeys: journeySelectors,
   lines: lineSelectors,
-  map: mapSelectors,
   passengers: passengerSelectors,
   stations: stationSelectors,
   terminals: terminalSelectors,
   tracks: trackSelectors,
-  trains: trainSelectors
+  trains: trainSelectors,
+  viewbox: viewboxSelectors
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
