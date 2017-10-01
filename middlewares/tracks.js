@@ -5,6 +5,12 @@ import { select } from "../reducers";
 import * as points from "../geometry/points";
 
 export const middleware = createMiddleware((before, after, cancel) => ({
+  [before(actions.ADD_TRACK)](store, action) {
+    if (!action.track.id) {
+      action.track.id = uuid();
+    }
+  },
+
   [after(actions.ADD_CONNECTION)](store, { connection }) {
     const { lineId, sourceId, destinationId } = connection;
     const state = store.getState();
@@ -52,7 +58,6 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     if (Math.abs(secondaryDistance) < 0.000001) {
       store.dispatch(
         actions.addTrack({
-          id: uuid(),
           connectionId: connection.id,
           lineId,
           sourceId: connection.sourceId,
@@ -67,7 +72,6 @@ export const middleware = createMiddleware((before, after, cancel) => ({
 
       store.dispatch(
         actions.addTrack({
-          id: uuid(),
           connectionId: connection.id,
           lineId,
           sourceId: connection.destinationId,
@@ -85,7 +89,6 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       const addTrack = (p1, p2, sourceId, destinationId, ordinality) => {
         store.dispatch(
           actions.addTrack({
-            id: uuid(),
             connectionId: connection.id,
             lineId,
             sourceId,

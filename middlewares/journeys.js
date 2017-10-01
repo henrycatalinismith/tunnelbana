@@ -46,6 +46,15 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     }
   },
 
+  [before(actions.ARRIVAL)](store, action) {
+    const state = store.getState();
+    const journey = select("journeys")
+      .from(state)
+      .byId(action.journey.id)
+      .toJS();
+    action.journey = { ...action.journey, ...journey };
+  },
+
   [after(actions.ARRIVAL)](store, { journey }) {
     const state = store.getState();
     const { connectionId, destinationId } = select("connections")
@@ -55,12 +64,8 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     clock.setTimeout(() => {
       store.dispatch(
         actions.departure({
-          id: uuid(),
-          sourceId: journey.destinationId,
-          destinationId: destinationId,
-          connectionId: connectionId,
           trainId: journey.trainId,
-          lineId: journey.lineId
+          destinationId: destinationId
         })
       );
     }, 1000);
@@ -174,11 +179,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     clock.setTimeout(() => {
       store.dispatch(
         actions.arrival({
-          id: journey.id,
-          destinationId: destination.id,
-          lineId: line.id,
-          sourceId: source.id,
-          trainId: train.id
+          id: journey.id
         })
       );
     }, time);
