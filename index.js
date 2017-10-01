@@ -9,6 +9,7 @@ import actions from "./actions";
 import clock from "./clock";
 import Map from "./components/Map";
 import store from "./reducers";
+import { select } from "./reducers";
 import { getConnection } from "./reducers/connections";
 import importCity from "./importers";
 
@@ -75,8 +76,9 @@ export function start(options, callback) {
   });
 
   const game = {
-    dispatch: bindActionCreators(dispatch, store.dispatch)
+    dispatch: bindActionCreators(dispatch, store.dispatch),
+    select: select.bindStore(store)
   };
 
-  callback.call(null, store, game);
+  callback.call(null, game);
 }

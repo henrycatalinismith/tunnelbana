@@ -1,40 +1,31 @@
 import uuid from "uuid/v1";
 import { start } from "../index";
-import { getConnection } from "../reducers/connections";
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.createElement("div");
   document.body.appendChild(app);
 
   const options = { element: app };
-  start(options, (store, actions) => {
-    store.dispatch(
-      actions.addLine({
-        id: "Circle",
-        color: "yellow"
-      })
-    );
+  start(options, game => {
+    game.dispatch.addLine({
+      id: "Circle",
+      color: "yellow"
+    });
 
-    store.dispatch(
-      actions.addLine({
-        id: "Riverside",
-        color: "#0273ff"
-      })
-    );
+    game.dispatch.addLine({
+      id: "Riverside",
+      color: "#0273ff"
+    });
 
-    store.dispatch(
-      actions.addLine({
-        id: "Polar",
-        color: "#ff0000"
-      })
-    );
+    game.dispatch.addLine({
+      id: "Polar",
+      color: "#ff0000"
+    });
 
-    store.dispatch(
-      actions.addLine({
-        id: "Hogwarts",
-        color: "#ff00ff"
-      })
-    );
+    game.dispatch.addLine({
+      id: "Hogwarts",
+      color: "#ff00ff"
+    });
     const π = Math.PI;
     const points = ({ x, y }, r, n) => {
       const angle = 2 * π / n;
@@ -59,31 +50,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     points(center, 250, 10).map((point, i) => {
       let id = uuid();
-      store.dispatch(
-        actions.addStation({
-          id: id,
-          x: point.x,
-          y: point.y
-        })
-      );
+      game.dispatch.addStation({
+        id: id,
+        x: point.x,
+        y: point.y
+      });
 
       if (lastId) {
-        store.dispatch(
-          actions.addConnection({
-            sourceId: lastId,
-            destinationId: id,
-            lineId: "Circle"
-          })
-        );
+        game.dispatch.addConnection({
+          sourceId: lastId,
+          destinationId: id,
+          lineId: "Circle"
+        });
       }
       if (i === 9) {
-        store.dispatch(
-          actions.addConnection({
-            sourceId: id,
-            destinationId: firstId,
-            lineId: "Circle"
-          })
-        );
+        game.dispatch.addConnection({
+          sourceId: id,
+          destinationId: firstId,
+          lineId: "Circle"
+        });
       }
 
       if (firstId === null) {
@@ -104,79 +89,61 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     for (let link of links) {
-      store.dispatch(
-        actions.addConnection({
-          sourceId: link.fromId,
-          destinationId: link.toId,
-          lineId: link.lineId
-        })
-      );
+      game.dispatch.addConnection({
+        sourceId: link.fromId,
+        destinationId: link.toId,
+        lineId: link.lineId
+      });
     }
 
-    store.dispatch(
-      actions.addTrain({
-        id: "Henry",
-        stationId: links[1].fromId,
-        lineId: links[1].lineId
-      })
-    );
+    game.dispatch.addTrain({
+      id: "Henry",
+      stationId: links[1].fromId,
+      lineId: links[1].lineId
+    });
 
-    store.dispatch(
-      actions.addTrain({
-        id: "Dave",
-        stationId: links[2].fromId,
-        lineId: links[2].lineId
-      })
-    );
+    game.dispatch.addTrain({
+      id: "Dave",
+      stationId: links[2].fromId,
+      lineId: links[2].lineId
+    });
 
-    store.dispatch(
-      actions.addTrain({
-        id: "Gordon",
-        stationId: lastId,
-        lineId: "Circle"
-      })
-    );
+    game.dispatch.addTrain({
+      id: "Gordon",
+      stationId: lastId,
+      lineId: "Circle"
+    });
 
-    store.dispatch(
-      actions.addTrain({
-        id: "Thomas",
-        stationId: blue1,
-        lineId: "Riverside"
-      })
-    );
+    game.dispatch.addTrain({
+      id: "Thomas",
+      stationId: blue1,
+      lineId: "Riverside"
+    });
 
-    store.dispatch(
-      actions.departure({
-        trainId: "Henry",
-        destinationId: links[1].toId
-      })
-    );
+    game.dispatch.departure({
+      trainId: "Henry",
+      destinationId: links[1].toId
+    });
 
-    store.dispatch(
-      actions.departure({
-        trainId: "Dave",
-        destinationId: links[2].toId
-      })
-    );
+    game.dispatch.departure({
+      trainId: "Dave",
+      destinationId: links[2].toId
+    });
 
-    store.dispatch(
-      actions.departure({
-        trainId: "Gordon",
-        destinationId: firstId
-      })
-    );
+    game.dispatch.departure({
+      trainId: "Gordon",
+      destinationId: firstId
+    });
 
-    store.dispatch(
-      actions.departure({
-        trainId: "Thomas",
-        destinationId: blue2
-      })
-    );
+    game.dispatch.departure({
+      trainId: "Thomas",
+      destinationId: blue2
+    });
 
-    store.dispatch(
-      actions.addPassenger({
-        stationId: blue1
-      })
-    );
+    game.dispatch.addPassenger({
+      stationId: blue1
+    });
+
+    console.log(game.select.trains.all().toJS());
   });
 });
