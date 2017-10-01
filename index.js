@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { bindActionCreators } from "redux";
 import { Provider, connect } from "react-redux";
 import { combineReducers, createStore } from "redux";
 import { TweenMax, TweenLite } from "gsap";
@@ -66,5 +67,16 @@ export function start(options, callback) {
     })
   );
 
-  callback.call(null, store, actions);
+  const dispatch = {};
+  Object.keys(actions).forEach(action => {
+    if (typeof actions[action] === "function") {
+      dispatch[action] = actions[action];
+    }
+  });
+
+  const game = {
+    dispatch: bindActionCreators(dispatch, store.dispatch)
+  };
+
+  callback.call(null, store, game);
 }
