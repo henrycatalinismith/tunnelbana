@@ -1,8 +1,8 @@
 import Immutable from "immutable";
 import actions from "../../actions";
-import { reducer, selectors } from "../map";
+import { reducer, selectors } from "../viewbox";
 
-describe("map", () => {
+describe("viewbox", () => {
   describe("reducer", () => {
     it("adds a station to the store on ADD_STATION", () => {
       const action = actions.windowResize({
@@ -11,7 +11,7 @@ describe("map", () => {
       });
       const newState = reducer(undefined, action);
 
-      expect(newState.toJS().viewBox).toEqual({
+      expect(newState.toJS()).toEqual({
         minX: 0,
         minY: 0,
         width: 100,
@@ -21,11 +21,11 @@ describe("map", () => {
   });
 
   describe("selectors", () => {
-    it("viewBox() returns just the viewBox", () => {
+    it("all() returns just the viewbox", () => {
       const state = Immutable.fromJS({
-        viewBox: { width: 100 }
+        width: 100
       });
-      const output = selectors.viewBox(state);
+      const output = selectors.all(state);
       expect(output.toJS()).toEqual({ width: 100 });
     });
   });
