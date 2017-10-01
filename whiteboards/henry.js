@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (lastId) {
         store.dispatch(
           actions.addConnection({
-            id: uuid(),
             sourceId: lastId,
             destinationId: id,
             lineId: "Circle"
@@ -80,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (i === 9) {
         store.dispatch(
           actions.addConnection({
-            id: uuid(),
             sourceId: id,
             destinationId: firstId,
             lineId: "Circle"
@@ -108,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let link of links) {
       store.dispatch(
         actions.addConnection({
-          id: uuid(),
           sourceId: link.fromId,
           destinationId: link.toId,
           lineId: link.lineId
@@ -178,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     store.dispatch(
       actions.addPassenger({
-        id: uuid(),
         stationId: blue1
       })
     );
