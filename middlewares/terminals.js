@@ -4,6 +4,12 @@ import actions from "../actions";
 import { select } from "../reducers";
 
 export const middleware = createMiddleware((before, after, cancel) => ({
+  [before(actions.ADD_TERMINAL)](store, action) {
+    if (!action.terminal.id) {
+      action.terminal.id = uuid();
+    }
+  },
+
   [after(actions.ADD_CONNECTION)](store, { connection }) {
     const { lineId, sourceId, destinationId } = connection;
 
@@ -29,7 +35,6 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     if (siblings.length === 0) {
       store.dispatch(
         actions.addTerminal({
-          id: uuid(),
           connectionId: connection.id,
           lineId,
           stationId: connection.sourceId,
@@ -40,7 +45,6 @@ export const middleware = createMiddleware((before, after, cancel) => ({
 
       store.dispatch(
         actions.addTerminal({
-          id: uuid(),
           connectionId: connection.id,
           lineId,
           stationId: connection.destinationId,
