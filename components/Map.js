@@ -10,22 +10,22 @@ import Train from "./Train";
 export class Map extends React.Component {
   static propTypes = {
     lines: PropTypes.object,
-    viewBox: PropTypes.object,
+    viewbox: PropTypes.object,
     stations: PropTypes.object,
     trains: PropTypes.object
   };
 
   render() {
-    const viewBox = [
-      this.props.viewBox.get("minX"),
-      this.props.viewBox.get("minY"),
-      this.props.viewBox.get("width"),
-      this.props.viewBox.get("height")
+    const viewbox = [
+      this.props.viewbox.get("minX"),
+      this.props.viewbox.get("minY"),
+      this.props.viewbox.get("width"),
+      this.props.viewbox.get("height")
     ].join(" ");
     const { lines, stations, trains } = this.props;
 
     return (
-      <svg viewBox={viewBox}>
+      <svg viewBox={viewbox}>
         {lines.map((l, i) => <Line key={`line-${i}`} line={l} />)}
         {trains.map((t, i) => <Train key={`train-${i}`} train={t} />)}
         {stations.map((s, i) => <Station key={`station-${i}`} station={s} />)}
@@ -40,9 +40,9 @@ const mapStateToProps = state => {
     lines: select("lines")
       .from(state)
       .all(),
-    viewBox: select("map")
+    viewbox: select("viewbox")
       .from(state)
-      .viewBox(),
+      .all(),
     stations: select("stations")
       .from(state)
       .all(),
