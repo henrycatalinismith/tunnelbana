@@ -6,6 +6,7 @@ import { select } from "../reducers";
 
 export class Line extends React.Component {
   static propTypes = {
+    id: PropTypes.string,
     line: PropTypes.object,
     connections: PropTypes.object
   };
@@ -15,9 +16,7 @@ export class Line extends React.Component {
     return (
       <g className="line" id={line.id}>
         {connections.map((c, i) => {
-          return (
-            <Connection key={`connection-${i}`} connection={c} line={line} />
-          );
+          return <Connection key={`connection-${i}`} id={c.get("id")} />;
         })}
       </g>
     );
@@ -25,11 +24,13 @@ export class Line extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const lineId = ownProps.line.get("id");
   return {
+    line: select("lines")
+      .from(state)
+      .byId(ownProps.id),
     connections: select("connections")
       .from(state)
-      .byLineId(lineId)
+      .byLineId(ownProps.id)
   };
 };
 

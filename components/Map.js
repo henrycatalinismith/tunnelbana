@@ -26,9 +26,11 @@ export class Map extends React.Component {
 
     return (
       <svg viewBox={viewbox}>
-        {lines.map((l, i) => <Line key={`line-${i}`} line={l} />)}
-        {trains.map((t, i) => <Train key={`train-${i}`} train={t} />)}
-        {stations.map((s, i) => <Station key={`station-${i}`} station={s} />)}
+        {lines.map((l, i) => <Line key={`line-${i}`} id={l.get("id")} />)}
+        {trains.map((t, i) => <Train key={`train-${i}`} id={t.get("id")} />)}
+        {stations.map((s, i) => (
+          <Station key={`station-${i}`} id={s.get("id")} />
+        ))}
         <Dragon />
       </svg>
     );
