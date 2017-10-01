@@ -1,5 +1,4 @@
 import { createMiddleware } from "signalbox";
-import uuid from "uuid/v1";
 import actions from "../actions";
 import { select } from "../reducers";
 
