@@ -7,6 +7,7 @@ import Passenger from "./Passenger";
 
 export class Station extends React.Component {
   static propTypes = {
+    id: PropTypes.string,
     station: PropTypes.object,
     passengers: PropTypes.object,
     selectStation: PropTypes.func,
@@ -54,11 +55,13 @@ export class Station extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const stationId = ownProps.station.get("id");
   return {
+    station: select("stations")
+      .from(state)
+      .byId(ownProps.id),
     passengers: select("passengers")
       .from(state)
-      .byStationId(stationId)
+      .byStationId(ownProps.id)
   };
 };
 
