@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const options = { element: app };
   start(options, game => {
+    game.before("ADD_LINE", (store, action) => {
+      console.log("before.ADD_LINE");
+    });
+
     game.dispatch.addLine({
       id: "Circle",
       color: "yellow"
