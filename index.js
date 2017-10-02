@@ -45,7 +45,24 @@ exports.createMiddleware = cb => {
     return `cancel.${actionType}.${cancels[actionType].length}`;
   };
 
-  const middlewares = cb.call(null, addBefore, addAfter, addCancel);
+  let middlewares;
+
+  if (typeof cb === 'function') {
+    middlewares = cb.call(null, addBefore, addAfter, addCancel);
+  } else if (typeof cb === 'object') {
+    middlewares = {};
+    for (let m of cb) {
+      for (let b in m.befores) {
+        befores[b] = (befores[b] || []).concat(m.befores[b][0]);
+      }
+      for (let a in m.afters) {
+        afters[a] = (afters[a] || []).concat(m.afters[a][0]);
+      }
+      for (let c in m.cancels) {
+        cancels[c] = (cancels[c] || []).concat(m.cancels[c][0]);
+      }
+    }
+  }
 
   Object.keys(middlewares).forEach(key => {
     const [, timing, actionType, index] = key.match(
@@ -55,7 +72,10 @@ exports.createMiddleware = cb => {
       middlewares[key]);
   });
 
-  return [middleware];
+  middleware.befores = befores;
+  middleware.afters = afters;
+  middleware.cancels = cancels;
+  return middleware;
 };
 
 
