@@ -79,9 +79,9 @@ export function start(options, callback) {
   const game = {
     dispatch: bindActionCreators(dispatch, store.dispatch),
     select: select.bindStore(store),
-    before: (actionType, m) => {
-      middlewares.befores[actionType].push(m);
-    }
+    before: (actionType, m) => middlewares.befores[actionType].push(m),
+    after: (actionType, m) => middlewares.afters[actionType].push(m),
+    cancel: (actionType, m) => middlewares.cancels[actionType].push(m)
   };
 
   callback.call(null, game);
