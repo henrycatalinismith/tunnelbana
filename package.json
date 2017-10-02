@@ -1,11 +1,11 @@
 {
   "name": "signalbox",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Redux middleware syntactical sugar",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/hnrysmth/signalbox.git"
+    "url": "git+ssh://git@github.com/railcar/signalbox.git"
   },
   "keywords": [
     "redux",
@@ -14,13 +14,16 @@
   "author": "Henry Smith <henry@henrysmith.org>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hnrysmth/signalbox/issues"
+    "url": "https://github.com/railcar/signalbox/issues"
   },
-  "homepage": "https://github.com/hnrysmth/signalbox#readme",
+  "homepage": "https://github.com/railcar/signalbox#readme",
   "engines": {
     "node": ">=8.4.0"
   },
   "dependencies": {
     "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
   }
 }
