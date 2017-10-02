@@ -1,7 +1,7 @@
 signalbox
 =========
 
-Wanted to put some 😍😍😍 into my redux middlewares and came up with this.
+oops, this kind of turned into a whole redux toolkit
 
 <table>
 <thead><th>🏇 Vanilla Redux Middleware 🛶</th><th>🚄 With Signalbox 🚀</th></thead>
@@ -126,6 +126,39 @@ store.dispatch({ type: "INCREMENT" });
 About to increment 0
 Just incremented to 1
 ```
+
+##### createSelect
+
+```javascript
+const { createSelect } = require('bo-selecta');
+exports.select = createSelect({
+  users: {
+    byId: (state, id) {
+      return state[id];
+    }
+  }
+});
+```
+
+##### stateAccessor
+
+It assumes you're doing a very typical redux setup where the store is a plain
+JS object and each selector only reads from its reducer's section of the overall
+state. If the above don't apply, e.g. maybe you use Immutable.js, you can pass a
+custom stateAccessor to get the correct `state` param to your selectors.
+
+```javascript
+const { createSelect } = require('bo-selecta');
+const { * as userSelectors } = require('./reducers/users');
+exports.select = createSelect({ users: userSelectors }, {
+  stateAccessor(s, entity) {
+    // Use the Immutable.js Map API to pass the correct subproperty of the store
+    // to the selector functions
+    return s.get(entity);
+  }
+});
+```
+
 
 Contributing
 ------------
