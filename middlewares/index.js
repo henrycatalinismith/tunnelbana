@@ -10,14 +10,14 @@ import { middleware as terminals } from "./terminals";
 import { middleware as tracks } from "./tracks";
 import { middleware as trains } from "./trains";
 
-export default [
-  ...connections,
-  ...dragon,
-  ...journeys,
-  ...lines,
-  ...stations,
-  ...terminals,
-  ...tracks,
-  ...trains,
-  ...passengers
-];
+export default createMiddleware([
+  connections,
+  dragon,
+  journeys,
+  lines,
+  stations,
+  terminals,
+  tracks,
+  trains,
+  passengers
+]);
