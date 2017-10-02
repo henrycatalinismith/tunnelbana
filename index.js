@@ -8,6 +8,7 @@ import { TweenMax, TweenLite } from "gsap";
 import actions from "./actions";
 import clock from "./clock";
 import Map from "./components/Map";
+import middlewares from "./middlewares";
 import store from "./reducers";
 import { select } from "./reducers";
 import { getConnection } from "./reducers/connections";
@@ -77,7 +78,10 @@ export function start(options, callback) {
 
   const game = {
     dispatch: bindActionCreators(dispatch, store.dispatch),
-    select: select.bindStore(store)
+    select: select.bindStore(store),
+    before: (actionType, m) => {
+      middlewares.befores[actionType].push(m);
+    }
   };
 
   callback.call(null, game);
