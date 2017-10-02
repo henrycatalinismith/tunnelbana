@@ -12,19 +12,23 @@ function counter(state = 0, action) {
   }
 }
 
-const middleware = createMiddleware((before, after) => ({
+const one = createMiddleware((before, after) => ({
   [before("INCREMENT")](store) {
     console.log(`About to increment ${store.getState()}`);
   },
+}));
+const two = createMiddleware((before, after) => ({
   [after("INCREMENT")](store) {
     console.log(`Just incremented to ${store.getState()}`);
   }
 }));
 
+const middleware = createMiddleware([one, two]);
+
 const store = createStore(
   counter,
   undefined,
-  applyMiddleware(...middleware)
+  applyMiddleware(middleware)
 );
 
 store.dispatch({ type: "INCREMENT" });
