@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { combineReducers } from "redux-immutable";
-import { createSelect } from "bo-selecta";
+import { createSelect } from "signalbox";
 
 import {
   reducer as connectionsReducer,
