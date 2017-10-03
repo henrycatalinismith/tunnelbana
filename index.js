@@ -1,4 +1,4 @@
-import { bindActionCreators } from "redux";
+const { bindActionCreators } = require("redux");
 
 exports.createApp = (store, actions, middlewares, selectors) => {
   const actionCreators = {};
