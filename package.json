@@ -1,6 +1,6 @@
 {
   "name": "energetic-headlight",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Trains and whatever",
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "redux-immutable": "^4.0.0",
     "redux-mock-store": "^1.2.3",
     "regenerator-runtime": "^0.11.0",
-    "signalbox": "^1.3.0",
+    "signalbox": "^1.4.2",
     "uuid": "^3.1.0",
     "webpack": "^3.5.5",
     "webpack-dashboard": "^0.4.0",
