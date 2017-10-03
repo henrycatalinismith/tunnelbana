@@ -1,6 +1,6 @@
 {
   "name": "signalbox",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Redux middleware syntactical sugar",
   "main": "index.js",
   "repository": {
