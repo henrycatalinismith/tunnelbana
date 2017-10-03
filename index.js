@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { bindActionCreators } from "redux";
 import { Provider, connect } from "react-redux";
 import { combineReducers, createStore } from "redux";
 import { TweenMax, TweenLite } from "gsap";
+import { createApp } from "signalbox";
 
 import actions from "./actions";
 import clock from "./clock";
@@ -69,20 +69,6 @@ export function start(options, callback) {
     })
   );
 
-  const dispatch = {};
-  Object.keys(actions).forEach(action => {
-    if (typeof actions[action] === "function") {
-      dispatch[action] = actions[action];
-    }
-  });
-
-  const game = {
-    dispatch: bindActionCreators(dispatch, store.dispatch),
-    select: select.bindStore(store),
-    before: (actionType, m) => middlewares.befores[actionType].push(m),
-    after: (actionType, m) => middlewares.afters[actionType].push(m),
-    cancel: (actionType, m) => middlewares.cancels[actionType].push(m)
-  };
-
+  const game = createApp(store, actions, middlewares, select);
   callback.call(null, game);
 }
