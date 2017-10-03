@@ -1,3 +1,5 @@
+import { bindActionCreators } from "redux";
+
 exports.createApp = (store, actions, middlewares, selectors) => {
   const actionCreators = {};
   const actionTypes = {};
