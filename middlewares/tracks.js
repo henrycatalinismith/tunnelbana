@@ -185,6 +185,12 @@ export const middleware = createMiddleware((before, after, cancel) => ({
           );
         }
       });
+
+      if (newTracks.length < tracks.length) {
+        tracks.slice(newTracks.length).forEach(track => {
+          store.dispatch(actions.deleteTrack(track.id));
+        });
+      }
     });
   }
 }));
