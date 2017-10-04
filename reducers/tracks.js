@@ -25,6 +25,10 @@ export const reducer = createReducer(new Immutable.Map(), {
     return state.update(action.track.id, track => {
       return track.merge(Immutable.fromJS(action.track));
     });
+  },
+
+  [actions.DELETE_TRACK](state, action) {
+    return state.delete(action.track.id);
   }
 });
 
