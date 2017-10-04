@@ -44,8 +44,6 @@ export class Connection extends React.Component {
         )}
 
         <path
-          id={`track-${this.props.source.id}-${destination &&
-            destination.id}-${line.id}`}
           d={path}
           stroke={line.color}
           strokeWidth={strokeWidth}

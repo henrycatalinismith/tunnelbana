@@ -41,16 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
       lineId: "Riverside"
     });
 
-    //game.dispatch.addTrain({
-    //id: "Henry",
-    //stationId: "one",
-    //lineId: "Riverside"
-    //});
+    game.dispatch.addTrain({
+      id: "Henry",
+      stationId: "one",
+      lineId: "Riverside"
+    });
 
-    //game.dispatch.departure({
-    //trainId: "Henry",
-    //destinationId: "two"
-    //});
+    game.dispatch.departure({
+      trainId: "Henry",
+      destinationId: "two"
+    });
 
     //game.dispatch.windowResize({
     //width: 300,
