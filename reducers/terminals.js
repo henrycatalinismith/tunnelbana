@@ -73,6 +73,10 @@ export const reducer = createReducer(new Immutable.Map(), {
         })
       );
     });
+  },
+
+  [actions.DELETE_TERMINAL](state, action) {
+    return state.delete(action.terminal.id);
   }
 });
 
