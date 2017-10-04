@@ -29,28 +29,28 @@ document.addEventListener("DOMContentLoaded", () => {
       y: 500
     });
 
-    game.dispatch.addConnection({
-      sourceId: "one",
-      destinationId: "two",
-      lineId: "Riverside"
-    });
+    //game.dispatch.addConnection({
+    //sourceId: "one",
+    //destinationId: "two",
+    //lineId: "Riverside"
+    //});
 
-    game.dispatch.addConnection({
-      sourceId: "two",
-      destinationId: "three",
-      lineId: "Riverside"
-    });
+    //game.dispatch.addConnection({
+    //sourceId: "two",
+    //destinationId: "three",
+    //lineId: "Riverside"
+    //});
 
-    game.dispatch.addTrain({
-      id: "Henry",
-      stationId: "one",
-      lineId: "Riverside"
-    });
+    //game.dispatch.addTrain({
+    //id: "Henry",
+    //stationId: "one",
+    //lineId: "Riverside"
+    //});
 
-    game.dispatch.departure({
-      trainId: "Henry",
-      destinationId: "two"
-    });
+    //game.dispatch.departure({
+    //trainId: "Henry",
+    //destinationId: "two"
+    //});
 
     //game.dispatch.windowResize({
     //width: 300,

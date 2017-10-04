@@ -19,7 +19,25 @@ export const reducer = createReducer(initialState, {
     );
   },
 
+  [actions.DRAGON_GRAB_TERMINAL](state, action) {
+    return state.merge(
+      Immutable.fromJS({
+        entity: "terminal",
+        id: action.terminal.id
+      })
+    );
+  },
+
   [actions.DRAGON_MOVE](state, action) {
+    return state.merge(
+      Immutable.fromJS({
+        x: action.x,
+        y: action.y
+      })
+    );
+  },
+
+  [actions.DRAGON_MOVE_TERMINAL](state, action) {
     return state.merge(
       Immutable.fromJS({
         x: action.x,
