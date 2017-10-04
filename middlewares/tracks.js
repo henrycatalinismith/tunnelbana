@@ -128,5 +128,47 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     tracks.forEach((track, i) => {
       addTrack(track[0], track[1], i);
     });
+  },
+
+  [after(actions.DRAGON_MOVE_STATION)](store, action) {
+    const { id: stationId } = action;
+    const state = store.getState();
+
+    const connections = select("connections")
+      .from(state)
+      .byStationId(stationId)
+      .toJS();
+
+    connections.forEach(connection => {
+      const { lineId, sourceId, destinationId } = connection;
+
+      const source = select("stations")
+        .from(state)
+        .byId(sourceId)
+        .toJS();
+
+      const destination = select("stations")
+        .from(state)
+        .byId(destinationId)
+        .toJS();
+
+      const tracks = select("tracks")
+        .from(state)
+        .byConnectionId(connection.id)
+        .toJS();
+
+      const newTracks = path(source, destination);
+      newTracks.forEach((track, i) => {
+        store.dispatch(
+          actions.updateTrack({
+            id: tracks[i].id,
+            x1: track[0].x,
+            y1: track[0].y,
+            x2: track[1].x,
+            y2: track[1].y
+          })
+        );
+      });
+    });
   }
 }));
