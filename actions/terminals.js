@@ -1,4 +1,6 @@
 export const ADD_TERMINAL = "ADD_TERMINAL";
+export const DELETE_TERMINAL = "DELETE_TERMINAL";
+
 export const SELECT_TERMINAL = "SELECT_TERMINAL";
 export const DESELECT_TERMINAL = "DESELECT_TERMINAL";
 export const MOVE_TERMINAL = "MOVE_TERMINAL";
@@ -7,6 +9,13 @@ export function addTerminal(terminal) {
   return {
     type: ADD_TERMINAL,
     terminal
+  };
+}
+
+export function deleteTerminal(id) {
+  return {
+    type: DELETE_TERMINAL,
+    terminal: { id }
   };
 }
 
