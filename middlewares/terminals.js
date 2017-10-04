@@ -12,6 +12,9 @@ export const middleware = createMiddleware((before, after, cancel) => ({
 
   [after(actions.ADD_CONNECTION)](store, { connection }) {
     const { lineId, sourceId, destinationId } = connection;
+    if (!destinationId) {
+      return;
+    }
 
     const state = store.getState();
     const connections = state.get("connections");

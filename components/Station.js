@@ -67,7 +67,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectStation: id => dispatch(actions.dragonGrab("station", id)),
+    selectStation: id => dispatch(actions.dragonGrabStation(id)),
     deselectStation: id => dispatch(actions.dragonDrop("station", id))
   };
 };

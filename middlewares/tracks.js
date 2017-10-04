@@ -98,6 +98,10 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     const connections = store.getState().get("connections");
     const stations = store.getState().get("stations");
 
+    if (!destinationId) {
+      return;
+    }
+
     const source = select("stations")
       .from(state)
       .byId(sourceId)
@@ -192,5 +196,69 @@ export const middleware = createMiddleware((before, after, cancel) => ({
         });
       }
     });
+  },
+
+  [after(actions.DRAGON_MOVE_TERMINAL)](store, action) {
+    const { id: terminalId } = action;
+    const state = store.getState();
+
+    const terminal = select("terminals")
+      .from(state)
+      .byId(terminalId)
+      .toJS();
+
+    const lineId = terminal.lineId;
+    const connection = select("connections")
+      .from(state)
+      .byId(terminal.connectionId)
+      .toJS();
+
+    const sourceId = connection.sourceId;
+    const source = select("stations")
+      .from(state)
+      .byId(connection.sourceId)
+      .toJS();
+
+    const tracks = select("tracks")
+      .from(state)
+      .byConnectionId(connection.id)
+      .toJS();
+
+    console.log(action, source);
+
+    const newTracks = path(source, { x: action.x, y: action.y });
+    newTracks.forEach((track, i) => {
+      if (!tracks[i]) {
+        store.dispatch(
+          actions.addTrack({
+            connectionId: connection.id,
+            lineId,
+            sourceId,
+            destinationId: undefined,
+            ordinality: i,
+            x1: track[0].x,
+            y1: track[0].y,
+            x2: track[1].x,
+            y2: track[1].y
+          })
+        );
+      } else {
+        store.dispatch(
+          actions.updateTrack({
+            id: tracks[i].id,
+            x1: track[0].x,
+            y1: track[0].y,
+            x2: track[1].x,
+            y2: track[1].y
+          })
+        );
+      }
+    });
+
+    if (newTracks.length < tracks.length) {
+      tracks.slice(newTracks.length).forEach(track => {
+        store.dispatch(actions.deleteTrack(track.id));
+      });
+    }
   }
 }));
