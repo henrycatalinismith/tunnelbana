@@ -23,9 +23,21 @@ document.addEventListener("DOMContentLoaded", () => {
       y: 100
     });
 
+    game.dispatch.addStation({
+      id: "three",
+      x: 150,
+      y: 500
+    });
+
     game.dispatch.addConnection({
       sourceId: "one",
       destinationId: "two",
+      lineId: "Riverside"
+    });
+
+    game.dispatch.addConnection({
+      sourceId: "two",
+      destinationId: "three",
       lineId: "Riverside"
     });
 
@@ -40,9 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
     //destinationId: "two"
     //});
 
-    game.dispatch.windowResize({
-      width: 300,
-      height: 300
-    });
+    //game.dispatch.windowResize({
+    //width: 300,
+    //height: 300
+    //});
   });
 });
