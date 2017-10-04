@@ -166,7 +166,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
               lineId,
               sourceId,
               destinationId,
-              i,
+              ordinality: i,
               x1: track[0].x,
               y1: track[0].y,
               x2: track[1].x,
