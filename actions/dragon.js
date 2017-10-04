@@ -5,6 +5,7 @@ export const DRAGON_MOVE = "DRAGON_MOVE";
 export const DRAGON_MOVE_STATION = "DRAGON_MOVE_STATION";
 export const DRAGON_MOVE_TERMINAL = "DRAGON_MOVE_TERMINAL";
 export const DRAGON_DROP = "DRAGON_DROP";
+export const DRAGON_DROP_TERMINAL = "DRAGON_DROP_TERMINAL";
 
 export function dragonGrab(entity, id) {
   return {
@@ -59,5 +60,12 @@ export function dragonDrop(entity, id) {
     type: DRAGON_DROP,
     entity,
     id
+  };
+}
+
+export function dragonDropTerminal(id) {
+  return {
+    type: DRAGON_DROP_TERMINAL,
+    terminal: { id }
   };
 }
