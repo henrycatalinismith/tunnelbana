@@ -9,6 +9,7 @@ export class Terminal extends React.Component {
   static propTypes = {
     connection: PropTypes.object,
     station: PropTypes.object,
+    dragon: PropTypes.object,
     terminal: PropTypes.object,
     line: PropTypes.object,
     selectTerminal: PropTypes.func
@@ -30,7 +31,9 @@ export class Terminal extends React.Component {
   render() {
     const terminal = this.props.terminal.toJS();
     const line = this.props.line.toJS();
-    const station = this.props.station.toJS();
+    const station = this.props.station
+      ? this.props.station.toJS()
+      : this.props.dragon.toJS();
     const x = typeof terminal.x === "undefined" ? station.x : terminal.x;
     const y = typeof terminal.y === "undefined" ? station.y : terminal.y;
 
@@ -86,6 +89,9 @@ const mapStateToProps = (state, ownProps) => {
     connection: select("connections")
       .from(state)
       .byId(ownProps.terminal.get("connectionId")),
+    dragon: select("dragon")
+      .from(state)
+      .dragon(),
     line: select("lines")
       .from(state)
       .byId(ownProps.terminal.get("lineId"))
