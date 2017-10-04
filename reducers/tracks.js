@@ -21,11 +21,9 @@ export const reducer = createReducer(new Immutable.Map(), {
     );
   },
 
-  [actions.DRAGON_MOVE_STATION](state, action) {
-    return state.filter(track => {
-      const sourceId = track.get("sourceId");
-      const destinationId = track.get("destinationId");
-      return sourceId !== action.id && destinationId !== action.id;
+  [actions.UPDATE_TRACK](state, action) {
+    return state.update(action.track.id, track => {
+      return track.merge(Immutable.fromJS(action.track));
     });
   }
 });
