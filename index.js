@@ -33,7 +33,7 @@ export function start(options, callback) {
     if (!throttle) {
       store.dispatch(actions.dragonMove(event.clientX, event.clientY));
       throttle = true;
-      setTimeout(() => (throttle = false), 50);
+      setTimeout(() => (throttle = false), 20);
     }
   });
 
