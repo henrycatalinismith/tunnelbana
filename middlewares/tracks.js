@@ -224,8 +224,6 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       .byConnectionId(connection.id)
       .toJS();
 
-    console.log(action, source);
-
     const newTracks = path(source, { x: action.x, y: action.y });
     newTracks.forEach((track, i) => {
       if (!tracks[i]) {

@@ -53,6 +53,15 @@ export const reducer = createReducer(initialState, {
         id: undefined
       })
     );
+  },
+
+  [actions.DRAGON_DROP_TERMINAL](state, action) {
+    return state.merge(
+      Immutable.fromJS({
+        entity: undefined,
+        id: undefined
+      })
+    );
   }
 });
 

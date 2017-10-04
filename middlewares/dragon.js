@@ -4,6 +4,13 @@ import actions from "../actions";
 import { select } from "../reducers";
 
 export const middleware = createMiddleware((before, after, cancel) => ({
+  [cancel(actions.DRAGON_DROP)](store, action) {
+    if (action.entity === "terminal" && !!action.id) {
+      store.dispatch(actions.dragonDropTerminal(action.id));
+      return true;
+    }
+  },
+
   [cancel(actions.DRAGON_GRAB_STATION)](store, action) {
     const stationId = action.station.id;
     const connectionId = uuid();
