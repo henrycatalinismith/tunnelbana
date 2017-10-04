@@ -159,15 +159,31 @@ export const middleware = createMiddleware((before, after, cancel) => ({
 
       const newTracks = path(source, destination);
       newTracks.forEach((track, i) => {
-        store.dispatch(
-          actions.updateTrack({
-            id: tracks[i].id,
-            x1: track[0].x,
-            y1: track[0].y,
-            x2: track[1].x,
-            y2: track[1].y
-          })
-        );
+        if (!tracks[i]) {
+          store.dispatch(
+            actions.addTrack({
+              connectionId: connection.id,
+              lineId,
+              sourceId,
+              destinationId,
+              i,
+              x1: track[0].x,
+              y1: track[0].y,
+              x2: track[1].x,
+              y2: track[1].y
+            })
+          );
+        } else {
+          store.dispatch(
+            actions.updateTrack({
+              id: tracks[i].id,
+              x1: track[0].x,
+              y1: track[0].y,
+              x2: track[1].x,
+              y2: track[1].y
+            })
+          );
+        }
       });
     });
   }
