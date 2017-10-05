@@ -62,5 +62,48 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     }
 
     return false;
+  },
+
+  [cancel(actions.DRAGON_CREATE_CONNECTION)](store, action) {
+    const state = store.getState();
+
+    const dragon = store
+      .getState()
+      .get("dragon")
+      .toJS();
+
+    const terminal = select("terminals")
+      .from(state)
+      .byId(dragon.id)
+      .toJS();
+
+    const connection = select("connections")
+      .from(state)
+      .byId(terminal.connectionId)
+      .toJS();
+
+    const lineId = connection.lineId;
+    const sourceId = connection.sourceId;
+    const destinationId = action.connection.destinationId;
+
+    if (sourceId === destinationId) {
+      // this has only fired because the mouse has re-entered the origin
+      // station and obviously we don't want to connect the station to itself
+      // so just cancel this completely
+      return true;
+    }
+
+    // probably need to revisit this tbh cos like i dunno just feels a bit
+    // messy creating a new connection instead of making the "pending" one
+    // real by setting its destinationId
+    store.dispatch(
+      actions.createConnection({
+        sourceId,
+        destinationId,
+        lineId
+      })
+    );
+
+    return true;
   }
 }));

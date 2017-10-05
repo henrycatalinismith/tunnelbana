@@ -1,11 +1,15 @@
 export const DRAGON_GRAB = "DRAGON_GRAB";
 export const DRAGON_GRAB_STATION = "DRAGON_GRAB_STATION";
 export const DRAGON_GRAB_TERMINAL = "DRAGON_GRAB_TERMINAL";
+
 export const DRAGON_MOVE = "DRAGON_MOVE";
 export const DRAGON_MOVE_STATION = "DRAGON_MOVE_STATION";
 export const DRAGON_MOVE_TERMINAL = "DRAGON_MOVE_TERMINAL";
+
 export const DRAGON_DROP = "DRAGON_DROP";
 export const DRAGON_DROP_TERMINAL = "DRAGON_DROP_TERMINAL";
+
+export const DRAGON_CREATE_CONNECTION = "DRAGON_CREATE_CONNECTION";
 
 export function dragonGrab(entity, id) {
   return {
@@ -67,5 +71,12 @@ export function dragonDropTerminal(id) {
   return {
     type: DRAGON_DROP_TERMINAL,
     terminal: { id }
+  };
+}
+
+export function dragonCreateConnection(destinationId) {
+  return {
+    type: DRAGON_CREATE_CONNECTION,
+    connection: { destinationId }
   };
 }
