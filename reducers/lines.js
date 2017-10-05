@@ -3,7 +3,7 @@ import { createReducer } from "redux-create-reducer";
 import actions from "../actions";
 
 export const reducer = createReducer(new Immutable.Map(), {
-  [actions.ADD_LINE](state, action) {
+  [actions.CREATE_LINE](state, action) {
     return state.set(
       action.line.id,
       Immutable.fromJS({

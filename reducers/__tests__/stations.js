@@ -4,9 +4,9 @@ import { reducer, selectors } from "../stations";
 
 describe("stations", () => {
   describe("reducer", () => {
-    it("adds a station to the store on ADD_STATION", () => {
+    it("adds a station to the store on CREATE_STATION", () => {
       const state = new Immutable.Map();
-      const action = actions.addStation({
+      const action = actions.createStation({
         id: "Medborgarplatsen",
         x: 10,
         y: 40

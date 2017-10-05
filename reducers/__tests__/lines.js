@@ -4,9 +4,9 @@ import { reducer, selectors } from "../lines";
 
 describe("lines", () => {
   describe("reducer", () => {
-    it("adds a line to the store on ADD_LINE", () => {
+    it("adds a line to the store on CREATE_LINE", () => {
       const state = new Immutable.Map();
-      const action = actions.addLine({
+      const action = actions.createLine({
         id: "Röda Linjen",
         color: "#ff0000"
       });

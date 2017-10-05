@@ -4,9 +4,9 @@ import { reducer, selectors } from "../connections";
 
 describe("connections", () => {
   describe("reducer", () => {
-    it("adds a connection to the store on ADD_CONNECTION", () => {
+    it("adds a connection to the store on CREATE_CONNECTION", () => {
       const state = new Immutable.Map();
-      const action = actions.addConnection({
+      const action = actions.createConnection({
         id: "Norr Mälarstrand",
         sourceId: "T-Centralen",
         destinationId: "Rådhuset",

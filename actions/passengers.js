@@ -1,10 +1,10 @@
-export const ADD_PASSENGER = "ADD_PASSENGER";
+export const CREATE_PASSENGER = "CREATE_PASSENGER";
 export const ALIGHT = "ALIGHT";
 export const BOARD = "BOARD";
 
 export function addPassenger(passenger) {
   return {
-    type: ADD_PASSENGER,
+    type: CREATE_PASSENGER,
     passenger
   };
 }

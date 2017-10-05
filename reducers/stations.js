@@ -3,7 +3,7 @@ import { createReducer } from "redux-create-reducer";
 import actions from "../actions";
 
 export const reducer = createReducer(new Immutable.Map(), {
-  [actions.ADD_STATION](state, action) {
+  [actions.CREATE_STATION](state, action) {
     return state.set(
       action.station.id,
       Immutable.fromJS({
