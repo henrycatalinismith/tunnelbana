@@ -8,19 +8,32 @@ import Passenger from "./Passenger";
 export class Station extends React.Component {
   static propTypes = {
     id: PropTypes.string,
+
     station: PropTypes.object,
     passengers: PropTypes.object,
+    dragon: PropTypes.object,
+
     selectStation: PropTypes.func,
-    deselectStation: PropTypes.func
+    deselectStation: PropTypes.func,
+    createConnection: PropTypes.func
   };
 
   constructor() {
     super();
     this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
   }
 
   onMouseDown(event) {
     this.props.selectStation(this.props.station.get("id"));
+  }
+
+  onMouseEnter(event) {
+    const dragon = this.props.dragon.toJS();
+    if (dragon.entity !== "terminal") {
+      return;
+    }
+    this.props.createConnection(this.props.id);
   }
 
   render() {
@@ -38,6 +51,7 @@ export class Station extends React.Component {
           strokeWidth="5"
           fill="white"
           onMouseDown={this.onMouseDown}
+          onMouseEnter={this.onMouseEnter}
         />
         {this.props.passengers.map((passenger, i) => {
           return (
@@ -61,14 +75,18 @@ const mapStateToProps = (state, ownProps) => {
       .byId(ownProps.id),
     passengers: select("passengers")
       .from(state)
-      .byStationId(ownProps.id)
+      .byStationId(ownProps.id),
+    dragon: select("dragon")
+      .from(state)
+      .dragon()
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     selectStation: id => dispatch(actions.dragonGrabStation(id)),
-    deselectStation: id => dispatch(actions.dragonDrop("station", id))
+    deselectStation: id => dispatch(actions.dragonDrop("station", id)),
+    createConnection: id => dispatch(actions.dragonCreateConnection(id))
   };
 };
 
