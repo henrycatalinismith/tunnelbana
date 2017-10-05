@@ -24,7 +24,7 @@ export class Connection extends React.Component {
     const line = this.props.line && this.props.line.toJS();
     const destination = this.props.destination && this.props.destination.toJS();
     const terminal = this.props.terminal;
-    const tracks = this.props.tracks.toJS();
+    const tracks = this.props.tracks;
 
     let path;
 
@@ -43,13 +43,9 @@ export class Connection extends React.Component {
           />
         )}
 
-        <path
-          d={path}
-          stroke={line.color}
-          strokeWidth={strokeWidth}
-          strokeLinejoin="round"
-          fill="none"
-        />
+        {tracks.map((track, i) => {
+          return <Track key={`track-${i}`} id={track.get("id")} />;
+        })}
 
         {this.props.destinationTerminal && (
           <Terminal
