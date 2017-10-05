@@ -42,9 +42,9 @@ const path = (source, destination) => {
   } else {
     let p1, p2;
 
-    const addTrack = (p1, p2, sourceId, destinationId, ordinality) => {
+    const createTrack = (p1, p2, sourceId, destinationId, ordinality) => {
       store.dispatch(
-        actions.addTrack({
+        actions.createTrack({
           connectionId: connection.id,
           lineId,
           sourceId,
@@ -86,13 +86,13 @@ const path = (source, destination) => {
 };
 
 export const middleware = createMiddleware((before, after, cancel) => ({
-  [before(actions.ADD_TRACK)](store, action) {
+  [before(actions.CREATE_TRACK)](store, action) {
     if (!action.track.id) {
       action.track.id = uuid();
     }
   },
 
-  [after(actions.ADD_CONNECTION)](store, { connection }) {
+  [after(actions.CREATE_CONNECTION)](store, { connection }) {
     const { lineId, sourceId, destinationId } = connection;
     const state = store.getState();
     const connections = store.getState().get("connections");
@@ -112,9 +112,9 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       .byId(destinationId)
       .toJS();
 
-    const addTrack = (p1, p2, ordinality) => {
+    const createTrack = (p1, p2, ordinality) => {
       store.dispatch(
-        actions.addTrack({
+        actions.createTrack({
           connectionId: connection.id,
           lineId,
           sourceId,
@@ -130,7 +130,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
 
     const tracks = path(source, destination);
     tracks.forEach((track, i) => {
-      addTrack(track[0], track[1], i);
+      createTrack(track[0], track[1], i);
     });
   },
 
@@ -165,7 +165,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       newTracks.forEach((track, i) => {
         if (!tracks[i]) {
           store.dispatch(
-            actions.addTrack({
+            actions.createTrack({
               connectionId: connection.id,
               lineId,
               sourceId,
@@ -228,7 +228,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     newTracks.forEach((track, i) => {
       if (!tracks[i]) {
         store.dispatch(
-          actions.addTrack({
+          actions.createTrack({
             connectionId: connection.id,
             lineId,
             sourceId,

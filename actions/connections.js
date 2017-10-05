@@ -1,8 +1,8 @@
-export const ADD_CONNECTION = "ADD_CONNECTION";
+export const CREATE_CONNECTION = "CREATE_CONNECTION";
 
-export function addConnection(connection) {
+export function createConnection(connection) {
   return {
-    type: ADD_CONNECTION,
+    type: CREATE_CONNECTION,
     connection
   };
 }

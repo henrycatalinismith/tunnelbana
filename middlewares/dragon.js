@@ -17,7 +17,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     const terminalId = uuid();
 
     store.dispatch(
-      actions.addConnection({
+      actions.createConnection({
         id: connectionId,
         sourceId: stationId,
         lineId: "Riverside" // todo: pick 1st empty line for this
@@ -25,7 +25,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     );
 
     store.dispatch(
-      actions.addTerminal({
+      actions.createTerminal({
         id: uuid(),
         connectionId,
         stationId,
@@ -34,7 +34,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     );
 
     store.dispatch(
-      actions.addTerminal({
+      actions.createTerminal({
         id: terminalId,
         connectionId,
         lineId: "Riverside" // todo: pick 1st empty line for this

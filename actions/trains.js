@@ -1,10 +1,10 @@
-export const ADD_TRAIN = "ADD_TRAIN";
+export const CREATE_TRAIN = "CREATE_TRAIN";
 export const DEPARTURE = "DEPARTURE";
 export const ARRIVAL = "ARRIVAL";
 
-export function addTrain(train) {
+export function createTrain(train) {
   return {
-    type: ADD_TRAIN,
+    type: CREATE_TRAIN,
     train
   };
 }

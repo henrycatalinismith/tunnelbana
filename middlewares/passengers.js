@@ -4,7 +4,7 @@ import actions from "../actions";
 import { select } from "../reducers";
 
 export const middleware = createMiddleware((before, after) => ({
-  [before(actions.ADD_PASSENGER)](store, action) {
+  [before(actions.CREATE_PASSENGER)](store, action) {
     if (!action.passenger.id) {
       action.passenger.id = uuid();
     }

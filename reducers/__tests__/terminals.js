@@ -4,9 +4,9 @@ import { reducer, selectors } from "../terminals";
 
 describe("terminals", () => {
   describe("reducer", () => {
-    it("adds a terminal to the store on ADD_TERMINAL", () => {
+    it("adds a terminal to the store on CREATE_TERMINAL", () => {
       const state = new Immutable.Map();
-      const action = actions.addTerminal({
+      const action = actions.createTerminal({
         id: "Example Terminal",
         connectionId: "Connection 1",
         lineId: "Red",

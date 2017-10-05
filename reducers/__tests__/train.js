@@ -4,9 +4,9 @@ import { reducer, selectors } from "../trains";
 
 describe("trains", () => {
   describe("reducer", () => {
-    it("adds a train to the store on ADD_TRAIN", () => {
+    it("adds a train to the store on CREATE_TRAIN", () => {
       const state = new Immutable.Map();
-      const action = actions.addTrain({
+      const action = actions.createTrain({
         id: "Thomas"
       });
       const newState = reducer(state, action);
