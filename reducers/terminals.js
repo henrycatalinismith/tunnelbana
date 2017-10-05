@@ -3,7 +3,7 @@ import { createReducer } from "redux-create-reducer";
 import actions from "../actions";
 
 export const reducer = createReducer(new Immutable.Map(), {
-  [actions.ADD_TERMINAL](state, action) {
+  [actions.CREATE_TERMINAL](state, action) {
     return state.set(
       action.terminal.id,
       Immutable.fromJS({
@@ -16,7 +16,7 @@ export const reducer = createReducer(new Immutable.Map(), {
     );
   },
 
-  [actions.ADD_CONNECTION](state, action) {
+  [actions.CREATE_CONNECTION](state, action) {
     const { lineId, sourceId, destinationId } = action.connection;
     const newSource = selectors.byLineAndStation(state, lineId, sourceId);
     const newDestination = selectors.byLineAndStation(
