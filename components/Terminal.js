@@ -37,43 +37,16 @@ export class Terminal extends React.Component {
     const x = typeof terminal.x === "undefined" ? station.x : terminal.x;
     const y = typeof terminal.y === "undefined" ? station.y : terminal.y;
 
-    const width = 20;
-    const height = 20;
-
+    const width = 10;
+    const height = 30;
     let bottom = { x, y };
-    let topLeft = { x: x - width, y: y - height };
-    let topRight = { x: x + width, y: y - height };
-    const center = {
-      x: bottom.x,
-      y: bottom.y - height / 2
-    };
-
-    if (false && terminal.isSelected) {
-      const origin = { x: 0, y: 0 };
-      const point = { x: this.state.xOffset, y: this.state.yOffset };
-      const radians = angle(point, origin) - Math.PI / 2;
-      bottom = rotate(center, bottom, radians);
-      topLeft = rotate(center, topLeft, radians);
-      topRight = rotate(center, topRight, radians);
-    }
-
-    const points = [
-      [bottom.x, bottom.y].join(","),
-      [topLeft.x, topLeft.y].join(","),
-      [topRight.x, topRight.y].join(",")
-    ].join(" ");
-
-    // stick a huge transparent border around it while it's selected so that
-    // the user doesn't accidentally mouseout the polygon because of the slight
-    // redux/svg lag
-    const stroke = terminal.isSelected ? "transparent" : undefined;
 
     return (
       <g className="terminal" id={terminal.id}>
         <rect
           style={{ cursor: "move" }}
-          width={10}
-          height={30}
+          width={width}
+          height={height}
           fill={line.color}
           x={bottom.x - 5}
           y={bottom.y - 25}
