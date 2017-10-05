@@ -4,9 +4,9 @@ import { reducer, selectors } from "../tracks";
 
 describe("tracks", () => {
   describe("reducer", () => {
-    it("adds a track to the store on ADD_TRACK", () => {
+    it("adds a track to the store on CREATE_TRACK", () => {
       const state = new Immutable.Map();
-      const action = actions.addTrack({
+      const action = actions.createTrack({
         id: "Track1"
       });
       const newState = reducer(state, action);

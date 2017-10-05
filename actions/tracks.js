@@ -1,10 +1,10 @@
-export const ADD_TRACK = "ADD_TRACK";
+export const CREATE_TRACK = "CREATE_TRACK";
 export const UPDATE_TRACK = "UPDATE_TRACK";
 export const DELETE_TRACK = "DELETE_TRACK";
 
-export function addTrack(track) {
+export function createTrack(track) {
   return {
-    type: ADD_TRACK,
+    type: CREATE_TRACK,
     track
   };
 }
