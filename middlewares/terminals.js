@@ -4,13 +4,19 @@ import actions from "../actions";
 import { select } from "../reducers";
 
 export const middleware = createMiddleware((before, after, cancel) => ({
-  [before(actions.CREATE_TERMINAL)](store, action) {
+  [before(actions.CREATE_TERMINAL)]: function inferTerminalProperties(
+    store,
+    action
+  ) {
     if (!action.terminal.id) {
       action.terminal.id = uuid();
     }
   },
 
-  [after(actions.CREATE_CONNECTION)](store, { connection }) {
+  [after(actions.CREATE_CONNECTION)]: function createTerminalsForNewConnection(
+    store,
+    { connection }
+  ) {
     const { lineId, sourceId, destinationId } = connection;
     if (!destinationId) {
       return;
