@@ -4,14 +4,41 @@ import actions from "../actions";
 import { select } from "../reducers";
 
 export const middleware = createMiddleware((before, after, cancel) => ({
-  [cancel(actions.DRAGON_DROP)](store, action) {
+  [cancel(actions.DRAGON_DROP)]: function redispatchMoreSpecificDragonDrop(
+    store,
+    action
+  ) {
     if (action.entity === "terminal" && !!action.id) {
       store.dispatch(actions.dragonDropTerminal(action.id));
       return true;
     }
   },
 
-  [cancel(actions.DRAGON_GRAB_STATION)](store, action) {
+  [cancel(actions.DRAGON_MOVE)]: function redispatchMoreSpecificDragonMove(
+    store,
+    action
+  ) {
+    const dragon = store.getState().get("dragon");
+    const entity = dragon.get("entity");
+    const id = dragon.get("id");
+
+    if (entity === "station" && !!id) {
+      store.dispatch(actions.dragonMoveStation(action.x, action.y, id));
+      return true;
+    }
+
+    if (entity === "terminal" && !!id) {
+      store.dispatch(actions.dragonMoveTerminal(action.x, action.y, id));
+      return true;
+    }
+
+    return false;
+  },
+
+  [cancel(actions.DRAGON_GRAB_STATION)]: function startCreatingConnection(
+    store,
+    action
+  ) {
     const stationId = action.station.id;
     const connectionId = uuid();
     const terminalId = uuid();
@@ -46,25 +73,10 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     return true;
   },
 
-  [cancel(actions.DRAGON_MOVE)](store, action) {
-    const dragon = store.getState().get("dragon");
-    const entity = dragon.get("entity");
-    const id = dragon.get("id");
-
-    if (entity === "station" && !!id) {
-      store.dispatch(actions.dragonMoveStation(action.x, action.y, id));
-      return true;
-    }
-
-    if (entity === "terminal" && !!id) {
-      store.dispatch(actions.dragonMoveTerminal(action.x, action.y, id));
-      return true;
-    }
-
-    return false;
-  },
-
-  [cancel(actions.DRAGON_CREATE_CONNECTION)](store, action) {
+  [cancel(actions.DRAGON_CREATE_CONNECTION)]: function finishCreatingConnection(
+    store,
+    action
+  ) {
     const state = store.getState();
 
     const dragon = store

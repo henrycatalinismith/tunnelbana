@@ -17,7 +17,7 @@ import * as points from "../geometry/points";
 import { getConnection } from "../reducers/connections";
 
 export const middleware = createMiddleware((before, after, cancel) => ({
-  [before(actions.DEPARTURE)](store, action) {
+  [before(actions.DEPARTURE)]: function inferJourneyProperties(store, action) {
     const state = store.getState();
     const train = select("trains")
       .from(state)
@@ -46,7 +46,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     }
   },
 
-  [before(actions.ARRIVAL)](store, action) {
+  [before(actions.ARRIVAL)]: function hydrateActionJourney(store, action) {
     const state = store.getState();
     const journey = select("journeys")
       .from(state)
@@ -55,7 +55,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     action.journey = { ...action.journey, ...journey };
   },
 
-  [after(actions.ARRIVAL)](store, { journey }) {
+  [after(actions.ARRIVAL)]: function scheduleDeparture(store, { journey }) {
     const state = store.getState();
     const { connectionId, destinationId } = select("connections")
       .from(state)
@@ -71,7 +71,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     }, 1000);
   },
 
-  [after(actions.DEPARTURE)](store, { journey }) {
+  [after(actions.DEPARTURE)]: function animateJourney(store, { journey }) {
     const state = store.getState();
 
     const train = select("trains")
