@@ -86,13 +86,16 @@ const path = (source, destination) => {
 };
 
 export const middleware = createMiddleware((before, after, cancel) => ({
-  [before(actions.CREATE_TRACK)](store, action) {
+  [before(actions.CREATE_TRACK)]: function inferTrackProperties(store, action) {
     if (!action.track.id) {
       action.track.id = uuid();
     }
   },
 
-  [after(actions.CREATE_CONNECTION)](store, { connection }) {
+  [after(actions.CREATE_CONNECTION)]: function createTracksForNewConnetion(
+    store,
+    { connection }
+  ) {
     const { lineId, sourceId, destinationId } = connection;
     const state = store.getState();
     const connections = store.getState().get("connections");
@@ -134,7 +137,10 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     });
   },
 
-  [after(actions.DRAGON_MOVE_STATION)](store, action) {
+  [after(actions.DRAGON_MOVE_STATION)]: function moveTracksForMovedStation(
+    store,
+    action
+  ) {
     const { id: stationId } = action;
     const state = store.getState();
 
@@ -198,7 +204,10 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     });
   },
 
-  [after(actions.DRAGON_MOVE_TERMINAL)](store, action) {
+  [after(actions.DRAGON_MOVE_TERMINAL)]: function moveTracksForMovedTerminal(
+    store,
+    action
+  ) {
     const { id: terminalId } = action;
     const state = store.getState();
 
