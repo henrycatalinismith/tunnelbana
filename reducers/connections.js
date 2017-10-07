@@ -14,6 +14,12 @@ export const reducer = createReducer(new Immutable.Map(), {
         terminalId: undefined
       })
     );
+  },
+
+  [actions.UPDATE_CONNECTION](state, action) {
+    return state.update(action.connection.id, connection => {
+      return connection.merge(Immutable.fromJS(action.connection));
+    });
   }
 });
 
