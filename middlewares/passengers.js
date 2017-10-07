@@ -4,13 +4,16 @@ import actions from "../actions";
 import { select } from "../reducers";
 
 export const middleware = createMiddleware((before, after) => ({
-  [before(actions.CREATE_PASSENGER)](store, action) {
+  [before(actions.CREATE_PASSENGER)]: function inferPassengerProperties(
+    store,
+    action
+  ) {
     if (!action.passenger.id) {
       action.passenger.id = uuid();
     }
   },
 
-  [after(actions.ARRIVAL)](store, { journey }) {
+  [after(actions.ARRIVAL)]: function alightTrains(store, { journey }) {
     const state = store.getState();
     const trainPassengers = select("passengers")
       .from(state)
@@ -23,7 +26,7 @@ export const middleware = createMiddleware((before, after) => ({
     }
   },
 
-  [after(actions.ARRIVAL)](store, { journey }) {
+  [after(actions.ARRIVAL)]: function boardTrains(store, { journey }) {
     const state = store.getState();
     const platformPassengers = select("passengers")
       .from(state)
