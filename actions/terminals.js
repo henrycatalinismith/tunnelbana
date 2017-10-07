@@ -1,5 +1,6 @@
 export const CREATE_TERMINAL = "CREATE_TERMINAL";
 export const DELETE_TERMINAL = "DELETE_TERMINAL";
+export const UPDATE_TERMINAL = "UPDATE_TERMINAL";
 
 export const SELECT_TERMINAL = "SELECT_TERMINAL";
 export const DESELECT_TERMINAL = "DESELECT_TERMINAL";
@@ -16,6 +17,13 @@ export function deleteTerminal(id) {
   return {
     type: DELETE_TERMINAL,
     terminal: { id }
+  };
+}
+
+export function updateTerminal(terminal) {
+  return {
+    type: UPDATE_TERMINAL,
+    terminal
   };
 }
 
