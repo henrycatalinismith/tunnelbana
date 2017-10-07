@@ -80,11 +80,14 @@ export const middleware = createMiddleware((before, after, cancel) => ({
 
     const otherTerminal = select("terminals")
       .from(state)
-      .byLineAndStation(lineId, connection.sourceId)
-      .toJS();
+      .byLineAndStation(lineId, connection.sourceId);
 
     store.dispatch(actions.deleteTerminal(terminal.id));
-    store.dispatch(actions.deleteTerminal(otherTerminal.id));
+
+    if (otherTerminal) {
+      store.dispatch(actions.deleteTerminal(otherTerminal.get("id")));
+    }
+
     tracks.forEach(track => store.dispatch(actions.deleteTrack(track.id)));
   }
 }));
