@@ -93,14 +93,26 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       return true;
     }
 
-    // probably need to revisit this tbh cos like i dunno just feels a bit
-    // messy creating a new connection instead of making the "pending" one
-    // real by setting its destinationId
+    store.dispatch(
+      actions.updateConnection({
+        id: connection.id,
+        destinationId
+      })
+    );
+
+    const newId = uuid();
     store.dispatch(
       actions.createConnection({
-        sourceId,
-        destinationId,
-        lineId
+        id: newId,
+        sourceId: destinationId,
+        lineId: "Riverside" // todo: pick 1st empty line for this
+      })
+    );
+
+    store.dispatch(
+      actions.updateTerminal({
+        id: terminal.id,
+        connectionId: newId
       })
     );
 
