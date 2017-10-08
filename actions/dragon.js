@@ -14,8 +14,7 @@ export const DRAGON_CREATE_CONNECTION = "DRAGON_CREATE_CONNECTION";
 export function dragonDrop(entity, id) {
   return {
     type: DRAGON_DROP,
-    entity,
-    id
+    dragon: { entity, id }
   };
 }
 
