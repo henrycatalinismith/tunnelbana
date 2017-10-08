@@ -24,10 +24,7 @@ export const middleware = createMiddleware((before, after) => ({
         actions.alight(trainPassengers.first().get("id"), journey.destinationId)
       );
     }
-  },
 
-  [after(actions.ARRIVAL)]: function boardTrains(store, { journey }) {
-    const state = store.getState();
     const platformPassengers = select("passengers")
       .from(state)
       .byStationId(journey.destinationId);

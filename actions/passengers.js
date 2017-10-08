@@ -9,18 +9,16 @@ export function addPassenger(passenger) {
   };
 }
 
-export function alight(passengerId, stationId) {
+export function alight(id, stationId) {
   return {
     type: ALIGHT,
-    passengerId,
-    stationId
+    passenger: { id, stationId }
   };
 }
 
-export function board(passengerId, trainId) {
+export function board(id, trainId) {
   return {
     type: BOARD,
-    passengerId,
-    trainId
+    passenger: { id, trainId }
   };
 }
