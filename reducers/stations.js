@@ -37,17 +37,6 @@ export const reducer = createReducer(new Immutable.Map(), {
     });
   },
 
-  [actions.DRAGON_MOVE_STATION](state, action) {
-    return state.update(action.id, station => {
-      return station.merge(
-        Immutable.fromJS({
-          x: action.x,
-          y: action.y
-        })
-      );
-    });
-  },
-
   [actions.DRAGON_DROP](state, action) {
     if (action.dragon.entity !== "station") return state;
     return state.update(action.dragon.id, station => {
