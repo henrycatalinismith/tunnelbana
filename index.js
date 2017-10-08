@@ -40,12 +40,6 @@ export function start(options, callback) {
     }
   });
 
-  window.addEventListener("focus", () => {
-    store.dispatch(actions.focusWindow());
-    clock.resume();
-    TweenMax.resumeAll(true, true);
-  });
-
   window.addEventListener("resize", () => {
     store.dispatch(
       actions.resizeWindow({
