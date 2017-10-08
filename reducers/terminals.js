@@ -66,7 +66,7 @@ export const reducer = createReducer(new Immutable.Map(), {
 
   [actions.DRAGON_DROP](state, action) {
     if (action.entity !== "terminal") return state;
-    return state.update(action.id, terminal => {
+    return state.update(action.dragon.id, terminal => {
       return terminal.merge(
         Immutable.fromJS({
           isSelected: false
