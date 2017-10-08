@@ -5,7 +5,7 @@ import { reducer, selectors } from "../viewbox";
 describe("viewbox", () => {
   describe("reducer", () => {
     it("adds a station to the store on CREATE_STATION", () => {
-      const action = actions.windowResize({
+      const action = actions.resizeWindow({
         width: 100,
         height: 200
       });
