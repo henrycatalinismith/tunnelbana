@@ -8,8 +8,8 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     store,
     action
   ) {
-    if (action.entity === "terminal" && !!action.id) {
-      store.dispatch(actions.dragonDropTerminal(action.id));
+    if (action.dragon.entity === "terminal" && !!action.dragon.id) {
+      store.dispatch(actions.dragonDropTerminal(action.dragon.id));
       return true;
     }
   },
