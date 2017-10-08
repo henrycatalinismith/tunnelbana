@@ -35,12 +35,12 @@ export const reducer = createReducer(new Immutable.Map(), {
     return state;
   },
 
-  [actions.SELECT_TERMINAL](state, action) {
+  [actions.GRAB_TERMINAL](state, action) {
     const terminalId = action.terminalId;
     return state.setIn([terminalId, "isSelected"], true);
   },
 
-  [actions.DESELECT_TERMINAL](state, action) {
+  [actions.DROP_TERMINAL](state, action) {
     return state.update(action.terminalId, terminal => {
       return terminal.merge(
         Immutable.fromJS({

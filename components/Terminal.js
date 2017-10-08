@@ -12,11 +12,11 @@ export class Terminal extends React.Component {
     dragon: PropTypes.object,
     terminal: PropTypes.object,
     line: PropTypes.object,
-    selectTerminal: PropTypes.func
+    grabTerminal: PropTypes.func
   };
 
   static defaultProps = {
-    selectTerminal: () => {}
+    grabTerminal: () => {}
   };
 
   constructor() {
@@ -25,7 +25,7 @@ export class Terminal extends React.Component {
   }
 
   onMouseDown(event) {
-    this.props.selectTerminal(this.props.terminal.get("id"));
+    this.props.grabTerminal(this.props.terminal.get("id"));
   }
 
   render() {
@@ -73,7 +73,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectTerminal: id => dispatch(actions.dragonGrab("terminal", id))
+    grabTerminal: id => dispatch(actions.dragonGrab("terminal", id))
   };
 };
 

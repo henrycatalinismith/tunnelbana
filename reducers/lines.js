@@ -14,11 +14,11 @@ export const reducer = createReducer(new Immutable.Map(), {
     );
   },
 
-  [actions.SELECT_TERMINAL](state, action) {
+  [actions.GRAB_TERMINAL](state, action) {
     return state.setIn([action.lineId, "isSelected"], true);
   },
 
-  [actions.DESELECT_TERMINAL](state, action) {
+  [actions.DROP_TERMINAL](state, action) {
     return state.setIn([action.lineId, "isSelected"], false);
   }
 });

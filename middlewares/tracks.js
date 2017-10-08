@@ -204,7 +204,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     });
   },
 
-  [after(actions.DRAGON_MOVE_TERMINAL)]: function moveTracksForMovedTerminal(
+  [after(actions.DRAGON_DRAG_TERMINAL)]: function moveTracksForMovedTerminal(
     store,
     action
   ) {

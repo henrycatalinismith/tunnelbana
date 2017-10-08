@@ -2,9 +2,9 @@ export const CREATE_TERMINAL = "CREATE_TERMINAL";
 export const DELETE_TERMINAL = "DELETE_TERMINAL";
 export const UPDATE_TERMINAL = "UPDATE_TERMINAL";
 
-export const SELECT_TERMINAL = "SELECT_TERMINAL";
-export const DESELECT_TERMINAL = "DESELECT_TERMINAL";
-export const MOVE_TERMINAL = "MOVE_TERMINAL";
+export const DRAG_TERMINAL = "DRAG_TERMINAL";
+export const DROP_TERMINAL = "DROP_TERMINAL";
+export const GRAB_TERMINAL = "GRAB_TERMINAL";
 
 export function createTerminal(terminal) {
   return {
@@ -27,25 +27,25 @@ export function updateTerminal(terminal) {
   };
 }
 
-export function selectTerminal(selection) {
+export function dropTerminal(selection) {
   return {
-    type: SELECT_TERMINAL,
+    type: DROP_TERMINAL,
     ...selection
   };
 }
 
-export function deselectTerminal(selection) {
+export function dragTerminal(terminalId, x, y) {
   return {
-    type: DESELECT_TERMINAL,
-    ...selection
-  };
-}
-
-export function moveTerminal(terminalId, x, y) {
-  return {
-    type: MOVE_TERMINAL,
+    type: DRAG_TERMINAL,
     terminalId,
     x,
     y
+  };
+}
+
+export function grabTerminal(selection) {
+  return {
+    type: GRAB_TERMINAL,
+    ...selection
   };
 }
