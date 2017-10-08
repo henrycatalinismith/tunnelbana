@@ -14,9 +14,9 @@ export function focusWindow() {
   };
 }
 
-export function resizeWindow(window) {
+export function resizeWindow(width, height) {
   return {
     type: RESIZE_WINDOW,
-    window
+    window: { width, height }
   };
 }
