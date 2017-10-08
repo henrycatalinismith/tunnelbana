@@ -3,8 +3,6 @@ import { createReducer } from "redux-create-reducer";
 import actions from "../actions";
 
 const initialState = Immutable.fromJS({
-  minX: 0,
-  minY: 0,
   width: 0,
   height: 0
 });
