@@ -1,22 +1,22 @@
-export const WINDOW_BLUR = "WINDOW_BLUR";
-export const WINDOW_FOCUS = "WINDOW_FOCUS";
-export const WINDOW_RESIZE = "WINDOW_RESIZE";
+export const BLUR_WINDOW = "BLUR_WINDOW";
+export const FOCUS_WINDOW = "FOCUS_WINDOW";
+export const RESIZE_WINDOW = "RESIZE_WINDOW";
 
-export function windowBlur() {
+export function blurWindow() {
   return {
-    type: WINDOW_BLUR
+    type: BLUR_WINDOW
   };
 }
 
-export function windowFocus() {
+export function focusWindow() {
   return {
-    type: WINDOW_FOCUS
+    type: FOCUS_WINDOW
   };
 }
 
-export function windowResize(window) {
+export function resizeWindow(window) {
   return {
-    type: WINDOW_RESIZE,
+    type: RESIZE_WINDOW,
     window
   };
 }
