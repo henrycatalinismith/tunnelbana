@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }, 100);
 
-    game.dispatch.addPassenger({
+    game.dispatch.createPassenger({
       stationId: blue1
     });
   });
