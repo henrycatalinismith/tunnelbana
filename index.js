@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider, connect } from "react-redux";
-import { combineReducers, createStore } from "redux";
-import { TweenMax, TweenLite } from "gsap";
+import { Provider } from "react-redux";
+import { TweenMax } from "gsap";
 import { createApp } from "signalbox";
 
 import actions from "./actions";
@@ -21,12 +20,6 @@ export function start(options, callback) {
     </Provider>,
     options.element
   );
-
-  window.addEventListener("blur", () => {
-    store.dispatch(actions.blurWindow());
-    clock.pause();
-    TweenMax.pauseAll(true, true);
-  });
 
   let throttle = false;
   window.addEventListener("mousemove", event => {
