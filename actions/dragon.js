@@ -5,7 +5,7 @@ export const DRAGON_MOVE = "DRAGON_MOVE";
 
 // deprecate
 export const DRAGON_MOVE_STATION = "DRAGON_MOVE_STATION";
-export const DRAGON_MOVE_TERMINAL = "DRAGON_MOVE_TERMINAL";
+export const DRAGON_DRAG_TERMINAL = "DRAGON_DRAG_TERMINAL";
 export const DRAGON_GRAB_STATION = "DRAGON_GRAB_STATION";
 export const DRAGON_GRAB_TERMINAL = "DRAGON_GRAB_TERMINAL";
 export const DRAGON_DROP_TERMINAL = "DRAGON_DROP_TERMINAL";
@@ -57,7 +57,7 @@ export function dragonMoveStation(x, y, id) {
 
 export function dragonMoveTerminal(x, y, id) {
   return {
-    type: DRAGON_MOVE_TERMINAL,
+    type: DRAGON_DRAG_TERMINAL,
     x,
     y,
     id
