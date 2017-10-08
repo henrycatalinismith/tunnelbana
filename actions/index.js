@@ -8,7 +8,6 @@ import * as stations from "./stations";
 import * as terminals from "./terminals";
 import * as tracks from "./tracks";
 import * as trains from "./trains";
-import * as viewbox from "./viewbox";
 import * as window from "./window";
 
 export default {
@@ -22,6 +21,5 @@ export default {
   ...terminals,
   ...tracks,
   ...trains,
-  ...viewbox,
   ...window
 };
