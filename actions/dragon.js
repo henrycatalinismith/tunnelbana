@@ -21,16 +21,14 @@ export function dragonDrop(entity, id) {
 export function dragonGrab(entity, id) {
   return {
     type: DRAGON_GRAB,
-    entity,
-    id
+    dragon: { entity, id }
   };
 }
 
 export function dragonMove(x, y) {
   return {
     type: DRAGON_MOVE,
-    x,
-    y
+    dragon: { x, y }
   };
 }
 

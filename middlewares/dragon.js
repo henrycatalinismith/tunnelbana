@@ -23,12 +23,16 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     const id = dragon.get("id");
 
     if (entity === "station" && !!id) {
-      store.dispatch(actions.dragonMoveStation(action.x, action.y, id));
+      store.dispatch(
+        actions.dragonMoveStation(action.dragon.x, action.dragon.y, id)
+      );
       return true;
     }
 
     if (entity === "terminal" && !!id) {
-      store.dispatch(actions.dragonMoveTerminal(action.x, action.y, id));
+      store.dispatch(
+        actions.dragonMoveTerminal(action.dragon.x, action.dragon.y, id)
+      );
       return true;
     }
 
