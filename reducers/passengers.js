@@ -15,10 +15,10 @@ export const reducer = createReducer(new Immutable.Map(), {
   },
 
   [actions.ALIGHT](state, action) {
-    return state.update(action.passengerId, passenger => {
+    return state.update(action.passenger.id, passenger => {
       return passenger.merge(
         Immutable.fromJS({
-          stationId: action.stationId,
+          stationId: action.passenger.stationId,
           trainId: undefined
         })
       );
@@ -26,11 +26,11 @@ export const reducer = createReducer(new Immutable.Map(), {
   },
 
   [actions.BOARD](state, action) {
-    return state.update(action.passengerId, passenger => {
+    return state.update(action.passenger.id, passenger => {
       return passenger.merge(
         Immutable.fromJS({
           stationId: undefined,
-          trainId: action.trainId
+          trainId: action.passenger.trainId
         })
       );
     });
