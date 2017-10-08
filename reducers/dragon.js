@@ -13,8 +13,8 @@ export const reducer = createReducer(initialState, {
   [actions.DRAGON_GRAB](state, action) {
     return state.merge(
       Immutable.fromJS({
-        entity: action.entity,
-        id: action.id
+        entity: action.dragon.entity,
+        id: action.dragon.id
       })
     );
   },
@@ -31,8 +31,8 @@ export const reducer = createReducer(initialState, {
   [actions.DRAGON_MOVE](state, action) {
     return state.merge(
       Immutable.fromJS({
-        x: action.x,
-        y: action.y
+        x: action.dragon.x,
+        y: action.dragon.y
       })
     );
   },
