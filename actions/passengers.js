@@ -2,7 +2,7 @@ export const CREATE_PASSENGER = "CREATE_PASSENGER";
 export const ALIGHT = "ALIGHT";
 export const BOARD = "BOARD";
 
-export function addPassenger(passenger) {
+export function createPassenger(passenger) {
   return {
     type: CREATE_PASSENGER,
     passenger
