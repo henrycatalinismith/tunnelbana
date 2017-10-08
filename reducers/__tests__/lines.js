@@ -21,7 +21,7 @@ describe("lines", () => {
       });
     });
 
-    it("marks the line as selected on SELECT_TERMINAL", () => {
+    it("marks the line as selected on GRAB_TERMINAL", () => {
       const state = Immutable.fromJS({
         "Röda Linjen": {
           id: "Röda Linjen",
@@ -29,12 +29,12 @@ describe("lines", () => {
           isSelected: false
         }
       });
-      const action = actions.selectTerminal({ lineId: "Röda Linjen" });
+      const action = actions.grabTerminal({ lineId: "Röda Linjen" });
       const newState = reducer(state, action);
       expect(newState.getIn(["Röda Linjen", "isSelected"])).toEqual(true);
     });
 
-    it("marks the line as not selected on DESELECT_TERMINAL", () => {
+    it("marks the line as not selected on DROP_TERMINAL", () => {
       const state = Immutable.fromJS({
         "Röda Linjen": {
           id: "Röda Linjen",
@@ -42,7 +42,7 @@ describe("lines", () => {
           isSelected: true
         }
       });
-      const action = actions.deselectTerminal({ lineId: "Röda Linjen" });
+      const action = actions.dropTerminal({ lineId: "Röda Linjen" });
       const newState = reducer(state, action);
       expect(newState.getIn(["Röda Linjen", "isSelected"])).toEqual(false);
     });
