@@ -45,9 +45,9 @@ import {
 } from "./trains";
 
 import {
-  reducer as viewboxReducer,
-  selectors as viewboxSelectors
-} from "./viewbox";
+  reducer as windowReducer,
+  selectors as windowSelectors
+} from "./window";
 
 import middlewares from "../middlewares";
 
@@ -61,7 +61,7 @@ const reducer = combineReducers({
   terminals: terminalsReducer,
   tracks: tracksReducer,
   trains: trainsReducer,
-  viewbox: viewboxReducer
+  window: windowReducer
 });
 
 const selectors = {
@@ -74,7 +74,7 @@ const selectors = {
   terminals: terminalSelectors,
   tracks: trackSelectors,
   trains: trainSelectors,
-  viewbox: viewboxSelectors
+  window: windowSelectors
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
