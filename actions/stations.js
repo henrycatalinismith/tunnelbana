@@ -19,8 +19,6 @@ export function importStation(station) {
 export function moveStation(stationId, x, y) {
   return {
     type: MOVE_STATION,
-    stationId,
-    x,
-    y
+    station: { id, x, y }
   };
 }
