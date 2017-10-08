@@ -1,5 +1,6 @@
 import * as connections from "./connections";
 import * as dragon from "./dragon";
+import * as journeys from "./journeys";
 import * as lines from "./lines";
 import * as passengers from "./passengers";
 import * as stations from "./stations";
@@ -12,6 +13,7 @@ import * as window from "./window";
 export default {
   ...connections,
   ...dragon,
+  ...journeys,
   ...lines,
   ...passengers,
   ...stations,
