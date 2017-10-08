@@ -10,7 +10,7 @@ const initialState = Immutable.fromJS({
 });
 
 export const reducer = createReducer(initialState, {
-  [actions.WINDOW_RESIZE](state, action) {
+  [actions.RESIZE_WINDOW](state, action) {
     return state.merge({
       width: action.window.width,
       height: action.window.height

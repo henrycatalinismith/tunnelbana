@@ -23,7 +23,7 @@ export function start(options, callback) {
   );
 
   window.addEventListener("blur", () => {
-    store.dispatch(actions.windowBlur());
+    store.dispatch(actions.blurWindow());
     clock.pause();
     TweenMax.pauseAll(true, true);
   });
@@ -48,14 +48,14 @@ export function start(options, callback) {
   });
 
   window.addEventListener("focus", () => {
-    store.dispatch(actions.windowFocus());
+    store.dispatch(actions.focusWindow());
     clock.resume();
     TweenMax.resumeAll(true, true);
   });
 
   window.addEventListener("resize", () => {
     store.dispatch(
-      actions.windowResize({
+      actions.resizeWindow({
         width: window.innerWidth,
         height: window.innerHeight
       })
@@ -63,12 +63,13 @@ export function start(options, callback) {
   });
 
   store.dispatch(
-    actions.windowResize({
+    actions.resizeWindow({
       width: window.innerWidth,
       height: window.innerHeight
     })
   );
 
+  store.dispatch(actions.start());
   const game = createApp(store, actions, middlewares, select);
   callback.call(null, game);
 }
