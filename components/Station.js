@@ -84,7 +84,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectStation: id => dispatch(actions.dragonGrabStation(id)),
+    selectStation: id => dispatch(actions.grabStation(id)),
     deselectStation: id => dispatch(actions.dragonDrop("station", id)),
     createConnection: id => dispatch(actions.dragonCreateConnection(id))
   };

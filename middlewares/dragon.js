@@ -32,7 +32,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     return false;
   },
 
-  [cancel(actions.DRAGON_GRAB_STATION)]: function startCreatingConnection(
+  [cancel(actions.GRAB_STATION)]: function startCreatingConnection(
     store,
     action
   ) {
