@@ -137,22 +137,21 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     });
   },
 
-  [after(actions.DRAGON_DRAG_TERMINAL)]: function moveTracksForMovedTerminal(
+  [after(actions.DRAG_TERMINAL)]: function moveTracksForMovedTerminal(
     store,
     action
   ) {
-    const { id: terminalId } = action;
     const state = store.getState();
 
     const terminal = select("terminals")
       .from(state)
-      .byId(terminalId)
+      .byId(action.terminal.id)
       .toJS();
 
     const lineId = terminal.lineId;
     const connection = select("connections")
       .from(state)
-      .byId(terminal.connectionId)
+      .imaginary()
       .toJS();
 
     const sourceId = connection.sourceId;
@@ -166,7 +165,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       .byConnectionId(connection.id)
       .toJS();
 
-    const newTracks = path(source, { x: action.x, y: action.y });
+    const newTracks = path(source, action.terminal);
     newTracks.forEach((track, i) => {
       if (!tracks[i]) {
         store.dispatch(
@@ -200,5 +199,46 @@ export const middleware = createMiddleware((before, after, cancel) => ({
         store.dispatch(actions.deleteTrack(track.id));
       });
     }
+  },
+
+  [before(
+    actions.REALIZE_CONNECTION
+  )]: function fixNewTracksForRealizedConnection(store, action) {
+    const state = store.getState();
+
+    const connection = select("connections")
+      .from(state)
+      .imaginary()
+      .toJS();
+    const source = select("stations")
+      .from(state)
+      .byId(connection.sourceId)
+      .toJS();
+    const destination = select("stations")
+      .from(state)
+      .byId(action.destination.id)
+      .toJS();
+
+    const tracks = select("tracks")
+      .from(state)
+      .byConnectionId(connection.id)
+      .toJS();
+
+    const newTracks = path(source, destination);
+
+    action.tracks = {};
+    tracks.forEach((track, i) => {
+      action.tracks[track.id] = {
+        ...track,
+        destinationId: action.destination.id,
+        x1: newTracks[i][0].x,
+        y1: newTracks[i][0].y,
+        x2: newTracks[i][1].x,
+        y2: newTracks[i][1].y
+      };
+    });
+
+    console.log("tracks: before.REALIZE_CONNECTION");
+    console.log(action.tracks);
   }
 }));

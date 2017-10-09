@@ -20,6 +20,33 @@ export const reducer = createReducer(new Immutable.Map(), {
     return state.update(action.connection.id, connection => {
       return connection.merge(Immutable.fromJS(action.connection));
     });
+  },
+
+  [actions.IMAGINE_CONNECTION](state, action) {
+    return state.set(
+      action.connection.id,
+      Immutable.fromJS({
+        id: action.connection.id,
+        sourceId: action.source.id,
+        lineId: action.line.id,
+        terminalId: action.destinationTerminal.id
+      })
+    );
+  },
+
+  [actions.REALIZE_CONNECTION](state, action) {
+    return state.update(action.connection.id, connection => {
+      return connection.merge(
+        Immutable.fromJS({
+          destinationId: action.destination.id,
+          terminalId: undefined
+        })
+      );
+    });
+  },
+
+  [actions.ABANDON_CONNECTION](state, action) {
+    return state.delete(action.connection.id);
   }
 });
 
@@ -100,5 +127,9 @@ export const selectors = {
           ? sameLine.first().get("sourceId")
           : sameLine.first().get("destinationId")
     };
+  },
+
+  imaginary(state) {
+    return state.filter(c => c.get("destinationId") === undefined).first();
   }
 };

@@ -37,9 +37,7 @@ export function dropTerminal(selection) {
 export function dragTerminal(terminalId, x, y) {
   return {
     type: DRAG_TERMINAL,
-    terminalId,
-    x,
-    y
+    terminal: { id: terminalId, x, y }
   };
 }
 

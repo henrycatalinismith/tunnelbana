@@ -62,38 +62,5 @@ export const middleware = createMiddleware((before, after, cancel) => ({
         })
       );
     }
-  },
-
-  [after(actions.DRAGON_DROP_TERMINAL)](store, action) {
-    const { id: terminalId } = action.terminal;
-    const state = store.getState();
-
-    const terminal = select("terminals")
-      .from(state)
-      .byId(terminalId)
-      .toJS();
-
-    const lineId = terminal.lineId;
-    const connection = select("connections")
-      .from(state)
-      .byId(terminal.connectionId)
-      .toJS();
-
-    const tracks = select("tracks")
-      .from(state)
-      .byConnectionId(connection.id)
-      .toJS();
-
-    const otherTerminal = select("terminals")
-      .from(state)
-      .byLineAndStation(lineId, connection.sourceId);
-
-    store.dispatch(actions.deleteTerminal(terminal.id));
-
-    if (otherTerminal) {
-      store.dispatch(actions.deleteTerminal(otherTerminal.get("id")));
-    }
-
-    tracks.forEach(track => store.dispatch(actions.deleteTrack(track.id)));
   }
 }));

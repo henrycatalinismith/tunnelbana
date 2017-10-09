@@ -83,6 +83,13 @@ export const reducer = createReducer(new Immutable.Map(), {
     return state.update(action.terminal.id, terminal => {
       return terminal.merge(Immutable.fromJS(action.terminal));
     });
+  },
+
+  [actions.IMAGINE_CONNECTION](state, action) {
+    return state.merge({
+      [action.sourceTerminal.id]: action.sourceTerminal,
+      [action.destinationTerminal.id]: action.destinationTerminal
+    });
   }
 });
 
