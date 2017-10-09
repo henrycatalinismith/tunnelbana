@@ -29,6 +29,18 @@ export const reducer = createReducer(new Immutable.Map(), {
 
   [actions.DELETE_TRACK](state, action) {
     return state.delete(action.track.id);
+  },
+
+  [actions.REALIZE_CONNECTION](state, action) {
+    return state.merge(Immutable.fromJS(action.tracks));
+  },
+
+  [actions.ABANDON_CONNECTION](state, action) {
+    const trackIds = selectors
+      .byConnectionId(state, action.connection.id)
+      .toJS()
+      .map(t => t.id);
+    return state.deleteAll(trackIds);
   }
 });
 

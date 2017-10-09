@@ -19,11 +19,20 @@ export const reducer = createReducer(initialState, {
     );
   },
 
-  [actions.DRAGON_GRAB_TERMINAL](state, action) {
+  [actions.IMAGINE_CONNECTION](state, action) {
     return state.merge(
       Immutable.fromJS({
         entity: "terminal",
-        id: action.terminal.id
+        id: action.destinationTerminal.id
+      })
+    );
+  },
+
+  [actions.ABANDON_CONNECTION](state, action) {
+    return state.merge(
+      Immutable.fromJS({
+        entity: undefined,
+        id: undefined
       })
     );
   },
@@ -37,25 +46,16 @@ export const reducer = createReducer(initialState, {
     );
   },
 
-  [actions.DRAGON_DRAG_TERMINAL](state, action) {
+  [actions.DRAG_TERMINAL](state, action) {
     return state.merge(
       Immutable.fromJS({
-        x: action.x,
-        y: action.y
+        x: action.terminal.x,
+        y: action.terminal.y
       })
     );
   },
 
   [actions.DRAGON_DROP](state, action) {
-    return state.merge(
-      Immutable.fromJS({
-        entity: undefined,
-        id: undefined
-      })
-    );
-  },
-
-  [actions.DRAGON_DROP_TERMINAL](state, action) {
     return state.merge(
       Immutable.fromJS({
         entity: undefined,
