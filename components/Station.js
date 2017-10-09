@@ -15,7 +15,7 @@ export class Station extends React.Component {
 
     selectStation: PropTypes.func,
     deselectStation: PropTypes.func,
-    createConnection: PropTypes.func
+    realizeConnection: PropTypes.func
   };
 
   constructor() {
@@ -33,7 +33,7 @@ export class Station extends React.Component {
     if (dragon.entity !== "terminal") {
       return;
     }
-    this.props.createConnection(this.props.id);
+    this.props.realizeConnection(this.props.id);
   }
 
   render() {
@@ -86,7 +86,8 @@ const mapDispatchToProps = dispatch => {
   return {
     selectStation: id => dispatch(actions.grabStation(id)),
     deselectStation: id => dispatch(actions.dragonDrop("station", id)),
-    createConnection: id => dispatch(actions.dragonCreateConnection(id))
+    realizeConnection: id =>
+      dispatch(actions.realizeConnection({ destinationId: id }))
   };
 };
 
