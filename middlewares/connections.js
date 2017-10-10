@@ -34,6 +34,24 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     };
   },
 
+  // https://github.com/railcar/energetic-headlight/commit/77fe402592600d82a411a9fe48206c16e265ae1e#commitcomment-24866416
+  [cancel(actions.REALIZE_CONNECTION)]: function cancelRecursiveConnection(
+    store,
+    action
+  ) {
+    const state = store.getState();
+    const connection = select("connections")
+      .from(state)
+      .imaginary()
+      .toJS();
+
+    const sourceId = connection.sourceId;
+    const destinationId = action.destination.id;
+    const isRecursive = sourceId === destinationId;
+
+    return isRecursive;
+  },
+
   [before(actions.REALIZE_CONNECTION)]: function hydrateNewlyRealizedConnection(
     store,
     action
