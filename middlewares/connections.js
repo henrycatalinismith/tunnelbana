@@ -4,7 +4,7 @@ import actions from "../actions";
 import { select } from "../reducers";
 
 export const middleware = createMiddleware((before, after, cancel) => ({
-  [before(actions.CREATE_CONNECTION)]: function inferConnectionProperties(
+  [before(actions.CREATE_CONNECTION)]: function inferNewConnectionProperties(
     store,
     action
   ) {
@@ -13,10 +13,9 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     }
   },
 
-  [before(actions.IMAGINE_CONNECTION)]: function inferConnectionProperties(
-    store,
-    action
-  ) {
+  [before(
+    actions.IMAGINE_CONNECTION
+  )]: function inferImaginaryConnectionProperties(store, action) {
     if (!action.connection.id) {
       action.connection.id = uuid();
     }
