@@ -137,7 +137,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     });
   },
 
-  [after(actions.DRAG_TERMINAL)]: function moveTracksForMovedTerminal(
+  [before(actions.DRAG_TERMINAL)]: function moveTracksForMovedTerminal(
     store,
     action
   ) {
@@ -165,40 +165,41 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       .byConnectionId(connection.id)
       .toJS();
 
+    action.connection = connection;
+    action.tracks = {};
+
     const newTracks = path(source, action.terminal);
-    newTracks.forEach((track, i) => {
-      if (!tracks[i]) {
-        store.dispatch(
-          actions.createTrack({
-            connectionId: connection.id,
-            lineId,
-            sourceId,
-            destinationId: undefined,
-            ordinality: i,
-            x1: track[0].x,
-            y1: track[0].y,
-            x2: track[1].x,
-            y2: track[1].y
-          })
-        );
+    newTracks.forEach((newTrack, i) => {
+      if (tracks[i]) {
+        const trackId = tracks[i].id;
+        action.tracks[trackId] = {
+          ...tracks[i],
+          connectionId: connection.id,
+          lineId,
+          sourceId,
+          ordinality: i,
+          destinationId: undefined,
+          x1: newTrack[0].x,
+          y1: newTrack[0].y,
+          x2: newTrack[1].x,
+          y2: newTrack[1].y
+        };
       } else {
-        store.dispatch(
-          actions.updateTrack({
-            id: tracks[i].id,
-            x1: track[0].x,
-            y1: track[0].y,
-            x2: track[1].x,
-            y2: track[1].y
-          })
-        );
+        // i already forgot when this happens sorry
+        const trackId = uuid();
+        action.tracks[trackId] = {
+          id: trackId,
+          connectionId: connection.id,
+          lineId,
+          sourceId,
+          destinationId: undefined,
+          x1: newTrack[0].x,
+          y1: newTrack[0].y,
+          x2: newTrack[1].x,
+          y2: newTrack[1].y
+        };
       }
     });
-
-    if (newTracks.length < tracks.length) {
-      tracks.slice(newTracks.length).forEach(track => {
-        store.dispatch(actions.deleteTrack(track.id));
-      });
-    }
   },
 
   [before(
@@ -251,8 +252,5 @@ export const middleware = createMiddleware((before, after, cancel) => ({
         };
       }
     });
-
-    console.log("tracks: before.REALIZE_CONNECTION");
-    console.log(action.tracks);
   }
 }));
