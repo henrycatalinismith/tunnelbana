@@ -11,6 +11,12 @@ export const middleware = createMiddleware((before, after) => ({
       store.dispatch(actions.focusWindow())
     );
 
+    window.addEventListener("keypress", event => {
+      if (event.key === "s") {
+        store.dispatch(actions.save());
+      }
+    });
+
     let throttle = false;
     window.addEventListener("mousemove", event => {
       if (!throttle) {
