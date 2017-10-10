@@ -9,16 +9,18 @@ export function createPassenger(passenger) {
   };
 }
 
-export function alight(id, stationId) {
+export function alight({ passengerId, stationId }) {
   return {
     type: ALIGHT,
-    passenger: { id, stationId }
+    passenger: { id: passengerId },
+    station: { id: stationId }
   };
 }
 
-export function board(id, trainId) {
+export function board({ passengerId, trainId }) {
   return {
     type: BOARD,
-    passenger: { id, trainId }
+    passenger: { id: passengerId },
+    train: { id: trainId }
   };
 }
