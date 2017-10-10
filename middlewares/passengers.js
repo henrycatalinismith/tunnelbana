@@ -21,7 +21,10 @@ export const middleware = createMiddleware((before, after) => ({
 
     if (trainPassengers.size > 0) {
       store.dispatch(
-        actions.alight(trainPassengers.first().get("id"), journey.destinationId)
+        actions.alight({
+          passengerId: trainPassengers.first().get("id"),
+          stationId: journey.destinationId
+        })
       );
     }
 
@@ -31,7 +34,10 @@ export const middleware = createMiddleware((before, after) => ({
 
     if (platformPassengers.size > 0) {
       store.dispatch(
-        actions.board(platformPassengers.first().get("id"), journey.trainId)
+        actions.board({
+          passengerId: platformPassengers.first().get("id"),
+          trainId: journey.trainId
+        })
       );
     }
   }
