@@ -225,17 +225,31 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       .toJS();
 
     const newTracks = path(source, destination);
+    console.log(newTracks.length, tracks.length);
 
     action.tracks = {};
-    tracks.forEach((track, i) => {
-      action.tracks[track.id] = {
-        ...track,
-        destinationId: action.destination.id,
-        x1: newTracks[i][0].x,
-        y1: newTracks[i][0].y,
-        x2: newTracks[i][1].x,
-        y2: newTracks[i][1].y
-      };
+    newTracks.forEach((newTrack, i) => {
+      if (tracks[i]) {
+        const trackId = tracks[i].id;
+        action.tracks[trackId] = {
+          ...tracks[i],
+          destinationId: action.destination.id,
+          x1: newTrack[0].x,
+          y1: newTrack[0].y,
+          x2: newTrack[1].x,
+          y2: newTrack[1].y
+        };
+      } else {
+        // i already forgot when this happens sorry
+        const trackId = uuid();
+        action.tracks[trackId] = {
+          destinationId: action.destination.id,
+          x1: newTrack[0].x,
+          y1: newTrack[0].y,
+          x2: newTrack[1].x,
+          y2: newTrack[1].y
+        };
+      }
     });
 
     console.log("tracks: before.REALIZE_CONNECTION");
