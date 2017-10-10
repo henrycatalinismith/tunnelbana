@@ -16,7 +16,7 @@ export const middleware = createMiddleware((before, after) => ({
       if (!throttle) {
         store.dispatch(actions.dragonMove(event.clientX, event.clientY));
         throttle = true;
-        setTimeout(() => (throttle = false), 20);
+        setTimeout(() => (throttle = false), 10);
       }
     });
 
