@@ -66,6 +66,11 @@ export const reducer = createReducer(initialState, {
 });
 
 export const selectors = {
+  all(state) {
+    return state;
+  },
+
+  // deprecated
   dragon(state) {
     return state;
   }

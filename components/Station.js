@@ -52,6 +52,7 @@ export class Station extends React.Component {
           fill="white"
           onMouseDown={this.onMouseDown}
           onMouseEnter={this.onMouseEnter}
+          onTouchStart={this.onMouseDown}
         />
         {this.props.passengers.map((passenger, i) => {
           return (
