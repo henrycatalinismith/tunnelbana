@@ -6,7 +6,6 @@ import actions from "../actions";
 
 const perform = {
   circle: (x, y) => {
-    console.log("circle", x, y);
     // circle, doesnt matter if x&y are undefined
     return <circle cx={x} cy={y} r={5} />;
   },
@@ -17,13 +16,11 @@ const perform = {
     if (x !== undefined && y !== undefined) {
       // square passenger waiting at a station
       // has x,y and is fine
-      console.log("square", x, y);
       x -= d;
       y -= d;
     } else {
       // square passenger about to leave on a train
       // x and y are undefined and it's a problem
-      console.log("square", x, y);
     }
 
     return <rect x={x} y={y} width={d} height={d} />;
