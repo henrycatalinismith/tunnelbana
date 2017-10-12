@@ -37,7 +37,6 @@ const mapStateToProps = (state, ownProps) => {
   const gender = select("genders")
     .from(state)
     .byId(genderId);
-  console.log({ genderId });
 
   return { passenger, gender };
 };
