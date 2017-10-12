@@ -58,7 +58,7 @@ export class Station extends React.Component {
           return (
             <Passenger
               key={`passenger-${i}`}
-              passenger={passenger}
+              id={passenger.get("id")}
               x={x + 20}
               y={y - 5}
             />
