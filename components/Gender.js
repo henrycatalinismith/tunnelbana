@@ -4,6 +4,11 @@ import { connect } from "react-redux";
 import { select } from "../reducers";
 import actions from "../actions";
 
+const perform = {
+  circle: (x, y) => <circle cx={x} cy={y} r={5} />,
+  square: (x, y) => <circle cx={x} cy={y} r={5} />
+};
+
 export class Gender extends React.Component {
   static propTypes = {
     id: PropTypes.string,
@@ -14,10 +19,11 @@ export class Gender extends React.Component {
 
   render() {
     const id = this.props.gender.get("id");
+    const { x, y } = this.props;
 
     return (
       <g className="gender" id={id}>
-        <circle cx={this.props.x} cy={this.props.y} r={5} />
+        {perform[id](x, y)}
       </g>
     );
   }
