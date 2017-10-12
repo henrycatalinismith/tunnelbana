@@ -13,6 +13,11 @@ import {
 } from "./dragon";
 
 import {
+  reducer as genderReducer,
+  selectors as genderSelectors
+} from "./genders";
+
+import {
   reducer as journeysReducer,
   selectors as journeySelectors
 } from "./journeys";
@@ -54,6 +59,7 @@ import middlewares from "../middlewares";
 const reducer = combineReducers({
   connections: connectionsReducer,
   dragon: dragonReducer,
+  genders: genderReducer,
   journeys: journeysReducer,
   lines: linesReducer,
   passengers: passengersReducer,
@@ -67,6 +73,7 @@ const reducer = combineReducers({
 const selectors = {
   connections: connectionSelectors,
   dragon: dragonSelectors,
+  genders: genderSelectors,
   journeys: journeySelectors,
   lines: lineSelectors,
   passengers: passengerSelectors,

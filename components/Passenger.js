@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import actions from "../actions";
+import Gender from "./Gender";
 
 export class Passenger extends React.Component {
   static propTypes = {
@@ -12,10 +13,11 @@ export class Passenger extends React.Component {
 
   render() {
     const id = this.props.passenger.get("id");
+    const { x, y } = this.props;
 
     return (
       <g className="passenger" id={id}>
-        <circle cx={this.props.x} cy={this.props.y} r={5} />
+        <Gender id="circle" x={x} y={y} />
       </g>
     );
   }
