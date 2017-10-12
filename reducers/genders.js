@@ -5,6 +5,9 @@ import actions from "../actions";
 const initialState = Immutable.fromJS({
   circle: {
     id: "circle"
+  },
+  square: {
+    id: "square"
   }
 });
 

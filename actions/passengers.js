@@ -2,10 +2,12 @@ export const CREATE_PASSENGER = "CREATE_PASSENGER";
 export const ALIGHT = "ALIGHT";
 export const BOARD = "BOARD";
 
-export function createPassenger(passenger) {
+export function createPassenger({ genderId, passengerId, stationId }) {
   return {
     type: CREATE_PASSENGER,
-    passenger
+    passenger: { id: passengerId },
+    gender: { id: genderId },
+    station: { id: stationId }
   };
 }
 
