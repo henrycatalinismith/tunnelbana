@@ -8,7 +8,8 @@ export const reducer = createReducer(new Immutable.Map(), {
       action.passenger.id,
       Immutable.fromJS({
         id: action.passenger.id,
-        stationId: action.passenger.stationId,
+        genderId: action.gender.id,
+        stationId: action.station.id,
         trainId: undefined
       })
     );

@@ -9,17 +9,19 @@ export class Passenger extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     passenger: PropTypes.object,
+    gender: PropTypes.object,
     x: PropTypes.number,
     y: PropTypes.number
   };
 
   render() {
     const id = this.props.passenger.get("id");
+    const genderId = this.props.gender.get("id");
     const { x, y } = this.props;
 
     return (
       <g className="passenger" id={id}>
-        <Gender id="circle" x={x} y={y} />
+        <Gender id={genderId} x={x} y={y} />
       </g>
     );
   }
@@ -31,7 +33,13 @@ const mapStateToProps = (state, ownProps) => {
     .from(state)
     .byId(passengerId);
 
-  return { passenger };
+  const genderId = passenger.get("genderId");
+  const gender = select("genders")
+    .from(state)
+    .byId(genderId);
+  console.log({ genderId });
+
+  return { passenger, gender };
 };
 
 const mapDispatchToProps = dispatch => {
