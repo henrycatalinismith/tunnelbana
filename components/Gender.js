@@ -6,7 +6,7 @@ import actions from "../actions";
 
 const perform = {
   circle: (x, y) => <circle cx={x} cy={y} r={5} />,
-  square: (x, y) => <circle cx={x} cy={y} r={5} />
+  square: (x, y) => <rect x={x} y={y} width={5} height={5} />
 };
 
 export class Gender extends React.Component {
