@@ -26,7 +26,9 @@ export class Train extends React.Component {
         <g className="train" id={train.get("id")}>
           <circle r={10} fill="gray" />
           {this.props.passengers.map((passenger, i) => {
-            return <Passenger key={`passenger-${i}`} passenger={passenger} />;
+            return (
+              <Passenger key={`passenger-${i}`} id={passenger.get("id")} />
+            );
           })}
         </g>
       );
