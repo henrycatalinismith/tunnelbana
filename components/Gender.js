@@ -10,14 +10,14 @@ const perform = {
     return <circle cx={x} cy={y} r={5} />;
   },
   square: (x, y) => {
-    const r = 5;
+    const r = 4;
     const d = r * 2;
 
     if (x !== undefined && y !== undefined) {
       // square passenger waiting at a station
       // has x,y and is fine
-      x -= d;
-      y -= d;
+      x -= r;
+      y -= r;
     } else {
       // square passenger about to leave on a train
       // x and y are undefined and it's a problem

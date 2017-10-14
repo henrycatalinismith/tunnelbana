@@ -189,6 +189,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
 
     game.dispatch.createPassenger({
+      stationId: blue2,
+      genderId: "circle"
+    });
+
+    game.dispatch.createPassenger({
       stationId: blue1,
       genderId: "square"
     });
