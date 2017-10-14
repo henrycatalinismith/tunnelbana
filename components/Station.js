@@ -40,12 +40,13 @@ export class Station extends React.Component {
     const id = this.props.station.get("id");
     const x = this.props.station.get("x");
     const y = this.props.station.get("y");
+    const translate = `translate(${Math.round(x)}, ${Math.round(y)})`;
 
     return (
-      <g className="station" id={id}>
+      <g className="station" id={id} transform={translate}>
         <circle
-          cx={x}
-          cy={y}
+          cx={0}
+          cy={0}
           r={10}
           stroke="black"
           strokeWidth="5"
@@ -59,8 +60,8 @@ export class Station extends React.Component {
             <Passenger
               key={`passenger-${i}`}
               id={passenger.get("id")}
-              x={x + 20}
-              y={y - 5}
+              x={20}
+              y={-5}
             />
           );
         })}
