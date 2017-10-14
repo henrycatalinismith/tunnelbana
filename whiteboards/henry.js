@@ -50,10 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     points(center, 250, 10).map((point, i) => {
       let id = uuid();
+      const genderId = Math.random() * 10 > 5 ? "circle" : "square";
       game.dispatch.createStation({
         id: id,
         x: point.x,
-        y: point.y
+        y: point.y,
+        genderId
       });
 
       if (lastId) {

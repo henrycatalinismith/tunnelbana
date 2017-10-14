@@ -21,7 +21,7 @@ export class Passenger extends React.Component {
 
     return (
       <g className="passenger" id={id}>
-        <Gender id={genderId} x={x} y={y} />
+        <Gender id={genderId} x={x} y={y} size="passenger" />
       </g>
     );
   }
