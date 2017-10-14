@@ -12,18 +12,34 @@ document.addEventListener("DOMContentLoaded", () => {
       color: "#0273ff"
     });
 
+    game.dispatch.createLine({
+      id: "Sunshine",
+      color: "yellow"
+    });
+
     game.dispatch.createStation({
       id: "central",
-      lineId: "Riverside",
       x: 100,
       y: 100
     });
 
     game.dispatch.createStation({
       id: "downtown",
-      lineId: "Riverside",
       x: 200,
       y: 100
+    });
+
+    game.dispatch.createStation({
+      id: "stadium",
+      x: 100,
+      y: 200
+    });
+
+    game.dispatch.createStation({
+      id: "docks",
+      genderId: "square",
+      x: 200,
+      y: 200
     });
 
     game.dispatch.createConnection({
@@ -32,9 +48,50 @@ document.addEventListener("DOMContentLoaded", () => {
       destinationId: "downtown"
     });
 
+    game.dispatch.createConnection({
+      lineId: "Sunshine",
+      sourceId: "stadium",
+      destinationId: "docks"
+    });
+
     game.dispatch.createPassenger({
+      passengerId: "our jimmy",
+      genderId: "square",
       stationId: "central"
     });
+
+    game.dispatch.createPassenger({
+      passengerId: "our baz",
+      genderId: "square",
+      stationId: "stadium"
+    });
+
+    setTimeout(() => {
+      game.dispatch.createTrain({
+        id: "thomas",
+        lineId: "Riverside",
+        stationId: "central"
+      });
+
+      game.dispatch.createTrain({
+        id: "henry",
+        lineId: "Sunshine",
+        stationId: "stadium"
+      });
+
+      setTimeout(() => {
+        game.dispatch.departure({
+          trainId: "thomas",
+          destinationId: "downtown"
+        });
+
+        game.dispatch.departure({
+          trainId: "henry",
+          destinationId: "docks"
+        });
+      }, 500);
+    }, 500);
+
     /*
     game.dispatch.createLine({
       id: "Circle",

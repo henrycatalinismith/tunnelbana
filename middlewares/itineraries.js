@@ -61,9 +61,9 @@ const planItinerary = (store, action) => {
         passengerId,
         stationId: destination.id
       };
-    }
 
-    found = destination.genderId === genderId;
+      found = destination.genderId === genderId;
+    }
 
     if (!found && nextStop && ordinality < max) {
       checkForwards(nextStop, ordinality + 1);
@@ -77,7 +77,7 @@ const planItinerary = (store, action) => {
   }
 
   if (found) {
-    console.log("❤️route planned");
+    console.log("❤️route planned", newItinerary);
     return newItinerary;
   } else {
     console.log("💩");
@@ -101,14 +101,13 @@ export const middleware = createMiddleware((before, after) => ({
       const firstStop = itinerary[0] || { stationId: undefined };
       const isNextDestination =
         firstStop.stationId === action.journey.destinationId;
-      return true;
+      return isNextDestination;
     });
 
-    //console.log(platformPassengers.size);
-    if (platformPassengers.size > 0) {
+    if (boardablePassengers.size > 0) {
       store.dispatch(
         actions.board({
-          passengerId: platformPassengers.first().get("id"),
+          passengerId: boardablePassengers.first().get("id"),
           trainId: action.journey.trainId
         })
       );
