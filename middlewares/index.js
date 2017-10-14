@@ -17,10 +17,13 @@ export default createMiddleware([
   connections,
   dragon,
   game,
-  itineraries,
   journeys,
   lines,
+
+  // lol
   passengers,
+  itineraries,
+
   stations,
   terminals,
   tracks,
