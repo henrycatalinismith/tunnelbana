@@ -11,16 +11,12 @@ export class Dragon extends React.Component {
 
   render() {
     const dragon = this.props.dragon.toJS();
+    const translate = `translate(${dragon.x}, ${dragon.y})`;
     return (
-      <g className="dragon">
-        <circle
-          style={{ pointerEvents: "none" }}
-          cx={dragon.x}
-          cy={dragon.y}
-          r={0}
-        />
+      <g className="dragon" transform={translate}>
+        <circle style={{ pointerEvents: "none" }} cx={0} cy={0} r={0} />
 
-        <use xlinkHref={`#${dragon.id}`} />
+        <use xlinkHref={`#${dragon.id}`} transform="translate(0,0)" />
       </g>
     );
   }
