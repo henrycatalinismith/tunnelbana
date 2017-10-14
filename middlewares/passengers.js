@@ -40,5 +40,23 @@ export const middleware = createMiddleware((before, after) => ({
         })
       );
     }
+  },
+
+  [before(actions.DEPARTURE)]: function alightTrains(store, action) {
+    const state = store.getState();
+
+    const platformPassengers = select("passengers")
+      .from(state)
+      .byStationId(action.journey.destinationId);
+
+    const boardablePassengers = platformPassengers.filter(p => {
+      const itinerary = select("itineraries")
+        .from(state)
+        .byPassengerId(p.get("id"));
+      console.log(itinerary.toJS());
+      return true;
+    });
+
+    console.log(platformPassengers.size, boardablePassengers.size);
   }
 }));

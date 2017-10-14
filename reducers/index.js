@@ -18,6 +18,11 @@ import {
 } from "./genders";
 
 import {
+  reducer as itinerariesReducer,
+  selectors as itinerarySelectors
+} from "./itineraries";
+
+import {
   reducer as journeysReducer,
   selectors as journeySelectors
 } from "./journeys";
@@ -60,6 +65,7 @@ const reducer = combineReducers({
   connections: connectionsReducer,
   dragon: dragonReducer,
   genders: genderReducer,
+  itineraries: itinerariesReducer,
   journeys: journeysReducer,
   lines: linesReducer,
   passengers: passengersReducer,
@@ -74,6 +80,7 @@ const selectors = {
   connections: connectionSelectors,
   dragon: dragonSelectors,
   genders: genderSelectors,
+  itineraries: itinerarySelectors,
   journeys: journeySelectors,
   lines: lineSelectors,
   passengers: passengerSelectors,
