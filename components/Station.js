@@ -53,7 +53,7 @@ export class Station extends React.Component {
             <Passenger
               key={`passenger-${i}`}
               id={passenger.get("id")}
-              x={20}
+              x={20 + i * 10}
               y={-5}
             />
           );
