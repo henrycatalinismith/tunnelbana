@@ -10,6 +10,7 @@ export const reducer = createReducer(new Immutable.Map(), {
         id: action.station.id,
         x: action.station.x,
         y: action.station.y,
+        genderId: action.gender.id,
         isSelected: false
       })
     );
