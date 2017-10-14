@@ -34,7 +34,7 @@ const planItinerary = (store, action) => {
     return c.destinationId === stationId;
   });
 
-  const newItinerary = {};
+  let newItinerary = {};
   const max = 10;
   let found = false;
   const checkForwards = (connection, ordinality = 0) => {
@@ -52,7 +52,9 @@ const planItinerary = (store, action) => {
       )
       .connection.toJS();
 
-    if (ordinality > 0) {
+    if (ordinality === 0) {
+      newItinerary = {};
+    } else {
       const i = Object.keys(newItinerary).length;
       const id = oldItinerary[i] ? oldItinerary[i].id : uuid();
       newItinerary[id] = {
@@ -72,8 +74,9 @@ const planItinerary = (store, action) => {
     //console.log(stationId, connection, destination, nextStop);
   };
 
-  if (forwards.length > 0) {
-    checkForwards(forwards[0], 0);
+  console.log(forwards.length);
+  for (let i = 0; i < forwards.length && !found; i += 1) {
+    checkForwards(forwards[i], 0);
   }
 
   if (found) {
