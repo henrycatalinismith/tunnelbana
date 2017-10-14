@@ -18,10 +18,14 @@ export class Passenger extends React.Component {
     const id = this.props.passenger.get("id");
     const genderId = this.props.gender.get("id");
     const { x, y } = this.props;
+    const translate =
+      x === undefined
+        ? undefined
+        : `translate(${Math.round(x)}, ${Math.round(y)})`;
 
     return (
-      <g className="passenger" id={id}>
-        <Gender id={genderId} x={x} y={y} size="passenger" />
+      <g className="passenger" id={id} transform={translate}>
+        <Gender id={genderId} size="passenger" />
       </g>
     );
   }
