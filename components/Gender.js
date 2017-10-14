@@ -5,13 +5,13 @@ import { select } from "../reducers";
 import actions from "../actions";
 
 const perform = {
-  circle: (x, y, size) => {
+  circle: size => {
     return {
-      passenger: <circle cx={x} cy={y} r={5} />,
+      passenger: <circle cx={0} cy={0} r={5} />,
       station: (
         <circle
-          cx={x}
-          cy={y}
+          cx={0}
+          cy={0}
           r={10}
           stroke="black"
           strokeWidth="5"
@@ -21,23 +21,12 @@ const perform = {
     }[size];
   },
 
-  square: (x, y, size) => {
+  square: size => {
     return {
       passenger: () => {
         const r = 4;
         const d = r * 2;
-
-        if (x !== undefined && y !== undefined) {
-          // square passenger waiting at a station
-          // has x,y and is fine
-          x -= r;
-          y -= r;
-        } else {
-          // square passenger about to leave on a train
-          // x and y are undefined and it's a problem
-        }
-
-        return <rect x={x} y={y} width={d} height={d} />;
+        return <rect x={-4} y={-4} width={d} height={d} />;
       },
       station: () => {
         return (
@@ -54,20 +43,13 @@ const perform = {
       }
     }[size].call();
   }
-
-  /*
-    })(size) {
-  }
-  */
 };
 
 export class Gender extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     gender: PropTypes.object,
-    size: PropTypes.oneOf(["passenger", "station"]),
-    x: PropTypes.number,
-    y: PropTypes.number
+    size: PropTypes.oneOf(["passenger", "station"])
   };
 
   static defaultProps = {
@@ -76,11 +58,11 @@ export class Gender extends React.Component {
 
   render() {
     const id = this.props.gender.get("id");
-    const { x, y, size } = this.props;
+    const { size } = this.props;
 
     return (
       <g className="gender" id={id}>
-        {perform[id](x, y, size)}
+        {perform[id](size)}
       </g>
     );
   }
