@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import { select } from "../reducers";
 import actions from "../actions";
 import Passenger from "./Passenger";
+import Gender from "./Gender";
 
 export class Station extends React.Component {
   static propTypes = {
     id: PropTypes.string,
 
     station: PropTypes.object,
+    gender: PropTypes.object,
     passengers: PropTypes.object,
     dragon: PropTypes.object,
 
@@ -41,20 +43,11 @@ export class Station extends React.Component {
     const x = this.props.station.get("x");
     const y = this.props.station.get("y");
     const translate = `translate(${Math.round(x)}, ${Math.round(y)})`;
+    const genderId = this.props.gender.get("id");
 
     return (
       <g className="station" id={id} transform={translate}>
-        <circle
-          cx={0}
-          cy={0}
-          r={10}
-          stroke="black"
-          strokeWidth="5"
-          fill="white"
-          onMouseDown={this.onMouseDown}
-          onMouseEnter={this.onMouseEnter}
-          onTouchStart={this.onMouseDown}
-        />
+        <Gender id={genderId} x={0} y={0} size="station" />
         {this.props.passengers.map((passenger, i) => {
           return (
             <Passenger
@@ -71,10 +64,15 @@ export class Station extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const station = select("stations")
+    .from(state)
+    .byId(ownProps.id);
+  const gender = select("genders")
+    .from(state)
+    .byId(station.get("genderId"));
   return {
-    station: select("stations")
-      .from(state)
-      .byId(ownProps.id),
+    station,
+    gender,
     passengers: select("passengers")
       .from(state)
       .byStationId(ownProps.id),

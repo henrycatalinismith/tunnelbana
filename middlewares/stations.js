@@ -10,5 +10,9 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     if (!action.station.id) {
       action.station.id = uuid();
     }
+
+    if (!action.gender.id) {
+      action.gender.id = "circle";
+    }
   }
 }));
