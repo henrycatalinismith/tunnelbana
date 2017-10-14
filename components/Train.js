@@ -20,7 +20,12 @@ export class Train extends React.Component {
     if (this.props.station) {
       const x = this.props.station.get("x");
       const y = this.props.station.get("y");
-      return <circle cx={x} cy={y} r={20} fill="gray" />;
+      const translate = `translate(${Math.round(x)}, ${Math.round(y)})`;
+      return (
+        <g className="train" id={train.get("id")} transform={translate}>
+          <circle cx={0} cy={0} r={20} fill="gray" />
+        </g>
+      );
     } else if (this.props.journey) {
       return (
         <g className="train" id={train.get("id")}>
