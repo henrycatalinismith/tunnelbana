@@ -8,6 +8,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   start(options, game => {
     game.dispatch.createLine({
+      id: "Riverside",
+      color: "#0273ff"
+    });
+
+    game.dispatch.createStation({
+      id: "central",
+      lineId: "Riverside",
+      x: 100,
+      y: 100
+    });
+
+    game.dispatch.createStation({
+      id: "downtown",
+      lineId: "Riverside",
+      x: 200,
+      y: 100
+    });
+
+    game.dispatch.createConnection({
+      lineId: "Riverside",
+      sourceId: "central",
+      destinationId: "downtown"
+    });
+
+    game.dispatch.createPassenger({
+      stationId: "central"
+    });
+    /*
+    game.dispatch.createLine({
       id: "Circle",
       color: "yellow"
     });
@@ -199,5 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
       stationId: blue1,
       genderId: "square"
     });
+    */
   });
 });
