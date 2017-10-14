@@ -74,9 +74,50 @@ const planItinerary = (store, action) => {
     //console.log(stationId, connection, destination, nextStop);
   };
 
+  // copy paste time!
+  //
+  const checkBackwards = (connection, ordinality = 0) => {
+    //console.log("checkBackwards", connection, ordinality);
+    const destination = select("stations")
+      .from(state)
+      .byId(connection.sourceId)
+      .toJS();
+    const nextStop = select("connections")
+      .from(state)
+      .forNextStop(
+        connection.sourceId,
+        connection.destinationId,
+        connection.lineId
+      )
+      .connection.toJS();
+
+    if (ordinality === 0) {
+      newItinerary = {};
+    } else {
+      const i = Object.keys(newItinerary).length;
+      const id = oldItinerary[i] ? oldItinerary[i].id : uuid();
+      newItinerary[id] = {
+        id,
+        ordinality: ordinality - 1,
+        passengerId,
+        stationId: destination.id
+      };
+
+      found = destination.genderId === genderId;
+    }
+
+    if (!found && nextStop && ordinality < max) {
+      checkBackwards(nextStop, ordinality + 1);
+    }
+  };
+
   console.log(forwards.length);
-  for (let i = 0; i < forwards.length && !found; i += 1) {
+  let i;
+  for (i = 0; i < forwards.length && !found; i += 1) {
     checkForwards(forwards[i], 0);
+  }
+  for (i = 0; i < backwards.length && !found; i += 1) {
+    checkBackwards(backwards[i], 0);
   }
 
   if (found) {
