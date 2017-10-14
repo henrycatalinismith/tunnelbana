@@ -35,6 +35,10 @@ export const reducer = createReducer(new Immutable.Map(), {
         })
       );
     });
+  },
+
+  [actions.LIVE_HAPPILY_EVER_AFTER](state, action) {
+    return state.delete(action.passenger.id);
   }
 });
 
