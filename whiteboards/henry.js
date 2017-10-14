@@ -72,6 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
       stationId: "stadium"
     });
 
+    game.dispatch.createPassenger({
+      passengerId: "our ga",
+      genderId: "circle",
+      stationId: "docks"
+    });
+
     setTimeout(() => {
       game.dispatch.createTrain({
         id: "thomas",
