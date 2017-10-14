@@ -8,7 +8,8 @@ export const GRAB_STATION = "GRAB_STATION";
 export function createStation(station) {
   return {
     type: CREATE_STATION,
-    station
+    station,
+    gender: { id: station.genderId }
   };
 }
 
