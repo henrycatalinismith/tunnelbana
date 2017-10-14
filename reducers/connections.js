@@ -112,6 +112,7 @@ export const selectors = {
     });
     if (onwardsJourney.size > 0) {
       return {
+        connection: onwardsJourney.first(),
         connectionId: onwardsJourney.first().get("id"),
         destinationId:
           onwardsJourney.first().get("sourceId") !== currentStationId
@@ -121,6 +122,7 @@ export const selectors = {
     }
 
     return {
+      connection: sameLine.first(),
       connectionId: sameLine.first().get("id"),
       destinationId:
         sameLine.first().get("sourceId") !== currentStationId
