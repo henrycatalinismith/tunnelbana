@@ -11,6 +11,10 @@ export const middleware = createMiddleware((before, after) => ({
     if (!action.passenger.id) {
       action.passenger.id = uuid();
     }
+
+    if (!action.gender.id) {
+      action.gender.id = "circle";
+    }
   },
 
   [after(actions.ARRIVAL)]: function alightTrains(store, { journey }) {
