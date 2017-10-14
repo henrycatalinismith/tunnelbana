@@ -111,7 +111,8 @@ const planItinerary = (store, action) => {
     }
   };
 
-  console.log(forwards.length);
+  console.log(action.passenger.id, forwards.length, backwards.length);
+
   let i;
   for (i = 0; i < forwards.length && !found; i += 1) {
     checkForwards(forwards[i], 0);
@@ -121,10 +122,15 @@ const planItinerary = (store, action) => {
   }
 
   if (found) {
-    console.log("❤️route planned", newItinerary);
+    console.log(
+      `❤️route planned ${action.passenger.id}`,
+      Object.keys(newItinerary).map(id => {
+        return newItinerary[id].stationId;
+      })
+    );
     return newItinerary;
   } else {
-    console.log("💩");
+    console.log(`💩${action.passenger.id}`);
     return {};
   }
 };
