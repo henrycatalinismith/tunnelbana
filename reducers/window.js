@@ -1,5 +1,5 @@
 import Immutable from "immutable";
-import { createReducer } from "redux-create-reducer";
+import { createReducer } from "signalbox";
 import actions from "../actions";
 
 const initialState = Immutable.fromJS({

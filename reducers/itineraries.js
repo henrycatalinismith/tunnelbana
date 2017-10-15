@@ -1,5 +1,5 @@
 import Immutable from "immutable";
-import { createReducer } from "redux-create-reducer";
+import { createReducer } from "signalbox";
 import actions from "../actions";
 
 export const reducer = createReducer(new Immutable.Map(), {
