@@ -1,26 +1,25 @@
 import { actions as connectionActions } from "./connections";
 import { actions as dragonActions } from "./dragon";
 import { actions as gameActions } from "./game";
-import * as game from "./game";
-import * as journeys from "./journeys";
-import * as lines from "./lines";
-import * as passengers from "./passengers";
-import * as stations from "./stations";
-import * as terminals from "./terminals";
-import * as tracks from "./tracks";
-import * as trains from "./trains";
-import * as window from "./window";
+import { actions as journeyActions } from "./journeys";
+import { actions as lineActions } from "./lines";
+import { actions as passengerActions } from "./passengers";
+import { actions as stationActions } from "./stations";
+import { actions as terminalActions } from "./terminals";
+import { actions as trackActions } from "./tracks";
+import { actions as trainActions } from "./trains";
+import { actions as windowActions } from "./window";
 
 export default {
   ...connectionActions,
   ...dragonActions,
-  ...game,
-  ...journeys,
-  ...lines,
-  ...passengers,
-  ...stations,
-  ...terminals,
-  ...tracks,
-  ...trains,
-  ...window
+  ...gameActions,
+  ...journeyActions,
+  ...lineActions,
+  ...passengerActions,
+  ...stationActions,
+  ...terminalActions,
+  ...trackActions,
+  ...trainActions,
+  ...windowActions
 };

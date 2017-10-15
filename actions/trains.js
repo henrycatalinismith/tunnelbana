@@ -1,8 +1,5 @@
-export const CREATE_TRAIN = "CREATE_TRAIN";
+import { createActions } from "signalbox";
 
-export function createTrain(train) {
-  return {
-    type: CREATE_TRAIN,
-    train
-  };
-}
+export const actions = createActions(["CREATE_TRAIN"], types => ({
+  createTrain: train => ({ type: types.CREATE_TRAIN, train })
+}));

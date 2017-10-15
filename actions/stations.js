@@ -1,28 +1,28 @@
-export const CREATE_STATION = "CREATE_STATION";
-export const IMPORT_STATION = "IMPORT_STATION";
+import { createActions } from "signalbox";
 
-export const DRAG_STATION = "DRAG_STATION";
-export const DROP_STATION = "DROP_STATION";
-export const GRAB_STATION = "GRAB_STATION";
+export const actions = createActions(
+  [
+    "CREATE_STATION",
+    "IMPORT_STATION",
+    "DRAG_STATION",
+    "DROP_STATION",
+    "GRAB_STATION"
+  ],
+  types => ({
+    createStation: station => ({
+      type: types.CREATE_STATION,
+      station,
+      gender: { id: station.genderId }
+    }),
 
-export function createStation(station) {
-  return {
-    type: CREATE_STATION,
-    station,
-    gender: { id: station.genderId }
-  };
-}
+    importStation: station => ({
+      type: types.IMPORT_STATION,
+      station
+    }),
 
-export function importStation(station) {
-  return {
-    type: IMPORT_STATION,
-    station
-  };
-}
-
-export function grabStation(id) {
-  return {
-    type: GRAB_STATION,
-    station: { id }
-  };
-}
+    grabStation: id => ({
+      type: types.GRAB_STATION,
+      station: { id }
+    })
+  })
+);
