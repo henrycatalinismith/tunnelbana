@@ -28,7 +28,7 @@ const planItinerary = (store, action) => {
   }
 
   const forwards = connections.filter(c => {
-    return c.sourceId === stationId;
+    return c.sourceId === stationId && c.destinationId;
   });
   const backwards = connections.filter(c => {
     return c.destinationId === stationId;
