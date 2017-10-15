@@ -1,49 +1,43 @@
-export const CREATE_TERMINAL = "CREATE_TERMINAL";
-export const DELETE_TERMINAL = "DELETE_TERMINAL";
-export const UPDATE_TERMINAL = "UPDATE_TERMINAL";
+import { createActions } from "signalbox";
 
-export const DRAG_TERMINAL = "DRAG_TERMINAL";
-export const DROP_TERMINAL = "DROP_TERMINAL";
-export const GRAB_TERMINAL = "GRAB_TERMINAL";
+export const actions = createActions(
+  [
+    "CREATE_TERMINAL",
+    "DELETE_TERMINAL",
+    "UPDATE_TERMINAL",
+    "DRAG_TERMINAL",
+    "DROP_TERMINAL",
+    "GRAB_TERMINAL"
+  ],
+  types => ({
+    createTerminal: terminal => ({
+      type: types.CREATE_TERMINAL,
+      terminal
+    }),
 
-export function createTerminal(terminal) {
-  return {
-    type: CREATE_TERMINAL,
-    terminal
-  };
-}
+    deleteTerminal: id => ({
+      type: types.DELETE_TERMINAL,
+      terminal: { id }
+    }),
 
-export function deleteTerminal(id) {
-  return {
-    type: DELETE_TERMINAL,
-    terminal: { id }
-  };
-}
+    updateTerminal: terminal => ({
+      type: types.UPDATE_TERMINAL,
+      terminal
+    }),
 
-export function updateTerminal(terminal) {
-  return {
-    type: UPDATE_TERMINAL,
-    terminal
-  };
-}
+    dragTerminal: (id, x, y) => ({
+      type: types.DRAG_TERMINAL,
+      terminal: { id, x, y }
+    }),
 
-export function dropTerminal(selection) {
-  return {
-    type: DROP_TERMINAL,
-    ...selection
-  };
-}
+    dropTerminal: selection => ({
+      type: types.DROP_TERMINAL,
+      ...selection
+    }),
 
-export function dragTerminal(terminalId, x, y) {
-  return {
-    type: DRAG_TERMINAL,
-    terminal: { id: terminalId, x, y }
-  };
-}
-
-export function grabTerminal(selection) {
-  return {
-    type: GRAB_TERMINAL,
-    ...selection
-  };
-}
+    grabTerminal: selection => ({
+      type: types.GRAB_TERMINAL,
+      ...selection
+    })
+  })
+);

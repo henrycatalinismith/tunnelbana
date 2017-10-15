@@ -1,16 +1,6 @@
-export const DEPARTURE = "DEPARTURE";
-export const ARRIVAL = "ARRIVAL";
+import { createActions } from "signalbox";
 
-export function departure(journey) {
-  return {
-    type: DEPARTURE,
-    journey
-  };
-}
-
-export function arrival(journey) {
-  return {
-    type: ARRIVAL,
-    journey
-  };
-}
+export const actions = createActions(["DEPARTURE", "ARRIVAL"], types => ({
+  departure: journey => ({ type: types.DEPARTURE, journey }),
+  arrival: journey => ({ type: types.ARRIVAL, journey })
+}));
