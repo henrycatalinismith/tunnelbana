@@ -1,5 +1,13 @@
 const { bindActionCreators } = require("redux");
 
+exports.createActions = (typeList, creatorCreator) => {
+  const actionTypes = {};
+  typeList.forEach(type => actionTypes[type] = type);
+  const actionCreators = creatorCreator(actionTypes);
+  const actions = { ...actionCreators, ...actionTypes };
+  return actions;
+};
+
 exports.createApp = (store, actions, middlewares, selectors) => {
   const actionCreators = {};
   const actionTypes = {};
