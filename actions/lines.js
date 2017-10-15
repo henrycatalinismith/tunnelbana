@@ -1,8 +1,5 @@
-export const CREATE_LINE = "CREATE_LINE";
+import { createActions } from "signalbox";
 
-export function createLine(line) {
-  return {
-    type: CREATE_LINE,
-    line
-  };
-}
+export const actions = createActions(["CREATE_LINE"], types => ({
+  createLine: line => ({ type: types.CREATE_LINE, line })
+}));

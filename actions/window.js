@@ -1,22 +1,13 @@
-export const BLUR_WINDOW = "BLUR_WINDOW";
-export const FOCUS_WINDOW = "FOCUS_WINDOW";
-export const RESIZE_WINDOW = "RESIZE_WINDOW";
+import { createActions } from "signalbox";
 
-export function blurWindow() {
-  return {
-    type: BLUR_WINDOW
-  };
-}
-
-export function focusWindow() {
-  return {
-    type: FOCUS_WINDOW
-  };
-}
-
-export function resizeWindow(width, height) {
-  return {
-    type: RESIZE_WINDOW,
-    window: { width, height }
-  };
-}
+export const actions = createActions(
+  ["BLUR_WINDOW", "FOCUS_WINDOW", "RESIZE_WINDOW"],
+  types => ({
+    blurWindow: () => ({ type: types.BLUR_WINDOW }),
+    focusWindow: () => ({ type: types.FOCUS_WINDOW }),
+    resizeWindow: (width, height) => ({
+      type: types.RESIZE_WINDOW,
+      window: { width, height }
+    })
+  })
+);
