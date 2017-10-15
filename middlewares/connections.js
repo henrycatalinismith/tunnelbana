@@ -25,16 +25,24 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     const firstSourceId = sourceIds[0];
     const lastDestinationId = destinationIds.pop();
 
+    const flip = () =>
+      ([action.source, action.destination] = [
+        action.destination,
+        action.source
+      ]);
+
     if (!firstSourceId && !lastDestinationId) {
       // first connection on the line, ignore it
     } else {
       if (action.source.id === firstSourceId) {
-        // flip it, it's the new first connection
-        [action.source, action.destination] = [
-          action.destination,
-          action.source
-        ];
+        flip(); // it's the new first connection
+      } else if (action.destination.id === lastDestinationId) {
+        flip(); // it's the new last connection
       }
+
+      // more validation needed here. the action should be completely rejected
+      // if the new connection would introduce a loop partway along the line
+
       console.log(sourceIds, destinationIds, firstSourceId, lastDestinationId);
     }
   },

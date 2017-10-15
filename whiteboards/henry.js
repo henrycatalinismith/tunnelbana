@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     game.dispatch.createConnection({
       lineId: "Riverside",
-      sourceId: "central",
-      destinationId: "docks"
+      sourceId: "docks",
+      destinationId: "downtown"
     });
 
     game.dispatch.createConnection({
