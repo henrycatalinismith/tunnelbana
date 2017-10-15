@@ -1,24 +1,27 @@
-export const DRAGON_DROP = "DRAGON_DROP";
-export const DRAGON_GRAB = "DRAGON_GRAB";
-export const DRAGON_MOVE = "DRAGON_MOVE";
+import { createActions } from "signalbox";
 
-export function dragonDrop(entity, id) {
-  return {
-    type: DRAGON_DROP,
-    dragon: { entity, id }
-  };
-}
+export const actions = createActions(
+  ["DRAGON_DROP", "DRAGON_GRAB", "DRAGON_MOVE"],
+  types => ({
+    dragonDrop: (entity, id) => {
+      return {
+        type: types.DRAGON_DROP,
+        dragon: { entity, id }
+      };
+    },
 
-export function dragonGrab(entity, id) {
-  return {
-    type: DRAGON_GRAB,
-    dragon: { entity, id }
-  };
-}
+    dragonGrab: (entity, id) => {
+      return {
+        type: types.DRAGON_DROP,
+        dragon: { entity, id }
+      };
+    },
 
-export function dragonMove(x, y) {
-  return {
-    type: DRAGON_MOVE,
-    dragon: { x, y }
-  };
-}
+    dragonMove: (x, y) => {
+      return {
+        type: types.DRAGON_MOVE,
+        dragon: { x, y }
+      };
+    }
+  })
+);
