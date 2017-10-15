@@ -65,9 +65,13 @@ const path = (source, destination) => {
       a.y += source.y < destination.y ? remainder / 2 : 0 - remainder / 2;
       b.y += source.y > destination.y ? remainder / 2 : 0 - remainder / 2;
 
-      tracks.push([{ x: source.x, y: source.y }, a]);
+      if (source.x !== a.x || source.y !== a.y) {
+        tracks.push([{ x: source.x, y: source.y }, a]);
+      }
       tracks.push([a, b]);
-      tracks.push([b, { x: destination.x, y: destination.y }]);
+      if (destination.x !== b.x || destination.y !== b.y) {
+        tracks.push([b, { x: destination.x, y: destination.y }]);
+      }
     }
 
     if (type === "longitudinal") {
@@ -76,9 +80,13 @@ const path = (source, destination) => {
       a.x += source.x < destination.x ? remainder / 2 : 0 - remainder / 2;
       b.x += source.x > destination.x ? remainder / 2 : 0 - remainder / 2;
 
-      tracks.push([{ x: source.x, y: source.y }, a]);
+      if (source.x !== a.x || source.y !== a.y) {
+        tracks.push([{ x: source.x, y: source.y }, a]);
+      }
       tracks.push([a, b]);
-      tracks.push([b, { x: destination.x, y: destination.y }]);
+      if (destination.x !== b.x || destination.y !== b.y) {
+        tracks.push([b, { x: destination.x, y: destination.y }]);
+      }
     }
   }
 
