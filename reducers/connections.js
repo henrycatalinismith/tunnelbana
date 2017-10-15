@@ -74,6 +74,17 @@ export const selectors = {
     return state.filter(c => c.get("lineId") === lineId).toList();
   },
 
+  lineSiblings(state, id, lineId) {
+    return state
+      .filter(c => {
+        const sameLine = c.get("lineId") === lineId;
+        const differentConnection = c.get("id") !== id;
+        const isSibling = sameLine && differentConnection;
+        return isSibling;
+      })
+      .toList();
+  },
+
   byStationId(state, stationId) {
     return state
       .filter(

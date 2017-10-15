@@ -4,12 +4,38 @@ import actions from "../actions";
 import { select } from "../reducers";
 
 export const middleware = createMiddleware((before, after, cancel) => ({
-  [before(actions.CREATE_CONNECTION)]: function inferNewConnectionProperties(
+  [cancel(actions.CREATE_CONNECTION)]: function inferNewConnectionProperties(
     store,
     action
   ) {
     if (!action.connection.id) {
       action.connection.id = uuid();
+    }
+
+    const state = store.getState();
+    const siblings = select("connections")
+      .from(state)
+      .lineSiblings(action.connection.id, action.line.id)
+      .toJS();
+
+    const sourceIds = siblings.map(c => c.sourceId);
+    const destinationIds = siblings.map(c => c.destinationId);
+    const stationIds = sourceIds.concat(destinationIds);
+
+    const firstSourceId = sourceIds[0];
+    const lastDestinationId = destinationIds.pop();
+
+    if (!firstSourceId && !lastDestinationId) {
+      // first connection on the line, ignore it
+    } else {
+      if (action.source.id === firstSourceId) {
+        // flip it, it's the new first connection
+        [action.source, action.destination] = [
+          action.destination,
+          action.source
+        ];
+      }
+      console.log(sourceIds, destinationIds, firstSourceId, lastDestinationId);
     }
   },
 
