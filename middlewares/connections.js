@@ -3,6 +3,39 @@ import uuid from "uuid/v1";
 import actions from "../actions";
 import { select } from "../reducers";
 
+const enforceListOrder = (store, action) => {
+  const state = store.getState();
+  const siblings = select("connections")
+    .from(state)
+    .lineSiblings(action.connection.id, action.line.id)
+    .toJS();
+
+  const sourceIds = siblings.map(c => c.sourceId);
+  const destinationIds = siblings.map(c => c.destinationId);
+  const stationIds = sourceIds.concat(destinationIds);
+
+  const firstSourceId = sourceIds[0];
+  const lastDestinationId = destinationIds.pop();
+
+  const flip = () =>
+    ([action.source, action.destination] = [action.destination, action.source]);
+
+  if (!firstSourceId && !lastDestinationId) {
+    // first connection on the line, ignore it
+  } else {
+    if (action.source.id === firstSourceId) {
+      flip(); // it's the new first connection
+    } else if (action.destination.id === lastDestinationId) {
+      flip(); // it's the new last connection
+    }
+
+    // more validation needed here. the action should be completely rejected
+    // if the new connection would introduce a loop partway along the line
+
+    console.log(sourceIds, destinationIds, firstSourceId, lastDestinationId);
+  }
+};
+
 export const middleware = createMiddleware((before, after, cancel) => ({
   [cancel(actions.CREATE_CONNECTION)]: function inferNewConnectionProperties(
     store,
@@ -12,39 +45,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       action.connection.id = uuid();
     }
 
-    const state = store.getState();
-    const siblings = select("connections")
-      .from(state)
-      .lineSiblings(action.connection.id, action.line.id)
-      .toJS();
-
-    const sourceIds = siblings.map(c => c.sourceId);
-    const destinationIds = siblings.map(c => c.destinationId);
-    const stationIds = sourceIds.concat(destinationIds);
-
-    const firstSourceId = sourceIds[0];
-    const lastDestinationId = destinationIds.pop();
-
-    const flip = () =>
-      ([action.source, action.destination] = [
-        action.destination,
-        action.source
-      ]);
-
-    if (!firstSourceId && !lastDestinationId) {
-      // first connection on the line, ignore it
-    } else {
-      if (action.source.id === firstSourceId) {
-        flip(); // it's the new first connection
-      } else if (action.destination.id === lastDestinationId) {
-        flip(); // it's the new last connection
-      }
-
-      // more validation needed here. the action should be completely rejected
-      // if the new connection would introduce a loop partway along the line
-
-      console.log(sourceIds, destinationIds, firstSourceId, lastDestinationId);
-    }
+    enforceListOrder(store, action);
   },
 
   [before(
