@@ -1,5 +1,6 @@
 import { actions as connectionActions } from "./connections";
 import { actions as dragonActions } from "./dragon";
+import { actions as gameActions } from "./game";
 import * as game from "./game";
 import * as journeys from "./journeys";
 import * as lines from "./lines";
