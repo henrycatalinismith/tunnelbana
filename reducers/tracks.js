@@ -2,6 +2,21 @@ import Immutable from "immutable";
 import { createReducer } from "redux-create-reducer";
 import actions from "../actions";
 
+const automerge = (state, action) => {
+  const oldTracks = selectors.byConnectionId(state, action.connection.id);
+  const newTracks = action.tracks;
+
+  const oldIds = oldTracks.map(track => track.get("id")).toJS();
+  const newIds = Object.keys(newTracks);
+
+  const deleteIds = oldIds.filter(oldId => {
+    const goneInNewIds = !newIds.includes(oldId);
+    return goneInNewIds;
+  });
+
+  return state.merge(Immutable.fromJS(action.tracks)).deleteAll(deleteIds);
+};
+
 export const reducer = createReducer(new Immutable.Map(), {
   [actions.CREATE_TRACK](state, action) {
     return state.set(
@@ -31,34 +46,16 @@ export const reducer = createReducer(new Immutable.Map(), {
     return state.delete(action.track.id);
   },
 
+  [actions.CREATE_CONNECTION](state, action) {
+    return automerge(state, action);
+  },
+
   [actions.DRAG_TERMINAL](state, action) {
-    const oldTracks = selectors.byConnectionId(state, action.connection.id);
-    const newTracks = action.tracks;
-
-    const oldIds = oldTracks.map(track => track.get("id")).toJS();
-    const newIds = Object.keys(newTracks);
-
-    const deleteIds = oldIds.filter(oldId => {
-      const goneInNewIds = !newIds.includes(oldId);
-      return goneInNewIds;
-    });
-
-    return state.merge(Immutable.fromJS(action.tracks)).deleteAll(deleteIds);
+    return automerge(state, action);
   },
 
   [actions.REALIZE_CONNECTION](state, action) {
-    const oldTracks = selectors.byConnectionId(state, action.connection.id);
-    const newTracks = action.tracks;
-
-    const oldIds = oldTracks.map(track => track.get("id")).toJS();
-    const newIds = Object.keys(newTracks);
-
-    const deleteIds = oldIds.filter(oldId => {
-      const goneInNewIds = !newIds.includes(oldId);
-      return goneInNewIds;
-    });
-
-    return state.merge(Immutable.fromJS(action.tracks)).deleteAll(deleteIds);
+    return automerge(state, action);
   },
 
   [actions.ABANDON_CONNECTION](state, action) {

@@ -31,7 +31,6 @@ export class Connection extends React.Component {
     if (tracks.length > 0) {
       path = "M" + tracks.map(t => `${t.x1} ${t.y1} ${t.x2} ${t.y2}`).join(" ");
     }
-
     const strokeWidth = line.isSelected ? 12 : 8;
 
     return (
