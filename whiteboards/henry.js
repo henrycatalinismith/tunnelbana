@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
       destinationId: "downtown"
     });
 
-    game.dispatch.createConnection({
-      lineId: "Sunshine",
-      sourceId: "stadium",
-      destinationId: "docks"
-    });
+    //game.dispatch.createConnection({
+    //lineId: "Sunshine",
+    //sourceId: "stadium",
+    //destinationId: "docks"
+    //});
 
     game.dispatch.createPassenger({
       passengerId: "our jimmy",
@@ -103,10 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
           destinationId: "downtown"
         });
 
-        game.dispatch.departure({
-          trainId: "henry",
-          destinationId: "docks"
-        });
+        //game.dispatch.departure({
+        //trainId: "henry",
+        //destinationId: "docks"
+        //});
       }, 500);
     }, 500);
 
