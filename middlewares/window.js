@@ -18,42 +18,65 @@ export const middleware = createMiddleware((before, after) => ({
       }
     });
 
+    const pointerDown = (x, y) => {
+      const target = document.elementFromPoint(x, y);
+      const grandparent = target.parentElement.parentElement;
+      const isStation = grandparent.classList.contains("station");
+      if (isStation) {
+        store.dispatch(actions.grabStation(grandparent.id));
+      }
+    };
+
+    window.addEventListener("mousedown", event => {
+      const x = event.clientX;
+      const y = event.clientY;
+      pointerDown(x, y);
+    });
+
+    window.addEventListener("touchstart", event => {
+      const x = event.touches[0].clientX;
+      const y = event.touches[0].clientY;
+      pointerDown(x, y);
+    });
+
     let throttle = false;
     const pointerMove = (x, y) => {
       if (!throttle) {
+        const target = document.elementFromPoint(x, y);
+        const grandparent = target.parentElement.parentElement;
+        const isStation = grandparent.classList.contains("station");
+
+        if (isStation) {
+          const state = store.getState();
+          const dragon = select("dragon")
+            .from(state)
+            .all()
+            .toJS();
+          const stationId = grandparent.id;
+
+          if (dragon.entity === "terminal") {
+            store.dispatch(
+              actions.realizeConnection({ destinationId: stationId })
+            );
+          }
+        }
+
         store.dispatch(actions.dragonMove(x, y));
         throttle = true;
         setTimeout(() => (throttle = false), 10);
       }
     };
 
-    window.addEventListener("mousemove", event =>
-      pointerMove(event.clientX, event.clientY)
-    );
-    window.addEventListener("touchmove", event =>
-      pointerMove(event.touches[0].clientX, event.touches[0].clientY)
-    );
+    window.addEventListener("mousemove", event => {
+      const x = event.clientX;
+      const y = event.clientY;
+      pointerMove(x, y);
+    });
 
     window.addEventListener("touchmove", event => {
       const x = event.touches[0].clientX;
       const y = event.touches[0].clientY;
-      const target = document.elementFromPoint(x, y);
-      const isStation = target.parentElement.classList.contains("station");
-
-      if (isStation) {
-        const state = store.getState();
-        const dragon = select("dragon")
-          .from(state)
-          .all()
-          .toJS();
-        const stationId = target.parentElement.id;
-
-        if (dragon.entity === "terminal") {
-          store.dispatch(
-            actions.realizeConnection({ destinationId: stationId })
-          );
-        }
-      }
+      pointerMove(x, y);
     });
 
     const pointerUp = () => {
