@@ -100,7 +100,7 @@ export const middleware = createMiddleware((before, after, cancel) => ({
     }
   },
 
-  [after(actions.CREATE_CONNECTION)]: function createTracksForNewConnetion(
+  [before(actions.CREATE_CONNECTION)]: function createTracksForNewConnetion(
     store,
     action
   ) {
@@ -123,25 +123,22 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       .byId(action.destination.id)
       .toJS();
 
-    const createTrack = (p1, p2, ordinality) => {
-      store.dispatch(
-        actions.createTrack({
-          connectionId: connection.id,
-          lineId: line.id,
-          sourceId: source.id,
-          destinationId: destination.id,
-          ordinality,
-          x1: p1.x,
-          y1: p1.y,
-          x2: p2.x,
-          y2: p2.y
-        })
-      );
-    };
+    const newTracks = path(source, destination);
 
-    const tracks = path(source, destination);
-    tracks.forEach((track, i) => {
-      createTrack(track[0], track[1], i);
+    action.tracks = {};
+    newTracks.forEach((newTrack, i) => {
+      const trackId = uuid();
+      action.tracks[trackId] = {
+        id: trackId,
+        connectionId: action.connection.id,
+        sourceId: action.source.id,
+        destinationId: action.destination.id,
+        lineId: action.line.id,
+        x1: newTrack[0].x,
+        y1: newTrack[0].y,
+        x2: newTrack[1].x,
+        y2: newTrack[1].y
+      };
     });
   },
 
@@ -234,7 +231,6 @@ export const middleware = createMiddleware((before, after, cancel) => ({
       .toJS();
 
     const newTracks = path(source, destination);
-    console.log(newTracks.length, tracks.length);
 
     action.tracks = {};
     newTracks.forEach((newTrack, i) => {
