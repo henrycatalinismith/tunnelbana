@@ -1,47 +1,44 @@
-export const CREATE_CONNECTION = "CREATE_CONNECTION";
-export const IMAGINE_CONNECTION = "IMAGINE_CONNECTION";
-export const REALIZE_CONNECTION = "REALIZE_CONNECTION";
-export const ABANDON_CONNECTION = "ABANDON_CONNECTION";
+import { createActions } from "signalbox";
 
-export function createConnection({
-  connectionId,
-  lineId,
-  sourceId,
-  destinationId
-}) {
-  return {
-    type: CREATE_CONNECTION,
-    connection: { id: connectionId },
-    line: { id: lineId },
-    source: { id: sourceId },
-    destination: { id: destinationId }
-  };
-}
+export const actions = createActions(
+  [
+    "CREATE_CONNECTION",
+    "IMAGINE_CONNECTION",
+    "REALIZE_CONNECTION",
+    "ABANDON_CONNECTION"
+  ],
+  types => ({
+    createConnection: ({ connectionId, lineId, sourceId, destinationId }) => {
+      return {
+        type: types.CREATE_CONNECTION,
+        connection: { id: connectionId },
+        line: { id: lineId },
+        source: { id: sourceId },
+        destination: { id: destinationId }
+      };
+    },
 
-export function imagineConnection({
-  connectionId,
-  lineId,
-  sourceId,
-  terminalId
-}) {
-  return {
-    type: IMAGINE_CONNECTION,
-    connection: { id: connectionId },
-    line: { id: lineId },
-    source: { id: sourceId },
-    terminal: { id: terminalId }
-  };
-}
+    imagineConnection: ({ connectionId, lineId, sourceId, terminalId }) => {
+      return {
+        type: types.IMAGINE_CONNECTION,
+        connection: { id: connectionId },
+        line: { id: lineId },
+        source: { id: sourceId },
+        terminal: { id: terminalId }
+      };
+    },
 
-export function realizeConnection({ destinationId }) {
-  return {
-    type: REALIZE_CONNECTION,
-    destination: { id: destinationId }
-  };
-}
+    realizeConnection: ({ destinationId }) => {
+      return {
+        type: types.REALIZE_CONNECTION,
+        destination: { id: destinationId }
+      };
+    },
 
-export function abandonConnection() {
-  return {
-    type: ABANDON_CONNECTION
-  };
-}
+    abandonConnection: () => {
+      return {
+        type: types.ABANDON_CONNECTION
+      };
+    }
+  })
+);
