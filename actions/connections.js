@@ -1,21 +1,20 @@
 export const CREATE_CONNECTION = "CREATE_CONNECTION";
-export const UPDATE_CONNECTION = "UPDATE_CONNECTION";
-
 export const IMAGINE_CONNECTION = "IMAGINE_CONNECTION";
 export const REALIZE_CONNECTION = "REALIZE_CONNECTION";
 export const ABANDON_CONNECTION = "ABANDON_CONNECTION";
 
-export function createConnection(connection) {
+export function createConnection({
+  connectionId,
+  lineId,
+  sourceId,
+  destinationId
+}) {
   return {
     type: CREATE_CONNECTION,
-    connection
-  };
-}
-
-export function updateConnection(connection) {
-  return {
-    type: UPDATE_CONNECTION,
-    connection
+    connection: { id: connectionId },
+    line: { id: lineId },
+    source: { id: sourceId },
+    destination: { id: destinationId }
   };
 }
 

@@ -8,18 +8,12 @@ export const reducer = createReducer(new Immutable.Map(), {
       action.connection.id,
       Immutable.fromJS({
         id: action.connection.id,
-        sourceId: action.connection.sourceId,
-        destinationId: action.connection.destinationId,
-        lineId: action.connection.lineId,
+        sourceId: action.source.id,
+        destinationId: action.destination.id,
+        lineId: action.line.id,
         terminalId: undefined
       })
     );
-  },
-
-  [actions.UPDATE_CONNECTION](state, action) {
-    return state.update(action.connection.id, connection => {
-      return connection.merge(Immutable.fromJS(action.connection));
-    });
   },
 
   [actions.IMAGINE_CONNECTION](state, action) {

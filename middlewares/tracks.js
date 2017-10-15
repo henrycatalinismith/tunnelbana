@@ -94,34 +94,34 @@ export const middleware = createMiddleware((before, after, cancel) => ({
 
   [after(actions.CREATE_CONNECTION)]: function createTracksForNewConnetion(
     store,
-    { connection }
+    action
   ) {
-    const { lineId, sourceId, destinationId } = connection;
+    const { connection, line } = action;
     const state = store.getState();
     const connections = store.getState().get("connections");
     const stations = store.getState().get("stations");
 
-    if (!destinationId) {
+    if (!action.destination.id) {
       return;
     }
 
     const source = select("stations")
       .from(state)
-      .byId(sourceId)
+      .byId(action.source.id)
       .toJS();
 
     const destination = select("stations")
       .from(state)
-      .byId(destinationId)
+      .byId(action.destination.id)
       .toJS();
 
     const createTrack = (p1, p2, ordinality) => {
       store.dispatch(
         actions.createTrack({
           connectionId: connection.id,
-          lineId,
-          sourceId,
-          destinationId,
+          lineId: line.id,
+          sourceId: source.id,
+          destinationId: destination.id,
           ordinality,
           x1: p1.x,
           y1: p1.y,
