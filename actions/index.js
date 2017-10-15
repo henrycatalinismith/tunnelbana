@@ -1,4 +1,4 @@
-import * as connections from "./connections";
+import { actions as connectionActions } from "./connections";
 import * as dragon from "./dragon";
 import * as game from "./game";
 import * as journeys from "./journeys";
@@ -11,7 +11,7 @@ import * as trains from "./trains";
 import * as window from "./window";
 
 export default {
-  ...connections,
+  ...connectionActions,
   ...dragon,
   ...game,
   ...journeys,
