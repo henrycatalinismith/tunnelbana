@@ -1,24 +1,21 @@
-export const CREATE_TRACK = "CREATE_TRACK";
-export const UPDATE_TRACK = "UPDATE_TRACK";
-export const DELETE_TRACK = "DELETE_TRACK";
+import { createActions } from "signalbox";
 
-export function createTrack(track) {
-  return {
-    type: CREATE_TRACK,
-    track
-  };
-}
+export const actions = createActions(
+  ["CREATE_TRACK", "UPDATE_TRACK", "DELETE_TRACK"],
+  types => ({
+    createTrack: track => ({
+      type: types.CREATE_TRACK,
+      track
+    }),
 
-export function updateTrack(track) {
-  return {
-    type: UPDATE_TRACK,
-    track
-  };
-}
+    updateTrack: track => ({
+      type: types.UPDATE_TRACK,
+      track
+    }),
 
-export function deleteTrack(id) {
-  return {
-    type: DELETE_TRACK,
-    track: { id }
-  };
-}
+    deleteTrack: id => ({
+      type: types.DELETE_TRACK,
+      track: { id }
+    })
+  })
+);
