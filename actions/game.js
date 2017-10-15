@@ -1,28 +1,11 @@
-export const START = "START";
-export const PAUSE = "PAUSE";
-export const RESUME = "RESUME";
-export const SAVE = "SAVE";
+import { createActions } from "signalbox";
 
-export function start() {
-  return {
-    type: START
-  };
-}
-
-export function pause() {
-  return {
-    type: PAUSE
-  };
-}
-
-export function resume() {
-  return {
-    type: RESUME
-  };
-}
-
-export function save() {
-  return {
-    type: SAVE
-  };
-}
+export const actions = createActions(
+  ["START", "PAUSE", "RESUME", "SAVE"],
+  types => ({
+    start: () => ({ type: types.START }),
+    pause: () => ({ type: types.PAUSE }),
+    resume: () => ({ type: types.RESUME }),
+    save: () => ({ type: types.SAVE })
+  })
+);
