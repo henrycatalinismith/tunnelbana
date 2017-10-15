@@ -13,30 +13,8 @@ export class Station extends React.Component {
     station: PropTypes.object,
     gender: PropTypes.object,
     passengers: PropTypes.object,
-    dragon: PropTypes.object,
-
-    selectStation: PropTypes.func,
-    deselectStation: PropTypes.func,
-    realizeConnection: PropTypes.func
+    dragon: PropTypes.object
   };
-
-  constructor() {
-    super();
-    this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseEnter = this.onMouseEnter.bind(this);
-  }
-
-  onMouseDown(event) {
-    this.props.selectStation(this.props.station.get("id"));
-  }
-
-  onMouseEnter(event) {
-    const dragon = this.props.dragon.toJS();
-    if (dragon.entity !== "terminal") {
-      return;
-    }
-    this.props.realizeConnection(this.props.id);
-  }
 
   render() {
     const id = this.props.station.get("id");
@@ -82,13 +60,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    selectStation: id => dispatch(actions.grabStation(id)),
-    deselectStation: id => dispatch(actions.dragonDrop("station", id)),
-    realizeConnection: id =>
-      dispatch(actions.realizeConnection({ destinationId: id }))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Station);
+export default connect(mapStateToProps)(Station);
