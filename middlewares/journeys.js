@@ -16,7 +16,7 @@ import clock from "../clock";
 import * as points from "../geometry/points";
 import { getConnection } from "../reducers/connections";
 
-export const middleware = createMiddleware((before, after, cancel) => ({
+export const middleware = createMiddleware((cancel, before, after) => ({
   [before(actions.DEPARTURE)]: function inferJourneyProperties(store, action) {
     const state = store.getState();
     const train = select("trains")
