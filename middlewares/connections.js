@@ -36,7 +36,7 @@ const enforceListOrder = (store, action) => {
   }
 };
 
-export const middleware = createMiddleware((before, after, cancel) => ({
+export const middleware = createMiddleware((cancel, before, after) => ({
   [cancel(actions.CREATE_CONNECTION)]: function inferNewConnectionProperties(
     store,
     action

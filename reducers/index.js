@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { combineReducers } from "redux-immutable";
-import { createSelect } from "signalbox";
+import { createSelectors } from "signalbox";
 
 import {
   reducer as connectionsReducer,
@@ -100,7 +100,7 @@ const store = createStore(
 
 export default store;
 
-export const select = createSelect(selectors, {
+export const select = createSelectors(selectors, {
   stateAccessor(s, entity) {
     return s.get(entity);
   }

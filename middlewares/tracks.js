@@ -93,7 +93,7 @@ const path = (source, destination) => {
   return tracks;
 };
 
-export const middleware = createMiddleware((before, after, cancel) => ({
+export const middleware = createMiddleware((cancel, before, after) => ({
   [before(actions.CREATE_TRACK)]: function inferTrackProperties(store, action) {
     if (!action.track.id) {
       action.track.id = uuid();
