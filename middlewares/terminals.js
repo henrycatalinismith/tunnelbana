@@ -3,7 +3,7 @@ import uuid from "uuid/v1";
 import actions from "../actions";
 import { select } from "../reducers";
 
-export const middleware = createMiddleware((before, after, cancel) => ({
+export const middleware = createMiddleware((cancel, before, after) => ({
   [before(actions.CREATE_TERMINAL)]: function inferTerminalProperties(
     store,
     action
