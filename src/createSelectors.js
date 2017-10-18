@@ -24,10 +24,10 @@ exports.createSelectors = (selectors, options = defaultOptions) => {
     for (let entity in selectors) {
       boundSelect[entity] = {};
       for (let name in selectors[entity]) {
-        boundSelect[entity][name] = () => {
+        boundSelect[entity][name] = (...args) => {
           const state = store.getState();
           const stateParam = options.stateAccessor(state, entity);
-          return selectors[entity][name].call(null, stateParam);
+          return selectors[entity][name].apply(null, [stateParam, ...args]);
         };
       }
     }
