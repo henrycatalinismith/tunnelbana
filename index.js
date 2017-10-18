@@ -4,7 +4,7 @@ exports.createActions = (typeList, creatorCreator) => {
   const actionTypes = {};
   typeList.forEach(type => actionTypes[type] = type);
   const actionCreators = creatorCreator(actionTypes);
-  const actions = { ...actionCreators, ...actionTypes };
+  const actions = Object.assign({}, actionCreators, actionTypes);
   return actions;
 };
 
