@@ -1,25 +1,12 @@
 const { createActions } = require("./src/createActions");
 const { createApp } = require("./src/createApp");
 const { createMiddleware } = require("./src/createMiddleware");
+const { createReducer } = require("./src/createReducer");
 
 const defaultOptions = {
   stateAccessor(state, entity) {
     return state && state[entity];
   }
-};
-
-exports.createReducer = (initialState, actionHandlers) => {
-  const reducer = (state, action) => {
-    if (state === undefined) {
-      state = initialState;
-    }
-    if (actionHandlers.hasOwnProperty(action.type)) {
-      state = actionHandlers[action.type](state, action);
-    }
-    return state;
-  };
-
-  return reducer;
 };
 
 exports.createSelect = (selectors, options = defaultOptions) => {
