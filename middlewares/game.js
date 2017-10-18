@@ -4,7 +4,7 @@ import actions from "../actions";
 import clock from "../clock";
 import download from "../download";
 
-export const middleware = createMiddleware((before, after) => ({
+export const middleware = createMiddleware((cancel, before, after) => ({
   [before(actions.SAVE)](store) {
     console.log("saving");
     store.dispatch(actions.pause());

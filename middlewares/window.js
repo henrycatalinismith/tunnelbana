@@ -2,7 +2,7 @@ import { createMiddleware } from "signalbox";
 import actions from "../actions";
 import { select } from "../reducers";
 
-export const middleware = createMiddleware((before, after) => ({
+export const middleware = createMiddleware((cancel, before, after) => ({
   [after(actions.START)](store) {
     store.dispatch(actions.resizeWindow(window.innerWidth, window.innerHeight));
 

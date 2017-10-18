@@ -135,7 +135,7 @@ const planItinerary = (store, action) => {
   }
 };
 
-export const middleware = createMiddleware((before, after) => ({
+export const middleware = createMiddleware((cancel, before, after) => ({
   [before(actions.DEPARTURE)]: function alightTrains(store, action) {
     const state = store.getState();
 
