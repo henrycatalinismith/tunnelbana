@@ -69,7 +69,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     };
   },
 
-  // https://github.com/railcar/energetic-headlight/commit/77fe402592600d82a411a9fe48206c16e265ae1e#commitcomment-24866416
+  // https://github.com/tunnelbana/energetic-headlight/commit/77fe402592600d82a411a9fe48206c16e265ae1e#commitcomment-24866416
   [cancel(actions.REALIZE_CONNECTION)]: function cancelRecursiveConnection(
     store,
     action

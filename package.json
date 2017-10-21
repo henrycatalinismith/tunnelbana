@@ -4,7 +4,7 @@
   "description": "Trains and whatever",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/railcar/energetic-headlight.git"
+    "url": "git+ssh://git@github.com/tunnelbana/energetic-headlight.git"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
