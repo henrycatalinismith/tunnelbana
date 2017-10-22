@@ -3,7 +3,7 @@ const path = require("path");
 const execSync = require("child_process").execSync;
 
 const token = process.env.GITHUB_TOKEN;
-const repo = "github.com/hnrysmth/tunnelbana.git";
+const repo = "hnrysmth/tunnelbana.git";
 
 if (!token) {
   process.stderr.write("Deploy failed due to missing token");
@@ -19,13 +19,13 @@ const options = {
   branch: "gh-pages",
   clone: "../gh-pages",
   message: "🚂",
-  //push: false,
-  repo: `git@${repo}`,
+  push: false,
+  repo: `git@github.com:${repo}`,
   src: ["index.html", "index.css", "tunnelbana.js"]
 };
 
-ghpages.publish(".", options);
-//run("git reset --soft HEAD~1");
-//run("git commit --all --amend --no-edit --reset-author --message '🚂'");
-//run(`git push --force --quiet https://${token}@${repo} master`);
-//});
+ghpages.publish(".", options, () => {
+  run("git reset --soft HEAD~1");
+  run("git commit --all --amend --no-edit --reset-author --message '🚂'");
+  run(`git push --force --quiet https://${token}@github.com/${repo} master`);
+});
