@@ -1,10 +1,10 @@
 {
-  "name": "energetic-headlight",
+  "name": "tunnelbana",
   "version": "4.2.0",
   "description": "Trains and whatever",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/tunnelbana/energetic-headlight.git"
+    "url": "git+ssh://git@github.com/hnrysmth/tunnelbana.git"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
