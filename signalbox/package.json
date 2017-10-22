@@ -1,0 +1,28 @@
+{
+  "name": "signalbox",
+  "version": "3.0.0",
+  "description": "Redux middleware syntactical sugar",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hnrysmth/tunnelbana.git"
+  },
+  "keywords": [
+    "redux",
+    "middleware"
+  ],
+  "author": "Henry Smith <henry@henrysmith.org>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.4.0"
+  },
+  "dependencies": {
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
