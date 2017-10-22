@@ -17,6 +17,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "gsap": "^1.20.2",
+    "html-webpack-include-assets-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.30.1",
     "immutable": "4.0.0-rc.2",
     "imports-loader": "^0.7.1",
     "jest": "^20.0.4",
@@ -48,8 +50,9 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --disable-host-check",
+    "build": "webpack",
     "precommit": "lint-staged",
+    "start": "DASH=1 webpack-dev-server --disable-host-check",
     "test": "jest"
   }
 }
