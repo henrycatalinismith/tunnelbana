@@ -17,6 +17,7 @@ const run = cmd => {
 
 const options = {
   branch: "gh-pages",
+  clone: "../gh-pages",
   message: "🚂",
   push: false,
   repo: `git@${repo}`,
