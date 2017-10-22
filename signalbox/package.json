@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/railcar/signalbox.git"
+    "url": "git+ssh://git@github.com/hnrysmth/tunnelbana.git"
   },
   "keywords": [
     "redux",
@@ -13,10 +13,6 @@
   ],
   "author": "Henry Smith <henry@henrysmith.org>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/railcar/signalbox/issues"
-  },
-  "homepage": "https://github.com/railcar/signalbox#readme",
   "engines": {
     "node": ">=8.4.0"
   },
