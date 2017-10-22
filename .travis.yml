@@ -1,0 +1,8 @@
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  repo: tunnelbana.github.io
+  target_branch: master
+  on:
+    branch: master
