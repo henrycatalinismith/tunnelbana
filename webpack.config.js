@@ -15,7 +15,7 @@ module.exports = {
     quiet: true,
     open: true
   },
-  entry: path.join(__dirname, "whiteboards", `${username}.js`),
+  entry: path.join(__dirname, "index.js"),
   module: {
     loaders: [
       {
