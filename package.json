@@ -52,7 +52,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "deploy": "node deploy.js",
+    "deploy": "NODE_DEBUG=gh-pages node deploy.js",
     "precommit": "lint-staged",
     "start": "DASH=1 webpack-dev-server --disable-host-check",
     "test": "jest"
