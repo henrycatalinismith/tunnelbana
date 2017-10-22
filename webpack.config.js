@@ -1,10 +1,30 @@
-const os = require("os");
 const path = require("path");
+
 const Dashboard = require("webpack-dashboard");
 const DashboardPlugin = require("webpack-dashboard/plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
 
-const dashboard = new Dashboard();
-const username = os.userInfo().username;
+const plugins = [
+  new HtmlWebpackPlugin({
+    title: "tunnelbana.github.io",
+    hash: true,
+    template: "index.ejs"
+  }),
+  new HtmlWebpackIncludeAssetsPlugin({
+    assets: ["index.css"],
+    append: true
+  })
+];
+
+if (process.env.DASH) {
+  plugins.push(
+    new DashboardPlugin({
+      port: 8080,
+      handler: new Dashboard().setData
+    })
+  );
+}
 
 module.exports = {
   devServer: {
@@ -29,14 +49,9 @@ module.exports = {
     ]
   },
   output: {
-    filename: "energetic-headlight.js"
+    filename: "tunnelbana.js"
   },
-  plugins: [
-    new DashboardPlugin({
-      port: 8080,
-      handler: dashboard.setData
-    })
-  ],
+  plugins,
   resolve: {
     modules: [__dirname, "node_modules"],
     extensions: ["*", ".js", ".jsx"]
