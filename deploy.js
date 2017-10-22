@@ -20,7 +20,7 @@ const options = {
   clone: "../gh-pages",
   message: "🚂",
   // push: false,
-  repo: `${token}@github.com:${repo}`,
+  repo: `https://${token}@github.com/${repo}`,
   src: ["index.html", "index.css", "tunnelbana.js"]
 };
 
