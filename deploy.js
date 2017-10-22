@@ -19,13 +19,13 @@ const options = {
   branch: "gh-pages",
   clone: "../gh-pages",
   message: "🚂",
-  // push: false,
+  push: false,
   repo: `https://${token}@github.com/${repo}`,
   src: ["index.html", "index.css", "tunnelbana.js"]
 };
 
-ghpages.publish(".", options);
-//run("git reset --soft HEAD~1");
-//run("git commit --all --amend --no-edit --reset-author --message '🚂'");
-//run(`git push --force --quiet https://${token}@github.com/${repo} master`);
-//});
+ghpages.publish(".", options, () => {
+  run("git reset --soft HEAD~1");
+  run("git commit --all --amend --no-edit --reset-author --message '🚂'");
+  run(`git push --force --quiet https://${token}@github.com/${repo} master`);
+});
