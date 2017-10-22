@@ -1,0 +1,25 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  overflow: hidden;
+  background: #333; }
+
+.Camera {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden; }
+
+.Camera__svg {
+  position: absolute;
+  top: -2vmin;
+  left: 0; }
+
+.Selection {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 13;
+  stroke: white;
+  stroke-width: 10px;
+  fill: rgba(255, 255, 255, 0.5); }
+
+/*# sourceMappingURL=highvalley.7a4c2d7f765948db7a79.css.map*/
