@@ -45,20 +45,23 @@ export const reducer = createReducer(new Immutable.Map(), {
 });
 
 export function getConnection(state, lineId, sourceId, destinationId) {
-  return state
-    .filter(c => {
-      const sameLine = c.get("lineId") === lineId;
-      const forwardsMatch =
-        c.get("sourceId") === sourceId &&
-        c.get("destinationId") === destinationId;
-      const backwardsMatch =
-        c.get("sourceId") === destinationId &&
-        c.get("destinationId") === sourceId;
-      const isMatch = sameLine && (forwardsMatch || backwardsMatch);
-      return isMatch;
-    })
-    .first()
-    .toJS();
+  const matches = state.filter(c => {
+    const sameLine = c.get("lineId") === lineId;
+    const forwardsMatch =
+      c.get("sourceId") === sourceId &&
+      c.get("destinationId") === destinationId;
+    const backwardsMatch =
+      c.get("sourceId") === destinationId &&
+      c.get("destinationId") === sourceId;
+    const isMatch = sameLine && (forwardsMatch || backwardsMatch);
+    return isMatch;
+  });
+
+  if (matches.size > 0) {
+    return matches.first().toJS();
+  }
+
+  return new Immutable.Map().toJS();
 }
 
 export const selectors = {
