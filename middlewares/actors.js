@@ -1,9 +1,14 @@
 const { createMiddleware } = require("signalbox");
+const uuid = require("uuid/v1");
+
 const actions = require("../actions").default;
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [after(actions.RESIZE_VIEWPORT)](store) {
-    // console.log("hey!");
+  [before(actions.CREATE_ACTOR)](store, action) {
+    if (!action.actor.id) {
+      action.actor.id = uuid();
+    }
+    console.log("hey!", action);
   }
 }));
 
