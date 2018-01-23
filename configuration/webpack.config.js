@@ -15,7 +15,7 @@ const plugins = [
   new HtmlWebpackPlugin({
     title: "highvalley",
     hash: true,
-    template: "entrypoints/index.ejs",
+    template: "./entrypoints/index.ejs",
     filename: "index.html"
   }),
   new ExtractTextPlugin({
@@ -43,8 +43,8 @@ module.exports = {
   },
   devtool: "source-map",
   entry: [
-    path.join(__dirname, "entrypoints", "index.js"),
-    path.join(__dirname, "entrypoints", "index.scss"),
+    path.join(__dirname, "../entrypoints", "index.js"),
+    path.join(__dirname, "../entrypoints", "index.scss"),
   ],
   module: {
     loaders: [
@@ -64,7 +64,7 @@ module.exports = {
               loader: "sass-loader",
               options: {
                 includePaths: [
-                  path.join(__dirname, "stylesheets"),
+                  path.join(__dirname, "../stylesheets"),
                 ]
               }
             }
@@ -75,11 +75,11 @@ module.exports = {
   },
   output: {
     filename: "highvalley.[hash].js",
-    path: path.join(__dirname, "artefacts"),
+    path: path.join(__dirname, "../artefacts"),
   },
   plugins,
   resolve: {
-    modules: [__dirname, "node_modules"],
+    modules: [__dirname, "../", "../node_modules"],
     extensions: ["*", ".js", ".jsx"]
   }
 };
