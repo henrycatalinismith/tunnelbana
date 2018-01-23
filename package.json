@@ -16,6 +16,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "scripts": {
-    "start": "DASH=1 webpack-dev-server --disable-host-check"
+    "build": "webpack --config configuration/webpack.config.js",
+    "start": "DASH=1 webpack-dev-server --config configuration/webpack.config.js --disable-host-check"
   }
 }
