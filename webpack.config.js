@@ -56,7 +56,19 @@ module.exports = {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: "css-loader?minimize"
+          use: [
+            {
+              loader: "css-loader"
+            },
+            {
+              loader: "sass-loader",
+              options: {
+                includePaths: [
+                  path.join(__dirname, "stylesheets"),
+                ]
+              }
+            }
+          ]
         })
       }
     ]
