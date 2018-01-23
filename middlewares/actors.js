@@ -8,7 +8,6 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     if (!action.actor.id) {
       action.actor.id = uuid();
     }
-    console.log("hey!", action);
   }
 }));
 
