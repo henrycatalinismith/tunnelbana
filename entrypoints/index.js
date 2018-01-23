@@ -10,8 +10,8 @@ const middlewares = require("../middlewares").default;
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = createApp(store(), actions, middlewares, selectors);
-
   const root = document.createElement("div");
+
   document.body.appendChild(root);
   ReactDOM.render(<HighValley />, root);
 
