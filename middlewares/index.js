@@ -1,8 +1,10 @@
 const { createMiddleware } = require("signalbox");
 
-const viewport = require("./viewport");
+const actors = require("./actors").default;
+const viewport = require("./viewport").default;
 
 export default createMiddleware([
+  actors,
   viewport,
 ]);
 
