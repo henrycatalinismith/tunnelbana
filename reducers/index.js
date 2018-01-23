@@ -3,15 +3,18 @@ const { createSelectors } = require("signalbox");
 
 const middleware = require("../middlewares").default;
 
+const actors = require("./actors");
 const viewport = require("./viewport");
 
 export const reducers = {
+  actors: actors.reducer,
   viewport: viewport.reducer,
 };
 
-export const selectors = {
+export const selectors = createSelectors({
+  actors: actors.selectors,
   viewport: viewport.selectors,
-};
+});
 
 export default function () {
   const reducer = combineReducers(reducers);
@@ -24,6 +27,4 @@ export default function () {
 
   return store;
 }
-
-export const select = createSelectors(selectors);
 
