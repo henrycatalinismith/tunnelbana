@@ -41,6 +41,7 @@ module.exports = {
     quiet: true,
     open: true
   },
+  devtool: "source-map",
   entry: [
     path.join(__dirname, "entrypoints", "index.js"),
     path.join(__dirname, "entrypoints", "index.scss"),
