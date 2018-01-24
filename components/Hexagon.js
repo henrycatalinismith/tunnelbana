@@ -6,11 +6,12 @@ const select = require("../reducers").selectors;
 
 export class Hexagon extends React.PureComponent {
   static propTypes = {
+    id: PropTypes.string,
+    hexagon: PropTypes.object
   };
 
   render() {
-    const { actors } = this.props;
-    const viewbox = [0, 0, 400, 400].join(" ");
+    const { hexagon } = this.props;
 
     const centerAng = 2 * Math.PI / 6;
     const round = n => Number(n.toFixed(3));
@@ -27,8 +28,8 @@ export class Hexagon extends React.PureComponent {
     let points = []
     for (let i = 0; i < 6; i++) {
       const ang = startAng + (i * centerAng);
-      const x = (offset / 2) + center.x + (radius * Math.cos(ang));
-      const y = (offset / 1.5) + center.y - (radius * Math.sin(ang));
+      const x = (offset / 2) + hexagon.x + (radius * Math.cos(ang));
+      const y = (offset / 1.5) + hexagon.y - (radius * Math.sin(ang));
       points.push([x, y]);
     }
 
@@ -40,8 +41,11 @@ export class Hexagon extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
+    hexagon: select("hexagons")
+      .from(state)
+      .byId(ownProps.id),
   };
 };
 

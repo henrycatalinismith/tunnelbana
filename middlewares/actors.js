@@ -6,7 +6,7 @@ const actions = require("../actions").default;
 export const middleware = createMiddleware((cancel, before, after) => ({
   [before(actions.CREATE_ACTOR)](store, action) {
     if (!action.actor.id) {
-      action.actor.id = uuid();
+      action.actor.id = Math.random() + "";
     }
   }
 }));
