@@ -19,7 +19,6 @@ export class HighValley extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log('index' + Math.random());
   return {
     actors: select("actors")
       .from(state)
