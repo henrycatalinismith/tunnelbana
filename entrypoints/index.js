@@ -1,6 +1,7 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 const { createApp } = require("signalbox");
+const { Provider } = require("react-redux");
 
 const HighValley = require("../components").default;
 const actions = require("../actions").default;
@@ -9,11 +10,12 @@ const { selectors } = require("../reducers");
 const middlewares = require("../middlewares").default;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const app = createApp(store(), actions, middlewares, selectors);
+  const s = store();
+  const app = createApp(s, actions, middlewares, selectors);
   const root = document.createElement("div");
 
   document.body.appendChild(root);
-  ReactDOM.render(<HighValley />, root);
+  ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
   app.dispatch.resizeViewport(window.innerWidth, window.innerHeight);
   app.dispatch.createActor({ x: 0, y: 0 });
