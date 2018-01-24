@@ -15,7 +15,7 @@ export class Camera extends React.PureComponent {
     const viewbox = [0, 0, 400, 400].join(" ");
 
     return (
-      <svg viewBox={viewbox}>
+      <svg draggable="false" viewBox={viewbox}>
         {Object.keys(hexagons).map((id, i) => {
           return <Hexagon key={i} id={id} />;
         })}
@@ -25,7 +25,6 @@ export class Camera extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log('camera' + Math.random() + JSON.stringify(select("hexagons").from(state).all()));
   return {
     actors: select("actors")
       .from(state)
