@@ -20,8 +20,6 @@ export class Hexagon extends React.PureComponent {
     const diagonal = 100;
     const offset = 2;
 
-    const center = { x: 200, y: 100 };
-
     const startAng = deg2rad(90);
     const radius = diagonal / 2;
 
@@ -36,7 +34,7 @@ export class Hexagon extends React.PureComponent {
     points = points.map(point => point.map(round));
 
     return (
-      <polygon points={points} />
+      <polygon stroke="#555555" fill="#6dd254" points={points} />
     );
   }
 }
