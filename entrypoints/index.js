@@ -8,29 +8,50 @@ const actions = require("../actions").default;
 const store = require("../reducers").default;
 const { selectors } = require("../reducers");
 const middlewares = require("../middlewares").default;
+const cube = require("../math/cube").default;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const s = store();
+  const initialState = {
+    viewport: {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    }
+  };
+
+  const s = store(initialState);
   const game = createApp(s, actions, middlewares, selectors);
   const root = document.createElement("div");
 
   document.body.appendChild(root);
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
-  game.dispatch.resizeViewport(window.innerWidth, window.innerHeight);
   game.dispatch.createActor({ x: 0, y: 0 });
-  game.dispatch.createHexagon({ x: 190, y: 100 });
-  game.dispatch.createHexagon({ x: 280, y: 100 });
 
-  game.dispatch.createHexagon({ x: 145, y: 178 });
-  game.dispatch.createHexagon({ x: 235, y: 178 });
-  game.dispatch.createHexagon({ x: 325, y: 178 });
+  game.dispatch.createHexagon(0, 0, 0);
 
-  game.dispatch.createHexagon({ x: 190, y: 256 });
-  game.dispatch.createHexagon({ x: 280, y: 256 });
+/*
+  game.dispatch.createHexagon({ x: -10, y: -80 });
+  game.dispatch.createHexagon({ x: 80, y: -80 });
 
-  console.log(game.select.viewport.dimensions());
-  console.log(game.select.actors.all());
+  game.dispatch.createHexagon({ x: -55, y: -2 });
+  game.dispatch.createHexagon({ x: 35, y: -2 });
+  game.dispatch.createHexagon({ x: 125, y: -2 });
+
+  game.dispatch.createHexagon({ x: -10, y: 76 });
+  */
+
+
+  const center = cube(0, 0, 0);
+  const ring = cube.ring(center, 1);
+
+  game.dispatch.createHexagon(center.x, center.y, center.z);
+  ring.forEach(c => {
+    game.dispatch.createHexagon(c.x, c.y, c.z);
+  });
+
+  console.log(center);
+  console.log(ring);
   console.log(game.select.hexagons.all());
+
 });
 

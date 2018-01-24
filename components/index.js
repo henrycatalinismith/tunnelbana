@@ -8,7 +8,7 @@ const Camera = require("./Camera").default;
 export class HighValley extends React.PureComponent {
   static propTypes = {
     actors: PropTypes.object,
-    hexagons: PropTypes.object,
+    hexagons: PropTypes.array,
   };
 
   render() {
