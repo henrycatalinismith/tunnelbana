@@ -5,6 +5,8 @@ const actions = require("../actions").default;
 const initialState = {
 };
 
+let selection;
+
 export const reducer = createReducer(initialState, {
   [actions.CREATE_HEXAGON](state, { hexagon }) {
     return {
@@ -14,8 +16,14 @@ export const reducer = createReducer(initialState, {
   },
 
   [actions.SELECT_HEXAGON](state, { hexagon }) {
+    const oldSelection = selection;
+    selection = hexagon.id;
     return {
       ...state,
+      [oldSelection]: {
+        ...state[oldSelection],
+        isSelected: false,
+      },
       [hexagon.id]: {
         ...state[hexagon.id],
         isSelected: true,
