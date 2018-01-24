@@ -2,20 +2,31 @@ const { createReducer } = require("signalbox");
 
 const actions = require("../actions").default;
 
-const initialState = {};
+const initialState = {
+};
 
 export const reducer = createReducer(initialState, {
-  [actions.CREATE_HEXAGON](hexagons, action) {
+  [actions.CREATE_HEXAGON](state, { hexagon }) {
     return {
-      ...hexagons,
-      [action.hexagon.id]: action.hexagon
+      ...state,
+      [hexagon.id]: hexagon
+    };
+  },
+
+  [actions.SELECT_HEXAGON](state, { hexagon }) {
+    return {
+      ...state,
+      [hexagon.id]: {
+        ...state[hexagon.id],
+        isSelected: true,
+      }
     };
   },
 });
 
 export const selectors = {
-  all: hexagons => hexagons,
-  byId: (hexagons, id) => hexagons[id],
+  all: state => state,
+  byId: (state, id) => state[id],
 };
 
 

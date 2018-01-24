@@ -2,13 +2,22 @@ const React = require("react");
 const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 
+const actions = require("../actions").default;
 const select = require("../reducers").selectors;
 
 export class Hexagon extends React.PureComponent {
   static propTypes = {
     id: PropTypes.string,
-    hexagon: PropTypes.object
+    hexagon: PropTypes.object,
+    selectHexagon: PropTypes.func
   };
+
+  constructor(props) {
+    super(props);
+    this.selectHexagon = () => {
+      this.props.selectHexagon(this.props.id);
+    }
+  }
 
   render() {
     const { hexagon } = this.props;
@@ -33,8 +42,10 @@ export class Hexagon extends React.PureComponent {
 
     points = points.map(point => point.map(round));
 
+    const fill = hexagon.isSelected ? "yellow" : "#6dd254";
+
     return (
-      <polygon stroke="#555555" fill="#6dd254" points={points} />
+      <polygon onClick={this.selectHexagon} stroke="#555555" fill={fill} points={points} />
     );
   }
 }
@@ -47,5 +58,11 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(Hexagon);
+const mapDispatchToProps = dispatch => {
+  return {
+    selectHexagon: id => dispatch(actions.selectHexagon(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Hexagon);
 
