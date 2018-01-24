@@ -11,18 +11,26 @@ const middlewares = require("../middlewares").default;
 
 document.addEventListener("DOMContentLoaded", () => {
   const s = store();
-  const app = createApp(s, actions, middlewares, selectors);
+  const game = createApp(s, actions, middlewares, selectors);
   const root = document.createElement("div");
 
   document.body.appendChild(root);
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
-  app.dispatch.resizeViewport(window.innerWidth, window.innerHeight);
-  app.dispatch.createActor({ x: 0, y: 0 });
-  app.dispatch.createHexagon({ x: 100, y: 100 });
+  game.dispatch.resizeViewport(window.innerWidth, window.innerHeight);
+  game.dispatch.createActor({ x: 0, y: 0 });
+  game.dispatch.createHexagon({ x: 190, y: 100 });
+  game.dispatch.createHexagon({ x: 280, y: 100 });
 
-  console.log(app.select.viewport.dimensions());
-  console.log(app.select.actors.all());
-  console.log(app.select.hexagons.all());
+  game.dispatch.createHexagon({ x: 145, y: 178 });
+  game.dispatch.createHexagon({ x: 235, y: 178 });
+  game.dispatch.createHexagon({ x: 325, y: 178 });
+
+  game.dispatch.createHexagon({ x: 190, y: 256 });
+  game.dispatch.createHexagon({ x: 280, y: 256 });
+
+  console.log(game.select.viewport.dimensions());
+  console.log(game.select.actors.all());
+  console.log(game.select.hexagons.all());
 });
 
