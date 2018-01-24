@@ -7,7 +7,9 @@ const select = require("../reducers").selectors;
 
 export class Hexagon extends React.PureComponent {
   static propTypes = {
-    id: PropTypes.string,
+    x: PropTypes.number,
+    y: PropTypes.number,
+    z: PropTypes.number,
     hexagon: PropTypes.object,
     selectHexagon: PropTypes.func
   };
@@ -21,6 +23,7 @@ export class Hexagon extends React.PureComponent {
 
   render() {
     const { hexagon } = this.props;
+    console.log(hexagon);
 
     const centerAng = 2 * Math.PI / 6;
     const round = n => Number(n.toFixed(3));
@@ -50,11 +53,11 @@ export class Hexagon extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, { x, y, z}) => {
   return {
     hexagon: select("hexagons")
       .from(state)
-      .byId(ownProps.id),
+      .byGrid(x, y, z),
   };
 };
 

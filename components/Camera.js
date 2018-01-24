@@ -7,17 +7,25 @@ const Hexagon = require("./Hexagon").default;
 export class Camera extends React.PureComponent {
   static propTypes = {
     actors: PropTypes.object,
-    hexagons: PropTypes.object,
+    hexagons: PropTypes.array,
+    viewport: PropTypes.object,
   };
 
   render() {
-    const { actors, hexagons } = this.props;
-    const viewbox = [0, 0, 400, 400].join(" ");
+    const { actors, hexagons, viewport } = this.props;
+
+    const viewbox = [
+      0 - (viewport.width / 2),
+      0 - (viewport.height / 2),
+      viewport.width,
+      viewport.height
+    ].join(" ");
 
     return (
       <svg draggable="false" viewBox={viewbox}>
-        {Object.keys(hexagons).map((id, i) => {
-          return <Hexagon key={i} id={id} />;
+        {hexagons.map((hexagon, i) => {
+          console.log(i, hexagon);
+          return <Hexagon key={i} x={hexagon.x} y={hexagon.y} z={hexagon.z} />;
         })}
       </svg>
     );
@@ -25,6 +33,7 @@ export class Camera extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
+  console.log(select("hexagons").from(state).all());
   return {
     actors: select("actors")
       .from(state)
@@ -32,6 +41,9 @@ const mapStateToProps = state => {
     hexagons: select("hexagons")
       .from(state)
       .all(),
+    viewport: select("viewport")
+      .from(state)
+      .dimensions(),
   };
 };
 

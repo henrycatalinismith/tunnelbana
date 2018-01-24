@@ -1,9 +1,9 @@
 import { createActions } from "signalbox";
 
 export default createActions(["CREATE_HEXAGON", "SELECT_HEXAGON"], types => ({
-  createHexagon: ({ x, y }) => ({
+  createHexagon: (x, y, z) => ({
     type: types.CREATE_HEXAGON,
-    hexagon: { x, y }
+    hexagon: { x, y, z }
   }),
 
   selectHexagon: id => ({
