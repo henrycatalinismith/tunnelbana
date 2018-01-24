@@ -19,12 +19,12 @@ export const selectors = createSelectors({
   viewport: viewport.selectors,
 });
 
-export default function () {
+export default function (initialState) {
   const reducer = combineReducers(reducers);
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
     reducer,
-    undefined,
+    initialState,
     composeEnhancers(applyMiddleware(middleware))
   );
 
