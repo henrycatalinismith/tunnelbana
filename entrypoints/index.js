@@ -19,8 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   app.dispatch.resizeViewport(window.innerWidth, window.innerHeight);
   app.dispatch.createActor({ x: 0, y: 0 });
+  app.dispatch.createHexagon({ x: 100, y: 100 });
 
   console.log(app.select.viewport.dimensions());
   console.log(app.select.actors.all());
+  console.log(app.select.hexagons.all());
 });
 
