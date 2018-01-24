@@ -1,13 +1,33 @@
 const React = require("react");
+const PropTypes = require("prop-types");
+const { connect } = require("react-redux");
+const select = require("../reducers").selectors;
+const Hexagon = require("./Hexagon").default;
 
-export default class Camera extends React.PureComponent {
+export class Camera extends React.PureComponent {
+  static propTypes = {
+    actors: PropTypes.object,
+  };
+
   render() {
+    const { actors } = this.props;
     const viewbox = [0, 0, 400, 400].join(" ");
 
     return (
       <svg viewBox={viewbox}>
-        <circle cx="100" cy="100" r="100" />
+        <Hexagon />
       </svg>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    actors: select("actors")
+      .from(state)
+      .all(),
+  };
+};
+
+export default connect(mapStateToProps)(Camera);
+
