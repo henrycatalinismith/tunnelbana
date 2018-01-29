@@ -1,0 +1,14 @@
+{
+  "plugins": ["transform-class-properties"],
+  "presets": [
+    "es2017",
+    "react",
+    "stage-3"
+  ],
+  "env": {
+    "test": {
+      "plugins": ["transform-class-properties"],
+      "presets": [["es2015"], "react"]
+    }
+  }
+}
