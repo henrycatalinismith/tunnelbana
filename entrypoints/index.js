@@ -42,11 +42,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   const center = cube(0, 0, 0);
-  const ring = cube.ring(center, 1);
+  game.dispatch.createCell({ radius: 3 });
 
+  return;
   game.dispatch.createHexagon(center.x, center.y, center.z);
+
+  let ring = cube.ring(center, 1);
+  let i = 1;
   for (let r of ring) {
-    game.dispatch.createHexagon(r.x, r.y, r.z);
+    setTimeout(() => {
+      game.dispatch.createHexagon(r.x, r.y, r.z);
+    }, i * 100);
+    i++;
+  }
+
+  ring = cube.ring(center, 2);
+  for (let r of ring) {
+    setTimeout(() => {
+      game.dispatch.createHexagon(r.x, r.y, r.z);
+    }, i * 100);
+    i++;
+  }
+
+  ring = cube.ring(center, 3);
+  for (let r of ring) {
+    setTimeout(() => {
+      game.dispatch.createHexagon(r.x, r.y, r.z);
+    }, i * 100);
+    i++;
+  }
+
+  ring = cube.ring(center, 4);
+  for (let r of ring) {
+    setTimeout(() => {
+      game.dispatch.createHexagon(r.x, r.y, r.z);
+    }, i * 100);
+    i++;
   }
 
   console.log(center);
