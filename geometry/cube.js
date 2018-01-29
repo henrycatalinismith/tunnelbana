@@ -39,6 +39,14 @@ cube.ring = (c, radius) => {
   return results;
 }
 
+cube.pixels = (c, radius) => {
+  //const x = Math.sqrt(3) * radius * (c.z + c.y) flat top
+  const x = 0 - Math.sqrt(3) * radius * ( c.z/2 + c.x )
+  const y = 3/2 * radius * c.z;
+
+  return { x, y };
+};
+
 export default cube;
 
 

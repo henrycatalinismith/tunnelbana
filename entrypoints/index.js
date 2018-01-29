@@ -8,7 +8,7 @@ const actions = require("../actions").default;
 const store = require("../reducers").default;
 const { selectors } = require("../reducers");
 const middlewares = require("../middlewares").default;
-const cube = require("../math/cube").default;
+const cube = require("../geometry/cube").default;
 
 document.addEventListener("DOMContentLoaded", () => {
   const initialState = {
@@ -45,9 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const ring = cube.ring(center, 1);
 
   game.dispatch.createHexagon(center.x, center.y, center.z);
-  ring.forEach(c => {
-    game.dispatch.createHexagon(c.x, c.y, c.z);
-  });
+  for (let r of ring) {
+    game.dispatch.createHexagon(r.x, r.y, r.z);
+  }
 
   console.log(center);
   console.log(ring);
