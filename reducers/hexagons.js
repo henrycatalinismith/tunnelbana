@@ -36,6 +36,14 @@ export const selectors = {
   all: hexagons => {
     return Object.keys(hexagons).map(id => hexagons[id]);
   },
+
+  byCell: (hexagons, cellId) => {
+    return Object.keys(hexagons).filter(id => {
+      const isMatch = hexagons[id].cellId === cellId;
+      return isMatch;
+    }).map(id => hexagons[id]);
+  },
+
   byGrid: (hexagons, x, y, z) => {
     const matchId = Object.keys(hexagons).filter(id => {
       const isMatch = (
