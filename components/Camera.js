@@ -24,8 +24,7 @@ export class Camera extends React.PureComponent {
     return (
       <svg draggable="false" viewBox={viewbox}>
         {hexagons.map((hexagon, i) => {
-          console.log(i, hexagon);
-          return <Hexagon key={i} x={hexagon.x} y={hexagon.y} z={hexagon.z} />;
+          return <Hexagon key={hexagon.id} x={hexagon.x} y={hexagon.y} z={hexagon.z} />;
         })}
       </svg>
     );
@@ -33,7 +32,6 @@ export class Camera extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log(select("hexagons").from(state).all());
   return {
     actors: select("actors")
       .from(state)
