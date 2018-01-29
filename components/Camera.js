@@ -32,13 +32,14 @@ export class Camera extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
+  const camera = select("camera").from(state).all();
   return {
     actors: select("actors")
       .from(state)
       .all(),
     hexagons: select("hexagons")
       .from(state)
-      .all(),
+      .byCell(camera.cellId),
     viewport: select("viewport")
       .from(state)
       .dimensions(),

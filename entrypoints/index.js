@@ -26,6 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
   game.dispatch.createActor({ x: 0, y: 0 });
-  game.dispatch.createCell({ radius: 3 });
+  game.dispatch.createCell({ radius: 2 });
 });
 
