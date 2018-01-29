@@ -1,19 +1,22 @@
 const React = require("react");
 const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
+
 const select = require("../reducers").selectors;
 const Hexagon = require("./Hexagon").default;
+const Station = require("./Station").default;
 
 export class Camera extends React.PureComponent {
   static propTypes = {
     actors: PropTypes.object,
     camera: PropTypes.object,
     hexagons: PropTypes.array,
+    stations: PropTypes.array,
     viewport: PropTypes.object,
   };
 
   render() {
-    const { actors, camera, hexagons, viewport } = this.props;
+    const { actors, camera, hexagons, stations, viewport } = this.props;
 
     const viewbox = [
       0 - (viewport.width / 2) + camera.x,
@@ -27,6 +30,9 @@ export class Camera extends React.PureComponent {
         {hexagons.map((hexagon, i) => {
           return <Hexagon key={hexagon.id} id={hexagon.id} />;
         })}
+        {stations.map((stations, i) => {
+          return <Station key={stations.id} id={stations.id} />;
+        })}
       </svg>
     );
   }
@@ -34,11 +40,13 @@ export class Camera extends React.PureComponent {
 
 const mapStateToProps = state => {
   const camera = select("camera").from(state).all();
+  const stations = select("stations").from(state).all();
   return {
     actors: select("actors")
       .from(state)
       .all(),
     camera,
+    stations,
     hexagons: select("hexagons")
       .from(state)
       .byCell(camera.cellId),
