@@ -13,6 +13,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       [id]: {
         id,
         cellId: action.cell.id,
+        terrainID: "grass",
         x: 0,
         y: 0,
         z: 0,
@@ -27,6 +28,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
         action.hexagons[id] = {
           id,
           cellId: action.cell.id,
+          terrainID: "grass",
           x: r.x,
           y: r.y,
           z: r.z,
