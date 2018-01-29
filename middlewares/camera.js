@@ -15,7 +15,6 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       x: point.x,
       y: point.y,
     };
-    console.log(hexagon, point);
   }
 }));
 
