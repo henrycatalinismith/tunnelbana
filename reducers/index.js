@@ -7,16 +7,18 @@ const actors = require("./actors");
 const camera = require("./camera");
 const cells = require("./cells");
 const hexagons = require("./hexagons");
+const terrain = require("./terrain");
 const viewport = require("./viewport");
 
 export const selectors = require("./selectors").default;
 
 export const reducers = {
   actors: actors.reducer,
+  camera: camera.reducer,
   cells: cells.reducer,
   hexagons: hexagons.reducer,
+  terrain: terrain.reducer,
   viewport: viewport.reducer,
-  camera: camera.reducer,
 };
 
 export default function (initialState) {
