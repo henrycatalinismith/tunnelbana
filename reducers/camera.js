@@ -8,7 +8,6 @@ const initialState = {
 
 export const reducer = createReducer(initialState, {
   [actions.CREATE_CELL](camera, action) {
-    console.log('ee', action);
     return {
       ...camera,
       cellId: action.cell.id,
