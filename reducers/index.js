@@ -9,6 +9,8 @@ const cells = require("./cells");
 const hexagons = require("./hexagons");
 const viewport = require("./viewport");
 
+export const selectors = require("./selectors").default;
+
 export const reducers = {
   actors: actors.reducer,
   cells: cells.reducer,
@@ -16,14 +18,6 @@ export const reducers = {
   viewport: viewport.reducer,
   camera: camera.reducer,
 };
-
-export const selectors = createSelectors({
-  actors: actors.selectors,
-  camera: camera.selectors,
-  cells: cells.selectors,
-  hexagons: hexagons.selectors,
-  viewport: viewport.selectors,
-});
 
 export default function (initialState) {
   const reducer = combineReducers(reducers);
