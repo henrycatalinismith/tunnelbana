@@ -2,25 +2,21 @@ const { createReducer } = require("signalbox");
 
 const actions = require("../actions").default;
 
-const initialState = []; 
+const initialState = {};
 
 let selection;
 
 export const reducer = createReducer(initialState, {
   [actions.CREATE_HEXAGON](hexagons, { hexagon }) {
-    const { x, y, z } = hexagon;
-    const newState = [ ...hexagons ];
-
-    if (!newState[x]) {
-      newState[x] = [];
-      newState[x][y] = [];
-    } else if (!newState[x][y]) {
-      newState[x][y] = [];
-    }
-
-    newState[x][y][z] = { x, y, z };
-
-    return newState;
+    return {
+      ...hexagons,
+      [hexagon.id]: {
+        id: hexagon.id,
+        x: hexagon.x,
+        y: hexagon.y,
+        z: hexagon.z,
+      },
+    };
   },
 
   [actions.SELECT_HEXAGON](state, { hexagon }) {
@@ -42,11 +38,20 @@ export const reducer = createReducer(initialState, {
 });
 
 export const selectors = {
-  all: state => {
-    console.log(state);
-    return flatten(state);
+  all: hexagons => {
+    return Object.keys(hexagons).map(id => hexagons[id]);
   },
-  byGrid: (state, x, y, z) => state[x][y][z],
+  byGrid: (hexagons, x, y, z) => {
+    const matchId = Object.keys(hexagons).filter(id => {
+      const isMatch = (
+        hexagons[id].x === x &&
+        hexagons[id].y === y &&
+        hexagons[id].z === z
+      );
+      return isMatch;
+    })[0];
+    return hexagons[matchId];
+  }
 };
 
 const flatten = arr => arr.reduce(
