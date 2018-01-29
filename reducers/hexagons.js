@@ -7,15 +7,10 @@ const initialState = {};
 let selection;
 
 export const reducer = createReducer(initialState, {
-  [actions.CREATE_HEXAGON](hexagons, { hexagon }) {
+  [actions.CREATE_CELL](hexagons, action) {
     return {
       ...hexagons,
-      [hexagon.id]: {
-        id: hexagon.id,
-        x: hexagon.x,
-        y: hexagon.y,
-        z: hexagon.z,
-      },
+      ...action.hexagons,
     };
   },
 
