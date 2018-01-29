@@ -7,16 +7,17 @@ const Hexagon = require("./Hexagon").default;
 export class Camera extends React.PureComponent {
   static propTypes = {
     actors: PropTypes.object,
+    camera: PropTypes.object,
     hexagons: PropTypes.array,
     viewport: PropTypes.object,
   };
 
   render() {
-    const { actors, hexagons, viewport } = this.props;
+    const { actors, camera, hexagons, viewport } = this.props;
 
     const viewbox = [
-      0 - (viewport.width / 2),
-      0 - (viewport.height / 2),
+      0 - (viewport.width / 2) + camera.x,
+      0 - (viewport.height / 2) + camera.y,
       viewport.width,
       viewport.height
     ].join(" ");
@@ -37,6 +38,7 @@ const mapStateToProps = state => {
     actors: select("actors")
       .from(state)
       .all(),
+    camera,
     hexagons: select("hexagons")
       .from(state)
       .byCell(camera.cellId),
