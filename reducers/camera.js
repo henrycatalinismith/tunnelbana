@@ -4,6 +4,8 @@ const actions = require("../actions").default;
 
 const initialState = {
   cellId: undefined,
+  x: 0,
+  y: 0,
 };
 
 export const reducer = createReducer(initialState, {
@@ -13,6 +15,14 @@ export const reducer = createReducer(initialState, {
       cellId: action.cell.id,
     };
   },
+
+  [actions.SELECT_HEXAGON](camera, action) {
+    return {
+      ...camera,
+      x: action.camera.x,
+      y: action.camera.y,
+    };
+  }
 });
 
 export const selectors = {
