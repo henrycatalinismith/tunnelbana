@@ -37,6 +37,8 @@ export const selectors = {
     return Object.keys(hexagons).map(id => hexagons[id]);
   },
 
+  byId: (hexagons, id) => hexagons[id],
+
   byCell: (hexagons, cellId) => {
     return Object.keys(hexagons).filter(id => {
       const isMatch = hexagons[id].cellId === cellId;
