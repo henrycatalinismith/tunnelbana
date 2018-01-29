@@ -24,7 +24,7 @@ export class Camera extends React.PureComponent {
     return (
       <svg draggable="false" viewBox={viewbox}>
         {hexagons.map((hexagon, i) => {
-          return <Hexagon key={hexagon.id} x={hexagon.x} y={hexagon.y} z={hexagon.z} />;
+          return <Hexagon key={hexagon.id} id={hexagon.id} />;
         })}
       </svg>
     );
