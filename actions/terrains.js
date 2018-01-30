@@ -1,10 +1,16 @@
 import { createActions } from "signalbox";
 
 export default createActions(["CHANGE_TERRAIN"], types => ({
-  changeTerrain: ({ hexagonId, terrainId }) => ({
+  changeTerrain: (x, y, z, id) => ({
     type: types.CHANGE_TERRAIN,
-    hexagon: { id: hexagonId },
-    terrain: { id: terrainId },
+    hexagon: { x, y, z },
+    terrain: { id },
+  }),
+
+  changeTerrainRing: (x, y, z, radius, id) => ({
+    type: types.CHANGE_TERRAIN,
+    ring: { x, y, z, radius },
+    terrain: { id },
   }),
 }));
 

@@ -3,32 +3,40 @@ const uuid = require("uuid/v1");
 
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
+const cube = require("../geometry/cube").default;
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [before(actions.CREATE_STATION)](store, action) {
+  [before(actions.CHANGE_TERRAIN)](store, action) {
     const state = store.getState();
-    let hexagon;
 
-    if (!action.hexagon.id) {
+    if (!action.ring && !action.hexagon.id) {
+      console.log('dd');
+
       action.hexagon = select("hexagons").from(state).at(
         0,
         action.hexagon.x,
         action.hexagon.y,
         action.hexagon.z
       ).toJS();
+
     }
 
-    if (!action.station.id) {
-      action.station.id = action.hexagon.id;
-    }
+    if (action.ring) {
+      const ring = select("hexagons").from(state).ring(
+        0,
+        action.ring.x,
+        action.ring.y,
+        action.ring.z,
+        action.ring.radius
+      ).toJS();
 
-    if (!action.cell.id) {
-      action.cell.id = action.hexagon.cellId;
+      action.ring.hexagonIds = ring;
     }
 
   }
 }));
 
 export default middleware;
+
 
 

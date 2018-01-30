@@ -35,48 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(root);
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
-  game.dispatch.createCell({ radius: 1 });
+  game.dispatch.createCell(4);
+  game.dispatch.createStation(-1, 1, 0);
+  game.dispatch.createStation(1, -1, 0);
+  game.dispatch.changeTerrain(0, 0, 0, "water");
+  game.dispatch.changeTerrainRing(2, -2, 0, 4, "water");
 
-  game.dispatch.createStation({
-    id: "Lime Street",
-    hexagonId: game.select.hexagons.at(0, -1, 1, 0).get("id"),
-  });
-
-  game.dispatch.createStation({
-    id: "Moorfields",
-    hexagonId: game.select.hexagons.at(0, 1, -1, 0).get("id"),
-  });
-
-  game.dispatch.changeTerrain({
-    hexagonId: game.select.hexagons.at(0, 0, 0, 0).get("id"),
-    terrainId: "water",
-  });
-
-  /*
-  game.dispatch.createStation({
-    id: "Edge Hill",
-    hexagonId: hexagons[6].id,
-  });
-
-  game.dispatch.createStation({
-    id: "Moorfields",
-    hexagonId: hexagons[4].id,
-  });
-
-  game.dispatch.createStation({
-    id: "Hamilton Square",
-    hexagonId: hexagons[3].id,
-  });
-
-  game.dispatch.createStation({
-    id: "James Street",
-    hexagonId: hexagons[1].id,
-  });
-
-  game.dispatch.createStation({
-    id: "Central",
-    hexagonId: hexagons[0].id,
-  });
-  */
 });
 
