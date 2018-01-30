@@ -5,7 +5,7 @@ const cameras = require("./cameras");
 const cells = require("./cells");
 const hexagons = require("./hexagons");
 const stations = require("./stations");
-const terrain = require("./terrain");
+const terrains = require("./terrains");
 const viewport = require("./viewport");
 
 const selectors = createSelectors({
@@ -14,7 +14,7 @@ const selectors = createSelectors({
   cells: cells.selectors,
   hexagons: hexagons.selectors,
   stations: stations.selectors,
-  terrain: terrain.selectors,
+  terrains: terrains.selectors,
   viewport: viewport.selectors,
 });
 

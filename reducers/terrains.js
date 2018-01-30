@@ -7,8 +7,8 @@ const initialState = {};
 export const reducer = createReducer(initialState, {});
 
 export const selectors = {
-  all: terrain => terrain,
-  byId: (terrain, id) => terrain[id],
+  all: terrains => terrains,
+  byId: (terrains, id) => terrains[id],
 };
 
 

@@ -58,7 +58,7 @@ export class Terrain extends React.PureComponent {
 }
 
 const mapStateToProps = (state, { id, hexagonId }) => {
-  const terrain = select("terrain").from(state).byId(id);
+  const terrain = select("terrains").from(state).byId(id);
   const hexagon = select("hexagons").from(state).byId(hexagonId);
   return {
     terrain,

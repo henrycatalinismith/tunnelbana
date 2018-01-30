@@ -12,7 +12,7 @@ const cube = require("../geometry/cube").default;
 
 document.addEventListener("DOMContentLoaded", () => {
   const initialState = {
-    terrain: {
+    terrains: {
       grass: {
         id: "grass",
       }
