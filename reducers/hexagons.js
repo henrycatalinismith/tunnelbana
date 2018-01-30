@@ -12,6 +12,14 @@ export const reducer = createReducer(initialState, {
     return hexagons.merge(Immutable.fromJS(action.hexagons));
   },
 
+  [actions.CHANGE_TERRAIN](hexagons, action) {
+    return hexagons.updateIn([action.hexagon.id], h => {
+      return h.merge({
+        terrainId: action.terrain.id,
+      });
+    });
+  },
+
   [actions.SELECT_HEXAGON](state, { hexagon }) {
     const oldSelection = selection;
     selection = hexagon.id;
@@ -43,7 +51,7 @@ export const selectors = {
     return state.filter(h => h.get("cellId") === cellId).toList();
   },
 
-  byPosition(state, cellId, x, y, z) {
+  at(state, cellId, x, y, z) {
     return state.filter(h => {
       const sameCell = h.get("cellId") === cellId;
       const sameX = h.get("x") === x;
