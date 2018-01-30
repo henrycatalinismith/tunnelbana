@@ -1,6 +1,5 @@
 const { createSelectors } = require("signalbox");
 
-const actors = require("./actors");
 const cameras = require("./cameras");
 const cells = require("./cells");
 const hexagons = require("./hexagons");
@@ -9,7 +8,6 @@ const terrains = require("./terrains");
 const viewport = require("./viewport");
 
 const selectors = createSelectors({
-  actors: actors.selectors,
   cameras: cameras.selectors,
   cells: cells.selectors,
   hexagons: hexagons.selectors,
