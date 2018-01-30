@@ -22,7 +22,7 @@ export class Hexagon extends React.PureComponent {
   }
 
   render() {
-    const { hexagon } = this.props;
+    const hexagon = this.props.hexagon.toJS();
 
     const centerAng = 2 * Math.PI / 6;
     const round = n => Number(n.toFixed(3));

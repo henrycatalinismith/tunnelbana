@@ -9,7 +9,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     if (!action.cell.id) {
       const state = store.getState();
       const hexagon = select("hexagons").from(state).byId(action.hexagon.id);
-      action.cell.id = hexagon.cellId;
+      action.cell.id = hexagon.get("cellId");
     }
   }
 }));
