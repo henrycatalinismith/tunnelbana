@@ -7,7 +7,8 @@ const cube = require("../geometry/cube").default;
 export const middleware = createMiddleware((cancel, before, after) => ({
   [before(actions.CREATE_CELL)](store, action) {
     const center = cube(0, 0, 0);
-    let id = uuid();
+    let makeId = (c, x, y, z) => [c, x, y, z].join(",");
+    let id = makeId(action.cell.id, 0, 0, 0);
 
     action.hexagons = {
       [id]: {
@@ -23,7 +24,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     for (let i = 0; i <= action.cell.radius; i++) {
       const ring = cube.ring(center, i);
       for (let r of ring) {
-        id = uuid();
+        id = makeId(action.cell.id, r.x, r.y, r.z);
 
         action.hexagons[id] = {
           id,
