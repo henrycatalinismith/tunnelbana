@@ -37,16 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   game.dispatch.createCell({ radius: 1 });
 
-  const hexagons = game.select.hexagons.all().toJS();
-
   game.dispatch.createStation({
     id: "Lime Street",
-    hexagonId: game.select.hexagons.byPosition(0, -1, 1, 0).get("id"),
+    hexagonId: game.select.hexagons.at(0, -1, 1, 0).get("id"),
   });
 
   game.dispatch.createStation({
     id: "Moorfields",
-    hexagonId: game.select.hexagons.byPosition(0, 1, -1, 0).get("id"),
+    hexagonId: game.select.hexagons.at(0, 1, -1, 0).get("id"),
+  });
+
+  game.dispatch.changeTerrain({
+    hexagonId: game.select.hexagons.at(0, 0, 0, 0).get("id"),
+    terrainId: "water",
   });
 
   /*
