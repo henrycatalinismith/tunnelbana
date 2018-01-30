@@ -1,3 +1,4 @@
+const Immutable = require("immutable");
 const { createReducer } = require("signalbox");
 
 const actions = require("../actions").default;

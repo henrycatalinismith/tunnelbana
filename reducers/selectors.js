@@ -14,7 +14,7 @@ const selectors = createSelectors({
   stations: stations.selectors,
   terrains: terrains.selectors,
   viewport: viewport.selectors,
-});
+}, { stateAccessor: (s, entity) => s.get(entity) });
 
 export default selectors;
 
