@@ -10,7 +10,7 @@ export class HighValley extends React.PureComponent {
   };
 
   render() {
-    return <Camera />;
+    return <Camera id="main" />;
   }
 }
 

@@ -11,6 +11,7 @@ export const reducer = createReducer(initialState, {
       ...stations,
       [action.station.id]: {
         ...action.station,
+        cellId: action.cell.id,
         hexagonId: action.hexagon.id,
       }
     };
@@ -20,6 +21,13 @@ export const reducer = createReducer(initialState, {
 export const selectors = {
   all: stations => {
     return Object.keys(stations).map(id => stations[id]);
+  },
+
+  byCell: (stations, cellId) => {
+    return selectors.all(stations).filter(s => {
+      const isMatch = s.cellId === cellId;
+      return isMatch;
+    });
   },
 
   byId: (stations, id) => {
