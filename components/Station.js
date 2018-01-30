@@ -14,7 +14,8 @@ export class Station extends React.PureComponent {
   };
 
   render() {
-    const { station, hexagon } = this.props;
+    const hexagon = this.props.hexagon.toJS();
+    const station = this.props.station.toJS();
 
     const centerAng = 2 * Math.PI / 6;
     const round = n => Number(n.toFixed(3));
@@ -43,7 +44,7 @@ export class Station extends React.PureComponent {
 
 const mapStateToProps = (state, { id }) => {
   const station = select("stations").from(state).byId(id);
-  const hexagon = select("hexagons").from(state).byId(station.hexagonId);
+  const hexagon = select("hexagons").from(state).byId(station.get("hexagonId"));
   return { station, hexagon };
 };
 

@@ -9,13 +9,17 @@ const Station = require("./Station").default;
 export class Camera extends React.PureComponent {
   static propTypes = {
     camera: PropTypes.object,
-    hexagons: PropTypes.array,
-    stations: PropTypes.array,
+    hexagons: PropTypes.object,
+    stations: PropTypes.object,
     viewport: PropTypes.object,
   };
 
   render() {
-    const { camera, hexagons, stations, viewport } = this.props;
+    const stations = this.props.stations;
+    const hexagons = this.props.hexagons;
+    const camera = this.props.camera.toJS();
+    const viewport = this.props.viewport.toJS();
+    console.log(camera, viewport);
 
     const viewbox = [
       0 - (viewport.width / 2) + camera.x,
@@ -27,10 +31,10 @@ export class Camera extends React.PureComponent {
     return (
       <svg draggable="false" viewBox={viewbox}>
         {hexagons.map((hexagon, i) => {
-          return <Hexagon key={hexagon.id} id={hexagon.id} />;
+          return <Hexagon key={hexagon.get("id")} id={hexagon.get("id")} />;
         })}
         {stations.map((stations, i) => {
-          return <Station key={stations.id} id={stations.id} />;
+          return <Station key={stations.get("id")} id={stations.get("id")} />;
         })}
       </svg>
     );
@@ -39,9 +43,10 @@ export class Camera extends React.PureComponent {
 
 const mapStateToProps = (state, { id }) => {
   const camera = select("cameras").from(state).byId(id);
-  const stations = select("stations").from(state).byCell(camera.cellId);
-  const hexagons = select("hexagons").from(state).byCell(camera.cellId);
+  const stations = select("stations").from(state).byCell(camera.get("cellId"));
+  const hexagons = select("hexagons").from(state).byCell(camera.get("cellId"));
   const viewport = select("viewport").from(state).dimensions();
+  console.log(camera.get("cellId"), stations);
 
   return { camera, hexagons, stations, viewport };
 };
