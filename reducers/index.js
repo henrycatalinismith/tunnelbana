@@ -1,4 +1,6 @@
-const { combineReducers, createStore, applyMiddleware, compose } = require("redux");
+const Immutable = require("immutable");
+const { createStore, applyMiddleware, compose } = require("redux");
+const { combineReducers } = require("redux-immutable");
 const { createSelectors } = require("signalbox");
 
 const middleware = require("../middlewares").default;
@@ -26,7 +28,7 @@ export default function (initialState) {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
     reducer,
-    initialState,
+    Immutable.fromJS(initialState),
     composeEnhancers(applyMiddleware(middleware))
   );
 

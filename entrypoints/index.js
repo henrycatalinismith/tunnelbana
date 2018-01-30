@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   game.dispatch.createCell({ radius: 1 });
 
-  const hexagons = game.select.hexagons.all();
+  const hexagons = game.select.hexagons.all().toJS();
 
   game.dispatch.createStation({
     id: "Lime Street",

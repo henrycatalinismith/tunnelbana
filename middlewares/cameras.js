@@ -10,7 +10,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     const state = store.getState();
     const hexagon = select("hexagons").from(state).byId(action.hexagon.id);
 
-    const point = cube.pixels(hexagon, 50);
+    const point = cube.pixels(hexagon.toJS(), 50);
     action.camera = {
       x: point.x,
       y: point.y,
