@@ -2,6 +2,7 @@ const Immutable = require("immutable");
 const { createReducer } = require("signalbox");
 
 const actions = require("../actions").default;
+const cube = require("../geometry/cube").default;
 
 const initialState = new Immutable.Map;
 
@@ -13,6 +14,16 @@ export const reducer = createReducer(initialState, {
   },
 
   [actions.CHANGE_TERRAIN](hexagons, action) {
+    if (action.ring) {
+      let curr = hexagons;
+      for (let h of action.ring.hexagonIds) {
+        curr = curr.updateIn([h.id], h2 => h2.merge({
+          terrainId: action.terrain.id,
+        }));
+      }
+      return curr;
+    }
+
     return hexagons.updateIn([action.hexagon.id], h => {
       return h.merge({
         terrainId: action.terrain.id,
@@ -60,6 +71,17 @@ export const selectors = {
       const isMatch = sameCell && sameX && sameY && sameZ;
       return isMatch;
     }).first();
+  },
+
+  ring(state, cellId, x, y, z, radius) {
+    const ring = cube.ring(cube(x, y, z), radius).map(
+      h => [cellId, h.x, h.y, h.z].join(",")
+    );
+
+    return state.filter(h => {
+      const sameId = ring.includes(h.get("id"));
+      return sameId;
+    }).toList();
   },
 };
 
