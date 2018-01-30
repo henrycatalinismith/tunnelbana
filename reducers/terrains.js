@@ -3,13 +3,13 @@ const { createReducer } = require("signalbox");
 
 const actions = require("../actions").default;
 
-const initialState = {};
+const initialState = new Immutable.Map;
 
 export const reducer = createReducer(initialState, {});
 
 export const selectors = {
-  all: terrains => terrains,
-  byId: (terrains, id) => terrains[id],
+  all: terrains => terrains.toList(),
+  byId: (terrains, id) => terrains.get(id),
 };
 
 

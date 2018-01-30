@@ -25,6 +25,7 @@ export class Terrain extends React.PureComponent {
 
   render() {
     const hexagon = this.props.hexagon.toJS();
+    const terrain = this.props.terrain.toJS();
 
     const centerAng = 2 * Math.PI / 6;
     const round = n => Number(n.toFixed(3));
@@ -49,7 +50,7 @@ export class Terrain extends React.PureComponent {
 
     points = points.map(point => point.map(round));
 
-    const fill = hexagon.isSelected ? "yellow" : "#6dd254";
+    const fill = hexagon.isSelected ? "yellow" : terrain.color;
 
     return (
       <polygon onClick={this.selectHexagon} fill={fill} points={points} />

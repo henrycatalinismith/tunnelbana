@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     terrains: {
       grass: {
         id: "grass",
+        color: "#6dd254",
       }
     },
     viewport: {
