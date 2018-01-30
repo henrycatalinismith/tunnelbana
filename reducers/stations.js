@@ -30,7 +30,6 @@ export const selectors = {
   byCell(state, cellId) {
     return state.filter(s => {
       const isMatch = s.get("cellId") === cellId;
-      console.log(s.get("cellId"));
       return isMatch;
     }).toList();
   },
