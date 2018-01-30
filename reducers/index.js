@@ -8,7 +8,7 @@ const cameras = require("./cameras");
 const cells = require("./cells");
 const hexagons = require("./hexagons");
 const stations = require("./stations");
-const terrain = require("./terrain");
+const terrains = require("./terrains");
 const viewport = require("./viewport");
 
 export const selectors = require("./selectors").default;
@@ -19,7 +19,7 @@ export const reducers = {
   cells: cells.reducer,
   hexagons: hexagons.reducer,
   stations: stations.reducer,
-  terrain: terrain.reducer,
+  terrains: terrains.reducer,
   viewport: viewport.reducer,
 };
 
