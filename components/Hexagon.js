@@ -47,7 +47,6 @@ export class Hexagon extends React.PureComponent {
     points = points.map(point => point.map(round));
 
     const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y)})`;
-    console.log(hexagon);
 
     return (
       <g className="Hexagon" transform={translate}>
