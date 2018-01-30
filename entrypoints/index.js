@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
       grass: {
         id: "grass",
         color: "#6dd254",
+      },
+      water: {
+        id: "water",
+        color: "blue",
       }
     },
     viewport: {
@@ -37,9 +41,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   game.dispatch.createStation({
     id: "Lime Street",
-    hexagonId: hexagons[5].id,
+    hexagonId: game.select.hexagons.byPosition(0, -1, 1, 0).get("id"),
   });
 
+  game.dispatch.createStation({
+    id: "Moorfields",
+    hexagonId: game.select.hexagons.byPosition(0, 1, -1, 0).get("id"),
+  });
+
+  /*
   game.dispatch.createStation({
     id: "Edge Hill",
     hexagonId: hexagons[6].id,
@@ -64,5 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
     id: "Central",
     hexagonId: hexagons[0].id,
   });
+  */
 });
 
