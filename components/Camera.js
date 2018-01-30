@@ -19,7 +19,6 @@ export class Camera extends React.PureComponent {
     const hexagons = this.props.hexagons;
     const camera = this.props.camera.toJS();
     const viewport = this.props.viewport.toJS();
-    console.log(camera, viewport);
 
     const viewbox = [
       0 - (viewport.width / 2) + camera.x,
@@ -46,7 +45,6 @@ const mapStateToProps = (state, { id }) => {
   const stations = select("stations").from(state).byCell(camera.get("cellId"));
   const hexagons = select("hexagons").from(state).byCell(camera.get("cellId"));
   const viewport = select("viewport").from(state).dimensions();
-  console.log(camera.get("cellId"), stations);
 
   return { camera, hexagons, stations, viewport };
 };
