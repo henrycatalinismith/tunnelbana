@@ -3,7 +3,6 @@ const { createSelectors } = require("signalbox");
 
 const middleware = require("../middlewares").default;
 
-const actors = require("./actors");
 const cameras = require("./cameras");
 const cells = require("./cells");
 const hexagons = require("./hexagons");
@@ -14,7 +13,6 @@ const viewport = require("./viewport");
 export const selectors = require("./selectors").default;
 
 export const reducers = {
-  actors: actors.reducer,
   cameras: cameras.reducer,
   cells: cells.reducer,
   hexagons: hexagons.reducer,
