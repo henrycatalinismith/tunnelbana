@@ -42,6 +42,17 @@ export const selectors = {
   byCell(state, cellId) {
     return state.filter(h => h.get("cellId") === cellId).toList();
   },
+
+  byPosition(state, cellId, x, y, z) {
+    return state.filter(h => {
+      const sameCell = h.get("cellId") === cellId;
+      const sameX = h.get("x") === x;
+      const sameY = h.get("y") === y;
+      const sameZ = h.get("z") === z;
+      const isMatch = sameCell && sameX && sameY && sameZ;
+      return isMatch;
+    }).first();
+  },
 };
 
 /*
