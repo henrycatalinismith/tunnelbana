@@ -38,6 +38,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
         };
       }
     }
+
   }
 }));
 
