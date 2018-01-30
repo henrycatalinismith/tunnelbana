@@ -8,7 +8,6 @@ const Station = require("./Station").default;
 
 export class Camera extends React.PureComponent {
   static propTypes = {
-    actors: PropTypes.object,
     camera: PropTypes.object,
     hexagons: PropTypes.array,
     stations: PropTypes.array,
@@ -16,7 +15,7 @@ export class Camera extends React.PureComponent {
   };
 
   render() {
-    const { actors, camera, hexagons, stations, viewport } = this.props;
+    const { camera, hexagons, stations, viewport } = this.props;
 
     const viewbox = [
       0 - (viewport.width / 2) + camera.x,
@@ -41,19 +40,10 @@ export class Camera extends React.PureComponent {
 const mapStateToProps = state => {
   const camera = select("camera").from(state).all();
   const stations = select("stations").from(state).all();
-  return {
-    actors: select("actors")
-      .from(state)
-      .all(),
-    camera,
-    stations,
-    hexagons: select("hexagons")
-      .from(state)
-      .byCell(camera.cellId),
-    viewport: select("viewport")
-      .from(state)
-      .dimensions(),
-  };
+  const hexagons = select("hexagons").from(state).byCell(camera.cellId);
+  const viewport = select("viewport").from(state).dimensions();
+
+  return { camera, hexagons, stations, viewport };
 };
 
 export default connect(mapStateToProps)(Camera);

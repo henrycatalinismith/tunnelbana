@@ -58,11 +58,9 @@ export class Hexagon extends React.PureComponent {
 }
 
 const mapStateToProps = (state, { id }) => {
-  return {
-    hexagon: select("hexagons")
-      .from(state)
-      .byId(id),
-  };
+  const hexagon = select("hexagons").from(state).byId(id);
+
+  return { hexagon };
 };
 
 const mapDispatchToProps = dispatch => {
