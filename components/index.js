@@ -7,25 +7,15 @@ const Camera = require("./Camera").default;
 
 export class HighValley extends React.PureComponent {
   static propTypes = {
-    actors: PropTypes.object,
-    hexagons: PropTypes.array,
   };
 
   render() {
-    return [
-      <Camera key="2" />,
-    ];
+    return <Camera />;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    actors: select("actors")
-      .from(state)
-      .all(),
-    hexagons: select("hexagons")
-      .from(state)
-      .all(),
   };
 };
 
