@@ -1,16 +1,18 @@
 const { createMiddleware } = require("signalbox");
 
 const actors = require("./actors").default;
-const camera = require("./camera").default;
+const cameras = require("./cameras").default;
 const cells = require("./cells").default;
 const hexagons = require("./hexagons").default;
+const stations = require("./stations").default;
 const viewport = require("./viewport").default;
 
 export default createMiddleware([
   actors,
-  camera,
+  cameras,
   cells,
   hexagons,
+  stations,
   viewport,
 ]);
 
