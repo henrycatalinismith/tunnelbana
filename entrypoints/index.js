@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(root);
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
-  game.dispatch.createCell(4);
+  game.dispatch.createCell(6);
   game.dispatch.createStation(-1, 1, 0);
   game.dispatch.createStation(1, -1, 0);
   game.dispatch.changeTerrain(0, 0, 0, "water");
@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
   game.dispatch.changeTerrainRing(2, 0, -2, 1, "water");
   game.dispatch.changeTerrainRing(-2, 0, 2, 0, "water");
   game.dispatch.changeTerrainRing(-2, 0, 2, 1, "water");
+  game.dispatch.changeTerrainRing(0, 0, 0, 5, "water");
+  game.dispatch.changeTerrainRing(0, 0, 0, 6, "water");
 
 });
 
