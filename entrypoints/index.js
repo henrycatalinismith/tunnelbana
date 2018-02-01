@@ -39,7 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
   game.dispatch.createStation(-1, 1, 0);
   game.dispatch.createStation(1, -1, 0);
   game.dispatch.changeTerrain(0, 0, 0, "water");
-  game.dispatch.changeTerrainRing(2, -2, 0, 4, "water");
+  game.dispatch.changeTerrainRing(2, 0, -2, 0, "water");
+  game.dispatch.changeTerrainRing(2, 0, -2, 1, "water");
+  game.dispatch.changeTerrainRing(-2, 0, 2, 0, "water");
+  game.dispatch.changeTerrainRing(-2, 0, 2, 1, "water");
 
 });
 
