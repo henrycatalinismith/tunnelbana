@@ -34,18 +34,23 @@ export const reducer = createReducer(initialState, {
   [actions.SELECT_HEXAGON](state, { hexagon }) {
     const oldSelection = selection;
     selection = hexagon.id;
-    return state;
-    return {
-      ...state,
-      [oldSelection]: {
-        ...state[oldSelection],
-        isSelected: false,
-      },
-      [hexagon.id]: {
-        ...state[hexagon.id],
+    let newState = state;
+
+    if (oldSelection) {
+      newState = newState.updateIn([oldSelection], h => {
+        return h.merge(Immutable.fromJS({
+          isSelected: false,
+        }));
+      });
+    }
+
+    newState = newState.updateIn([hexagon.id], h => {
+      return h.merge(Immutable.fromJS({
         isSelected: true,
-      }
-    };
+      }));
+    });
+
+    return newState;
   },
 });
 
