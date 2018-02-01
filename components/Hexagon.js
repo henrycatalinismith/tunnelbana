@@ -50,7 +50,6 @@ export class Hexagon extends React.PureComponent {
 
     return (
       <g className="Hexagon" transform={translate}>
-        <polygon onClick={this.selectHexagon} stroke="#eee" points={points}/>
         <Terrain id={hexagon.terrainId} hexagonId={hexagon.id} />
       </g>
     );

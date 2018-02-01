@@ -53,7 +53,7 @@ export class Terrain extends React.PureComponent {
     const fill = hexagon.isSelected ? "yellow" : terrain.color;
 
     return (
-      <polygon onClick={this.selectHexagon} fill={fill} points={points} />
+      <polygon key="2" onClick={this.selectHexagon} stroke={fill} fill={fill} points={points} />
     );
   }
 }
