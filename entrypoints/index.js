@@ -15,11 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
     terrains: {
       grass: {
         id: "grass",
-        color: "#6dd254",
+        color: "#b3b128",
       },
       water: {
         id: "water",
-        color: "blue",
+        color: "#2369a6",
       }
     },
     viewport: {
