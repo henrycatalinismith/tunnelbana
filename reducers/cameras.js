@@ -21,16 +21,13 @@ export const reducer = createReducer(initialState, {
   },
 
   [actions.SELECT_HEXAGON](cameras, action) {
-    return cameras;
-    return {
-      ...cameras,
-      main: {
-        ...cameras.main,
+    return cameras.updateIn(["main"], c => {
+      return c.merge(Immutable.fromJS({
         x: action.camera.x,
         y: action.camera.y,
-      }
-    };
-  }
+      }));
+    });
+  },
 });
 
 export const selectors = {
