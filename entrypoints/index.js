@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
   game.thunks.createCell(6);
-  game.dispatch.createStation(-1, 1, 0);
-  game.dispatch.createStation(1, -1, 0);
+  game.thunks.createStation(-1, 1, 0);
+  game.thunks.createStation(1, -1, 0);
   game.thunks.changeTerrain("water", 0, 0, 0);
   game.thunks.changeTerrainRing("water", 2, 0, -2, 1);
   game.thunks.changeTerrainRing("water", -2, 0, 2, 1);
