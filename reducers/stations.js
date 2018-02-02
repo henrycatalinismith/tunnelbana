@@ -11,8 +11,8 @@ export const reducer = createReducer(initialState, {
       action.station.id,
       Immutable.fromJS({
         id: action.station.id,
-        cellId: action.cell.id,
-        hexagonId: action.hexagon.id,
+        cellId: action.station.cellId,
+        hexagonId: action.station.hexagonId,
       })
     );
   }

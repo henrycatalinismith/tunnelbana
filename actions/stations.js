@@ -1,11 +1,9 @@
 import { createActions } from "signalbox";
 
 export default createActions(["CREATE_STATION"], types => ({
-  createStation: (x, y, z) => ({
+  createStation: station => ({
     type: types.CREATE_STATION,
-    station: {},
-    cell: {},
-    hexagon: { x, y, z },
+    station: station
   }),
 }));
 
