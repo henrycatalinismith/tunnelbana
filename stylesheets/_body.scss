@@ -4,6 +4,15 @@ body {
   overflow: hidden;
 }
 
+svg {
+  transform: rotate3d(1, 0, 0, 00deg);
+  position: absolute;
+  top: -106px;
+  left: 0;
+  right: 0;
+  height: 130vh;
+}
+
 // work then
 svg {
   -moz-user-drag: none;
