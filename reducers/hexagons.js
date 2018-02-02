@@ -13,22 +13,18 @@ export const reducer = createReducer(initialState, {
     return hexagons.merge(Immutable.fromJS(action.hexagons));
   },
 
-  [actions.CHANGE_TERRAIN](hexagons, action) {
-    if (action.ring) {
-      let curr = hexagons;
-      for (let h of action.ring.hexagonIds) {
-        curr = curr.updateIn([h.id], h2 => h2.merge({
-          terrainId: action.terrain.id,
-        }));
-      }
-      return curr;
+  [actions.CHANGE_TERRAINS](hexagons, action) {
+    let newState = hexagons;
+
+    for (let change of action.hexagons) {
+      newState = newState.updateIn([change.id], h => {
+        return h.merge({
+          terrainId: change.terrainId,
+        });
+      });
     }
 
-    return hexagons.updateIn([action.hexagon.id], h => {
-      return h.merge({
-        terrainId: action.terrain.id,
-      });
-    });
+    return newState;
   },
 
   [actions.SELECT_HEXAGON](state, { hexagon }) {

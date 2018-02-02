@@ -35,18 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(root);
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
-  console.log(thunks, game.thunks);
   game.thunks.createCell(6);
-  return;
   game.dispatch.createStation(-1, 1, 0);
   game.dispatch.createStation(1, -1, 0);
-  game.dispatch.changeTerrain(0, 0, 0, "water");
-  game.dispatch.changeTerrainRing(2, 0, -2, 0, "water");
-  game.dispatch.changeTerrainRing(2, 0, -2, 1, "water");
-  game.dispatch.changeTerrainRing(-2, 0, 2, 0, "water");
-  game.dispatch.changeTerrainRing(-2, 0, 2, 1, "water");
-  game.dispatch.changeTerrainRing(0, 0, 0, 5, "water");
-  game.dispatch.changeTerrainRing(0, 0, 0, 6, "water");
+  game.thunks.changeTerrain("water", 0, 0, 0);
+  game.thunks.changeTerrainRing("water", 2, 0, -2, 1);
+  game.thunks.changeTerrainRing("water", -2, 0, 2, 1);
+  game.thunks.changeTerrainRing("water", 0, 0, 0, 6);
 
 });
 
