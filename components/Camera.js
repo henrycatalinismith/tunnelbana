@@ -20,11 +20,13 @@ export class Camera extends React.PureComponent {
     const camera = this.props.camera.toJS();
     const viewport = this.props.viewport.toJS();
 
+    const { width, height } = viewport;
+
     const viewbox = [
-      0 - (viewport.width / 2) + camera.x,
-      0 - (viewport.height / 2) + camera.y,
-      viewport.width,
-      viewport.height
+      0 - (width / 2) + camera.x,
+      0 - (height / 2) + camera.y,
+      width,
+      height
     ].join(" ");
 
     return (
