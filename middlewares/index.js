@@ -1,5 +1,4 @@
 const { createMiddleware } = require("signalbox");
-
 const cameras = require("./cameras").default;
 const cells = require("./cells").default;
 const hexagons = require("./hexagons").default;

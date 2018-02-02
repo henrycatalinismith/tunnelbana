@@ -8,7 +8,7 @@ const actions = require("../actions").default;
 const store = require("../reducers").default;
 const { selectors } = require("../reducers");
 const middlewares = require("../middlewares").default;
-const cube = require("../geometry/cube").default;
+const thunks = require("../thunks").default;
 
 document.addEventListener("DOMContentLoaded", () => {
   const initialState = {
@@ -29,13 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const s = store(initialState);
-  const game = createApp(s, actions, middlewares, selectors);
+  const game = createApp(s, actions, middlewares, selectors, thunks);
   const root = document.createElement("div");
 
   document.body.appendChild(root);
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
-  game.dispatch.createCell(6);
+  console.log(thunks, game.thunks);
+  game.thunks.createCell(6);
+  return;
   game.dispatch.createStation(-1, 1, 0);
   game.dispatch.createStation(1, -1, 0);
   game.dispatch.changeTerrain(0, 0, 0, "water");
