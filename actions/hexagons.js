@@ -1,11 +1,14 @@
 import { createActions } from "signalbox";
 
-export default createActions(["CREATE_HEXAGON", "SELECT_HEXAGON"], types => ({
+export default createActions(["CHANGE_TERRAINS", "SELECT_HEXAGON"], types => ({
+  changeTerrains: hexagons => ({
+    type: types.CHANGE_TERRAINS,
+    hexagons,
+  }),
+
   selectHexagon: id => ({
     type: types.SELECT_HEXAGON,
     hexagon: { id }
   })
 }));
-
-
 
