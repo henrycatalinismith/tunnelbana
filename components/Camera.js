@@ -30,7 +30,8 @@ export class Camera extends React.PureComponent {
     ].join(" ");
 
     return (
-      <svg draggable="false" viewBox={viewbox}>
+      <div className="Camera">
+      <svg draggable="false" viewBox={viewbox} className="Camera__svg">
         {hexagons.map((hexagon, i) => {
           return <Hexagon key={hexagon.get("id")} id={hexagon.get("id")} />;
         })}
@@ -38,6 +39,7 @@ export class Camera extends React.PureComponent {
           return <Station key={stations.get("id")} id={stations.get("id")} />;
         })}
       </svg>
+      </div>
     );
   }
 }

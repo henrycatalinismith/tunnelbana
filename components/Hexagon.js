@@ -49,7 +49,7 @@ export class Hexagon extends React.PureComponent {
     const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y)})`;
 
     return (
-      <g className="Hexagon" transform={translate}>
+      <g className="Hexagon" id={hexagon.id} transform={translate}>
         <Terrain id={hexagon.terrainId} hexagonId={hexagon.id} />
       </g>
     );

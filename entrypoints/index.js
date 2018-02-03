@@ -16,10 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
       grass: {
         id: "grass",
         color: "#b3b128",
+        side: "#8e8d1d",
+        height: 6,
       },
       water: {
         id: "water",
         color: "#2369a6",
+        height: 0,
+      },
+      forest: {
+        id: "forest",
+        color: "#152d07",
+        side: "#071a04",
+        height: 18,
       }
     },
     viewport: {
@@ -35,12 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(root);
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
 
-  game.thunks.createCell(6);
+  game.thunks.createCell(16);
   game.thunks.createStation(-1, 1, 0);
   game.thunks.createStation(1, -1, 0);
-  game.thunks.changeTerrain("water", 0, 0, 0);
+  // game.thunks.changeTerrain("water", 0, 0, 0);
   game.thunks.changeTerrainRing("water", 2, 0, -2, 1);
   game.thunks.changeTerrainRing("water", -2, 0, 2, 1);
+  game.thunks.changeTerrainRing("forest", -2, 3, -1, 1);
+  game.thunks.changeTerrain("forest", -2, 3, -1);
   game.thunks.changeTerrainRing("water", 0, 0, 0, 6);
 
 });
