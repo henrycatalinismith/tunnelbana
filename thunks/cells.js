@@ -38,6 +38,7 @@ export default {
             cellId: cell.id,
             cellRadius: radius,
             terrainId: "grass",
+            terrainHeight: 10,
             x: r.x,
             y: r.y,
             z: r.z,
