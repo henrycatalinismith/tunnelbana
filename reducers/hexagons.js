@@ -20,6 +20,7 @@ export const reducer = createReducer(initialState, {
       newState = newState.updateIn([change.id], h => {
         return h.merge({
           terrainId: change.terrainId,
+          terrainHeight: change.terrainHeight,
         });
       });
     }
@@ -60,7 +61,20 @@ export const selectors = {
   },
 
   byCell(state, cellId) {
-    return state.filter(h => h.get("cellId") === cellId).toList();
+    return state
+      .filter(h => h.get("cellId") === cellId)
+      .toList()
+      .sort((a, b) => {
+        const az = a.get("z");
+        const bz = b.get("z");
+        const ah = a.get("terrainHeight");
+        const bh = b.get("terrainHeight");
+        if (az > bz) return 1;
+        if (az < bz) return -1;
+        if (ah > bh) return 1;
+        if (ah < bh) return -1;
+        return 0;
+      })
   },
 
   at(state, cellId, x, y, z) {
