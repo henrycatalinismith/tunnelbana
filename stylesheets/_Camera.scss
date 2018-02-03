@@ -1,0 +1,13 @@
+.Camera {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.Camera__svg {
+  transform: perspective(1000px) rotateX(10deg) scale(1.1);
+  position: absolute;
+  top: -2vmin;
+  left: 0;
+}
