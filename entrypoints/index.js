@@ -12,6 +12,15 @@ const thunks = require("../thunks").default;
 
 document.addEventListener("DOMContentLoaded", () => {
   const initialState = {
+    cameras: {
+      main: {
+        cellId: 0,
+        hexagonId: "0,0,0,0",
+        radius: 4,
+        x: 0,
+        y: 0,
+      }
+    },
     terrains: {
       grass: {
         id: "grass",
