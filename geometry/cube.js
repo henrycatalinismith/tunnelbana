@@ -14,6 +14,14 @@ cube.scale = (c, scale) => {
   return cube(c.x * scale, c.y * scale, c.z * scale);
 }
 
+cube.distance = (c1, c2) => {
+  return (
+    Math.abs(c1.x - c2.x)
+    + Math.abs(c1.y - c2.y)
+    + Math.abs(c1.z - c2.z)
+  ) / 2;
+};
+
 cube.directions = [
   cube(1, -1, 0), cube(1, 0, -1), cube(0, 1, -1),
   cube(-1, 1, 0), cube(-1, 0, 1), cube(0, -1, 1),

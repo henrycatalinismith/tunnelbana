@@ -60,9 +60,24 @@ export const selectors = {
     return hexagons.get(id);
   },
 
-  byCell(state, cellId) {
-    return state
+  forCamera(hexagons, camera) {
+    const cellId = camera.get("cellId");
+    const hexagonId = camera.get("hexagonId");
+    const [, x, y, z] = hexagonId.split(",");
+    const radius = camera.get("radius");
+
+    const center = { x, y, z };
+    const withinRadius = h => {
+      return cube.distance(center, {
+        x: h.get("x"),
+        y: h.get("y"),
+        z: h.get("z"),
+      }) < radius;
+    };
+
+    return hexagons
       .filter(h => h.get("cellId") === cellId)
+      .filter(h => withinRadius(h))
       .toList()
       .sort((a, b) => {
         const az = a.get("z");
@@ -77,8 +92,8 @@ export const selectors = {
       })
   },
 
-  at(state, cellId, x, y, z) {
-    return state.filter(h => {
+  at(hexagons, cellId, x, y, z) {
+    return hexagons.filter(h => {
       const sameCell = h.get("cellId") === cellId;
       const sameX = h.get("x") === x;
       const sameY = h.get("y") === y;
@@ -88,76 +103,14 @@ export const selectors = {
     }).first();
   },
 
-  ring(state, cellId, x, y, z, radius) {
+  ring(hexagons, cellId, x, y, z, radius) {
     const ring = cube.ring(cube(x, y, z), radius).map(
       h => [cellId, h.x, h.y, h.z].join(",")
     );
 
-    return state.filter(h => {
+    return hexagons.filter(h => {
       const sameId = ring.includes(h.get("id"));
       return sameId;
     }).toList();
   },
 };
-
-/*
-  byGrid(state, cellId) {
-    return state.filter(h => h.get("cellId") === cellId).toList();
-  },
-
-  byGrid: (hexagons, x, y, z) => {
-    const matchId = Object.keys(hexagons).filter(id => {
-      const isMatch = (
-        hexagons[id].x === x &&
-        hexagons[id].y === y &&
-        hexagons[id].z === z
-      );
-      return isMatch;
-    })[0];
-    return hexagons[matchId];
-  }
-
-
-const flatten = arr => arr.reduce(
-  (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
-);
-
-
-
-
-/*
-const Immutable = require("immutable");
-const { createReducer } = require("signalbox");
-
-const actions = require("../actions").default;
-
-const initialState = new Immutable.Map;
-
-export const reducer = createReducer(initialState, {
-  [actions.CREATE_STATION](state, action) {
-    return state.set(
-      action.station.id,
-      Immutable.fromJS({
-        id: action.station.id,
-        cellId: action.cell.id,
-        hexagonId: action.hexagon.id,
-      })
-    );
-  }
-});
-
-export const selectors = {
-  all(state) {
-    return state.toList();
-  },
-
-  byId(state, id) {
-    return state.get(id);
-  },
-
-  byCell(state, cellId) {
-    return state.filter(s => s.get("cellId") === cellId).toList();
-  },
-};
-
-*/
