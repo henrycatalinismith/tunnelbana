@@ -31,6 +31,7 @@ export class Terrain extends React.PureComponent {
     const round = n => Number(n.toFixed(3));
     const deg2rad = degs => Math.PI * degs / 180;
 
+    const height = 20;
     const diagonal = 100;
     const offset = 2;
 
@@ -44,17 +45,25 @@ export class Terrain extends React.PureComponent {
     for (let i = 0; i < 6; i++) {
       const ang = startAng + (i * centerAng);
       const x = (offset / 2) + center.x + (radius * Math.cos(ang));
-      const y = (offset / 1.5) + center.y - (radius * Math.sin(ang));
+      const y = (offset / 1.5) + center.y - (radius * Math.sin(ang)) - terrain.height;
       points.push([x, y]);
     }
+
+    const sides = points
+      .slice(2, 5)
+      .map(point => [point[0], point[1] + height])
+      .concat(points.slice(2, 5).reverse())
 
     points = points.map(point => point.map(round));
 
     const fill = hexagon.isSelected ? "yellow" : terrain.color;
 
-    return (
-      <polygon key="2" onClick={this.selectHexagon} stroke={fill} fill={fill} points={points} />
-    );
+    const cool = terrain.height > 0 && <polygon key="3" fill={terrain.side} points={sides} />;
+
+    return [
+      <polygon key="2" onClick={this.selectHexagon} stroke={fill} fill={fill} points={points} />,
+      cool
+    ];
   }
 }
 
