@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       main: {
         cellId: 0,
         hexagonId: "0,0,0,0",
-        radius: 4,
+        radius: 16,
         x: 0,
         y: 0,
       }
@@ -26,12 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
         id: "grass",
         color: "#b3b128",
         side: "#8e8d1d",
-        height: 6,
+        height: 10,
       },
       water: {
         id: "water",
         color: "#2369a6",
-        height: 0,
+        side: "#174d7c",
+        height: 2,
       },
       forest: {
         id: "forest",
