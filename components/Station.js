@@ -11,11 +11,13 @@ export class Station extends React.PureComponent {
     id: PropTypes.string,
     station: PropTypes.object,
     hexagon: PropTypes.object,
+    terrain: PropTypes.object,
   };
 
   render() {
     const hexagon = this.props.hexagon.toJS();
     const station = this.props.station.toJS();
+    const terrain = this.props.terrain.toJS();
 
     const centerAng = 2 * Math.PI / 6;
     const round = n => Number(n.toFixed(3));
@@ -25,7 +27,7 @@ export class Station extends React.PureComponent {
     const offset = 2;
 
     const center = cube.pixels(hexagon, diagonal / 2);
-    const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y)})`;
+    const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y - terrain.height)})`;
 
     return (
       <g className="Station" transform={translate}>
@@ -45,7 +47,8 @@ export class Station extends React.PureComponent {
 const mapStateToProps = (state, { id }) => {
   const station = select("stations").from(state).byId(id);
   const hexagon = select("hexagons").from(state).byId(station.get("hexagonId"));
-  return { station, hexagon };
+  const terrain = select("terrains").from(state).byId(hexagon.get("terrainId"));
+  return { station, hexagon, terrain };
 };
 
 const mapDispatchToProps = dispatch => {
