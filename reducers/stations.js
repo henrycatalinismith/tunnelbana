@@ -27,6 +27,14 @@ export const selectors = {
     return state.get(id);
   },
 
+  at(state, cellId, x, y, z) {
+    const hexagonId = [cellId, x, y, z].join(",");
+    return state.filter(s => {
+      const isMatch = s.get("hexagonId") === hexagonId;
+      return isMatch;
+    }).first();
+  },
+
   byCell(state, cellId) {
     return state.filter(s => {
       const isMatch = s.get("cellId") === cellId;
