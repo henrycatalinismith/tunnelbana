@@ -6,6 +6,16 @@ const actions = require("../actions").default;
 const initialState = new Immutable.Map;
 
 export const reducer = createReducer(initialState, {
+  [actions.ZOOM_CAMERA](cameras, { camera }) {
+    if (camera.zoom < 1 || camera.zoom > 10) {
+      return cameras;
+    }
+
+    return cameras.updateIn([camera.id], c => {
+      return c.merge({ zoom: camera.zoom });
+    });
+  },
+
   [actions.CREATE_CELL](cameras, action) {
     return cameras.updateIn(["main"], c => {
       return c.merge({
