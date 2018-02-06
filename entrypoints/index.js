@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     isClicked = false;
   });
 
-  game.thunks.createCell(16);
+  game.thunks.createCell(8);
   game.thunks.createStation(-1, 1, 0);
   game.thunks.createStation(1, -1, 0);
 
