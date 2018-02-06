@@ -87,6 +87,13 @@ document.addEventListener("DOMContentLoaded", () => {
   game.thunks.changeTerrainRing("water", -2, 0, 2, 1);
   game.thunks.changeTerrainRing("forest", -2, 3, -1, 1);
   game.thunks.changeTerrain("forest", -2, 3, -1);
+  game.thunks.changeTerrain("forest", 2, -3, 1);
+  game.thunks.changeTerrain("forest", 2, -4, 2);
+  game.thunks.changeTerrain("forest", 1, -5, 4);
+  game.thunks.changeTerrain("forest", -2, -2, 4);
+  game.thunks.changeTerrain("forest", 0, -4, 4);
+  game.thunks.changeTerrain("forest", 0, -3, 3);
+  game.thunks.changeTerrain("forest", 1, -2, 1);
   game.thunks.changeTerrainRing("water", 0, 0, 0, 6);
   game.thunks.changeTerrainRing("water", 0, 0, 0, 7);
   game.thunks.changeTerrainRing("water", 0, 0, 0, 8);
@@ -96,8 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   game.thunks.createStation(3, 1, -4);
   game.thunks.createStation(-4, 4, 0);
+  game.thunks.createStation(3, -4, 1);
   game.thunks.createConnection(1, -1, 0, 3, 1, -4);
   game.thunks.createConnection(3, 1, -4, -4, 4, 0);
+  game.thunks.createConnection(-4, 4, 0, 3, -4, 1);
 
 });
 
