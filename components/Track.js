@@ -30,7 +30,14 @@ export class Track extends React.PureComponent {
 
     return (
       <g className="track" id={track.id}>
-        <path d={path} strokeWidth={10} stroke="black" />
+        <path
+          d={path}
+          stroke="black"
+          strokeWidth={10}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
       </g>
     );
   }

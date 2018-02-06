@@ -20,6 +20,16 @@ export const selectors = {
     return tracks.get(id);
   },
 
+  at(tracks, x, y, z) {
+    return tracks.filter(t => {
+      const sameX = t.get("x2") === x;
+      const sameY = t.get("y2") === y;
+      const sameZ = t.get("z2") === z;
+      const isMatch = sameX && sameY && sameZ;
+      return isMatch;
+    }).toList();
+  },
+
   byConnection(tracks, connectionId) {
     return tracks.filter(s => {
       const isMatch = s.get("connectionId") === connectionId;
