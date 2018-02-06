@@ -2,6 +2,7 @@ const React = require("react");
 const ReactDOM = require("react-dom");
 const { createApp } = require("signalbox");
 const { Provider } = require("react-redux");
+const { throttle } = require("lodash");
 
 const HighValley = require("../components").default;
 const actions = require("../actions").default;
@@ -14,9 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const initialState = {
     cameras: {
       main: {
+        id: "main",
         cellId: 0,
         hexagonId: "0,0,0,0",
-        radius: 16,
+        radius: 32,
+        zoom: 1.5,
         x: 0,
         y: 0,
       }
@@ -53,6 +56,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.body.appendChild(root);
   ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
+
+  document.addEventListener("mousewheel", event => {
+    game.thunks.zoom(event.deltaY);
+  });
+
+  let isClicked = false;
+  document.addEventListener("mousedown", event => {
+    isClicked = true;
+  });
+
+  const onMove = throttle(event => {
+    if (!isClicked) {
+      return;
+    }
+    console.log(event);
+  }, 1000);
+
+  document.addEventListener("mousemove", onMove);
+
+  document.addEventListener("mouseup", event => {
+    isClicked = false;
+  });
 
   game.thunks.createCell(16);
   game.thunks.createStation(-1, 1, 0);
