@@ -10,6 +10,7 @@ export default {
       const state = getState();
       const hexagons = state.get("hexagons");
       const stations = state.get("stations");
+      const trax = state.get("tracks");
 
       const from = { x: x1, y: y1, z: z1 };
       const goal = { x: x2, y: y2, z: z2 };
@@ -47,8 +48,10 @@ export default {
         for (let next of neighbors) {
           const hexagon = select.hexagons.at(hexagons, 0, next.x, next.y, next.z);
           if (hexagon && hexagon.get("terrainId") !== "water" && hexagon.get("terrainId") !== "forest") {
+            const tracksHere = select.tracks.at(trax, next.x, next.y, next.z);
+            const heuristic = tracksHere.size > 0 ? 2 : 1;
             const nextId = [next.x, next.y, next.z].join(",");
-            const new_cost = cost_so_far[id] + 1;
+            const new_cost = cost_so_far[id] + heuristic;
 
             if (typeof cost_so_far[nextId] === 'undefined' || new_cost < cost_so_far[nextId]) {
               cost_so_far[nextId] = new_cost;
