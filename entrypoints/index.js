@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
   game.thunks.changeTerrainRing("forest", -2, 3, -1, 1);
   game.thunks.changeTerrain("forest", -2, 3, -1);
   game.thunks.changeTerrainRing("water", 0, 0, 0, 6);
+  game.thunks.createConnection(-1, 1, 0, 1, -1, 0);
 
 });
 
