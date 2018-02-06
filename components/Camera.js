@@ -5,6 +5,7 @@ const { connect } = require("react-redux");
 const select = require("../reducers").selectors;
 const Hexagon = require("./Hexagon").default;
 const Station = require("./Station").default;
+const Connection = require("./Connection").default;
 
 export class Camera extends React.PureComponent {
   static propTypes = {
@@ -12,6 +13,7 @@ export class Camera extends React.PureComponent {
     hexagons: PropTypes.object,
     stations: PropTypes.object,
     viewport: PropTypes.object,
+    connections: PropTypes.object,
   };
 
   render() {
@@ -19,6 +21,7 @@ export class Camera extends React.PureComponent {
     const hexagons = this.props.hexagons;
     const camera = this.props.camera.toJS();
     const viewport = this.props.viewport.toJS();
+    const connections = this.props.connections.toJS();
 
     const center = { x: 0, y: 0 };
     const width = viewport.width * camera.zoom;
@@ -34,8 +37,13 @@ export class Camera extends React.PureComponent {
         {hexagons.map((hexagon, i) => {
           return <Hexagon key={hexagon.get("id")} id={hexagon.get("id")} />;
         })}
-        {stations.map((stations, i) => {
-          return <Station key={stations.get("id")} id={stations.get("id")} />;
+
+        {connections.map((connection, i) => {
+          return <Connection key={connection.id} id={connection.id} />;
+        })}
+
+        {stations.map((station, i) => {
+          return <Station key={station.get("id")} id={station.get("id")} />;
         })}
       </svg>
       </div>
@@ -48,8 +56,9 @@ const mapStateToProps = (state, { id }) => {
   const stations = select("stations").from(state).byCell(camera.get("cellId"));
   const hexagons = select("hexagons").from(state).forCamera(camera);
   const viewport = select("viewport").from(state).dimensions();
+  const connections = select("connections").from(state).all();
 
-  return { camera, hexagons, stations, viewport };
+  return { camera, hexagons, stations, viewport, connections };
 };
 
 export default connect(mapStateToProps)(Camera);
