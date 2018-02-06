@@ -35,6 +35,12 @@ cube.neighbor = (c, direction) => {
   return cube.add(c, cube.direction(direction));
 }
 
+cube.neighbors = c => {
+  return cube.directions.map(d => {
+    return cube.add(c, d);
+  });
+}
+
 cube.ring = (c, radius) => {
   const results = [];
   let curr = cube.add(c, cube.scale(cube.direction(4), radius));

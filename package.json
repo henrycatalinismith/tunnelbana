@@ -30,6 +30,7 @@
     "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
+    "shuffled-priority-queue": "^1.0.0",
     "signalbox": "file:./signalbox",
     "style-loader": "^0.19.1",
     "uuid": "^3.2.1",
