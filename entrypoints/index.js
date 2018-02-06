@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     isClicked = false;
   });
 
-  game.thunks.createCell(8);
+  game.thunks.createCell(10);
   game.thunks.createStation(-1, 1, 0);
   game.thunks.createStation(1, -1, 0);
 
@@ -88,6 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
   game.thunks.changeTerrainRing("forest", -2, 3, -1, 1);
   game.thunks.changeTerrain("forest", -2, 3, -1);
   game.thunks.changeTerrainRing("water", 0, 0, 0, 6);
+  game.thunks.changeTerrainRing("water", 0, 0, 0, 7);
+  game.thunks.changeTerrainRing("water", 0, 0, 0, 8);
+  game.thunks.changeTerrainRing("water", 0, 0, 0, 9);
+  game.thunks.changeTerrainRing("water", 0, 0, 0, 10);
   game.thunks.createConnection(-1, 1, 0, 1, -1, 0);
 
   game.thunks.createStation(3, 1, -4);
