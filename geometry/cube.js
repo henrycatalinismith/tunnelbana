@@ -6,6 +6,8 @@ class Cube {
 
 const cube = (x, y, z) => new Cube(x, y, z);
 
+const lerp = (a, b, t) => a + (b - a) * t; // for floats
+
 cube.add = (a, b) => {
   return cube(a.x + b.x, a.y + b.y, a.z + b.z);
 }
@@ -46,6 +48,43 @@ cube.ring = (c, radius) => {
 
   return results;
 }
+
+cube.lerp = (a, b, t) => cube(
+  lerp(a.x, b.x, t),
+  lerp(a.y, b.y, t),
+  lerp(a.z, b.z, t)
+);
+
+cube.line = (a, b) => {
+  const n = cube.distance(a, b);
+  const results = [];
+  for (let i = 0; i <= n; i++) {
+    results.push(cube.round(
+      cube.lerp(a, b, 1.0 / n * i)
+    ))
+  }
+  return results;
+};
+
+cube.round = c => {
+  let rx = Math.round(c.x)
+  let ry = Math.round(c.y)
+  let rz = Math.round(c.z)
+
+  const x_diff = Math.abs(rx - c.x)
+  const y_diff = Math.abs(ry - c.y)
+  const z_diff = Math.abs(rz - c.z)
+
+  if (x_diff > y_diff && x_diff > z_diff) {
+    rx = -ry -rz;
+  } else if (y_diff > z_diff) {
+    ry = -rx-rz;
+  } else {
+    rz = -rx-ry;
+  }
+
+  return cube(rx, ry, rz);
+};
 
 cube.pixels = (c, radius) => {
   //const x = Math.sqrt(3) * radius * (c.z + c.y) flat top
