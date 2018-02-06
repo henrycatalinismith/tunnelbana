@@ -8,9 +8,11 @@ const middleware = require("../middlewares").default;
 
 const cameras = require("./cameras");
 const cells = require("./cells");
+const connections = require("./connections");
 const hexagons = require("./hexagons");
 const stations = require("./stations");
 const terrains = require("./terrains");
+const tracks = require("./tracks");
 const viewport = require("./viewport");
 
 export const selectors = require("./selectors").default;
@@ -18,12 +20,13 @@ export const selectors = require("./selectors").default;
 export const reducers = {
   cameras: cameras.reducer,
   cells: cells.reducer,
+  connections: connections.reducer,
   hexagons: hexagons.reducer,
   stations: stations.reducer,
   terrains: terrains.reducer,
+  tracks: tracks.reducer,
   viewport: viewport.reducer,
 };
-
 
 export default function (initialState) {
   const reducer = combineReducers(reducers);

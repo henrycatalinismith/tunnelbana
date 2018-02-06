@@ -2,17 +2,21 @@ const { createSelectors } = require("signalbox");
 
 const cameras = require("./cameras");
 const cells = require("./cells");
+const connections = require("./connections");
 const hexagons = require("./hexagons");
 const stations = require("./stations");
 const terrains = require("./terrains");
+const tracks = require("./tracks");
 const viewport = require("./viewport");
 
 export const select = {
   cameras: cameras.selectors,
   cells: cells.selectors,
+  connections: connections.selectors,
   hexagons: hexagons.selectors,
   stations: stations.selectors,
   terrains: terrains.selectors,
+  tracks: tracks.selectors,
   viewport: viewport.selectors,
 };
 
