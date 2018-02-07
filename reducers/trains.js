@@ -8,7 +8,6 @@ let selection;
 
 export const reducer = createReducer(initialState, {
   [actions.CREATE_TRAIN](trains, action) {
-    console.log(action);
     return trains.set(
       action.train.id,
       Immutable.fromJS({
