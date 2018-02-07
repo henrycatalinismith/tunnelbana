@@ -37,6 +37,9 @@ export const reducer = createReducer(initialState, {
       return t.merge(Immutable.fromJS({
         stationId: destination.id,
         journeyId: undefined,
+        x: destination.x,
+        y: destination.y,
+        z: destination.z,
       }));
     });
   },

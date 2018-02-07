@@ -37,4 +37,31 @@ export const selectors = {
       return isMatch;
     }).first();
   },
+
+  nextStop(connections, {
+    journey,
+    train,
+    source,
+    destination,
+    connection,
+  }) {
+    const goesHere = connections.filter(
+      c =>
+        c.get("sourceId") === destination.id ||
+        c.get("destinationId") === destination.id
+    );
+
+    const onwardsJourney = goesHere.filter(c => {
+      const hasNewSource =
+        c.get("sourceId") !== destination.id &&
+        c.get("sourceId") !== source.id;
+      const hasNewDestination =
+        c.get("destinationId") !== destination.id &&
+        c.get("destinationId") !== source.id;
+      return hasNewSource || hasNewDestination;
+    });
+
+    console.log(onwardsJourney.size);
+    return onwardsJourney.first();
+  }
 };
