@@ -22,31 +22,32 @@ export default {
         return;
       }
       train = train.toJS();
+      console.log(train);
 
       let sourceHexagon = select.hexagons.at(hexagons, 0, train.x, train.y, train.z);
       if (!sourceHexagon) {
-        console.error(`thunks/journeys: cant depart from nonexistent station 0,${train.x},${train.y},${train.z}`);
+        console.error(`thunks/journeys: cant depart from nonexistent source hexagon 0,${train.x},${train.y},${train.z}`);
         return;
       }
       sourceHexagon = sourceHexagon.toJS();
 
       let destinationHexagon = select.hexagons.at(hexagons, 0, x, y, z);
       if (!destinationHexagon) {
-        console.error(`thunks/journeys: cant depart to nonexistent station 0,${x},${y},${z}`);
+        console.error(`thunks/journeys: cant depart to nonexistent destination hexagon 0,${x},${y},${z}`);
         return;
       }
       destinationHexagon = destinationHexagon.toJS();
 
       let source = select.stations.at(stations, 0, train.x, train.y, train.z);
       if (!source) {
-        console.error(`thunks/journeys: cant depart from nonexistent station 0,${train.x},${train.y},${train.z}`);
+        console.error(`thunks/journeys: cant depart from nonexistent source 0,${train.x},${train.y},${train.z}`);
         return;
       }
       source = source.toJS();
 
       let destination = select.stations.at(stations, 0, x, y, z);
       if (!destination) {
-        console.error(`thunks/journeys: cant depart to nonexistent station 0,${x},${y},${z}`);
+        console.error(`thunks/journeys: cant depart to nonexistent destination 0,${x},${y},${z}`);
         return;
       }
       destination = destination.toJS();
@@ -82,6 +83,7 @@ export default {
 
       TweenLite.fromTo(`#train0`, journey.duration / 1000, from, to);
       dispatch(departure);
+      id++;
     }
   },
 
