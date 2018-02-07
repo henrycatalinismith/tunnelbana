@@ -34,7 +34,6 @@ export class Camera extends React.PureComponent {
 
     const viewbox = [x, y, width, height].join(" ");
 
-console.log(trains);
     return (
       <div className="Camera">
       <svg draggable="false" viewBox={viewbox} className="Camera__svg">
