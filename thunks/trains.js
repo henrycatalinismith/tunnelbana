@@ -24,8 +24,9 @@ export default {
       const terrain = { id: hexagon.terrainId };
 
       const cell = { id: camera.cellId };
+      const station = { id: hexagon.id };
 
-      const action = actions.createTrain({ train, hexagon, cell, terrain });
+      const action = actions.createTrain({ train, hexagon, cell, terrain, station });
       dispatch(action);
       id++;
     };

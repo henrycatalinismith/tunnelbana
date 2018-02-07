@@ -109,6 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
   game.thunks.createConnection(-4, 4, 0, 3, -4, 1);
 
   game.thunks.createTrain(-1, 1, 0);
+  setTimeout(() => {
+    game.thunks.departure("0", 1, -1, 0);
+  }, 300);
 
 });
 

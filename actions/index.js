@@ -2,6 +2,7 @@ const cameras = require("./cameras").default;
 const cells = require("./cells").default;
 const connections = require("./connections").default;
 const hexagons = require("./hexagons").default;
+const journeys = require("./journeys").default;
 const stations = require("./stations").default;
 const terrains = require("./terrains").default;
 const tracks = require("./tracks").default;
@@ -13,6 +14,7 @@ const actions = Object.assign({},
   cells,
   connections,
   hexagons,
+  journeys,
   stations,
   terrains,
   tracks,

@@ -13,12 +13,32 @@ export const reducer = createReducer(initialState, {
       Immutable.fromJS({
         id: action.train.id,
         cellId: action.cell.id,
+        journeyId: undefined,
+        stationId: action.station.id,
         terrainId: action.terrain.id,
         x: action.hexagon.x,
         y: action.hexagon.y,
         z: action.hexagon.z,
       })
     );
+  },
+
+  [actions.DEPARTURE](trains, { train, journey }) {
+    return trains.updateIn([train.id], t => {
+      return t.merge(Immutable.fromJS({
+        stationId: undefined,
+        journeyId: journey.id,
+      }));
+    });
+  },
+
+  [actions.ARRIVAL](trains, { train, destination }) {
+    return trains.updateIn([train.id], t => {
+      return t.merge(Immutable.fromJS({
+        stationId: destination.id,
+        journeyId: undefined,
+      }));
+    });
   },
 });
 
@@ -36,5 +56,17 @@ export const selectors = {
       const isMatch = t.get("cellId") === cellId;
       return isMatch;
     }).toList();
+  },
+
+  at(trains, cellId, x, y, z) {
+    const hexagonId = [cellId, x, y, z].join(",");
+    return trains.filter(t => {
+      const sameCell = t.get("cellId") === cellId;
+      const sameX = t.get("x") === x;
+      const sameY = t.get("y") === y;
+      const sameZ = t.get("z") === z;
+      const isMatch = sameCell && sameX && sameY && sameZ;
+      return isMatch;
+    }).first();
   },
 };
