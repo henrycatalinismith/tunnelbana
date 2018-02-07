@@ -14,13 +14,6 @@ export class Hexagon extends React.PureComponent {
     hexagon: PropTypes.object,
   };
 
-  constructor(props) {
-    super(props);
-    this.selectHexagon = () => {
-      this.props.selectHexagon(this.props.id);
-    }
-  }
-
   render() {
     const hexagon = this.props.hexagon.toJS();
 
@@ -62,11 +55,4 @@ const mapStateToProps = (state, { id }) => {
   return { hexagon };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    selectHexagon: id => dispatch(actions.selectHexagon(id)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Hexagon);
-
+export default connect(mapStateToProps)(Hexagon);

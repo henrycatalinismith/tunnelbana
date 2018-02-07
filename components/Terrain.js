@@ -1,10 +1,10 @@
-
 const React = require("react");
 const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 
 const cube = require("../geometry/cube").default;
 const actions = require("../actions").default;
+const thunks = require("../thunks").default;
 const select = require("../reducers").selectors;
 
 export class Terrain extends React.PureComponent {
@@ -13,13 +13,14 @@ export class Terrain extends React.PureComponent {
     hexagonId: PropTypes.string,
     terrain: PropTypes.object,
     hexagon: PropTypes.object,
-    selectHexagon: PropTypes.func
+    tapHexagon: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
-    this.selectHexagon = () => {
-      this.props.selectHexagon(this.props.hexagonId);
+    this.tapHexagon = () => {
+      const [, x, y, z] = this.props.hexagonId.split(",");
+      this.props.tapHexagon(x, y, z);
     }
   }
 
@@ -62,7 +63,7 @@ export class Terrain extends React.PureComponent {
     const cool = terrain.height > 0 && <polygon key="3" stroke={terrain.side} fill={terrain.side} points={sides} />;
 
     return [
-      <polygon key="2" onClick={this.selectHexagon} stroke={fill} fill={fill} points={points} />,
+      <polygon key="2" onClick={this.tapHexagon} stroke={fill} fill={fill} points={points} />,
       cool
     ];
   }
@@ -79,7 +80,7 @@ const mapStateToProps = (state, { id, hexagonId }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectHexagon: id => dispatch(actions.selectHexagon(id)),
+    tapHexagon: (x, y, z) => dispatch(thunks.tapHexagon(x, y, z)),
   };
 };
 
