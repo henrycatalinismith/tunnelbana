@@ -29,16 +29,45 @@ export class Station extends React.PureComponent {
     const center = cube.pixels(hexagon, diagonal / 2);
     const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y - terrain.height)})`;
 
+    const startAng = deg2rad(90);
+    const radius = diagonal / 2;
+
+    const contents = [
+      <circle
+        key="1"
+        cx={0}
+        cy={0}
+        r={10}
+        stroke="black"
+        strokeWidth="5"
+        fill="white"
+      />
+    ];
+
+    if (station.isSelected) {
+      let points = []
+      for (let i = 0; i < 6; i++) {
+        const ang = startAng + (i * centerAng);
+        const x = (offset / 2) + 0 + (radius * Math.cos(ang));
+        const y = (offset / 1.5) + 0 - (radius * Math.sin(ang));
+        points.push([x, y]);
+      }
+      const fill = "yellow"
+      contents.push(
+        <polygon
+          key="2"
+          className="Selection"
+          onClick={this.tapHexagon}
+          fill="transparent"
+          points={points}
+        />
+      );
+    }
+
+
     return (
       <g className="Station" transform={translate}>
-        <circle
-          cx={0}
-          cy={0}
-          r={10}
-          stroke="black"
-          strokeWidth="5"
-          fill="white"
-        />
+        {contents}
       </g>
     );
   }
