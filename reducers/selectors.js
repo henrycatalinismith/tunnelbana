@@ -4,6 +4,7 @@ const cameras = require("./cameras");
 const cells = require("./cells");
 const connections = require("./connections");
 const hexagons = require("./hexagons");
+const journeys = require("./journeys");
 const stations = require("./stations");
 const terrains = require("./terrains");
 const tracks = require("./tracks");
@@ -15,6 +16,7 @@ export const select = {
   cells: cells.selectors,
   connections: connections.selectors,
   hexagons: hexagons.selectors,
+  journeys: journeys.selectors,
   stations: stations.selectors,
   terrains: terrains.selectors,
   tracks: tracks.selectors,
