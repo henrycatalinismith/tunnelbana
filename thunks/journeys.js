@@ -22,7 +22,6 @@ export default {
         return;
       }
       train = train.toJS();
-      console.log(train);
 
       let sourceHexagon = select.hexagons.at(hexagons, 0, train.x, train.y, train.z);
       if (!sourceHexagon) {
