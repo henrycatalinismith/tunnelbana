@@ -7,6 +7,7 @@ const hexagons = require("./hexagons");
 const stations = require("./stations");
 const terrains = require("./terrains");
 const tracks = require("./tracks");
+const trains = require("./trains");
 const viewport = require("./viewport");
 
 export const select = {
@@ -17,6 +18,7 @@ export const select = {
   stations: stations.selectors,
   terrains: terrains.selectors,
   tracks: tracks.selectors,
+  trains: trains.selectors,
   viewport: viewport.selectors,
 };
 
