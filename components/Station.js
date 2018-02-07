@@ -32,17 +32,7 @@ export class Station extends React.PureComponent {
     const startAng = deg2rad(90);
     const radius = diagonal / 2;
 
-    const contents = [
-      <circle
-        key="1"
-        cx={0}
-        cy={0}
-        r={10}
-        stroke="black"
-        strokeWidth="5"
-        fill="white"
-      />
-    ];
+    const contents = [];
 
     if (station.isSelected) {
       let points = []
@@ -64,6 +54,18 @@ export class Station extends React.PureComponent {
       );
     }
 
+
+    contents.push(
+      <circle
+        key="1"
+        cx={0}
+        cy={0}
+        r={10}
+        stroke="black"
+        strokeWidth="5"
+        fill="white"
+      />
+    );
 
     return (
       <g className="Station" transform={translate}>
