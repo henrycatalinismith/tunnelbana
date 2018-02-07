@@ -4,6 +4,7 @@ const connections = require("./connections").default;
 const hexagons = require("./hexagons").default;
 const stations = require("./stations").default;
 const terrains = require("./terrains").default;
+const trains = require("./trains").default;
 
 const thunks = {
   ...cameras,
@@ -12,6 +13,7 @@ const thunks = {
   ...hexagons,
   ...stations,
   ...terrains,
+  ...trains,
 };
 
 export default thunks;
