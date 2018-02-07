@@ -64,7 +64,6 @@ export default {
         return;
       }
       tracks = tracks.toJS();
-      console.log(tracks);
 
       const firstTrackOrigin = {
         x: tracks[0].x1,
