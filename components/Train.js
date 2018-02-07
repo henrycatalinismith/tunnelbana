@@ -25,7 +25,6 @@ export class Train extends React.PureComponent {
     const offset = 2;
 
     const center = cube.pixels(train, diagonal / 2);
-    console.log(center, terrain);
     const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y - terrain.height)})`;
 
     return (
