@@ -14,6 +14,9 @@ export const reducer = createReducer(initialState, {
         id: action.station.id,
         cellId: action.station.cellId,
         hexagonId: action.station.hexagonId,
+        x: action.station.x,
+        y: action.station.y,
+        z: action.station.z,
         isSelected: false,
       })
     );
