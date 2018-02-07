@@ -22,4 +22,19 @@ export const selectors = {
   byId(connections, id) {
     return connections.get(id);
   },
+
+  between(connections, sourceId, destinationId) {
+    return connections.filter(c => {
+      const forwardsMatch =
+        c.get("sourceId") === sourceId &&
+        c.get("destinationId") === destinationId;
+
+      const backwardsMatch =
+        c.get("sourceId") === destinationId &&
+        c.get("destinationId") === sourceId;
+
+      const isMatch = (forwardsMatch || backwardsMatch);
+      return isMatch;
+    }).first();
+  },
 };

@@ -13,6 +13,9 @@ export default {
         id: hexagon.id,
         hexagonId: hexagon.id,
         cellId: hexagon.cellId,
+        x,
+        y,
+        z,
       };
 
       const action = actions.createStation(station);
