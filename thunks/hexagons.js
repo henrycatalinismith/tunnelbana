@@ -5,6 +5,23 @@ const cube = require("../geometry/cube").default;
 let cellId = 0;
 
 export default {
+  tapHexagon(x, y, z) {
+    console.log('?');
+    return (dispatch, getState) => {
+      let station = select("stations")
+        .from(getState())
+        .at(0, x, y, z);
+
+      if (!station) {
+        return;
+      }
+      station = station.toJS();
+
+      const action = actions.selectStation(station);
+      dispatch(action);
+    };
+  },
+
   changeTerrain(terrainId, x, y, z) {
     return (dispatch, getState) => {
       const terrain = select("terrains")
