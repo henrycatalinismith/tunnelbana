@@ -47,7 +47,7 @@ export class Train extends React.PureComponent {
 
     return (
       <g className="Train" id={`train${train.id}`} transform={translate}>
-        <circle r={radius} fill="gray" />
+        <circle r={radius} fill="red" />
       </g>
     );
   }

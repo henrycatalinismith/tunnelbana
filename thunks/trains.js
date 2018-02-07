@@ -19,6 +19,7 @@ export default {
 
       const train = {
         id: id + "",
+        speed: 6
       };
 
       const terrain = { id: hexagon.terrainId };
