@@ -13,6 +13,7 @@ const hexagons = require("./hexagons");
 const stations = require("./stations");
 const terrains = require("./terrains");
 const tracks = require("./tracks");
+const trains = require("./trains");
 const viewport = require("./viewport");
 
 export const selectors = require("./selectors").default;
@@ -25,6 +26,7 @@ export const reducers = {
   stations: stations.reducer,
   terrains: terrains.reducer,
   tracks: tracks.reducer,
+  trains: trains.reducer,
   viewport: viewport.reducer,
 };
 

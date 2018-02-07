@@ -5,6 +5,7 @@ const hexagons = require("./hexagons").default;
 const stations = require("./stations").default;
 const terrains = require("./terrains").default;
 const tracks = require("./tracks").default;
+const trains = require("./trains").default;
 const viewport = require("./viewport").default;
 
 const actions = Object.assign({},
@@ -15,6 +16,7 @@ const actions = Object.assign({},
   stations,
   terrains,
   tracks,
+  trains,
   viewport
 );
 

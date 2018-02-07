@@ -54,7 +54,6 @@ export class Station extends React.PureComponent {
       );
     }
 
-
     contents.push(
       <circle
         key="1"
