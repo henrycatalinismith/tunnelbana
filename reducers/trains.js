@@ -12,6 +12,7 @@ export const reducer = createReducer(initialState, {
       action.train.id,
       Immutable.fromJS({
         id: action.train.id,
+        speed: action.train.speed,
         cellId: action.cell.id,
         journeyId: undefined,
         stationId: action.station.id,

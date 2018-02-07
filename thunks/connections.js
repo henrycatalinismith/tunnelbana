@@ -70,6 +70,7 @@ export default {
       current = goal;
       const tracks = {};
       const dots = [];
+      let ordinality = 0;
 
       while (current.x !== from.x || current.y !== from.y || current.z !== from.z) {
         dots.push(current);
@@ -81,9 +82,11 @@ export default {
           connectionId: connection.id,
           x1: current.x, y1: current.y, z1: current.z,
           x2: next.x, y2: next.y, z2: next.z,
+          ordinality,
         };
 
         current = next;
+        ordinality++;
       }
 
       const action = actions.createConnection({

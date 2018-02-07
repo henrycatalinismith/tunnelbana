@@ -31,9 +31,18 @@ export const selectors = {
   },
 
   byConnection(tracks, connectionId) {
-    return tracks.filter(s => {
-      const isMatch = s.get("connectionId") === connectionId;
-      return isMatch;
-    }).toList();
+    return tracks
+      .filter(s => {
+        const isMatch = s.get("connectionId") === connectionId;
+        return isMatch;
+      })
+      .toList()
+      .sort((a, b) => {
+        const aOrdinality = a.get("ordinality");
+        const bOrdinality = b.get("ordinality");
+        if (aOrdinality > bOrdinality) return 1;
+        if (aOrdinality < bOrdinality) return -1;
+        return 0;
+      })
   },
 };
