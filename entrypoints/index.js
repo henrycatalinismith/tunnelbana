@@ -42,6 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
         color: "#152d07",
         side: "#071a04",
         height: 18,
+      },
+      city: {
+        id: "city",
+        color: "#b3b128",
+        side: "#8e8d1d",
+        height: 10,
       }
     },
     viewport: {
@@ -86,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
   game.thunks.changeTerrainRing("water", 2, 0, -2, 1);
   game.thunks.changeTerrainRing("water", -2, 0, 2, 1);
   game.thunks.changeTerrainRing("forest", -2, 3, -1, 1);
-  game.thunks.changeTerrain("forest", -2, 3, -1);
+  game.thunks.changeTerrain("city", -1, 1, 0);
   game.thunks.changeTerrain("forest", 2, -3, 1);
   game.thunks.changeTerrain("forest", 2, -4, 2);
   game.thunks.changeTerrain("forest", 1, -5, 4);

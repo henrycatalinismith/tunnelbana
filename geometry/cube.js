@@ -55,6 +55,16 @@ cube.ring = (c, radius) => {
   return results;
 }
 
+c.radius = (c, radius) => {
+  let results = [c];
+
+  for (let i = 1; i < radius; i++) {
+    results = [ ...results, cube.ring(c, i) ];
+  }
+
+  return results;
+}
+
 cube.lerp = (a, b, t) => cube(
   lerp(a.x, b.x, t),
   lerp(a.y, b.y, t),
