@@ -61,7 +61,9 @@ export const selectors = {
       return hasNewSource || hasNewDestination;
     });
 
-    console.log(onwardsJourney.size);
-    return onwardsJourney.first();
+    if (onwardsJourney.size > 0) {
+      return onwardsJourney.first();
+    }
+    return goesHere.first();
   }
 };
