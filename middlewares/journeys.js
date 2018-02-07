@@ -37,14 +37,17 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     }
     nextConnection = nextConnection.toJS();
 
-    const nextDestinationId = nextConnection.destinationId;
+    const nextDestinationId =
+      nextConnection.destinationId === destination.id
+      ? nextConnection.sourceId
+      : nextConnection.destinationId
+      ;
     let nextDestination = select.stations.byId(stations, nextDestinationId);
     if (!nextDestination) {
       console.error(`middlewards/journeys: cant schedule departure due to nonexistent destination ${nextDestinationId}`);
       return;
     }
     nextDestination = nextDestination.toJS();
-    console.log(nextConnection, nextDestination);
 
     setTimeout(
       () => store.dispatch(thunks.departure(
