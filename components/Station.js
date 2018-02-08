@@ -19,29 +19,14 @@ export class Station extends React.PureComponent {
     const station = this.props.station.toJS();
     const terrain = this.props.terrain.toJS();
 
-    const centerAng = 2 * Math.PI / 6;
-    const round = n => Number(n.toFixed(3));
-    const deg2rad = degs => Math.PI * degs / 180;
-
-    const diagonal = 100;
-    const offset = 2;
-
-    const center = cube.pixels(hexagon, diagonal / 2);
-    const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y - terrain.height)})`;
-
-    const startAng = deg2rad(90);
-    const radius = diagonal / 2;
+    const center = cube.pixels(hexagon, 50);
+    center.y -= terrain.height;
+    const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y)})`;
 
     const contents = [];
 
     if (station.isSelected) {
-      let points = []
-      for (let i = 0; i < 6; i++) {
-        const ang = startAng + (i * centerAng);
-        const x = (offset / 2) + 0 + (radius * Math.cos(ang));
-        const y = (offset / 1.5) + 0 - (radius * Math.sin(ang));
-        points.push([x, y]);
-      }
+      const points = cube.sides({ x: 0, y: 0}, 50);
       const fill = "yellow"
       contents.push(
         <polygon
@@ -55,6 +40,7 @@ export class Station extends React.PureComponent {
     }
 
     contents.push(
+
       <circle
         key="1"
         cx={0}
@@ -64,6 +50,7 @@ export class Station extends React.PureComponent {
         strokeWidth="5"
         fill="white"
       />
+
     );
 
     return (

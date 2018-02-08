@@ -16,29 +16,7 @@ export class Hexagon extends React.PureComponent {
 
   render() {
     const hexagon = this.props.hexagon.toJS();
-
-    const centerAng = 2 * Math.PI / 6;
-    const round = n => Number(n.toFixed(3));
-    const deg2rad = degs => Math.PI * degs / 180;
-
-    const diagonal = 100;
-    const offset = 2;
-
-    const center = cube.pixels(hexagon, diagonal / 2);
-
-    const startAng = deg2rad(90);
-    const radius = diagonal / 2;
-
-    let points = []
-    for (let i = 0; i < 6; i++) {
-      const ang = startAng + (i * centerAng);
-      const x = (offset / 2) + (radius * Math.cos(ang));
-      const y = (offset / 1.5) - (radius * Math.sin(ang));
-      points.push([x, y]);
-    }
-
-    points = points.map(point => point.map(round));
-
+    const center = cube.pixels(hexagon, 50);
     const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y)})`;
 
     return (
