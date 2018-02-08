@@ -33,14 +33,7 @@ export class Train extends React.PureComponent {
       isMoving = false;
     }
 
-    const centerAng = 2 * Math.PI / 6;
-    const round = n => Number(n.toFixed(3));
-    const deg2rad = degs => Math.PI * degs / 180;
-
-    const diagonal = 100;
-    const offset = 2;
-
-    const center = cube.pixels(train, diagonal / 2);
+    const center = cube.pixels(train, 50);
     const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y - terrain.height)})`;
 
     const radius = isMoving ? 10 : 20;
