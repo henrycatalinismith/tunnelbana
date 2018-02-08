@@ -1,5 +1,5 @@
 class Cube {
-  constructor(x, y, z) {
+  constructor(x = 0, y = 0, z = 0) {
     Object.assign(this, { x, y, z });
   }
 }
@@ -58,8 +58,8 @@ cube.ring = (c, radius) => {
 cube.radius = (c, radius) => {
   let results = [c];
 
-  for (let i = 1; i < radius; i++) {
-    results = [ ...results, cube.ring(c, i) ];
+  for (let i = 1; i <= radius; i++) {
+    results = [ ...results, ...cube.ring(c, i) ];
   }
 
   return results;
