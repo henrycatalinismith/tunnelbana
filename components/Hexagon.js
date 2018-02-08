@@ -6,7 +6,7 @@ const cube = require("../geometry/cube").default;
 const actions = require("../actions").default;
 const select = require("../reducers").selectors;
 
-const Terrain = require("./Terrain").default;
+const Terrain = require("../terrains").default;
 
 export class Hexagon extends React.PureComponent {
   static propTypes = {
@@ -21,7 +21,7 @@ export class Hexagon extends React.PureComponent {
 
     return (
       <g className="Hexagon" id={hexagon.id} transform={translate}>
-        <Terrain id={hexagon.terrainId} hexagonId={hexagon.id} />
+        <Terrain id={hexagon.terrainId} />
       </g>
     );
   }
