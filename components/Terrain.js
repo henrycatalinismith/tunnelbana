@@ -7,19 +7,6 @@ const actions = require("../actions").default;
 const thunks = require("../thunks").default;
 const select = require("../reducers").selectors;
 
-const Hex = ({ x, y, z }) => (
-  <rect
-    key={`building(${x}-${y})`}
-    x={x}
-    y={y}
-    width={16}
-    height={32}
-    stroke="#333"
-    strokeWidth="4"
-    fill="#999"
-  />
-);
-
 export class Terrain extends React.PureComponent {
   static propTypes = {
     id: PropTypes.string,
@@ -41,45 +28,26 @@ export class Terrain extends React.PureComponent {
     const hexagon = this.props.hexagon.toJS();
     const terrain = this.props.terrain.toJS();
 
-    const centerAng = 2 * Math.PI / 6;
-    const round = n => Number(n.toFixed(3));
-    const deg2rad = degs => Math.PI * degs / 180;
+    const center = {
+      x: 0,
+      y: 0 - terrain.height,
+    };
 
-    const height = terrain.height;
-    const diagonal = 100;
-    const offset = 2;
+    let points = cube.sides(center, 50);
 
-    //const center = cube.pixels(hexagon, diagonal / 2);
-    const center = { x: 0, y: 0};
-
-    const startAng = deg2rad(90);
-    const radius = diagonal / 2;
-
-    let points = []
-    for (let i = 0; i < 6; i++) {
-      const ang = startAng + (i * centerAng);
-      const x = (offset / 2) + center.x + (radius * Math.cos(ang));
-      const y = (offset / 1.5) + center.y - (radius * Math.sin(ang)) - terrain.height;
-      points.push([x, y]);
-    }
-
-    const sides = points
+    const walls = points
       .slice(2, 5)
-      .map(point => [point[0], point[1] + height])
-      .concat(points.slice(2, 5).reverse())
-      .map(point => point.map(round))
-
-    points = points.map(point => point.map(round));
+      .map(point => [point[0], point[1] + terrain.height])
+      .concat(points.slice(2, 5).reverse());
 
     const fill = hexagon.isSelected ? "yellow" : terrain.color;
 
-    const cool = terrain.height > 0 && <polygon key="3" stroke={terrain.side} fill={terrain.side} points={sides} />;
+    const wall = terrain.height > 0 && <polygon key="3" stroke={terrain.side} fill={terrain.side} points={walls} />;
 
     let extras = null;
 
     if (terrain.id === "city") {
-
-      const BuildingHex = ({ x, y, z }) => (
+      const building = (x, y) => (
         <rect
           key={`building(${x}-${y})`}
           x={x}
@@ -103,7 +71,7 @@ export class Terrain extends React.PureComponent {
     return [
       <polygon key="2" onClick={this.tapHexagon} stroke={fill} fill={fill} points={points} />,
       extras,
-      cool
+      wall,
     ];
   }
 }

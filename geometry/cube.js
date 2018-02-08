@@ -55,7 +55,7 @@ cube.ring = (c, radius) => {
   return results;
 }
 
-c.radius = (c, radius) => {
+cube.radius = (c, radius) => {
   let results = [c];
 
   for (let i = 1; i < radius; i++) {
@@ -108,6 +108,24 @@ cube.pixels = (c, radius) => {
   const y = 3/2 * radius * c.z;
 
   return { x, y };
+};
+
+cube.sides = (center, radius) => {
+  const centerAng = 2 * Math.PI / 6;
+  const round = n => Number(n.toFixed(3));
+  const deg2rad = degs => Math.PI * degs / 180;
+  const offset = 2;
+  const startAng = deg2rad(90);
+  const points = [];
+
+  for (let i = 0; i < 6; i++) {
+    const ang = startAng + (i * centerAng);
+    const x = (offset / 2) + center.x + (radius * Math.cos(ang));
+    const y = (offset / 1.5) + center.y - (radius * Math.sin(ang));
+    points.push([x, y]);
+  }
+
+  return points.map(point => point.map(round));
 };
 
 export default cube;
