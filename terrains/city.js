@@ -9,18 +9,22 @@ export const terrain = {
   height: 10,
 }
 
-const building = (x, y) => (
-  <rect
-    key={`building(${x}-${y})`}
-    x={x}
-    y={y}
-    width={16}
-    height={32}
-    stroke="#333"
-    strokeWidth="4"
-    fill="#999"
-  />
-);
+const buildingRadius = 8;
+const building = (x, y) => {
+  const center = { x, y };
+  const points = cube.sides(center, buildingRadius);
+  return (
+    <polygon
+      key={`${x},${y}`}
+      stroke={terrain.color}
+      fill={terrain.color}
+      points={points}
+      stroke="#333"
+      strokeWidth="1"
+      fill="#999"
+    />
+  );
+}
 
 export class City extends React.PureComponent {
   render() {
@@ -36,6 +40,14 @@ export class City extends React.PureComponent {
       .map(point => [point[0], point[1] + terrain.height])
       .concat(points.slice(2, 5).reverse());
 
+    const blocks = cube.radius(cube(), 2);
+    const buildings = blocks.map((hex, i) => {
+      const hexPx = cube.pixels(hex, buildingRadius + 2);
+      hexPx.y -= terrain.height;
+      return building(hexPx.x, hexPx.y);
+    });
+    console.log(cube.radius(cube(), 1));
+
     return [
       <polygon
         key="top"
@@ -49,10 +61,7 @@ export class City extends React.PureComponent {
         fill={terrain.side}
         points={walls}
       />,
-      building(20, -58),
-      building(20, -28),
-      building(0, -58),
-      building(-20, -58),
+      ...buildings
     ];
   }
 }
