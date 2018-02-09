@@ -13,7 +13,7 @@ const components = {
   city: city.City,
 };
 
-const terrains = {
+export const terrains = {
   grass: grass.terrain,
   water: water.terrain,
   forest: forest.terrain,
