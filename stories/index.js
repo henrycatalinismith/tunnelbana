@@ -1,7 +1,5 @@
 const React = require("react");
 const { storiesOf, action, linkTo } = require("@storybook/react");
-const Button = require("./Button").default;
-const Welcome = require("./Welcome").default;
 const Terrain = require("../terrains").default;
 
 storiesOf("Terrain", module)
