@@ -1,5 +1,13 @@
 const path = require("path");
 
+const isStorybook = !!process.argv.filter(arg => arg.match(/start-storybook$/)).length;
+if (isStorybook) {
+  module.exports = require("./webpack.storybook.js");
+  return;
+}
+//console.log(isStorybook);
+//process.exit(-1);
+
 const Dashboard = require("webpack-dashboard");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
