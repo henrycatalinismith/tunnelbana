@@ -10,19 +10,51 @@ export const terrain = {
 }
 
 const buildingRadius = 8;
-const building = (x, y) => {
+const building = (x, y, c) => {
   const center = { x, y };
-  const points = cube.sides(center, buildingRadius);
+  const points = cube.sides({ x: 0, y: 0 }, buildingRadius + 0);
+
+  const paths = [
+    "M" + [points[1][0], points[1][1], 0 + 1, 0 + 1].join(" "),
+    "M" + [points[3][0], points[3][1], 0 + 1, 0 + 1].join(" "),
+    "M" + [points[5][0], points[5][1], 0 + 1, 0 + 1].join(" "),
+  ];
+
+  const translate = `translate(${c.z * 4 * c.x * 4}, ${c.z * 2 * c.y * 3})`;
+
   return (
-    <polygon
-      key={`${x},${y}`}
-      stroke={terrain.color}
-      fill={terrain.color}
-      points={points}
-      stroke="#333"
-      strokeWidth="1"
-      fill="#999"
-    />
+    <g transform={translate}>
+      <polygon
+        key={`${x},${y}`}
+        stroke={terrain.color}
+        fill={terrain.color}
+        points={points}
+        stroke="#333"
+        strokeWidth="1"
+        fill="#999"
+      />
+
+      <path
+        key={`${x},${y},1`}
+        d={paths[0]}
+        stroke="#333"
+        strokeWidth={1}
+      />
+
+      <path
+        key={`${x},${y},2`}
+        d={paths[1]}
+        stroke="#333"
+        strokeWidth={1}
+      />
+
+      <path
+        key={`${x},${y},3`}
+        d={paths[2]}
+        stroke="#333"
+        strokeWidth={1}
+      />
+    </g>
   );
 }
 
@@ -41,22 +73,30 @@ export class City extends React.PureComponent {
       .concat(points.slice(2, 5).reverse());
 
     const blocks = cube.radius(cube(), 2);
-    const buildings = blocks
+    const hexagons = blocks
       .filter(hex => {
-        if (hex.x % 2 !== 0) {
-          return false;
+        if (hex.y % 3 !== 0) {
         }
-        if (hex.z % 2 !== 0) {
-          return false;
+        if (hex.x % 2 !== 0) {
+        }
+        if (hex.z % 3 !== 0) {
         }
         return true;
-      })
-      .map((hex, i) => {
-        const hexPx = cube.pixels(hex, buildingRadius + 2);
-        hexPx.y -= terrain.height;
-        return building(hexPx.x, hexPx.y);
       });
-    console.log(cube.radius(cube(), 1));
+
+    hexagons.sort((a, b) => {
+      if (a.z > b.z) return 1;
+      if (a.z < b.z) return -1;
+      if (a.x > b.x) return -1;
+      if (a.x < b.x) return 1;
+      return 0;
+    });
+
+    const buildings = hexagons.map((hex, i) => {
+      const hexPx = cube.pixels(hex, buildingRadius);
+      hexPx.y -= terrain.height;
+      return building(hexPx.x, hexPx.y, hex);
+    });
 
     return [
       <polygon
