@@ -11,6 +11,8 @@ const { selectors } = require("../reducers");
 const middlewares = require("../middlewares").default;
 const thunks = require("../thunks").default;
 
+const terrains = require("../terrains").terrains;
+
 document.addEventListener("DOMContentLoaded", () => {
   const initialState = {
     cameras: {
@@ -24,32 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         y: 0,
       }
     },
-    terrains: {
-      grass: {
-        id: "grass",
-        color: "#b3b128",
-        side: "#8e8d1d",
-        height: 10,
-      },
-      water: {
-        id: "water",
-        color: "#2369a6",
-        side: "#174d7c",
-        height: 2,
-      },
-      forest: {
-        id: "forest",
-        color: "#152d07",
-        side: "#071a04",
-        height: 18,
-      },
-      city: {
-        id: "city",
-        color: "#b3b128",
-        side: "#8e8d1d",
-        height: 10,
-      }
-    },
+    terrains,
     viewport: {
       width: window.innerWidth,
       height: window.innerHeight,
