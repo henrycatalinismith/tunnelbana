@@ -43,7 +43,7 @@
   "scripts": {
     "build": "webpack --config configuration/webpack.config.js",
     "start": "DASH=1 webpack-dev-server --config configuration/webpack.config.js --disable-host-check",
-    "storybook": "start-storybook -p 6006 -c .storybook",
+    "storybook": "start-storybook -p 6006 -c configuration",
     "build-storybook": "build-storybook"
   }
 }
