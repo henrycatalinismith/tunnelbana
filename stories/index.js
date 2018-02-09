@@ -22,9 +22,13 @@ storiesOf("Terrain", module)
     </svg>
   ))
 
-  .add("city", () => (
-    <svg viewBox="-50 -60 100 120" style={{ maxHeight: "400px", maxWidth: "300px" }}>
+  .add("city", () => [
+    <svg key="big" viewBox="-50 -60 100 120" style={{ maxHeight: "400px", maxWidth: "300px" }}>
+      <Terrain id="city" />
+    </svg>,
+
+    <svg key="small" viewBox="-50 -60 100 120" style={{ maxHeight: "100px", maxWidth: "100px" }}>
       <Terrain id="city" />
     </svg>
-  ))
+  ])
 
