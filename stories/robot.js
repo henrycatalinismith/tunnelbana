@@ -83,11 +83,11 @@ storiesOf("Robot", module)
         <Cube x={1} y={-1} z={0}><Terrain id="grass" /></Cube>
 
         <Cube x={0} y={0} z={0}><Terrain id="grass" /></Cube>
-        <Cube x={0} y={-1} z={1}><Terrain id="grass" /><Robot frame="minus-x-1" /></Cube>
-        <Cube x={0} y={-2} z={2}><Terrain id="grass" /><Robot frame="minus-x-2" /></Cube>
+        <Cube x={-1} y={0} z={1}><Terrain id="grass" /><Robot frame="minus-x-1" /></Cube>
+        <Cube x={-2} y={0} z={2}><Terrain id="grass" /><Robot frame="minus-x-2" /></Cube>
 
-        <Cube x={-1} y={0} z={1}><Terrain id="grass" /><Robot frame="minus-y-1" /></Cube>
-        <Cube x={-2} y={0} z={2}><Terrain id="grass" /><Robot frame="minus-y-2" /></Cube>
+        <Cube x={0} y={-1} z={1}><Terrain id="grass" /><Robot frame="minus-y-1" /></Cube>
+        <Cube x={0} y={-2} z={2}><Terrain id="grass" /><Robot frame="minus-y-2" /></Cube>
 
       </Story>
     );
