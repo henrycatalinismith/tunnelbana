@@ -14,15 +14,16 @@ export default class Body extends React.PureComponent {
 
   render() {
     const text = {
-      opacity: 0,
+      //opacity: 0,
       transform: [
         `scale(1.6)`,
-        `translate(${-13}, ${2})`,
+        `translate(${-9}, ${-6})`,
+        `rotate(15 ${-13 * 1/1.6} ${2 * 1/1.6})`,
       ].join(" ")
     };
 
     const transform = `translate(${-20}, ${-52})`;
-    const emoji = "🤖";
+    const emoji = "😎";
 
     return (
       <g className="Body" fill="#d8d8d8" stroke="#979797" transform={transform}>
