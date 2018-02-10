@@ -2,10 +2,9 @@ const React = require("react");
 const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 
-const cube = require("../geometry/cube").default;
-const actions = require("../actions").default;
 const select = require("../reducers").selectors;
 
+const Cube = require("../components/Cube").default;
 const Terrain = require("../terrains").default;
 
 export class Hexagon extends React.PureComponent {
@@ -16,13 +15,11 @@ export class Hexagon extends React.PureComponent {
 
   render() {
     const hexagon = this.props.hexagon.toJS();
-    const center = cube.pixels(hexagon, 50);
-    const translate = `translate(${Math.round(center.x)}, ${Math.round(center.y)})`;
-
+    const { x, y, z } = hexagon;
     return (
-      <g className="Hexagon" id={hexagon.id} transform={translate}>
+      <Cube x={x} y={y} z={z}>
         <Terrain id={hexagon.terrainId} />
-      </g>
+      </Cube>
     );
   }
 }

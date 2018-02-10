@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cellId: 0,
         hexagonId: "0,0,0,0",
         radius: 32,
-        zoom: 0.5,
+        zoom: 1,
         x: 0,
         y: 0,
       }
