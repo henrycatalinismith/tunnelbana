@@ -3,6 +3,7 @@ const cells = require("./cells").default;
 const connections = require("./connections").default;
 const hexagons = require("./hexagons").default;
 const journeys = require("./journeys").default;
+const robots = require("./robots").default;
 const stations = require("./stations").default;
 const terrains = require("./terrains").default;
 const trains = require("./trains").default;
@@ -13,6 +14,7 @@ const thunks = {
   ...connections,
   ...hexagons,
   ...journeys,
+  ...robots,
   ...stations,
   ...terrains,
   ...trains,

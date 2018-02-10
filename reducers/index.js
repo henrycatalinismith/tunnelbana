@@ -11,6 +11,7 @@ const cells = require("./cells");
 const connections = require("./connections");
 const hexagons = require("./hexagons");
 const journeys = require("./journeys");
+const robots = require("./robots");
 const stations = require("./stations");
 const terrains = require("./terrains");
 const tracks = require("./tracks");
@@ -25,6 +26,7 @@ export const reducers = {
   connections: connections.reducer,
   hexagons: hexagons.reducer,
   journeys: journeys.reducer,
+  robots: robots.reducer,
   stations: stations.reducer,
   terrains: terrains.reducer,
   tracks: tracks.reducer,
