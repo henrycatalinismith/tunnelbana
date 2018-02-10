@@ -1,6 +1,8 @@
 const React = require("react");
 const PropTypes = require("prop-types");
 
+const Svg = require("../components/Svg").default;
+
 class Story extends React.PureComponent {
   static propTypes = {
     children: PropTypes.any,
@@ -39,17 +41,10 @@ class Story extends React.PureComponent {
     const { children, scale } = this.props;
     const { width, height } = this.state;
 
-    const viewBox = [
-      -width/2 * 1/scale,
-      -height/2 * 1/scale,
-      width / scale,
-      height / scale
-    ].join(" ");
-
     return (
-      <svg viewBox={viewBox}>
+      <Svg x={-width/2 * 1/scale} y={-height/2 * 1/scale} width={width/scale} height={height/scale}>
         {children}
-      </svg>
+      </Svg>
     );
   }
 }
