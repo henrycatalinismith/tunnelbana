@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@kadira/storybook": "^2.21.0",
+    "@storybook/addon-console": "^1.0.0",
     "@storybook/react": "^3.3.12",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
