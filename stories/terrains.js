@@ -19,7 +19,7 @@ storiesOf("Terrain", module)
   ))
 
   .add("forest", () => (
-    <Story scale={2}>
+    <Story scale={3}>
       <Terrain id="forest" />
     </Story>
   ))
