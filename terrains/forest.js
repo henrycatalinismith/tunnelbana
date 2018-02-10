@@ -2,7 +2,7 @@ const React = require("react");
 const PropTypes = require("prop-types");
 
 const { Hexagon } = require("../components/Hexagon");
-const cube = require("../geometry/cube").default;
+const { Cliff } = require("../components/Cliff");
 
 export const terrain = {
   id: "forest",
@@ -13,18 +13,6 @@ export const terrain = {
 
 export class Forest extends React.PureComponent {
   render() {
-    const center = {
-      x: 0,
-      y: 0 - terrain.height,
-    };
-
-    const points = cube.sides(center, 50);
-
-    const walls = points
-      .slice(2, 5)
-      .map(point => [point[0], point[1] + terrain.height])
-      .concat(points.slice(2, 5).reverse());
-
     return [
       <Hexagon
         key="top"
@@ -32,11 +20,11 @@ export class Forest extends React.PureComponent {
         stroke={terrain.color}
         fill={terrain.color}
       />,
-      <polygon
+      <Cliff
         key="sides"
+        height={terrain.height}
         stroke={terrain.side}
         fill={terrain.side}
-        points={walls}
       />
     ];
   }
