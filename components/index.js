@@ -3,7 +3,7 @@ const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 const select = require("../reducers").selectors;
 
-const Camera = require("./Camera").default;
+const Camera = require("../containers/Camera").default;
 
 export class HighValley extends React.PureComponent {
   static propTypes = {
