@@ -1,10 +1,10 @@
 const React = require("react");
 const PropTypes = require("prop-types");
 const { storiesOf, action, linkTo } = require("@storybook/react");
-//const { action } = require("@storybook/addon-actions");
 const withPropsCombinations = require("react-storybook-addon-props-combinations").default;
 
 const cube = require("../geometry/cube").default;
+const Story = require("./Story").default;
 const Terrain = require("../components/Terrain").default;
 const Robot = require("../components/Robot").default;
 const Cube = require("../components/Cube").default;
@@ -47,10 +47,10 @@ class Animation extends React.PureComponent {
     const { width, height, frames } = this.props;
     const { frame } = this.state;
     return (
-      <svg viewBox="-50 -70 100 120" style={{ height: `${height}px`, width: `${width}px`, float: "left" }}>
+      <Story scale={4}>
         <Terrain id="grass" />
         <Robot frame={frames[frame]} />
-      </svg>
+      </Story>
     );
   }
 }
@@ -60,7 +60,7 @@ storiesOf("Robot", module)
   .add("snowflake", () => {
 
     return (
-      <svg viewBox="-250 -250 1000 1000" width="100%" height="100%">
+      <Story>
 
         <Cube x={0} y={2} z={-2}><Terrain id="grass" /></Cube>
         <Cube x={0} y={1} z={-1}><Terrain id="grass" /></Cube>
@@ -80,7 +80,7 @@ storiesOf("Robot", module)
         <Cube x={-1} y={0} z={1}><Terrain id="grass" /><Robot frame="minus-y-1" /></Cube>
         <Cube x={-2} y={0} z={2}><Terrain id="grass" /><Robot frame="minus-y-2" /></Cube>
 
-      </svg>
+      </Story>
     );
   })
 
@@ -95,15 +95,40 @@ storiesOf("Robot", module)
     ],
   }))
 
-  .add("minus-x-1", () => <Wrapper frame="minus-x-1" width="300" height="300" />)
-  .add("minus-x-2", () => <Wrapper frame="minus-x-2" width="300" height="300" />)
+  .add("minus-x-1", () => (
+    <Story scale={4}>
+      <Terrain id="grass" />
+      <Robot frame="minus-x-1" />
+    </Story>
+  ))
+
+  .add("minus-x-2", () => (
+    <Story scale={4}>
+      <Terrain id="grass" />
+      <Robot frame="minus-x-2" />
+    </Story>
+  ))
+
   .add("minus-x-cycle", () => (<Animation width={300} height={300} frames={[
     "minus-x-1",
     "minus-x-2"
   ]} /> ))
 
-  .add("minus-y-1", () => <Wrapper frame="minus-y-1" width="300" height="300" />)
-  .add("minus-y-2", () => <Wrapper frame="minus-y-2" width="300" height="300" />)
+
+  .add("minus-y-1", () => (
+    <Story scale={4}>
+      <Terrain id="grass" />
+      <Robot frame="minus-y-1" />
+    </Story>
+  ))
+
+  .add("minus-y-2", () => (
+    <Story scale={4}>
+      <Terrain id="grass" />
+      <Robot frame="minus-y-2" />
+    </Story>
+  ))
+
   .add("minus-y-cycle", () => (<Animation width={300} height={300} frames={[
     "minus-y-1",
     "minus-y-2"
