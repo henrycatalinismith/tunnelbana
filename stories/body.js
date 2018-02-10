@@ -6,7 +6,7 @@ const withPropsCombinations = require("react-storybook-addon-props-combinations"
 
 const cube = require("../geometry/cube").default;
 const Terrain = require("../terrains").default;
-const { Body } = require("../components/Body");
+const Body = require("../components/Body").default;
 const { Cube } = require("../components/Cube");
 const { Hexagon } = require("../components/Hexagon");
 
