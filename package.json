@@ -44,6 +44,7 @@
   },
   "scripts": {
     "build": "webpack --config configuration/webpack.config.js",
+    "clean": "rm artefacts/*",
     "start": "webpack-dev-server --config configuration/webpack.config.js --disable-host-check",
     "storybook": "start-storybook -p 6006 -c configuration",
     "build-storybook": "build-storybook"
