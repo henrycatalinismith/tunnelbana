@@ -7,6 +7,12 @@ const { Hexagon } = require("../components/Hexagon");
 
 storiesOf("Hexagon", module)
 
+  .add("fill", () => (
+    <Story scale={2}>
+      <Hexagon radius={100} fill="red" />
+    </Story>
+  ))
+
   .add("stroke", () => (
     <Story scale={2}>
       <Hexagon radius={100} stroke="red" />
@@ -16,12 +22,6 @@ storiesOf("Hexagon", module)
   .add("strokeWidth", () => (
     <Story scale={2}>
       <Hexagon radius={80} stroke="red" strokeWidth={20} />
-    </Story>
-  ))
-
-  .add("fill", () => (
-    <Story scale={2}>
-      <Hexagon radius={100} fill="red" />
     </Story>
   ))
 

@@ -7,6 +7,12 @@ const Cliff = require("../components/Cliff").default;
 
 storiesOf("Cliff", module)
 
+  .add("fill", () => (
+    <Story scale={2}>
+      <Cliff radius={100} stroke="red" fill="red" />
+    </Story>
+  ))
+
   .add("stroke", () => (
     <Story scale={2}>
       <Cliff radius={100} stroke="red" />
@@ -16,12 +22,6 @@ storiesOf("Cliff", module)
   .add("strokeWidth", () => (
     <Story scale={2}>
       <Cliff radius={100} stroke="red" fill="white" strokeWidth={3} />
-    </Story>
-  ))
-
-  .add("fill", () => (
-    <Story scale={2}>
-      <Cliff radius={100} stroke="red" fill="red" />
     </Story>
   ))
 
