@@ -11,7 +11,7 @@ const { selectors } = require("../reducers");
 const middlewares = require("../middlewares").default;
 const thunks = require("../thunks").default;
 
-const terrains = require("../terrains").terrains;
+const { terrains } = require("../configuration/constants");
 
 document.addEventListener("DOMContentLoaded", () => {
   const initialState = {
