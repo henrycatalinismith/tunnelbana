@@ -2,6 +2,8 @@ const React = require("react");
 const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 
+const Cube = require("../components/Cube").default;
+const Terrain = require("../terrains").default;
 const select = require("../reducers").selectors;
 const Hexagon = require("./Hexagon").default;
 const Station = require("./Station").default;
@@ -20,7 +22,7 @@ export class Camera extends React.PureComponent {
 
   render() {
     const stations = this.props.stations;
-    const hexagons = this.props.hexagons;
+    const hexagons = this.props.hexagons.toJS();
     const camera = this.props.camera.toJS();
     const viewport = this.props.viewport.toJS();
     const connections = this.props.connections.toJS();
@@ -34,12 +36,25 @@ export class Camera extends React.PureComponent {
 
     const viewbox = [x, y, width, height].join(" ");
 
+    /*
+
+      cube.radius(cube(), camera.radius).map(({ x, y, z }) => (
+        <Cube x={x} y={y} z={z}>
+          <Terrain {...terrain(x, y, z).props} />
+        </Cube>
+      ))
+
+    */
+
     return (
       <div className="Camera">
       <svg draggable="false" viewBox={viewbox} className="Camera__svg">
-        {hexagons.map((hexagon, i) => {
-          return <Hexagon key={hexagon.get("id")} id={hexagon.get("id")} />;
-        })}
+
+        {hexagons.map((hexagon, i) => (
+          <Cube key={`cube${i}`} x={hexagon.x} y={hexagon.y} z={hexagon.z}>
+            <Terrain id={hexagon.terrainId} />
+          </Cube>
+        ))}
 
         {connections.map((connection, i) => {
           return <Connection key={connection.id} id={connection.id} />;
