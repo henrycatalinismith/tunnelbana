@@ -28,9 +28,11 @@ storiesOf("Cube", module)
       {cube.radius(cube(), 2).map(({ x, y, z}, i) => (
         <Hex key={i} x={x} y={y} z={z} />
       ))}
-      {cube.line(cube(-2, 0, 2), cube(2, 0, -2)).map(({ x, y, z}, i) => (
+      {cube.line(cube(-2, 1, -1), cube(2, 0, -2)).map(({ x, y, z}, i) => (
         <Hex key={i} x={x} y={y} z={z} fill="#e2e7eb" />
       ))}
+
+
     </Story>
   ))
 
