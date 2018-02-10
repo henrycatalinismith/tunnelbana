@@ -4,24 +4,34 @@ const PropTypes = require("prop-types");
 const Hexagon = require("./Hexagon").default;
 const Cliff = require("./Cliff").default;
 const cube = require("../geometry/cube").default;
+const { terrains } = require("../configuration/constants");
 
-export const Terrain = ({ height, color, cliff, x, y, radius, stroke, strokeWidth }) => ([
+const T = ({ height, color, cliff, x, y, radius, stroke, strokeWidth }) => ([
   <Hexagon
     key="top"
     x={x}
-    y={y}
+    y={y - height}
     radius={radius}
     fill={color}
   />,
  <Cliff
-    key="top"
+    key="cliff"
     x={x}
     y={y}
     height={height}
     radius={radius}
     fill={cliff}
   />
-]);
+])
+
+const id = (PassedComponent) => ({ children, ...props }) => {
+  if (props.id && terrains[props.id]) {
+    return <PassedComponent {...props} {...terrains[props.id]} />;
+  }
+  return <PassedComponent {...props} />;
+};
+
+const Terrain = id(T);
 
 Terrain.propTypes = {
   x: PropTypes.number,
