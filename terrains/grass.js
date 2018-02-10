@@ -1,6 +1,8 @@
 const React = require("react");
 const PropTypes = require("prop-types");
+
 const cube = require("../geometry/cube").default;
+const { Hexagon } = require("../components/Hexagon");
 
 export const terrain = {
   id: "grass",
@@ -24,11 +26,11 @@ export class Grass extends React.PureComponent {
       .concat(points.slice(2, 5).reverse());
 
     return [
-      <polygon
+      <Hexagon
         key="top"
+        y={-terrain.height}
         stroke={terrain.color}
         fill={terrain.color}
-        points={points}
       />,
       <polygon
         key="sides"
