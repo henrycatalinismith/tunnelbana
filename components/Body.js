@@ -18,6 +18,7 @@ export class Body extends React.PureComponent {
 
   render() {
     const text = {
+      opacity: 0,
       transform: [
         `scale(1.6)`,
         `translate(${-13}, ${2})`,
@@ -25,6 +26,7 @@ export class Body extends React.PureComponent {
     };
 
     const transform = `translate(${-20}, ${-52})`;
+    const emoji = "🤖";
 
     return (
       <g className="Body" fill="#d8d8d8" stroke="#979797" transform={transform}>
@@ -36,7 +38,7 @@ export class Body extends React.PureComponent {
             <ellipse id="Leg" transform="translate(26.944607, 65.033613) rotate(13.000000) translate(-26.944607, -65.033613) " cx="26.944607" cy="65.0336126" rx="3.5999999" ry="6.3875"></ellipse>
             <ellipse id="Leg" transform="translate(28.725425, 51.598577) scale(-1, 1) rotate(18.000000) translate(-28.725425, -51.598577) " cx="28.7254245" cy="51.5985773" rx="4.0999999" ry="6.3875"></ellipse>
             <ellipse id="Head" cx="23" cy="23.1" rx="23" ry="22.8125"></ellipse>
-            <text key="Face" x="12" y="25.2" fontSize={29} {...text}>😎</text>
+            <text key="Face" x="12" y="25.2" fontSize={29} {...text}>{emoji}</text>
           </g>
 
           <g id="minus-x-2">
@@ -45,7 +47,7 @@ export class Body extends React.PureComponent {
             <ellipse id="Leg" transform="translate(30.730661, 63.270971) rotate(-22.000000) translate(-30.730661, -63.270971) " cx="30.7306614" cy="63.2709706" rx="3.5999999" ry="6.3875"></ellipse>
             <ellipse id="Leg" transform="translate(29.225425, 51.598577) scale(-1, 1) rotate(-29.000000) translate(-29.225425, -51.598577) " cx="29.2254246" cy="51.5985773" rx="4.6" ry="6.3875"></ellipse>
             <ellipse id="Head" cx="23" cy="22.8125" rx="23" ry="22.8125"></ellipse>
-            <text key="Face" x="12" y="25" fontSize={29} {...text}>😎</text>
+            <text key="Face" x="12" y="25" fontSize={29} {...text}>{emoji}</text>
           </g>
 
           <g id="minus-y-1">

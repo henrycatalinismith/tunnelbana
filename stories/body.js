@@ -4,8 +4,11 @@ const { storiesOf, action, linkTo } = require("@storybook/react");
 //const { action } = require("@storybook/addon-actions");
 const withPropsCombinations = require("react-storybook-addon-props-combinations").default;
 
+const cube = require("../geometry/cube").default;
 const Terrain = require("../terrains").default;
 const { Body } = require("../components/Body");
+const { Cube } = require("../components/Cube");
+const { Hexagon } = require("../components/Hexagon");
 
 const Wrapper = ({ frame, width, height }) => (
   <svg viewBox="-50 -70 100 120" style={{ height: `${height}px`, width: `${width}px`, float: "left" }}>
@@ -53,6 +56,30 @@ class Animation extends React.PureComponent {
 }
 
 storiesOf("Body", module)
+
+  .add("special", () => {
+    const c1 = cube(0, 0, 0);
+    const c2 = cube(0, 1, -1);
+    const px1 = cube.pixels(c1, 50);
+    const px2 = cube.pixels(c2, 50);
+
+    const piece = ({ x, y, z }) => {
+      const px = cube.pixels({ x, y, z }, 50);
+      const translate = `translate(${Math.round(px.x)}, ${Math.round(px.y)})`;
+      return (
+        <Cube x={x} y={y} z={z}>
+          <Hexagon />
+        </Cube>
+      );
+    }
+
+    return (
+      <svg viewBox="-200 -200 1000 1000" width="100%" height="100%">
+        {piece(c1)}
+        {piece(c2)}
+      </svg>
+    );
+  })
 
   .add("all", withPropsCombinations(Wrapper, {
     width: [200],
