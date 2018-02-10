@@ -7,8 +7,8 @@ const withPropsCombinations = require("react-storybook-addon-props-combinations"
 const cube = require("../geometry/cube").default;
 const Terrain = require("../components/Terrain").default;
 const Robot = require("../components/Robot").default;
-const { Cube } = require("../components/Cube");
-const { Hexagon } = require("../components/Hexagon");
+const Cube = require("../components/Cube").default;
+const Hexagon = require("../components/Hexagon").default;
 
 const Wrapper = ({ frame, width, height }) => (
   <svg viewBox="-50 -70 100 120" style={{ height: `${height}px`, width: `${width}px`, float: "left" }}>
@@ -57,26 +57,29 @@ class Animation extends React.PureComponent {
 
 storiesOf("Robot", module)
 
-  .add("special", () => {
-    const c1 = cube(0, 0, 0);
-    const c2 = cube(0, 1, -1);
-    const px1 = cube.pixels(c1, 50);
-    const px2 = cube.pixels(c2, 50);
-
-    const piece = ({ x, y, z }) => {
-      const px = cube.pixels({ x, y, z }, 50);
-      const translate = `translate(${Math.round(px.x)}, ${Math.round(px.y)})`;
-      return (
-        <Cube x={x} y={y} z={z}>
-          <Hexagon />
-        </Cube>
-      );
-    }
+  .add("snowflake", () => {
 
     return (
-      <svg viewBox="-200 -200 1000 1000" width="100%" height="100%">
-        {piece(c1)}
-        {piece(c2)}
+      <svg viewBox="-250 -250 1000 1000" width="100%" height="100%">
+
+        <Cube x={0} y={2} z={-2}><Terrain id="grass" /></Cube>
+        <Cube x={0} y={1} z={-1}><Terrain id="grass" /></Cube>
+
+        <Cube x={2} y={0} z={-2}><Terrain id="grass" /></Cube>
+        <Cube x={1} y={0} z={-1}><Terrain id="grass" /></Cube>
+
+        <Cube x={-2} y={2} z={0}><Terrain id="grass" /></Cube>
+        <Cube x={-1} y={1} z={0}><Terrain id="grass" /></Cube>
+
+        <Cube x={2} y={-2} z={0}><Terrain id="grass" /></Cube>
+        <Cube x={1} y={-1} z={0}><Terrain id="grass" /></Cube>
+
+        <Cube x={0} y={-1} z={1}><Terrain id="grass" /><Robot frame="minus-x-1" /></Cube>
+        <Cube x={0} y={-2} z={2}><Terrain id="grass" /><Robot frame="minus-x-2" /></Cube>
+
+        <Cube x={-1} y={0} z={1}><Terrain id="grass" /><Robot frame="minus-y-1" /></Cube>
+        <Cube x={-2} y={0} z={2}><Terrain id="grass" /><Robot frame="minus-y-2" /></Cube>
+
       </svg>
     );
   })
