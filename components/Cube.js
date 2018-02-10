@@ -24,4 +24,4 @@ export class Cube extends React.PureComponent {
   }
 }
 
-
+export default Cube;
