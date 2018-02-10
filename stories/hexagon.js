@@ -7,7 +7,6 @@ const { Hexagon } = require("../components/Hexagon");
 
 storiesOf("Hexagon", module)
 
-    // <svg viewBox="-100 -100 300 320" width="100%" height="100%">
   .add("stroke", () => (
     <Story scale={2}>
       <Hexagon radius={100} stroke="red" />
