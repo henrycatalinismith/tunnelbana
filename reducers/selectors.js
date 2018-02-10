@@ -5,6 +5,7 @@ const cells = require("./cells");
 const connections = require("./connections");
 const hexagons = require("./hexagons");
 const journeys = require("./journeys");
+const robots = require("./robots");
 const stations = require("./stations");
 const terrains = require("./terrains");
 const tracks = require("./tracks");
@@ -17,6 +18,7 @@ export const select = {
   connections: connections.selectors,
   hexagons: hexagons.selectors,
   journeys: journeys.selectors,
+  robots: robots.selectors,
   stations: stations.selectors,
   terrains: terrains.selectors,
   tracks: tracks.selectors,
