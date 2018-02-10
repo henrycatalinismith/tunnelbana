@@ -3,7 +3,7 @@ const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 
 const select = require("../reducers").selectors;
-const Hexagon = require("./Hexagon").default;
+const Hexagon = require("../containers/Hexagon").default;
 const Station = require("./Station").default;
 const Connection = require("./Connection").default;
 const Train = require("./Train").default;
