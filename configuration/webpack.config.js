@@ -1,67 +1,71 @@
 const path = require("path");
+const _ = require("lodash");
 
-const isStorybook = !!process.argv.filter(arg => arg.match(/start-storybook$/)).length;
-if (isStorybook) {
-  module.exports = require("./webpack.storybook.js");
-  return;
-}
-//console.log(isStorybook);
-//process.exit(-1);
+const mode = !!process.argv.filter(arg => arg.match(/start-storybook$/)).length
+  ? "storybook"
+  : !!process.argv.filter(arg => arg.match(/webpack-dev-server$/)).length
+  ? "dashboard"
+  : "build";
 
-const Dashboard = require("webpack-dashboard");
-const DashboardPlugin = require("webpack-dashboard/plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const HtmlWebpackIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const babel = () => {
+  return {
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          loader: "babel-loader",
+          exclude: /(node_modules|bower_components)/,
+          //query: { compact: false }
+        },
+      ]
+    },
+  };
+};
 
-const extractSass = new ExtractTextPlugin({
-  filename: "[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "development"
-});
+const resolve = () => {
+  return {
+    resolve: {
+      modules: [__dirname, "../", "../node_modules"],
+      extensions: ["*", ".js", ".jsx"]
+    }
+  };
+};
 
-const plugins = [
-  new HtmlWebpackPlugin({
-    title: "highvalley",
-    hash: true,
-    template: "./entrypoints/index.ejs",
-    filename: "index.html"
-  }),
-  new ExtractTextPlugin({
-    filename: "highvalley.[hash].css",
-  }),
-];
+const entry = () => {
+  return {
+    entry: [
+      path.join(__dirname, "../entrypoints", "index.js"),
+      path.join(__dirname, "../entrypoints", "index.scss"),
+    ],
+    output: {
+      filename: "highvalley.[hash].js",
+      path: path.join(__dirname, "../artefacts"),
+    },
+  };
+};
 
-if (process.env.DASH) {
-  plugins.push(
-    new DashboardPlugin({
-      port: 8080,
-      handler: new Dashboard().setData
-    })
-  );
-}
+const html = () => {
+  const HtmlWebpackPlugin = require("html-webpack-plugin");
+  const HtmlWebpackIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
 
-module.exports = {
-  devServer: {
-    compress: true,
-    historyApiFallback: true,
-    port: 8080,
-    host: "127.0.0.1",
-    quiet: true,
-    open: true
-  },
-  devtool: "source-map",
-  entry: [
-    path.join(__dirname, "../entrypoints", "index.js"),
-    path.join(__dirname, "../entrypoints", "index.scss"),
-  ],
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: "babel-loader",
-        query: { compact: false }
-      },
-      {
+  return {
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: "highvalley",
+        hash: true,
+        template: "./entrypoints/index.ejs",
+        filename: "index.html"
+      }),
+    ]
+  };
+};
+
+const sass = () => {
+  const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+  return {
+    module: {
+      loaders: [{
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
           fallback: "style-loader",
@@ -79,18 +83,67 @@ module.exports = {
             }
           ]
         })
-      }
+      }]
+    },
+    plugins: [
+      new ExtractTextPlugin({
+        filename: "highvalley.[hash].css",
+      }),
     ]
-  },
-  output: {
-    filename: "highvalley.[hash].js",
-    path: path.join(__dirname, "../artefacts"),
-  },
-  plugins,
-  resolve: {
-    modules: [__dirname, "../", "../node_modules"],
-    extensions: ["*", ".js", ".jsx"]
-  }
+  };
 };
 
+const dashboard = () => {
+  const Dashboard = require("webpack-dashboard");
+  const DashboardPlugin = require("webpack-dashboard/plugin");
 
+  return {
+    devtool: "source-map",
+    devServer: {
+      compress: true,
+      historyApiFallback: true,
+      port: 8080,
+      host: "127.0.0.1",
+      quiet: true,
+      open: false,
+    },
+    plugins: [
+      new DashboardPlugin({
+        port: 8080,
+        handler: new Dashboard().setData
+      })
+    ]
+  };
+};
+
+const merge = (...config) => {
+  const concat = (src, dst) => _.isArray(src) ? src.concat(dst) : undefined;
+  return _.mergeWith.apply(null, config.concat(concat));
+};
+
+const config = ({
+
+  build: () => merge(
+    babel(),
+    resolve(),
+    html(),
+    sass(),
+    entry()
+  ),
+
+  dashboard: () => merge(
+    babel(),
+    resolve(),
+    html(),
+    sass(),
+    entry(),
+    dashboard()
+  ),
+
+  storybook: () => merge(
+    babel()
+  ),
+
+})[mode]();
+
+module.exports = config;
