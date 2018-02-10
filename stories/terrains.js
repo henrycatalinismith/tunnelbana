@@ -1,32 +1,33 @@
 const React = require("react");
 const { storiesOf, action, linkTo } = require("@storybook/react");
 
+const Story = require("./Story").default;
 const Terrain = require("../components/Terrain").default;
 
 storiesOf("Terrain", module)
 
   .add("grass", () => (
-    <svg viewBox="-50 -60 100 120" style={{ maxHeight: "400px", maxWidth: "300px" }}>
+    <Story scale={3}>
       <Terrain id="grass" />
-    </svg>
+    </Story>
   ))
 
   .add("water", () => (
-    <svg viewBox="-50 -60 100 120" style={{ maxHeight: "400px", maxWidth: "300px" }}>
+    <Story scale={3}>
       <Terrain id="water" />
-    </svg>
+    </Story>
   ))
 
   .add("forest", () => (
-    <svg viewBox="-50 -60 100 120" style={{ maxHeight: "400px", maxWidth: "300px" }}>
+    <Story scale={2}>
       <Terrain id="forest" />
-    </svg>
+    </Story>
   ))
 
   .add("city", () => (
-    <svg viewBox="-50 -60 100 120" style={{ maxHeight: "400px", maxWidth: "300px" }}>
+    <Story scale={3}>
       <Terrain id="city" />
-    </svg>
+    </Story>
   ))
 
 
