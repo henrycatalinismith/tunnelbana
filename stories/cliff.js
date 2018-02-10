@@ -15,13 +15,13 @@ storiesOf("Cliff", module)
 
   .add("strokeWidth", () => (
     <Story scale={2}>
-      <Cliff radius={80} stroke="red" strokeWidth={20} />
+      <Cliff radius={100} stroke="red" fill="white" strokeWidth={3} />
     </Story>
   ))
 
   .add("fill", () => (
     <Story scale={2}>
-      <Cliff radius={80} stroke="red" fill="red" />
+      <Cliff radius={100} stroke="red" fill="red" />
     </Story>
   ))
 
