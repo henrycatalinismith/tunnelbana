@@ -4,6 +4,7 @@ const { connect } = require("react-redux");
 
 const Cube = require("../components/Cube").default;
 const Terrain = require("../components/Terrain").default;
+const Robot = require("../components/Robot").default;
 const select = require("../reducers").selectors;
 const Station = require("./Station").default;
 const Connection = require("./Connection").default;
@@ -13,6 +14,7 @@ export class Camera extends React.PureComponent {
   static propTypes = {
     camera: PropTypes.object,
     hexagons: PropTypes.object,
+    robots: PropTypes.object,
     stations: PropTypes.object,
     viewport: PropTypes.object,
     connections: PropTypes.object,
@@ -22,6 +24,7 @@ export class Camera extends React.PureComponent {
   render() {
     const stations = this.props.stations;
     const hexagons = this.props.hexagons.toJS();
+    const robots = this.props.robots.toJS();
     const camera = this.props.camera.toJS();
     const viewport = this.props.viewport.toJS();
     const connections = this.props.connections.toJS();
@@ -55,6 +58,10 @@ export class Camera extends React.PureComponent {
           </Cube>
         ))}
 
+        {robots.map((robot, i) => (
+          <Robot key={`robot${i}`} x={robot.x} y={robot.y} z={robot.z} />
+        ))}
+
         {connections.map((connection, i) => {
           return <Connection key={connection.id} id={connection.id} />;
         })}
@@ -77,10 +84,11 @@ const mapStateToProps = (state, { id }) => {
   const stations = select("stations").from(state).byCell(camera.get("cellId"));
   const hexagons = select("hexagons").from(state).forCamera(camera);
   const viewport = select("viewport").from(state).dimensions();
+  const robots = select("robots").from(state).all();
   const connections = select("connections").from(state).all();
   const trains = select("trains").from(state).byCell(camera.get("cellId"));
 
-  return { camera, hexagons, stations, viewport, connections, trains };
+  return { camera, hexagons, stations, viewport, connections, trains, robots };
 };
 
 export default connect(mapStateToProps)(Camera);
