@@ -2,11 +2,7 @@ const React = require("react");
 const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 
-//const cube = require("../geometry/cube").default;
-//const actions = require("../actions").default;
-//const select = require("../reducers").selectors;
-
-export class Body extends React.PureComponent {
+export default class Body extends React.PureComponent {
   static propTypes = {
     frame: PropTypes.string,
   };
@@ -65,13 +61,4 @@ export class Body extends React.PureComponent {
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  //const station = select("stations").from(state).byId(id);
-  //const hexagon = select("hexagons").from(state).byId(station.get("hexagonId"));
-  //const terrain = select("terrains").from(state).byId(hexagon.get("terrainId"));
-  return {};
-};
-
-export default connect(mapStateToProps)(Body);
 

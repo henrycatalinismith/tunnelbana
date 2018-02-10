@@ -4,7 +4,7 @@ const { createApp } = require("signalbox");
 const { Provider } = require("react-redux");
 const { throttle } = require("lodash");
 
-const HighValley = require("../components").default;
+const Camera = require("../containers/Camera").default;
 const actions = require("../actions").default;
 const store = require("../reducers").default;
 const { selectors } = require("../reducers");
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.createElement("div");
 
   document.body.appendChild(root);
-  ReactDOM.render(<Provider store={s}><HighValley /></Provider>, root);
+  ReactDOM.render(<Provider store={s}><Camera id="main" /></Provider>, root);
 
   document.addEventListener("mousewheel", event => {
     game.thunks.zoom(event.deltaY);
