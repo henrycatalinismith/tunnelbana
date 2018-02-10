@@ -3,9 +3,8 @@ const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 
 const Cube = require("../components/Cube").default;
-const Terrain = require("../terrains").default;
+const Terrain = require("../components/Terrain").default;
 const select = require("../reducers").selectors;
-const Hexagon = require("./Hexagon").default;
 const Station = require("./Station").default;
 const Connection = require("./Connection").default;
 const Train = require("./Train").default;
