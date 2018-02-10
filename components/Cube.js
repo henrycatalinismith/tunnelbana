@@ -6,7 +6,7 @@ const cube = require("../geometry/cube").default;
 export class Cube extends React.PureComponent {
   static propTypes = {
     x: PropTypes.number,
-    children: PropTypes.object,
+    children: PropTypes.any,
   };
 
   static defaultProps = { r: 50 };
