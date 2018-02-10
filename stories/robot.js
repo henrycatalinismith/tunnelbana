@@ -4,6 +4,7 @@ const { storiesOf, action, linkTo } = require("@storybook/react");
 const withPropsCombinations = require("react-storybook-addon-props-combinations").default;
 
 const cube = require("../geometry/cube").default;
+const Svg = require("../components/Svg").default;
 const Story = require("./Story").default;
 const Terrain = require("../components/Terrain").default;
 const Robot = require("../components/Robot").default;
@@ -11,10 +12,12 @@ const Cube = require("../components/Cube").default;
 const Hexagon = require("../components/Hexagon").default;
 
 const Wrapper = ({ frame, width, height }) => (
-  <svg viewBox="-50 -70 100 120" style={{ height: `${height}px`, width: `${width}px`, float: "left" }}>
-    <Terrain id="grass" />
-    <Robot frame={frame} />
-  </svg>
+  <div style={{ height: `${height}px`, width: `${width}px`, float: "left" }}>
+    <Svg x={-50} y={-70} width={100} height={120}>
+      <Terrain id="grass" />
+      <Robot frame={frame} />
+    </Svg>
+  </div>
 )
 
 class Animation extends React.PureComponent {
