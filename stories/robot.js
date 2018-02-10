@@ -6,14 +6,14 @@ const withPropsCombinations = require("react-storybook-addon-props-combinations"
 
 const cube = require("../geometry/cube").default;
 const Terrain = require("../components/Terrain").default;
-const Body = require("../components/Body").default;
+const Robot = require("../components/Robot").default;
 const { Cube } = require("../components/Cube");
 const { Hexagon } = require("../components/Hexagon");
 
 const Wrapper = ({ frame, width, height }) => (
   <svg viewBox="-50 -70 100 120" style={{ height: `${height}px`, width: `${width}px`, float: "left" }}>
     <Terrain id="grass" />
-    <Body frame={frame} />
+    <Robot frame={frame} />
   </svg>
 )
 
@@ -49,13 +49,13 @@ class Animation extends React.PureComponent {
     return (
       <svg viewBox="-50 -70 100 120" style={{ height: `${height}px`, width: `${width}px`, float: "left" }}>
         <Terrain id="grass" />
-        <Body frame={frames[frame]} />
+        <Robot frame={frames[frame]} />
       </svg>
     );
   }
 }
 
-storiesOf("Body", module)
+storiesOf("Robot", module)
 
   .add("special", () => {
     const c1 = cube(0, 0, 0);
