@@ -2,6 +2,7 @@ require("./canvas");
 require("./circle");
 require("./cliff");
 require("./cube");
+require("./ellipse");
 require("./hexagon");
 require("./rect");
 require("./robot");
