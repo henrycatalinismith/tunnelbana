@@ -1,6 +1,7 @@
 const React = require("react");
 const PropTypes = require("prop-types");
 const { storiesOf, action, linkTo } = require("@storybook/react");
+const { TweenLite, TweenMax, Linear } = require("gsap");
 const withPropsCombinations = require("react-storybook-addon-props-combinations").default;
 
 const cube = require("../geometry/cube").default;
@@ -13,12 +14,53 @@ const Hexagon = require("../components/Hexagon").default;
 
 const Wrapper = ({ frame, width, height }) => (
   <div style={{ height: `${height}px`, width: `${width}px`, float: "left" }}>
-    <Svg x={-50} y={-70} width={100} height={120}>
+    <Svg x={0} y={0} width={100} height={120}>
       <Terrain id="grass" />
       <Robot frame={frame} />
     </Svg>
   </div>
 )
+
+class Loop extends React.PureComponent {
+  static propTypes = {
+    interval: PropTypes.number,
+  };
+
+  static defaultProps = {
+    interval: 1000,
+  };
+
+  constructor(...props) {
+    super(...props);
+    this.state = {
+      count: 0,
+    };
+  }
+
+  componentDidMount() {
+    const loop = () => {
+      this.setState({ count: this.state.count + 1 });
+      const from = { x: -20, y: -60 };
+      const to = cube.pixels({ x: from.x -1, y: 0, z: 1}, 50);
+      to.x += from.x;
+      to.y += from.y;
+      TweenLite.fromTo(`.Robot`, this.props.interval / 1000, from, {
+        ...to,
+        ease: Linear.easeNone,
+      });
+    };
+    this.interval = window.setInterval(loop, this.props.interval + 400);
+    loop();
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.interval);
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
 
 class Animation extends React.PureComponent {
   static propTypes = {
@@ -50,10 +92,7 @@ class Animation extends React.PureComponent {
     const { width, height, frames } = this.props;
     const { frame } = this.state;
     return (
-      <Story scale={4}>
-        <Terrain id="grass" />
-        <Robot frame={frames[frame]} />
-      </Story>
+      <Robot frame={frames[frame]} />
     );
   }
 }
@@ -83,8 +122,18 @@ storiesOf("Robot", module)
         <Cube x={1} y={-1} z={0}><Terrain id="grass" /></Cube>
 
         <Cube x={0} y={0} z={0}><Terrain id="grass" /></Cube>
-        <Cube x={-1} y={0} z={1}><Terrain id="grass" /><Robot frame="minus-x-1" /></Cube>
-        <Cube x={-2} y={0} z={2}><Terrain id="grass" /><Robot frame="minus-x-2" /></Cube>
+        <Cube x={-1} y={0} z={1}><Terrain id="grass" />
+          <Animation width={300} height={300} frames={[
+            "minus-x-1",
+            "minus-x-2"
+          ]} />
+        </Cube>
+        <Cube x={-2} y={0} z={2}><Terrain id="grass" />
+          <Animation width={300} height={300} frames={[
+            "minus-x-2",
+            "minus-x-1"
+          ]} />
+        </Cube>
 
         <Cube x={0} y={-1} z={1}><Terrain id="grass" /><Robot frame="minus-y-1" /></Cube>
         <Cube x={0} y={-2} z={2}><Terrain id="grass" /><Robot frame="minus-y-2" /></Cube>
@@ -118,11 +167,32 @@ storiesOf("Robot", module)
     </Story>
   ))
 
-  .add("minus-x-cycle", () => (<Animation width={300} height={300} frames={[
-    "minus-x-1",
-    "minus-x-2"
-  ]} /> ))
+  .add("minus-x-cycle", () => (
+    <Story scale={4}>
+      <Terrain id="grass" />
+      <Animation width={300} height={300} frames={[
+        "minus-x-1",
+        "minus-x-2"
+      ]} />
+    </Story>
+  ))
 
+  .add("minus-x-animation", () => (
+    <Story scale={2}>
+      <Cube x={-1} y={0} z={1}>
+        <Terrain id="grass" />
+      </Cube>
+      <Cube x={0} y={0} z={0}>
+        <Terrain id="grass" />
+        <Loop interval={860}>
+          <Animation width={300} height={300} frames={[
+            "minus-x-1",
+            "minus-x-2"
+          ]} />
+        </Loop>
+      </Cube>
+    </Story>
+  ))
 
   .add("minus-y-1", () => (
     <Story scale={4}>
@@ -138,7 +208,12 @@ storiesOf("Robot", module)
     </Story>
   ))
 
-  .add("minus-y-cycle", () => (<Animation width={300} height={300} frames={[
-    "minus-y-1",
-    "minus-y-2"
-  ]} /> ))
+  .add("minus-y-cycle", () => (
+    <Story scale={4}>
+      <Terrain id="grass" />
+      <Animation width={300} height={300} frames={[
+        "minus-y-1",
+        "minus-y-2"
+      ]} />
+    </Story>
+  ))
