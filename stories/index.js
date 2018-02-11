@@ -4,6 +4,7 @@ require("./cliff");
 require("./cube");
 require("./ellipse");
 require("./hexagon");
+require("./polygon");
 require("./rect");
 require("./robot");
 require("./terrains");
