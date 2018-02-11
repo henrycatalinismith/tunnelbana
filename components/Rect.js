@@ -10,6 +10,8 @@ export default class Rect extends Shape {
     width: PropTypes.number,
     height: PropTypes.number,
     fill: PropTypes.string,
+    stroke: PropTypes.string,
+    strokeWidth: PropTypes.number,
   };
 
   static defaultProps = {
