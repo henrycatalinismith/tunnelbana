@@ -26,7 +26,7 @@ export default class Body extends React.PureComponent {
     const emoji = "😎";
 
     return (
-      <g className="Body" fill="#d8d8d8" stroke="#979797" transform={transform}>
+      <g className="Robot" fill="#d8d8d8" stroke="#979797" transform={transform}>
         <defs>
 
           <g id="minus-x-1">
