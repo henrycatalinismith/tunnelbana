@@ -24,7 +24,6 @@ export default class Rect extends Shape {
   draw(context) {
     const { x, y, width, height } = this.props;
 
-    console.log('ee', context);
     if (this.props.fill) {
       context.fillStyle = this.props.fill;
       context.fillRect(x, y, width, height);

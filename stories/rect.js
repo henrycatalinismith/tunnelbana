@@ -41,7 +41,6 @@ class OutputSwitch extends React.PureComponent {
   render() {
     const canvasStyle = this.state.output === "canvas" ? OutputSwitch.buttonOn : OutputSwitch.buttonOff;
     const svgStyle = this.state.output === "svg" ? OutputSwitch.buttonOn : OutputSwitch.buttonOff;
-    console.log(this.props.children);
 
     return (
       <div>
