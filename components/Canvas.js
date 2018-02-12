@@ -21,7 +21,9 @@ export default class Canvas extends React.Component {
   };
 
   getChildContext() {
-    return { context: this.state.context };
+    return {
+      context: this.state.context
+    };
   }
 
   constructor(...props) {
@@ -32,7 +34,6 @@ export default class Canvas extends React.Component {
   }
 
   setCanvas = canvas => {
-    console.log('setCanvas', canvas);
     this.canvas = canvas;
   };
 
@@ -47,30 +48,9 @@ export default class Canvas extends React.Component {
   }
 
   render() {
-    let children = this.props.children;
-
-    /*
-    if (children && _.isArray(children)) {
-      children = React.Children.map(
-        children,
-        child => React.cloneElement(child, this.state)
-      );
-    } else if (children) {
-      children = React.cloneElement(children, this.state)
-    }
-    */
-
-    console.log(children, this.state.context);
-
     return (
       <canvas key={1} ref={this.setCanvas} width={this.props.width} height={this.props.height}>
-        {this.state.context && React.Children.map(this.props.children, c => {
-          console.log(c);
-          const withProp = React.cloneElement(c, {
-            ctx: this.state.context
-          });
-          return withProp;
-        })}
+        {this.state.context && this.props.children}
       </canvas>
     );
   }
