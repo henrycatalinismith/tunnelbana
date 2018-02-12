@@ -24,6 +24,7 @@ export default class Rect extends Shape {
   draw(context) {
     const { x, y, width, height } = this.props;
 
+    console.log('ee', context);
     if (this.props.fill) {
       context.fillStyle = this.props.fill;
       context.fillRect(x, y, width, height);
@@ -34,6 +35,13 @@ export default class Rect extends Shape {
       context.lineWidth = this.props.strokeWidth;
       context.strokeRect(x, y, width, height);
     }
+  }
+
+  render() {
+    if (this.context.renderer === "canvas") {
+      return null;
+    }
+    return <rect {...this.props} />;
   }
 }
 

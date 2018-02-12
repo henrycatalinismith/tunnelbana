@@ -18,8 +18,8 @@ Svg.propTypes = {
 Svg.defaultProps = {
   x: 0,
   y: 0,
-  width: 0,
-  height: 0,
+  width: window.innerWidth,
+  height: window.innerHeight,
   children: null,
 };
 
