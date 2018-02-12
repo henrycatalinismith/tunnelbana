@@ -2,7 +2,7 @@ const React = require("react");
 const PropTypes = require("prop-types");
 
 const Svg = ({ x, y, width, height, children }) => (
-  <svg viewBox={[x, y, width, height].join(" ")}>
+  <svg viewBox={[x, y, width, height].join(" ")} style={{ width, height }}>
     {children}
   </svg>
 );
